@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+  @apply text-base text-black bg-bg-color;
+  font-family: 'Rubik', sans-serif;
+  direction: rtl;
+
+  input:focus {
+    outline: none;
+  }
+
+  th {
+    font-weight: 400;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  opacity: 0.2 !important;
+}
+
+.myShadowCard {
+  transition: all 0.5s;
+  box-shadow: none;
+  &:hover {
+    box-shadow: 1px 0px 16px #ddd;
+
+  }
+}
+
+.editMode {
+  transition: all 0.5s;
+  background: rgba(0, 37, 54, 0.5);
+
+}
