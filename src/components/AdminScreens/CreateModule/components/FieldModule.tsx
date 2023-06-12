@@ -19,7 +19,7 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
     setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
     setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
     setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-  },[])
+  }, [col, row, setValue]);
 
   return (
     <th className='pt-4'>

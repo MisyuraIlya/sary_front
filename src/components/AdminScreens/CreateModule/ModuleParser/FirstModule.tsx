@@ -15,7 +15,7 @@ interface FirstModule {
 const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , control}) => {
     useEffect(() => {
         setValue(`collectionsRows[${orden}].orden`, orden);
-    },[])
+      }, [orden, setValue]);
     return (
         <>
             <th className='bg-primary text-white'>

@@ -46,7 +46,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
     } else {
       setFilterArr([]);
     }
-  }, [filterData]);
+  }, [data, filterData]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;

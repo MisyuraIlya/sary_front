@@ -16,7 +16,8 @@ const InputModule: FC<InputModuleProps> = ({answer,placeholder, register, col, r
         setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'input');
         setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
-      },[])
+      }, [col, row, setValue]);
+      
 
       
     return (

@@ -10,7 +10,7 @@ type ColsCardProps = {
 const ColsCard:FC<ColsCardProps> = ({item,register,setValue, index}) => {
     useEffect(() => {
         setValue(`collectionsCols[${item.orden}].orden`, index); 
-    },[])
+      }, [item.orden, index, setValue]);
     return (
         <div className='p-1'>
             <input value={item.title}  placeholder={'כותרת'} className='w-36 rounded-md px-2' {...register(`collectionsCols[${item.orden}].title`)}/>

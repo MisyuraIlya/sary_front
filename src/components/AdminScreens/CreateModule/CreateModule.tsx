@@ -1,5 +1,5 @@
 import Meta from '@/ui/Meta';
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import AdminLayout from '../layout/AdminLayout';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import ReactSelect from 'react-select'
@@ -54,27 +54,27 @@ const CreateModule = () => {
     }
   };
 
-  const handleAutoUpload = async () => {
-    if(selectedFile){
-      let res = await onAsk('האם תרצו להריץ את הקובץ?','')
-      if(res) {
+  const handleAutoUpload = useCallback(async () => {
+    if (selectedFile) {
+      let res = await onAsk('האם תרצו להריץ את הקובץ?','');
+      if (res) {
         ExerciseMethods.uploadXml(selectedFile);
       }
     }
-  }
+  }, [ExerciseMethods, selectedFile]);
 
   useEffect(() => {
-    if(exercises){
-      setValue(`title`, exercises?.title); 
-      setValue(`description`, exercises?.description); 
-      setValue(`description2`, exercises?.description2); 
-      setValue(`courseId`, moduleId); 
+    if (exercises) {
+      setValue('title', exercises?.title); 
+      setValue('description', exercises?.description); 
+      setValue('description2', exercises?.description2); 
+      setValue('courseId', moduleId); 
     }
-  },[exercises])
-
+  }, [exercises, moduleId, setValue]);
+  
   useEffect(() => {
-    handleAutoUpload()
-  },[selectedFile])
+    handleAutoUpload();
+  }, [handleAutoUpload, selectedFile]);
 
     return (
         <Meta title='create Module'>

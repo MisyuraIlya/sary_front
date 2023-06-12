@@ -8,11 +8,11 @@ export const useAuthRedirect = () => {
     console.log('user',user?.userType.title)
 
     useEffect(() => {
-        if(user?.userType.title == 'admin') {
-            replace('/admin/tableOfContents')
+        if (user?.userType.title === 'admin') {
+          replace('/admin/tableOfContents')
         } 
-        if(user?.userType.title == 'student') {
-            replace('/')
+        if (user?.userType.title === 'student') {
+          replace('/')
         }
-    },[user])
+      }, [user, replace])
 }

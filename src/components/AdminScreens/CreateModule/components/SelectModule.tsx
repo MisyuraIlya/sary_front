@@ -17,12 +17,11 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
 
     const getValue = (value:any) => value ? optionsNew.find((option) => option.value === value) : {value:answer, label:answer}
     useEffect(() => {
-        // {...register(`collectionsRows[${row - 1}].collectionRow[${row - 1}].collectionAnswers[0].value`,{value: answer})}
-        setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row); 
-        setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer); 
-        setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, options); 
-        setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'selectbox'); 
-      }, []);
+        setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer);
+        setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, options);
+        setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'selectbox');
+      }, [answer, col, options, row, setValue]);
 
     return (
         <th className='bg-white pt-4'>
