@@ -11,11 +11,11 @@ const nextConfig = {
         destination: 'http://3.74.233.199:4000/auth/:slug*'
       },
       {
-        source: 'courses/:slug*',
+        source: '/courses/:slug*',
         destination: 'http://3.74.233.199:4000/courses/:slug*'
       },
       {
-        source: 'exercises/:slug*',
+        source: '/exercises/:slug*',
         destination: 'http://3.74.233.199:4000/exercises/:slug*'
       }
     ]
