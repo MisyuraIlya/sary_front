@@ -16,7 +16,7 @@ export const ExercisesService = {
 
     async create (data: any) {
         console.log('data',JSON.stringify(data))
-        const response = await instance<any>({
+        const response = await axios<any>({
             url: `/exercises`,
             method:'POST',
             data: data
@@ -28,7 +28,7 @@ export const ExercisesService = {
 
 
     async getOne (id: number) {
-        const response = await instance<IExercise>({
+        const response = await axios<IExercise>({
             url: `/exercises/${id}`,
             method:'GET',
         })
@@ -47,7 +47,7 @@ export const ExercisesService = {
 
 
     async delete(id: string | number): Promise<any> {
-        const response = await instance<any>({
+        const response = await axios<any>({
             url: `/exercises/${id}`,
             method:'DELETE',
         })

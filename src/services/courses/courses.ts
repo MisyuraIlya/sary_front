@@ -17,7 +17,7 @@ interface courseDtoRequest {
 export const CourseService = {
 
     async create (data: courseDtoRequest) {
-        const response = await instance<ICourse[]>({
+        const response = await axios<ICourse[]>({
             url: `/courses`,
             method:'POST',
             data: data
@@ -29,7 +29,7 @@ export const CourseService = {
 
 
     async getCoursesLvl1 () {
-        const response = await instance<ICourse[]>({
+        const response = await axios<ICourse[]>({
             url: `/courses`,
             method:'GET'
         })
@@ -39,7 +39,7 @@ export const CourseService = {
     },
 
     async getChildrenById(id: number) {
-        const response = await instance<ICourse>({
+        const response = await axios<ICourse>({
             url: `/courses/parent/${id}`,
             method:'GET'
         })
@@ -48,7 +48,7 @@ export const CourseService = {
     },
 
     async getRecursiveChildren(id: number) {
-        const response = await instance<ICourse>({
+        const response = await axios<ICourse>({
             url: `/courses/recursiveId/${id}`,
             method:'GET'
         })
@@ -57,7 +57,7 @@ export const CourseService = {
     },
 
     async update (id: number, data: courseDtoRequest) {
-        const response = await instance<ICourse[]>({
+        const response = await axios<ICourse[]>({
             url: `/courses/${id}`,
             method:'PUT',
             data: data
@@ -68,7 +68,7 @@ export const CourseService = {
     },
 
     async remove (id: number) {
-        const response = await instance<ICourse[]>({
+        const response = await axios<ICourse[]>({
             url: `/courses/${id}`,
             method:'DELETE'
         })
