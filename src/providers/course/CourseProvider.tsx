@@ -56,11 +56,11 @@ interface CourseProviderProps {
 const CourseProvider: React.FC<CourseProviderProps> = (props) => {
   // state
   const [choosedCourse, setChoosedCourse] = useState<string | null>(null)
-  const [choosedLvl1, setChoosedLvl1] = useState<number | null>(null)
-  const [choosedLvl2, setChoosedLvl2] = useState<number | null>(null)
-  const [choosedLvl3, setChoosedLvl3] = useState<number | null>(null)
-  const [choosedLvl4, setChoosedLvl4] = useState<number | null>(null)
-  const [choosedLvl5, setChoosedLvl5] = useState<number | null>(null)
+  const [choosedLvl1, setChoosedLvl1] = useState<any>(null)
+  const [choosedLvl2, setChoosedLvl2] = useState<any>(null)
+  const [choosedLvl3, setChoosedLvl3] = useState<any>(null)
+  const [choosedLvl4, setChoosedLvl4] = useState<any>(null)
+  const [choosedLvl5, setChoosedLvl5] = useState<any>(null)
   const router = useRouter()
   // Helpers
   const {data: courses, isLoading: isLoadingCourses, isError: isErrorCourses, refetch: refetchCourses} = useQuery(['get courses'], () => CourseService.getCoursesLvl1(), { staleTime: 0, cacheTime:0 })
@@ -139,29 +139,30 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     refetchingLvlFunc(level - 1)
   }
 
-  const handleRouter = () => {
-    const {query} = router
-    if(query.first && !query.second && !query.third && !query.fourth && ! query.fifth){
-      setChoosedLvl1(query.first)
-  } else if (query.first && query.second && !query.third && !query.fourth && ! query.fifth) {
-    setChoosedLvl1(query.first)
-    setChoosedLvl2( query.second)
-  } else if (query.first && query.second && query.third && !query.fourth && ! query.fifth) {
-    setChoosedLvl1(query.first)
-    setChoosedLvl2(query.second)
-    setChoosedLvl3(query.third)
-  } else if (query.first && query.second && query.third && query.fourth && ! query.fifth) {
-    setChoosedLvl1(query.first)
-    setChoosedLvl2(query.second)
-    setChoosedLvl3(query.third)
-    setChoosedLvl4(query.fourth)
-  }
-
-  }
-
   useEffect(() => {
-    handleRouter()
-  },[router.query.first, router.query.second, router.query.third, router.query.fourth, router.query.fifth])
+    const handleRouter = () => {
+      const { query } = router;
+      if (query.first && !query.second && !query.third && !query.fourth && !query.fifth) {
+        setChoosedLvl1(query.first);
+      } else if (query.first && query.second && !query.third && !query.fourth && !query.fifth) {
+        setChoosedLvl1(query.first);
+        setChoosedLvl2(query.second);
+      } else if (query.first && query.second && query.third && !query.fourth && !query.fifth) {
+        setChoosedLvl1(query.first);
+        setChoosedLvl2(query.second);
+        setChoosedLvl3(query.third);
+      } else if (query.first && query.second && query.third && query.fourth && !query.fifth) {
+        setChoosedLvl1(query.first);
+        setChoosedLvl2(query.second);
+        setChoosedLvl3(query.third);
+        setChoosedLvl4(query.fourth);
+      }
+    };
+
+    handleRouter();
+  }, [router.query.first, router.query.second, router.query.third, router.query.fourth, router.query.fifth, router]);
+
+
 
 
   // useEffect(() => {

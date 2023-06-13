@@ -4,6 +4,7 @@ import FieldModule from '../components/FieldModule';
 import InputModule from '../components/InputModule';
 import SelectModule from '../components/SelectModule';
 import { CollectionsRow } from '@/types/exercise.interface';
+import TextAreaModule from '../components/TextAreaModule';
 
 interface FirstModule {
     exercises: CollectionsRow;
@@ -16,9 +17,11 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
     useEffect(() => {
         setValue(`collectionsRows[${orden}].orden`, orden);
       }, [orden, setValue]);
+
+
     return (
         <>
-            <th className='bg-primary text-white'>
+            <th className='bg-primary text-white pt-5'>
                 {orden}
             </th>
             {
@@ -26,6 +29,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
                     if(item.module_type == 'text') return <FieldModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue} />
                     if(item.module_type == 'input') return <InputModule key={index} answer={item.collectionAnswers.length > 0 ? item.collectionAnswers[0].value : ""  } placeholder={item.placeholder || ''}  register={register} col={orden} row={item.orden} setValue={setValue}/>
                     if(item.module_type == 'selectbox') return <SelectModule key={index} placeholder={item.placeholder || ''} options={item.collectionValues} answer={item.collectionAnswers.length > 0 ? item.collectionAnswers[0].value : ""} register={register}   col={orden} row={item.orden} setValue={setValue} control={control} />
+                    if(item.module_type == 'textarea') return <TextAreaModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue}/>
                 })
             }
             <th className='bg-white'>

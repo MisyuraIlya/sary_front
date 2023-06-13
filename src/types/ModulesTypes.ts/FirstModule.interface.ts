@@ -1,5 +1,5 @@
 
-type KeyModule = "field" | "input" | "selectbox";
+type KeyModule = "field" | "input" | "selectbox" | "textarea";
 
 export interface IFirstModule {
     name: string;

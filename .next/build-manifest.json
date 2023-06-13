@@ -29,11 +29,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/admin/createModule/[moduleId].js"
-    ],
-    "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
     ]
   },
   "ampFirstPages": []

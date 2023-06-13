@@ -14,6 +14,7 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import SubHeading from '@/ui/heading/SubHeading';
 import ColsCard from './components/ColsCard';
 import { onAsk } from '@/utils/sweetAlert';
+import { Oval } from 'react-loader-spinner';
 const options = [
   { value: 1, label: 'מודול ראשון' }
 ]
@@ -22,10 +23,10 @@ const CreateModule = () => {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
-  const {ExerciseMethods, exercises} = useExercise()
+  const {ExerciseMethods, exercises, isOnlineXml, loading} = useExercise()
   const router = useRouter();
 
-  const { moduleId } = router.query;
+  const moduleId = router.query.moduleId
   
   const { register, handleSubmit: handleSubmitForm, watch, formState: { errors } , setValue,control} = useForm<any>();
   
@@ -69,29 +70,37 @@ const CreateModule = () => {
       setValue('title', exercises?.title); 
       setValue('description', exercises?.description); 
       setValue('description2', exercises?.description2); 
+      setValue('module', exercises?.module);
       setValue('courseId', moduleId); 
     }
   }, [exercises, moduleId, setValue]);
-  
+
+  console.log(' exercises?.module', exercises?.module)
+
   // useEffect(() => {
   //   handleAutoUpload();
   // }, [handleAutoUpload, selectedFile]);
 
+  const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
     return (
         <Meta title='create Module'>
             <AdminLayout>
               <div className='mr-12'>
                 <Heading>{exercises?.title}</Heading>
                 <SubHeading>{exercises?.description}</SubHeading>
-                <div className="border-b border-solid border-2 border-gray-400"></div>
+                {exercises?.title &&
+                  <div className="border-b border-solid border-2 border-gray-400"></div>
+                }
 
                 <div className='grid grid-cols-2 py-10 px-2 relative'>
                   <Controller control={control} name={`module`} rules={{required:'צריך לבחור מודול'}} render={
                       ({field:{onChange,value},fieldState:{error}}) => (
                       <>
+                      
                       <ReactSelect
                       placeholder={'בחירת מודול'}
                       options={options}
+                      value={getValue(value)}
                       onChange={(newValue) => onChange((newValue?.value))}
                       className='w-96'
                       />
@@ -105,10 +114,12 @@ const CreateModule = () => {
                       }
                   />
                   <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
-                      {exercises?.title && moduleId && 
-                        <Button className='bg-red text-white rounded-md' onClick={() => ExerciseMethods.deleteModule(moduleId[0])}>מחיקה</Button>                    
+                      {exercises?.title && moduleId && isOnlineXml && 
+                        <Button className='bg-red text-white rounded-md' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</Button>                    
                       }
 
+                      {!isOnlineXml &&
+                        <>
                       <label htmlFor="fileInput" className="w-56 bg-primary flex items-center justify-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md cursor-pointer">
                         בחר קובץ
                       </label>
@@ -116,48 +127,72 @@ const CreateModule = () => {
 
                       <Button className='bg-primary text-white rounded-md '>העלה</Button>
                       <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
+                        </>
+                      }
+
                   </form>
                 </div>
               </div>
 
+              {loading ?
+              <div className='myCenter' style={{minHeight:'50vh'}}>
+              <Oval
+                height={80}
+                width={80}
+                color="#4fa94d"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel='oval-loading'
+                secondaryColor="#4fa94d"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
 
-              <form onSubmit={handleSubmitForm(onSubmit)} className='mr-12'>
-                <table className='w-full'>
-                  <tbody className=''>
-                    <tr className='heading bg-primary'>
-                        <div className='text-center justify-center text-white'>
-                        </div>
-                        {
-                          exercises?.collectionsCols?.map((item,index) => {
-                            return(
-                              <th key={index} className=''>
-                                <ColsCard item={item} index={index+1} register={register} setValue={setValue}/>
-                              </th>
-                            )
-                          })
-                        }
-                        <div className='text-center justify-center text-white '>
-                        </div>
-                    </tr>
-                    {
-                    exercises?.collectionsRows?.map((item,index) => {
-                      return(
-                        <tr key={index}>
-                            <FirstModule 
-                            exercises={item} 
-                            key={index} 
-                            register={register} 
-                            orden={item.orden}
-                            setValue={setValue}
-                            control={control}
-                            />
-                        </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </table>
-              </form>
+              />
+            </div>
+
+            :
+            <form onSubmit={handleSubmitForm(onSubmit)} className='mr-12'>
+              <table className='w-full'>
+                <tbody className=''>
+                  <tr className='heading bg-primary'>
+                      <div className='text-center justify-center text-white'>
+                      </div>
+                      {
+                        exercises?.collectionsCols?.map((item,index) => {
+                          return(
+                            <th key={index} className=''>
+                              <ColsCard item={item} index={index+1} register={register} setValue={setValue}/>
+                            </th>
+                          )
+                        })
+                      }
+                      <div className='text-center justify-center text-white '>
+                      </div>
+                  </tr>
+                  {
+                  exercises?.collectionsRows?.map((item,index) => {
+                    return(
+                      <tr key={index}>
+                          <FirstModule 
+                          exercises={item} 
+                          key={index} 
+                          register={register} 
+                          orden={item.orden}
+                          setValue={setValue}
+                          control={control}
+                          />
+                      </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </form>
+              }
+
+
+
 
             </AdminLayout>
         </Meta>

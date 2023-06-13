@@ -4,6 +4,7 @@ export interface IExercise {
     id:              number;
     title:           string;
     description:     string;
+    module: number;
     description2:    null | string;
     course:          ICourse;
     collectionsCols: CollectionsCol[];
@@ -40,5 +41,6 @@ export enum ModuleType {
     Input = "input",
     Selectbox = "selectbox",
     Text = "text",
+    TextArea = "textarea"
 }
 

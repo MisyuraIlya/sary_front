@@ -57,7 +57,7 @@ const TableOfContents = () => {
                                 )}
                             </div>
                     </div>
-                    <div style={{minHeight:'50%'}} className='bg-white pb-12'>
+                    <div  className='bg-white pb-12'>
                         { 
                             <div className='px-12 py-6'>
                                 <p>עריכת קורס: {lvl1?.name} {lvl2?.name && '/'} {lvl2?.name} {lvl3?.name && '/'} {lvl3?.name} {lvl4?.name && '/'} {lvl4?.name}  </p>

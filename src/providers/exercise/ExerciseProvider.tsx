@@ -10,10 +10,11 @@ interface ExerciseContextType {
     setId: (id: number) => void
     uploadXml: (file: File) => void
     createMoudle: (data: any) => void
-    deleteModule: (id: number | string) => void
+    deleteModule: (id: any) => void
   };
   exercises: IExercise | undefined;
-  loading: boolean
+  loading: boolean,
+  isOnlineXml: boolean
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -36,7 +37,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
   // state
     const [id, setId] = useState<number | null>();
     const [loading, setLoading] = useState(false)
-    const [exercises, setExercises] = useState<IExercise>()
+    const [exercises, setExercises] = useState<IExercise | undefined>()
+    const [isOnlineXml, setIsOnlineXml] = useState(false)
     const router = useRouter();
     const moduleId = router.query.moduleId;
   // Helpers
@@ -47,6 +49,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       const response = await ExercisesService.getOne(id)
       if(response){
         setExercises(response)
+        setIsOnlineXml(true)
       } 
     } catch(e) {
       console.log('error',e)
@@ -60,6 +63,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     try {
       const response = await ExercisesService.parseXlFile(file)
       setExercises(response)
+      setIsOnlineXml(false)
     } catch(e) {
       console.log('error',e)
       onErrorAlert('שגיאה בלפרסס את המודול','אנא פנה לצוות דיגירטייד')
@@ -75,18 +79,21 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       setTimeout(() => {
         fetchOnline(moduleId)
         onSuccessAlert('תרגיל נשמר בהצלחה!','')
+        setLoading(false)
+
       },2000)
     } catch(e) {
       console.log('error',e)
     } finally {
-      setLoading(false)
     }
   }
   
-  const deleteModule = async (id: number|string) => {
+  const deleteModule = async (id: any) => {
     const res = await onAsk('האם תרצו למחוק את המודול הזה?','')
     if(res){
       setLoading(true)
+      setExercises(undefined)
+      setIsOnlineXml(false)
       try {
         const response = await ExercisesService.delete(id)
         await fetchOnline(moduleId)
@@ -114,7 +121,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
   const value: ExerciseContextType = {
     exercises,
     ExerciseMethods,
-    loading
+    loading,
+    isOnlineXml
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;
