@@ -39,3 +39,13 @@ body {
   background: rgba(0, 37, 54, 0.5);
 
 }
+
+.cardHover {
+  &:hover {
+    background-color: #31aef228;
+  }
+}
+
+.clickedCard {
+  background-color: #31aef228;
+}

@@ -9,6 +9,7 @@ import { useCourse } from '@/providers/course/CourseProvider';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ICourse } from '@/types/course.interface';
 import { onAsk } from '@/utils/sweetAlert';
+import { useRouter } from 'next/router';
 interface CourseCard {
     item: ICourse
     isNew: boolean
@@ -24,7 +25,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
     const [checked, setChecked] = useState(item.published)
     const [editMode, setEditMode] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<CourseForm>();
-
+    const router = useRouter()
     const {CourseMethods} = useCourse();
 
     const onSubmit: SubmitHandler<CourseForm> = (data) => {
@@ -43,7 +44,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
 
 
     return (
-        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-green/10'} myShadowCard cursor-pointer`} style={{height:'300px', width:'300px'}}>
+        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-green/10'} myShadowCard cursor-pointer`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
             {editMode && <span className='absolute m-4 text-white' onClick={() => setEditMode(false)}>X</span>}
             <div className='text-center h-full flex justify-center items-center'>
                 <div>

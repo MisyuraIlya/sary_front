@@ -11,7 +11,7 @@ import { useCourse } from '@/providers/course/CourseProvider';
 import AdminLayout from '../layout/AdminLayout';
 import { CourseService } from '@/services/courses/courses';
 import { ICourse } from '@/types/course.interface';
-
+import { useRouter } from 'next/router';
 type courseType = {
     name: string,
 };
@@ -20,12 +20,12 @@ const TableOfContents = () => {
 
     const [addCourse, setAddCourse] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<courseType>();
-    const {courses, CourseMethods, choosedLvl1, choosedCourse} = useCourse()
+    const {courses, CourseMethods, choosedLvl1, choosedCourse, lvl1, lvl2, lvl3, lvl4} = useCourse()
     const onSubmit = () => CourseMethods.createFunction('', 1, null)
-    
+    const router = useRouter()
     const handleChooseCourse = (item: ICourse) => {
-        CourseMethods.setChoosedCourse(item.name)
-        CourseMethods.setChoosedLvl1(item.id)
+        // CourseMethods.setChoosedCourse(item.name)
+        // CourseMethods.setChoosedLvl1(item.id)
     }
     return (
         <Meta title='courses'>
@@ -58,9 +58,9 @@ const TableOfContents = () => {
                             </div>
                     </div>
                     <div style={{minHeight:'50%'}} className='bg-white pb-12'>
-                        {choosedCourse &&
+                        { 
                             <div className='px-12 py-6'>
-                                <p>עריכת קורס: {choosedCourse} </p>
+                                <p>עריכת קורס: {lvl1?.name} {lvl2?.name && '/'} {lvl2?.name} {lvl3?.name && '/'} {lvl3?.name} {lvl4?.name && '/'} {lvl4?.name}  </p>
                             </div>
                         }
 

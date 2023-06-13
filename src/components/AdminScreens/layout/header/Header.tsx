@@ -5,7 +5,7 @@ import {FC} from 'react'
 
 const Header: FC = () => {
     return (
-        <header className='bg-primary w-full py-6 px-6 grid grid-cols-2'>
+        <header className='bg-primary w-full py-2 px-6 grid grid-cols-2' style={{height:'70px'}}>
             <div className='flex justify-start items-center'>
                 <Image
                 priority

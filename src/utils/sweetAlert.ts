@@ -36,8 +36,12 @@ export const onAsk = (title: string, message: string): Promise<boolean> => {
       text: message,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'מחיקה',
-      cancelButtonText: 'ביטול',
+      confirmButtonText: 'כן',
+      cancelButtonText: 'לא',
+      customClass:{
+        confirmButton: 'bg-primary',
+        cancelButton:''
+      }
     }).then((result) => {
       return result.isConfirmed;
     });

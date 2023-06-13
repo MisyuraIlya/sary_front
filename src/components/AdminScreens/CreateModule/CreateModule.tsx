@@ -45,7 +45,10 @@ const CreateModule = () => {
     event.preventDefault();
     if (selectedFile) {
       try {
-        ExerciseMethods.uploadXml(selectedFile);
+        let res = await onAsk('האם תרצו להריץ את הקובץ?','');
+        if (res) {
+          ExerciseMethods.uploadXml(selectedFile);
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -72,9 +75,9 @@ const CreateModule = () => {
     }
   }, [exercises, moduleId, setValue]);
   
-  useEffect(() => {
-    handleAutoUpload();
-  }, [handleAutoUpload, selectedFile]);
+  // useEffect(() => {
+  //   handleAutoUpload();
+  // }, [handleAutoUpload, selectedFile]);
 
     return (
         <Meta title='create Module'>
@@ -113,7 +116,7 @@ const CreateModule = () => {
                       </label>
                       <input id="fileInput" type="file" onChange={handleFileChange} className="hidden" />
 
-                      {/* <Button className='bg-primary text-white rounded-md '>העלה</Button> */}
+                      <Button className='bg-primary text-white rounded-md '>העלה</Button>
                       <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
                   </form>
                 </div>

@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 import { CourseService } from '@/services/courses/courses';
 import { useQuery } from '@tanstack/react-query';
 import { ICourse } from '@/types/course.interface';
+import { useRouter } from 'next/router';
 
 interface CourseContextType {
   CourseMethods: {
@@ -56,7 +57,7 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
   const [choosedLvl3, setChoosedLvl3] = useState<number | null>(null)
   const [choosedLvl4, setChoosedLvl4] = useState<number | null>(null)
   const [choosedLvl5, setChoosedLvl5] = useState<number | null>(null)
-
+  const router = useRouter()
   // Helpers
   const {data: courses, isLoading: isLoadingCourses, isError: isErrorCourses, refetch: refetchCourses} = useQuery(['get courses'], () => CourseService.getCoursesLvl1(), { staleTime: 0, cacheTime:0 })
 
@@ -134,34 +135,58 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     refetchingLvlFunc(level - 1)
   }
 
+  const handleRouter = () => {
+    const {query} = router
+    if(query.first && !query.second && !query.third && !query.fourth && ! query.fifth){
+      setChoosedLvl1(query.first)
+  } else if (query.first && query.second && !query.third && !query.fourth && ! query.fifth) {
+    setChoosedLvl1(query.first)
+    setChoosedLvl2( query.second)
+  } else if (query.first && query.second && query.third && !query.fourth && ! query.fifth) {
+    setChoosedLvl1(query.first)
+    setChoosedLvl2(query.second)
+    setChoosedLvl3(query.third)
+  } else if (query.first && query.second && query.third && query.fourth && ! query.fifth) {
+    setChoosedLvl1(query.first)
+    setChoosedLvl2(query.second)
+    setChoosedLvl3(query.third)
+    setChoosedLvl4(query.fourth)
+  }
+
+  }
 
   useEffect(() => {
-      setChoosedLvl2(null);
-      setChoosedLvl3(null);
-      setChoosedLvl4(null);
-      setChoosedLvl5(null);
-  },[choosedLvl1])
+    handleRouter()
+  },[router.query.first, router.query.second, router.query.third, router.query.fourth, router.query.fifth])
 
-  useEffect(() => {
-      if (choosedLvl2) {
-          setChoosedLvl3(null);
-          setChoosedLvl4(null);
-          setChoosedLvl5(null);
-        }
-  },[choosedLvl2])
 
-  useEffect(() => {
-      if (choosedLvl3) {
-          setChoosedLvl4(null);
-          setChoosedLvl5(null);
-        }
-  },[choosedLvl3])
+  // useEffect(() => {
+  //     setChoosedLvl2(null);
+  //     setChoosedLvl3(null);
+  //     setChoosedLvl4(null);
+  //     setChoosedLvl5(null);
+  // },[choosedLvl1])
 
-  useEffect(() => {
-      if (choosedLvl4) {
-          setChoosedLvl5(null);
-        }
-  },[choosedLvl4])
+  // useEffect(() => {
+  //     if (choosedLvl2) {
+  //         setChoosedLvl3(null);
+  //         setChoosedLvl4(null);
+  //         setChoosedLvl5(null);
+  //       }
+  // },[choosedLvl2])
+
+  // useEffect(() => {
+  //     if (choosedLvl3) {
+  //         setChoosedLvl4(null);
+  //         setChoosedLvl5(null);
+  //       }
+  // },[choosedLvl3])
+
+  // useEffect(() => {
+  //     if (choosedLvl4) {
+  //         setChoosedLvl5(null);
+  //       }
+  // },[choosedLvl4])
 
 
 

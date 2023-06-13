@@ -16,7 +16,6 @@ interface RellationContainerProps {
   data: ICourse[];
   level: number;
   parentId: number;
-  choosedLVl: (id: number) => void;
   isExercise: boolean;
 
 }
@@ -26,7 +25,6 @@ const RellationContainer: FC<RellationContainerProps> = ({
   title,
   level,
   parentId,
-  choosedLVl,
   isExercise
 }) => {
   const { CourseMethods } = useCourse();
@@ -37,16 +35,8 @@ const RellationContainer: FC<RellationContainerProps> = ({
 
   const onSubmitAdd: SubmitHandler<Inputs> = (data) => {
     CourseMethods.createFunction(data.name, level, parentId);
+    setActiveAdd(false)
   };
-
-  useEffect(() => {
-    if (filterData) {
-      let filter = data.filter((item) => item.name.includes(filterData));
-      setFilterArr(filter);
-    } else {
-      setFilterArr([]);
-    }
-  }, [data, filterData]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -72,6 +62,18 @@ const RellationContainer: FC<RellationContainerProps> = ({
       })
     }
   };
+  
+
+  useEffect(() => {
+    if (filterData) {
+      let filter = data.filter((item) => item.name.includes(filterData));
+      setFilterArr(filter);
+    } else {
+      setFilterArr([]);
+    }
+  }, [data, filterData]);
+
+
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -142,7 +144,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <RellationCard item={item} choosedLVl={choosedLVl} key={index} isExercise={isExercise}/>
+                          <RellationCard item={item}  key={index} isExercise={isExercise} level={level}/>
                         </div>
                       )}
                     </Draggable>

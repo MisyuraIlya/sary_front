@@ -11,23 +11,60 @@ type Inputs = {
 
 interface RellationCardProps {
     item: ICourse;
-    choosedLVl: (id: number) => void;
     isExercise: boolean
+    level: number
 }
-const RellationCard: FC<RellationCardProps> = ({item,choosedLVl,isExercise}) => {
+const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
     const router = useRouter();
     const [editMode, setEditMode] = useState(false)
-    const {CourseMethods} = useCourse()
+    const {CourseMethods, choosedLvl1, choosedLvl2 , choosedLvl3 ,choosedLvl4} = useCourse()
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
     const handleRemove = async () => {
         const res =  await onAsk('את בטוחה שאת רוצה למחוק?','אם תלחצי כן לא תוכלי לשחזר את הקובץ והוא ימחק באופן סופי')
         if(res) {CourseMethods.removeFunction(item.id,item.level)}
     }
+    const {query} = router
+
+    const handleChoose = (id: number) => {
+        // choosedLVl(item.id)
+        if(query.first && level === 2){
+            router.push(`/admin/tableOfContents/${query.first}/${id}`)
+        } else if ((query.first && query.second) && level === 3) {
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${id}`)
+        } else if ((query.first && query.second && query.third) && level === 4) {
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${id}`)
+        } else if ((query.first && !query.second && query.third && query.fourth) && level === 5) {
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${id}`)
+        } else if ((query.first && !query.second && query.third && query.fourth &&  query.fifth)) {
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${query.fifth}`)
+        } 
+    }
+
+    const checkOnActive = () => {
+        if(level === 2 ) {
+            if(choosedLvl2 == item.id) {
+                console.log('2')
+                return true
+            } 
+        } else if (level === 3) {
+            if(choosedLvl3 == item.id) {
+                return true
+            }
+        } else if (level === 4) {
+            if(choosedLvl4 == item.id) {
+                return true
+            }
+        } else if (level == 5) {
+
+        } else {
+            return false
+        }
+    }
     return (
-        <div className='border-t border-gray '>
-            <div className='flex py-2 m-auto px-4'>
-                <div className='w-full flex items-center cursor-pointer' onClick={() => choosedLVl(item.id)}>
+        <div className={`border-t border-gray cardHover ${checkOnActive() ? 'clickedCard' : ''}`}>
+            <div className='flex py-2 m-auto px-4 '>
+                <div className='w-full flex items-center cursor-pointer' onClick={() => handleChoose(item.id)} >
                     <p>{item.name}</p>
                 </div>
                 <div className='flex gap-2 '>

@@ -1,16 +1,8 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/admin/createExercises": "pages/admin/createExercises.html",
-  "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].html",
-  "/admin/tableOfContents": "pages/admin/tableOfContents.html",
-  "/auth": "pages/auth.html",
-  "/enteringPurchase": "pages/enteringPurchase.html",
-  "/enteringType": "pages/enteringType.html",
-  "/": "pages/index.html",
-  "/signInTeacher": "pages/signInTeacher.html",
-  "/signInStudent": "pages/signInStudent.html",
-  "/teacherEnteringType": "pages/teacherEnteringType.html",
   "/_error": "pages/_error.js",
-  "/404": "pages/404.html"
+  "/_document": "pages/_document.js",
+  "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].js",
+  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth].js",
+  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
 }

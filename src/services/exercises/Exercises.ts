@@ -41,7 +41,7 @@ export const ExercisesService = {
     async parseXlFile(file: File): Promise<IExercise> {
         const formData = new FormData();
         formData.append('file', file); // Assuming the backend expects the file to be named 'xlFile'
-        const response: AxiosResponse<IExercise> = await axios.post('http://localhost:4000/courses/uploadXl', formData);
+        const response: AxiosResponse<IExercise> = await axios.post('http://3.74.233.199:4000/courses/uploadXl', formData);
         return response.data;
     },
 
