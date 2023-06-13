@@ -26,7 +26,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
     const [editMode, setEditMode] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<CourseForm>();
     const router = useRouter()
-    const {CourseMethods} = useCourse();
+    const {CourseMethods, choosedLvl1} = useCourse();
 
     const onSubmit: SubmitHandler<CourseForm> = (data) => {
         CourseMethods.updateFunction(item.id,data.name, data.grade, 1,checked, item.orden)
@@ -42,9 +42,9 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
         if(res) {CourseMethods.removeFunction(item.id, 1)}
     }
 
-
+    console.log('choosedCourse',choosedLvl1,item)
     return (
-        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-green/10'} myShadowCard cursor-pointer`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
+        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-green/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
             {editMode && <span className='absolute m-4 text-white' onClick={() => setEditMode(false)}>X</span>}
             <div className='text-center h-full flex justify-center items-center'>
                 <div>
@@ -88,7 +88,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
                     <div className='grid grid-cols-12 w-full mr-5 mt-2 mb-2'>
                         <div className={`col-span-8 flex gap-4`}>
                             <div className='bg-white rounded-full cursor-pointer flex justify-center p-4' onClick={() => setEditMode(!editMode)}>
-                                <Image src={`/images/draw.svg`} width={15} height={15} alt='draw'/>
+                                <Image src={`/pt-2 text-white text-centerimages/draw.svg`} width={15} height={15} alt='draw'/>
                             </div>
                             <div className='bg-white rounded-full  cursor-pointer flex justify-center p-4' onClick={() => handleRemoveCourse()}>
                                 <Image src={'/images/trash.svg'} width={19} height={15} alt='draw'/>

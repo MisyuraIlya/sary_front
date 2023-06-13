@@ -71,14 +71,14 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
                     {
                         isExercise &&
                         <div className=' border border-black rounded-full flex justify-center w-12 h-12'>
-                            <Image src={'images/eye.svg'} width={30} height={30} priority alt='trash' className=' cursor-pointer rounded-lg p-1' onClick={() => router.push(`/admin/createModule/${item.id}`)}/>
+                            <Image src={'/images/eye.svg'} width={30} height={30} priority alt='trash' className=' cursor-pointer rounded-lg p-1' onClick={() => router.push(`/admin/createModule/${item.id}`)}/>
                         </div>
                     }      
                     <div className='border border-black rounded-full flex justify-center w-12 h-12'> 
-                        <Image src={'images/draw.svg'} width={25} height={2} priority alt='draw' className=' cursor-pointer rounded-lg p-1' onClick={() => setEditMode(!editMode)}/>
+                        <Image src={'/images/draw.svg'} width={25} height={2} priority alt='draw' className=' cursor-pointer rounded-lg p-1' onClick={() => setEditMode(!editMode)}/>
                     </div>  
                     <div className='border border-black rounded-full flex justify-center w-12 h-12'>
-                        <Image src={'images/trash.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1'onClick={() => handleRemove()}/>
+                        <Image src={'/images/trash.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1'onClick={() => handleRemove()}/>
                     </div>    
                 </div>    
             </div>  

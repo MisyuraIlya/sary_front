@@ -34,6 +34,10 @@ body {
   }
 }
 
+.activeShadow {
+  box-shadow: 1px 0px 16px #ddd;
+}
+
 .editMode {
   transition: all 0.5s;
   background: rgba(0, 37, 54, 0.5);
@@ -48,4 +52,10 @@ body {
 
 .clickedCard {
   background-color: #31aef228;
+}
+
+.myCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -8,7 +8,7 @@ export const sideBarList = [
     {
         id:2,
         title:'תוכן העניינים',
-        icon:'../images/sidebar/summary.svg',
+        icon:'/images/sidebar/summary.svg',
         href:'/admin/tableOfContents'
     },
     // {

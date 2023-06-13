@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCourse } from '@/providers/course/CourseProvider';
 import RellationCard from '../RellationCard/RellationCard';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
-
+import { TailSpin } from 'react-loader-spinner';
 type Inputs = {
   name: string;
 };
@@ -31,6 +31,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
   const [activeAdd, setActiveAdd] = useState(false);
   const [filterData, setFilterData] = useState('');
   const [filterArr, setFilterArr] = useState<ICourse[]>([]);
+  const [loading, setLoading] = useState(false)
   const { register: registerAdd, handleSubmit: handleAdd } = useForm<Inputs>();
 
   const onSubmitAdd: SubmitHandler<Inputs> = (data) => {
@@ -56,10 +57,15 @@ const RellationContainer: FC<RellationContainerProps> = ({
         ...item,
         orden: index + 1,
       }));
-      console.log('updatedData',updatedData)
+      setLoading(true)
+
       updatedData.map((item) => {
         CourseMethods.updateFunction(item.id, item.name, item.grade, item.level, item.published, item.orden);
       })
+
+      setTimeout(() => {
+        setLoading(false)
+      },200)
     }
   };
   
@@ -132,28 +138,44 @@ const RellationContainer: FC<RellationContainerProps> = ({
             </form>
           </div>
           )}
-          <div className='overflow-auto py-2'>
-            <Droppable droppableId='droppable'>
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {(filterArr.length > 0 ? filterArr : data)?.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <RellationCard item={item}  key={index} isExercise={isExercise} level={level}/>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+            {loading ? 
+              <div className='myCenter p-12'>
+                <TailSpin
+                  height="80"
+                  width="80"
+                  color="#31B0F2"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={loading}
+                />
+              </div> 
+              :
+              <div className='overflow-auto py-2'>
+                <Droppable droppableId='droppable'>
+                  {(provided) => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                      {(filterArr.length > 0 ? filterArr : data)?.map((item, index) => (
+                        <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <RellationCard item={item}  key={index} isExercise={isExercise} level={level}/>
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            }
+
         </div>
       </div>
     </DragDropContext>

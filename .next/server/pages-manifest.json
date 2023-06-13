@@ -1,8 +1,7 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/_error": "pages/_error.js",
   "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].js",
-  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth].js",
   "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
 }

@@ -34,11 +34,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
-    ],
-    "/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third]/[fourth]/[fifth].js"
     ]
   },
   "ampFirstPages": []

@@ -31,6 +31,10 @@ interface CourseContextType {
   lvl4: ICourse | null | undefined
   choosedLvl4: number | null
   choosedCourse: string | null
+  isLoadingLvl1: boolean
+  loadingLvl2: boolean
+  loadingLvl3: boolean
+  loadingLvl4: boolean
 }
 
 const CourseContext = createContext<CourseContextType | null>(null);
@@ -216,7 +220,11 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     choosedLvl3,
     lvl4,
     choosedLvl4,
-    choosedCourse
+    choosedCourse,
+    isLoadingLvl1,
+    loadingLvl2,
+    loadingLvl3,
+    loadingLvl4
 
   };
 

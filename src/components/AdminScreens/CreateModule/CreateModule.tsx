@@ -15,9 +15,7 @@ import SubHeading from '@/ui/heading/SubHeading';
 import ColsCard from './components/ColsCard';
 import { onAsk } from '@/utils/sweetAlert';
 const options = [
-  { value: 1, label: 'מודול ראשון' },
-  { value: 2, label: 'מודול שני' },
-  { value: 3, label: 'מודול שלישי' }
+  { value: 1, label: 'מודול ראשון' }
 ]
 
 const CreateModule = () => {
@@ -87,7 +85,7 @@ const CreateModule = () => {
                 <SubHeading>{exercises?.description}</SubHeading>
                 <div className="border-b border-solid border-2 border-gray-400"></div>
 
-                <div className='grid grid-cols-2 py-10 px-2'>
+                <div className='grid grid-cols-2 py-10 px-2 relative'>
                   <Controller control={control} name={`module`} rules={{required:'צריך לבחור מודול'}} render={
                       ({field:{onChange,value},fieldState:{error}}) => (
                       <>
@@ -98,7 +96,7 @@ const CreateModule = () => {
                       className='w-96'
                       />
                       {error && (
-                          <div style={{color:'red'}}>
+                          <div style={{color:'red',position:'absolute', bottom:'10px', paddingRight:'15px'}}>
                               {error.message}
                           </div>
                       )}
