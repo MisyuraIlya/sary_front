@@ -8,7 +8,7 @@ export const AuthService = {
 
     async main (type: 'login' | 'register', data: any) {
         const response = await axios<IAuthResponse>({
-            url: `/auth/${type}`,
+            url: `/api/auth/${type}`,
             method:'POST',
             data
         })
