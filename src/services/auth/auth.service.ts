@@ -7,7 +7,7 @@ import { instance } from "@/api/api.interceptor"
 export const AuthService = {
 
     async main (type: 'login' | 'register', data: any) {
-        const response = await instance<IAuthResponse>({
+        const response = await axios<IAuthResponse>({
             url: `/auth/${type}`,
             method:'POST',
             data
