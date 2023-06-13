@@ -18,7 +18,7 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({Component: {
         return <>{children}</>;
       }
     }
-    router.pathname !== '/entering' && router.replace('/entering')
+    router.pathname !== '/entering' && router.replace('/')
     return null
 }
 

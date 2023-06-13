@@ -114,6 +114,10 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
       refetchLvl3()
     } else if (lvl == 4) {
       refetchLvl4()
+    } 
+
+    if(lvl == 0) {
+      refetchLvl1()
     }
   }
 
@@ -161,38 +165,6 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
 
     handleRouter();
   }, [router.query.first, router.query.second, router.query.third, router.query.fourth, router.query.fifth, router]);
-
-
-
-
-  // useEffect(() => {
-  //     setChoosedLvl2(null);
-  //     setChoosedLvl3(null);
-  //     setChoosedLvl4(null);
-  //     setChoosedLvl5(null);
-  // },[choosedLvl1])
-
-  // useEffect(() => {
-  //     if (choosedLvl2) {
-  //         setChoosedLvl3(null);
-  //         setChoosedLvl4(null);
-  //         setChoosedLvl5(null);
-  //       }
-  // },[choosedLvl2])
-
-  // useEffect(() => {
-  //     if (choosedLvl3) {
-  //         setChoosedLvl4(null);
-  //         setChoosedLvl5(null);
-  //       }
-  // },[choosedLvl3])
-
-  // useEffect(() => {
-  //     if (choosedLvl4) {
-  //         setChoosedLvl5(null);
-  //       }
-  // },[choosedLvl4])
-
 
 
   const CourseMethods = {

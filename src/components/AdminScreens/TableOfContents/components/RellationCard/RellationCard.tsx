@@ -19,7 +19,10 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
     const [editMode, setEditMode] = useState(false)
     const {CourseMethods, choosedLvl1, choosedLvl2 , choosedLvl3 ,choosedLvl4} = useCourse()
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
+        setEditMode(false)
+    }
     const handleRemove = async () => {
         const res =  await onAsk('את בטוחה שאת רוצה למחוק?','אם תלחצי כן לא תוכלי לשחזר את הקובץ והוא ימחק באופן סופי')
         if(res) {CourseMethods.removeFunction(item.id,item.level)}
@@ -89,10 +92,10 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
                 </div>
                 <div className='flex gap-2 justify-end'>
                     <div className=' rounded-full flex justify-center w-12 h-12' style={{backgroundColor:'#31B0F2'}} > 
-                        <Image src={'images/vWhite.svg'} width={25} height={25} priority alt='draw' className=' cursor-pointer rounded-lg p-1' onClick={handleSubmit(onSubmit)}/>
+                        <Image src={'/images/vWhite.svg'} width={25} height={25} priority alt='draw' className=' cursor-pointer rounded-lg p-1' onClick={handleSubmit(onSubmit)}/>
                     </div>  
                     <div className=' rounded-full flex justify-center w-12 h-12' style={{backgroundColor:'rgba(49, 176, 242, 0.3)'}}>
-                        <Image src={'images/xBlue.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1' onClick={() => setEditMode(false)}/>
+                        <Image src={'/images/xBlue.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1' onClick={() => setEditMode(false)}/>
                     </div>
  
                 </div>  

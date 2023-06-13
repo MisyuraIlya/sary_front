@@ -25,10 +25,35 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/admin/createModule/[moduleId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/createModule/[moduleId].js"
+    ],
     "/admin/tableOfContents": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/admin/tableOfContents.js"
+    ],
+    "/admin/tableOfContents/[first]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/tableOfContents/[first].js"
+    ],
+    "/admin/tableOfContents/[first]/[second]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/tableOfContents/[first]/[second].js"
+    ],
+    "/admin/tableOfContents/[first]/[second]/[third]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third].js"
+    ],
+    "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
     ]
   },
   "ampFirstPages": []

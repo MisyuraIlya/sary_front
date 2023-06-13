@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, { FC, ChangeEvent, useEffect } from 'react';
 
 interface FieldModule {
@@ -9,7 +10,7 @@ interface FieldModule {
 }
 
 const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) => {
-
+  const {isOnlineXml} = useExercise()  
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.innerText;
     setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, text);
@@ -26,7 +27,7 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
       <div>
         <div contentEditable onInput={handleInputChange} dangerouslySetInnerHTML={{ __html: value }} />
         
-        <input type="hidden" {...register(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, { value:[{value: value}] })} />
+        <input type="hidden" disable {...register(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, { value:[{value: value}] })} />
       </div>
     </th>
   );
