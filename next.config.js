@@ -7,7 +7,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/auth/:slug*',
+        source: '/auth/:slug*',
         destination: 'http://3.74.233.199:4000/auth/:slug*'
       },
       {
