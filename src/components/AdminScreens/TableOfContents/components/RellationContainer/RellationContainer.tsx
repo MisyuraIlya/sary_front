@@ -7,6 +7,7 @@ import { useCourse } from '@/providers/course/CourseProvider';
 import RellationCard from '../RellationCard/RellationCard';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { TailSpin } from 'react-loader-spinner';
+import SideBars from '@/components/SideBars/SideBars';
 type Inputs = {
   name: string;
 };

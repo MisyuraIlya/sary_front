@@ -15,7 +15,12 @@ const ColsCard:FC<ColsCardProps> = ({item,register,setValue, index}) => {
       }, [item.orden, index, setValue]);
     return (
         <div className='p-1'>
-            <input disabled={isOnlineXml ? true : false}  placeholder={'כותרת'} className='w-36 rounded-md px-2' {...register(`collectionsCols[${item.orden}].title`, {value: item.title})}/>
+            <input 
+            disabled
+            // disabled={isOnlineXml ? true : false}
+            placeholder={'כותרת'} 
+            className='w-36 rounded-md  text-white bg-primary text-center' 
+            {...register(`collectionsCols[${item.orden}].title`, {value: item.title})}/>
         </div>
     );
 };

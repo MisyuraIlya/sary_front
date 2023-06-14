@@ -13,14 +13,17 @@ import { useRouter } from 'next/router';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import SubHeading from '@/ui/heading/SubHeading';
 import ColsCard from './components/ColsCard';
-import { onAsk } from '@/utils/sweetAlert';
+import { onAsk, onInfoAlert } from '@/utils/sweetAlert';
 import { Oval } from 'react-loader-spinner';
+import Image from 'next/image';
+import SideBars from '@/components/SideBars/SideBars';
+import TextAreaModule from './components/TextAreaModule';
 const options = [
   { value: 1, label: 'מודול ראשון' }
 ]
 
 const CreateModule = () => {
-
+  const [isEmptySelect, setIsEmptySelect] = useState<number>()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
   const {ExerciseMethods, exercises, isOnlineXml, loading} = useExercise()
@@ -42,18 +45,24 @@ const CreateModule = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (selectedFile) {
-      try {
-        let res = await onAsk('האם תרצו להריץ את הקובץ?','');
-        if (res) {
-          ExerciseMethods.uploadXml(selectedFile);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+    console.log('isEmptySelect',isEmptySelect)
+    if(!isEmptySelect) {
+      onInfoAlert('אנא בחרו מודל רצוי','')
     } else {
-      console.error('No file selected');
+      if (selectedFile) {
+        try {
+          let res = await onAsk('האם תרצו להריץ את הקובץ?','');
+          if (res) {
+            ExerciseMethods.uploadXml(selectedFile);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      } else {
+        console.error('No file selected');
+      }
     }
+
   };
 
   const handleAutoUpload = useCallback(async () => {
@@ -76,11 +85,22 @@ const CreateModule = () => {
   }, [exercises, moduleId, setValue]);
 
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleSidebarToggle = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarOpen(false);
+  };
+
   // useEffect(() => {
   //   handleAutoUpload();
   // }, [handleAutoUpload, selectedFile]);
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
+  console.log('exercises',exercises)
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -93,23 +113,27 @@ const CreateModule = () => {
 
                 <div className='grid grid-cols-2 py-10 px-2 relative'>
                   <Controller control={control} name={`module`} rules={{required:'צריך לבחור מודול'}} render={
-                      ({field:{onChange,value},fieldState:{error}}) => (
-                      <>
-                      
-                      <ReactSelect
-                      placeholder={'בחירת מודול'}
-                      options={options}
-                      value={getValue(value)}
-                      onChange={(newValue) => onChange((newValue?.value))}
-                      className='w-96'
-                      />
-                      {error && (
-                          <div style={{color:'red',position:'absolute', bottom:'10px', paddingRight:'15px'}}>
-                              {error.message}
-                          </div>
-                      )}
-                      </>
-                      )
+                      ({field:{onChange,value},fieldState:{error}}) => { 
+                        
+                        setIsEmptySelect(value) 
+                        
+                        return(
+                        <>
+                        {console.log('value',value)}
+                        <ReactSelect
+                        placeholder={'בחירת מודול'}
+                        options={options}
+                        value={getValue(value)}
+                        onChange={(newValue) => onChange((newValue?.value))}
+                        className='w-96'
+                        />
+                        {error && (
+                            <div style={{color:'red',position:'absolute', bottom:'10px', paddingRight:'15px'}}>
+                                {error.message}
+                            </div>
+                        )}
+                        </>
+                        )}
                       }
                   />
                   <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
@@ -135,8 +159,13 @@ const CreateModule = () => {
                       {selectedFile &&                     
                         <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
                       }
+
                         </>
                       }
+
+                      <div className='bg-primary p-2 rounded-lg' onClick={() => handleSidebarToggle()} >
+                        <Image src={'/images/settings.svg'} alt='settings' width={25} height={25}/>
+                      </div> 
 
                   </form>
                 </div>
@@ -199,7 +228,22 @@ const CreateModule = () => {
             </form>
               }
 
+              <SideBars anchor="left" isOpen={isSidebarOpen} onClose={handleSidebarClose}>
+                  <div style={{width:'700px'}} className='myCenter'>
+                    <div className='m-10 w-full'>
+                      <div className='text-center'>
+                        <Heading>{exercises?.title}</Heading>
+                      </div>
+                      <div>
+                        <SubHeading>{exercises?.description}</SubHeading>
+                      </div>
 
+                      <div className='pt-12'>
+                        <textarea value={exercises?.description2 ?? ''} className='w-full h-96'/> 
+                      </div>
+                    </div>
+                  </div>
+              </SideBars>
 
 
             </AdminLayout>

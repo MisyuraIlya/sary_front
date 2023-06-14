@@ -5,13 +5,18 @@ import { useQuery } from '@tanstack/react-query';
 import { CourseService } from '@/services/courses/courses';
 import { useCourse } from '@/providers/course/CourseProvider';
 import { ThreeDots } from 'react-loader-spinner';
+import SideBars from '@/components/SideBars/SideBars';
 interface CourseRellationsContainerProps {
 
 }
 const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
     const {CourseMethods,lvl1,lvl2,lvl3,lvl4,choosedLvl1,choosedLvl2,choosedLvl3,choosedLvl4, isLoadingLvl1, loadingLvl2, loadingLvl3,loadingLvl4} = useCourse()
+
+
+
     return (
         <>
+
         {isLoadingLvl1 ||loadingLvl2 || loadingLvl3 || loadingLvl4 ?
             <div className='myCenter'>
                 <ThreeDots 

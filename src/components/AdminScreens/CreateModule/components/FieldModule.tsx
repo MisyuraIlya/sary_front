@@ -25,9 +25,13 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
   return (
     <th className='pt-4'>
       <div>
-        <div contentEditable onInput={handleInputChange} dangerouslySetInnerHTML={{ __html: value }} />
+        <div 
+        contentEditable 
+        // onInput={handleInputChange} 
+        dangerouslySetInnerHTML={{ __html: value }} />
         
-        <input type="hidden" disable {...register(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, { value:[{value: value}] })} />
+        <input 
+        type="hidden" disable {...register(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, { value:[{value: value}] })} />
       </div>
     </th>
   );
