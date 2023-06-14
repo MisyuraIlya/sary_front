@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/admin/tableOfContents/[first]/[second]/[third]": "pages/admin/tableOfContents/[first]/[second]/[third].js",
-  "/admin/tableOfContents/[first]/[second]": "pages/admin/tableOfContents/[first]/[second].js",
-  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
+  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js",
+  "/admin/tableOfContents/[first]/[second]/[third]": "pages/admin/tableOfContents/[first]/[second]/[third].js"
 }

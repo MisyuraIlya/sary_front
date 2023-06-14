@@ -121,6 +121,13 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     }
   }
 
+  const refetchRemove = () => {
+    refetchLvl1()
+    refetchLvl2()
+    refetchLvl3()
+    refetchLvl4()
+  }
+
   const updateFunction = async (id: number, name:string, grade: string, lvl:number, published: boolean, orden:number) => {
     await CourseService.update(id, {name,grade, published, orden})
     refetchingLvlFunc(lvl- 1)
@@ -130,7 +137,7 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
 
   const removeFunction = async (id: number, lvl:number) => {
     await CourseService.remove(id)
-    refetchingLvlFunc(lvl - 1)
+    refetchRemove()
     refetchCourses()
 
   }
