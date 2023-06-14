@@ -25,7 +25,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                 />
             </div>
         :
-            <div className='grid grid-cols-4 gap-4 px-12 '>
+            <div className='grid grid-cols-4 gap-4 px-12 pb-12'>
                 {lvl1?.children &&
                     <RellationContainer 
                     title='פרקים' 

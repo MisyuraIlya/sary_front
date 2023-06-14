@@ -33,9 +33,8 @@ const Auth: FC = () => {
         else register(data)
         reset()
     }
-    console.log('choosed1',choosed1)
     return (
-    <Meta title='Auth'>
+    <Meta title='כניסה'>
         <AuthLayout>
             {/* {!choosed1 && 
                 <AuthChooseLvl1 setChoosed1={setChoosed1}/>        

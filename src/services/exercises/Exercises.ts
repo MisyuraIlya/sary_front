@@ -15,7 +15,6 @@ interface courseDtoRequest {
 export const ExercisesService = {
 
     async create (data: any) {
-        console.log('data',JSON.stringify(data))
         const response = await axios<any>({
             url: `/exercises`,
             method:'POST',

@@ -28,7 +28,7 @@ const TableOfContents = () => {
         // CourseMethods.setChoosedLvl1(item.id)
     }
     return (
-        <Meta title='courses'>
+        <Meta title='קורסים'>
             <AdminLayout>
                 <div className='h-full' style={{backgroundColor:'#F0FBFF'}}>
                     <div className='mr-12 mb-10'>

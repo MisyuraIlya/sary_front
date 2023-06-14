@@ -75,7 +75,6 @@ const CreateModule = () => {
     }
   }, [exercises, moduleId, setValue]);
 
-  console.log(' exercises?.module', exercises?.module)
 
   // useEffect(() => {
   //   handleAutoUpload();
@@ -83,7 +82,7 @@ const CreateModule = () => {
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
     return (
-        <Meta title='create Module'>
+        <Meta title='יצירת מודול'>
             <AdminLayout>
               <div className='mr-12'>
                 <Heading>{exercises?.title}</Heading>
@@ -125,8 +124,17 @@ const CreateModule = () => {
                       </label>
                       <input id="fileInput" type="file" onChange={handleFileChange} className="hidden" />
 
-                      <Button className='bg-primary text-white rounded-md '>העלה</Button>
-                      <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
+                      {selectedFile && 
+                        <div className='relative'>
+                          <Button className='bg-primary text-white rounded-md '>העלה</Button>      
+                          <div className='absolute '>
+                            {selectedFile.name}
+                          </div>
+                        </div>   
+                      }
+                      {selectedFile &&                     
+                        <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
+                      }
                         </>
                       }
 

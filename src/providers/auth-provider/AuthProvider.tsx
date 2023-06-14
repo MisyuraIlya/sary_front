@@ -31,7 +31,6 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
     }
   }, [logout, user]);
 
-  console.log('isOnlyUser,isOnlyAdmin', isOnlyUser, isOnlyAdmin);
 
   return (
     <>

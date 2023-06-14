@@ -17,6 +17,7 @@ interface CourseContextType {
     refetchLvl3: () => void
     refetchLvl4: () => void
     updateFunction: (id: number, name:string, grade: string, lvl:number, published: boolean, orden:number) => void
+    silentUpdate: (id: number, name:string, grade: string, lvl:number, published: boolean, orden:number) => void
     removeFunction: (id: number, lvl:number) => void
     createFunction: (name: string, level: number, parent: number | null) => void,
     setChoosedCourse: (title: string) => void
@@ -135,6 +136,10 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
 
   }
 
+  const silentUpdate = async (id: number, name:string, grade: string, lvl:number, published: boolean, orden:number) => {
+    await CourseService.update(id, {name,grade, published, orden})
+  }
+
   const removeFunction = async (id: number, lvl:number) => {
     await CourseService.remove(id)
     refetchRemove()
@@ -185,6 +190,7 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     refetchLvl3,
     refetchLvl4,
     updateFunction,
+    silentUpdate,
     removeFunction,
     createFunction,
     setChoosedCourse

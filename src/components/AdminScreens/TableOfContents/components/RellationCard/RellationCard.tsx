@@ -13,8 +13,9 @@ interface RellationCardProps {
     item: ICourse;
     isExercise: boolean
     level: number
+    clearArray: () => void
 }
-const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
+const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArray}) => {
     const router = useRouter();
     const [editMode, setEditMode] = useState(false)
     const {CourseMethods, choosedLvl1, choosedLvl2 , choosedLvl3 ,choosedLvl4} = useCourse()
@@ -22,10 +23,13 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
         setEditMode(false)
+        clearArray()
     }
     const handleRemove = async () => {
         const res =  await onAsk('את בטוחה שאת רוצה למחוק?','אם תלחצי כן לא תוכלי לשחזר את הקובץ והוא ימחק באופן סופי')
         if(res) {CourseMethods.removeFunction(item.id,item.level)}
+        clearArray()
+        
     }
     const {query} = router
 
@@ -47,7 +51,6 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
     const checkOnActive = () => {
         if(level === 2 ) {
             if(choosedLvl2 == item.id) {
-                console.log('2')
                 return true
             } 
         } else if (level === 3) {
@@ -64,6 +67,8 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
             return false
         }
     }
+
+
     return (
         <div className={`border-t border-gray cardHover ${checkOnActive() ? 'clickedCard' : ''}`}>
             <div className='flex py-2 m-auto px-4 '>
@@ -73,14 +78,14 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level}) => {
                 <div className='flex gap-2 '>
                     {
                         isExercise &&
-                        <div className=' border border-black rounded-full flex justify-center w-12 h-12'>
+                        <div className=' border border-black rounded-full flex justify-center w-12 h-12 hover:bg-white'>
                             <Image src={'/images/eye.svg'} width={30} height={30} priority alt='trash' className=' cursor-pointer rounded-lg p-1' onClick={() => router.push(`/admin/createModule/${item.id}`)}/>
                         </div>
                     }      
-                    <div className='border border-black rounded-full flex justify-center w-12 h-12'> 
+                    <div className='border border-black rounded-full flex justify-center w-12 h-12 hover:bg-white'> 
                         <Image src={'/images/draw.svg'} width={25} height={2} priority alt='draw' className=' cursor-pointer rounded-lg p-1' onClick={() => setEditMode(!editMode)}/>
                     </div>  
-                    <div className='border border-black rounded-full flex justify-center w-12 h-12'>
+                    <div className='border border-black rounded-full flex justify-center w-12 h-12 hover:bg-white'>
                         <Image src={'/images/trash.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1'onClick={() => handleRemove()}/>
                     </div>    
                 </div>    

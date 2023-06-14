@@ -25,15 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/tableOfContents/[first]/[second]/[third]": [
+    "/admin/tableOfContents/[first]/[second]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third].js"
-    ],
-    "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js"
+      "static/chunks/pages/admin/tableOfContents/[first]/[second].js"
     ]
   },
   "ampFirstPages": []

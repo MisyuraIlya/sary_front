@@ -32,17 +32,20 @@ const RellationContainer: FC<RellationContainerProps> = ({
   const [filterData, setFilterData] = useState('');
   const [filterArr, setFilterArr] = useState<ICourse[]>([]);
   const [loading, setLoading] = useState(false)
+
+  const [changedArray, setChangedArray] = useState<{ orden: number; id: number; name: string; grade: string; image: string; color: string; published: boolean; level: number; totalChildren?: number | undefined; children?: ICourse[] | undefined; }[]>([]);
   const { register: registerAdd, handleSubmit: handleAdd } = useForm<Inputs>();
 
   const onSubmitAdd: SubmitHandler<Inputs> = (data) => {
     CourseMethods.createFunction(data.name, level, parentId);
     setActiveAdd(false)
+    clearArray()
   };
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
-    const newItems = Array.from(filterArr.length > 0 ? filterArr : data);
+    const newItems = data
     const [removed] = newItems.splice(result.source.index, 1);
     newItems.splice(result.destination.index, 0, removed);
 
@@ -57,28 +60,32 @@ const RellationContainer: FC<RellationContainerProps> = ({
         ...item,
         orden: index + 1,
       }));
-      setLoading(true)
-
-      updatedData.map((item) => {
-        CourseMethods.updateFunction(item.id, item.name, item.grade, item.level, item.published, item.orden);
-      })
+      setChangedArray(updatedData)
 
       setTimeout(() => {
-        setLoading(false)
-      },200)
+        updatedData.map((item) => {
+          CourseMethods.silentUpdate(item.id, item.name, item.grade, item.level, item.published, item.orden);
+        })
+  
+      },500)
+
+
     }
   };
+
+  const clearArray = () => {
+    setChangedArray([])
+  }
   
 
   useEffect(() => {
     if (filterData) {
-      let filter = data.filter((item) => item.name.includes(filterData));
+      let filter = (changedArray.length > 0 ? changedArray : data).filter((item) => item.name.includes(filterData));
       setFilterArr(filter);
     } else {
       setFilterArr([]);
     }
   }, [data, filterData]);
-
 
 
   return (
@@ -156,7 +163,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
                 <Droppable droppableId='droppable'>
                   {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
-                      {(filterArr.length > 0 ? filterArr : data)?.map((item, index) => (
+                      {(changedArray.length > 0 ? (filterArr.length > 0 ? filterArr : changedArray) : (filterArr.length > 0 ? filterArr : data)).map((item, index) => (
                         <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                           {(provided) => (
                             <div
@@ -164,7 +171,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <RellationCard item={item}  key={index} isExercise={isExercise} level={level}/>
+                              <RellationCard item={item}  key={index} isExercise={isExercise} level={level} clearArray={clearArray}/>
                             </div>
                           )}
                         </Draggable>

@@ -14,7 +14,6 @@ interface SelectModuleProps {
 }
 const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, row, register, setValue, control}) => {
     const optionsNew = options?.map(item => ({ value: item.value, label: item.value }));
-    console.log('optionsNew',optionsNew, answer)
     const getValue = (value:any) => value ? optionsNew.find((option) => option.value.trim() == value) : {value:answer, label:answer}
     useEffect(() => {
         setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -28,7 +27,6 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
              <Controller control={control} name={`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`} rules={{required:'צריך לבחור את התשובה'}} render={
                 ({field:{onChange,value},fieldState:{error}}) => (
                 <>
-                {console.log('aaa=>',getValue(value))}
                 <ReactSelect
                 placeholder={placeholder}
                 options={optionsNew}

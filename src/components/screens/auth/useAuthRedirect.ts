@@ -5,7 +5,6 @@ export const useAuthRedirect = () => {
     const {user} = useAuth()
 
     const {replace} = useRouter()
-    console.log('user',user?.userType.title)
 
     useEffect(() => {
         if (user?.userType.title === 'admin') {
