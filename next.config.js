@@ -8,15 +8,15 @@ const nextConfig = {
     return [
       {
         source: '/auth/:slug*',
-        destination: `http://${process.env.SERVER_URL}/auth/:slug*`
+        destination: `http://3.74.228.194/auth/:slug*`
       },
       {
         source: '/courses/:slug*',
-        destination: `http://${process.env.SERVER_URL}/courses/:slug*`
+        destination: `http://3.74.228.194/courses/:slug*`
       },
       {
         source: '/exercises/:slug*',
-        destination: `http://${process.env.SERVER_URL}/exercises/:slug*`
+        destination: `http://3.74.228.194/exercises/:slug*`
       }
     ]
   }
