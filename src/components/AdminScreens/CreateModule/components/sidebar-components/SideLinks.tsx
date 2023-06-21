@@ -36,7 +36,7 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
             pdfLink = localFile
         }
         if(exercises?.pdf){
-            window.open(`http://3.74.228.194/:4000/${pdfLink}`, '_blank', 'noopener');
+            window.open(`http://3.74.228.194:4000/${pdfLink}`, '_blank', 'noopener');
         }
     }
     
