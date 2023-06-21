@@ -66,7 +66,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       setIsOnlineXml(false)
     } catch(e) {
       console.log('error',e)
-      onErrorAlert('שגיאה בלפרסס את המודול','אנא פנה לצוות דיגירטייד')
+      onErrorAlert('שגיאה בלפרסס את המודול','XL אינו תקין')
     } finally {
       setLoading(false)
     }
@@ -105,6 +105,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     }
 
   }
+  
 
 
   useEffect(() => {

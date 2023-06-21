@@ -18,7 +18,6 @@ const ColsCard:FC<ColsCardProps> = ({item,register,setValue, index}) => {
             <input 
             disabled
             // disabled={isOnlineXml ? true : false}
-            placeholder={'כותרת'} 
             className='w-36 rounded-md  text-white bg-primary text-center' 
             {...register(`collectionsCols[${item.orden}].title`, {value: item.title})}/>
         </div>

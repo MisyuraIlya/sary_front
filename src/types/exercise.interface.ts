@@ -3,6 +3,8 @@ import { ICourse } from "./course.interface";
 export interface IExercise {
     id:              number;
     title:           string;
+    youtube_link: string;
+    pdf: string | null;
     description:     string;
     module: number;
     description2:    null | string;
@@ -20,6 +22,8 @@ export interface CollectionsCol {
 export interface CollectionsRow {
     id:            number;
     orden:         number;
+    youtube_link: string;
+    pdf: string | null;
     collectionRow: CollectionRow[];
 }
 
@@ -27,6 +31,7 @@ export interface CollectionRow {
     id:                number;
     placeholder:       null | string;
     module_type:       ModuleType;
+    isFullText: boolean;
     orden: number;
     collectionAnswers: Collection[];
     collectionValues:  Collection[];
@@ -44,3 +49,7 @@ export enum ModuleType {
     TextArea = "textarea"
 }
 
+
+export interface ResponseUploadedPdf {
+    path: string
+}

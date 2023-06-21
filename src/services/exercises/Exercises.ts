@@ -3,13 +3,25 @@ import { IFirstModuleResponse } from "@/types/ModulesTypes.ts/FirstModule.interf
 import { ICourse } from "@/types/course.interface"
 import axios, { AxiosResponse } from 'axios';
 import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
-import { IExercise } from "@/types/exercise.interface";
+import { IExercise, ResponseUploadedPdf } from "@/types/exercise.interface";
 interface courseDtoRequest {
     title: string
     description: string
     moduleType: number
     courseId: number
     exercises: any 
+}
+
+interface updatePdf {
+    pdf: string;
+
+    tableType: 'exercises' | 'exercises_rows';
+}
+
+interface updateLink {
+    link: string;
+
+    tableType: 'exercises' | 'exercises_rows';
 }
 
 export const ExercisesService = {
@@ -53,7 +65,37 @@ export const ExercisesService = {
 
 
         return response.data
-    }
+    },
+
+    async uploadPdf(file: File): Promise<ResponseUploadedPdf> {
+        const formData = new FormData();
+        formData.append('file', file); // Assuming the backend expects the file to be named 'xlFile'
+        const response: AxiosResponse<ResponseUploadedPdf> = await axios.post('/exercises/pdf', formData);
+        return response.data;
+    },
+
+
+    async updatePdf (id: number, data: updatePdf) {
+        const response = await axios<void>({
+            url: `/exercises/pdf/${id}`,
+            method:'PUT',
+            data: data
+        })
+
+
+        return response.data
+    },
+    async updateLink (id: number, data: updateLink) {
+        const response = await axios<void>({
+            url: `/exercises/linkvideo/${id}`,
+            method:'PUT',
+            data: data
+        })
+
+
+        return response.data
+    },
+    
 
 
 }

@@ -1,5 +1,9 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/signInStudent": "pages/signInStudent.js",
+  "/admin/tableOfContents": "pages/admin/tableOfContents.js",
+  "/teacherEnteringType": "pages/teacherEnteringType.js"
 }

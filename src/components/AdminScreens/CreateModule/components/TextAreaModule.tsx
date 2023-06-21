@@ -16,6 +16,7 @@ const TextAreaModule: FC<TextAreaModuleProps> = ({value, register, col, row, set
         setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'textarea');
         setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
+        setValue(`collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
       }, [col, row, setValue]);
       
 

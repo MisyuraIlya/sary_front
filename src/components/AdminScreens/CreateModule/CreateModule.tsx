@@ -18,6 +18,10 @@ import { Oval } from 'react-loader-spinner';
 import Image from 'next/image';
 import SideBars from '@/components/SideBars/SideBars';
 import TextAreaModule from './components/TextAreaModule';
+import TextField from '@mui/material/TextField';
+import { ExercisesService } from '@/services/exercises/Exercises';
+import SideLinks from './components/sidebar-components/SideLinks';
+import { substring10 } from '@/helpers/Substring10';
 const options = [
   { value: 1, label: 'מודול ראשון' }
 ]
@@ -27,6 +31,7 @@ const CreateModule = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
   const {ExerciseMethods, exercises, isOnlineXml, loading} = useExercise()
+
   const router = useRouter();
 
   const moduleId = router.query.moduleId
@@ -34,6 +39,7 @@ const CreateModule = () => {
   const { register, handleSubmit: handleSubmitForm, watch, formState: { errors } , setValue,control} = useForm<any>();
   
   const onSubmit = (data: any) => {
+    console.log('data',data)
     ExerciseMethods.createMoudle(data)
   };
 
@@ -65,14 +71,6 @@ const CreateModule = () => {
 
   };
 
-  const handleAutoUpload = useCallback(async () => {
-    if (selectedFile) {
-      let res = await onAsk('האם תרצו להריץ את הקובץ?','');
-      if (res) {
-        ExerciseMethods.uploadXml(selectedFile);
-      }
-    }
-  }, [ExerciseMethods, selectedFile]);
 
   useEffect(() => {
     if (exercises) {
@@ -81,6 +79,8 @@ const CreateModule = () => {
       setValue('description2', exercises?.description2); 
       setValue('module', exercises?.module);
       setValue('courseId', moduleId); 
+      setValue('youtube_link', exercises?.youtube_link); 
+      setValue('pdf', exercises?.pdf); 
     }
   }, [exercises, moduleId, setValue]);
 
@@ -95,12 +95,9 @@ const CreateModule = () => {
     setIsSidebarOpen(false);
   };
 
-  // useEffect(() => {
-  //   handleAutoUpload();
-  // }, [handleAutoUpload, selectedFile]);
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
-  console.log('exercises',exercises)
+
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -152,7 +149,7 @@ const CreateModule = () => {
                         <div className='relative'>
                           <Button className='bg-primary text-white rounded-md '>העלה</Button>      
                           <div className='absolute '>
-                            {selectedFile.name}
+                            {substring10(selectedFile.name)}
                           </div>
                         </div>   
                       }
@@ -241,7 +238,10 @@ const CreateModule = () => {
                       <div className='pt-12'>
                         <textarea value={exercises?.description2 ?? ''} className='w-full h-96'/> 
                       </div>
+                      <SideLinks exercises={exercises} register={register} setValue={setValue} tableType={'exercises'}/>
+
                     </div>
+
                   </div>
               </SideBars>
 

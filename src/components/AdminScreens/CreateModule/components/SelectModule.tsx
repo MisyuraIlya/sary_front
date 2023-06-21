@@ -20,6 +20,7 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
         setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer);
         setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, options);
         setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'selectbox');
+        setValue(`collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
       }, [answer, col, options, row, setValue]);
 
     return (

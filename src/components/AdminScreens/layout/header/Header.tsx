@@ -1,18 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
 import {FC} from 'react'
-
+import SideBars from '@/components/SideBars/SideBars';
+import { onAsk } from '@/utils/sweetAlert';
+import { useActions } from '@/hooks/useActions';
 const Header: FC = () => {
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const { logout } = useActions();
+
+    const handleSidebarToggle = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+    };
+  
+    const handleSidebarClose = () => {
+      setIsSidebarOpen(false);
+    };
+
+    const handleExitSystem = async () => {
+        const res = await onAsk('האם את רוצה לצאת מהמערכת?','')
+        if(res) {
+            logout()
+        }
+    }
+
     return (
-        <header className='bg-primary w-full py-2 px-6 grid grid-cols-2' style={{height:'70px'}}>
-            <div className='flex justify-start items-center'>
+        <>
+            <header className='bg-primary w-full py-2 px-6 grid grid-cols-2 fixed' style={{height:'70px', zIndex:1000000}}>
+            <div className='flex justify-start items-center' >
                 <Image
                 priority
                 width={48}
                 height={48}
                 src={'/images/header/avatars/avatar.svg'}    
                 alt='Sary'
+                className='cursor-pointer'
+                onClick={() => handleSidebarToggle()}
                 />
                 <p className='text-center text-white px-4'>אורלי</p>
             </div>
@@ -74,6 +99,73 @@ const Header: FC = () => {
                 </div>
             </div>
         </header>
+
+        <SideBars anchor="right" isOpen={isSidebarOpen} onClose={handleSidebarClose} isPrimaryBg={true}>
+            <div style={{width:'394px'}}>
+                <div className='bg-black w-full'>
+                    <div className='mr-10 ml-10 py-12'>
+                        <h2 style={{fontSize:'25px', fontWeight:'700', color:'#C6CEE6'}}>הפרופיל שלי</h2>
+                    </div>
+                </div>
+                <div className='mr-10 ml-10 mt-12'>
+                    <div className='grid grid-cols-12'>
+                        <div className='col-span-5 items-center flex'>
+                            <Image
+                                priority
+                                width={78}
+                                height={78}
+                                src={'/images/header/avatars/avatar.svg'}    
+                                alt='Sary'
+                                className='cursor-pointer'
+                                onClick={() => handleSidebarToggle()}
+                            />
+                        </div>
+                        <div className='col-span-7'>
+                            <h2 style={{fontSize:'35px', fontWeight:'700', color:'#C6CEE6'}}>אורלי</h2>
+                            <div className='flex gap-4' style={{color:'#C6CEE6'}}>
+                                <Image
+                                    priority
+                                    width={22}
+                                    height={22}
+                                    src={'/images/phone.svg'}    
+                                    alt='Sary'
+                                    className='cursor-pointer'
+                                    onClick={() => handleSidebarToggle()}
+                                />
+                                <p>0501234567</p>
+                            </div>
+                            <div className='flex gap-4' style={{color:'#C6CEE6'}}>
+                                <Image
+                                    priority
+                                    width={22}
+                                    height={22}
+                                    src={'/images/email.svg'}    
+                                    alt='Sary'
+                                    className='cursor-pointer'
+                                    onClick={() => handleSidebarToggle()}
+                                />
+                                <p>admin@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='absolute mr-12 flex items-center text-center gap-4 cursor-pointer' style={{bottom:'120px', color:'#C6CEE6'}} onClick={() => handleExitSystem()}>
+                    <Image
+                        priority
+                        width={25}
+                        height={25}
+                        src={'/images/arrowLeft.svg'}    
+                        alt='Sary'
+                        className='items-center '
+                    />
+                    <p>יציאה מהמערכת</p>
+                </div>
+            </div>
+        </SideBars>
+        
+        
+        </>
+
     );
 };
 

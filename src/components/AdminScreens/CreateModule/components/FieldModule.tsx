@@ -20,6 +20,7 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
     setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
     setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
     setValue(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
+    setValue(`collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
   }, [col, row, setValue]);
 
   return (
@@ -28,7 +29,9 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
         <div 
         contentEditable 
         // onInput={handleInputChange} 
-        dangerouslySetInnerHTML={{ __html: value }} />
+        dangerouslySetInnerHTML={{ __html: value }}
+        className='text-right pr-2'
+        />
         
         <input 
         type="hidden" disable {...register(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, { value:[{value: value}] })} />

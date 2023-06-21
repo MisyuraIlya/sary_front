@@ -7,20 +7,22 @@ interface RighSideBarProps {
     isOpen: boolean;
     onClose: () => void;
     children: any;
+    isPrimaryBg?: boolean
 }
 
-const StyledDrawer = styled(Drawer)({
-  '& .MuiDrawer-paper': {
-    marginTop: '70px',
-  },
-  '& .MuiBackdrop-root': {
-    marginTop: '70px',
-  },
-});
+const StyledDrawer = styled(Drawer)<{ isPrimaryBg?: boolean }>(
+  ({ isPrimaryBg }) => ({
+    '& .MuiDrawer-paper': {
+      marginTop: '70px',
+      backgroundColor: isPrimaryBg ? '#002536' : 'white',
+    },
+    '& .MuiBackdrop-root': {
+      marginTop: '70px',
+    },
+  })
+);
 
-
-
-const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children}) => {
+const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children, isPrimaryBg}) => {
     
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
@@ -43,7 +45,7 @@ const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children}) =
 
     return (
         <div>
-          <StyledDrawer anchor={anchor} open={isOpen} onClose={toggleDrawer(false)} style={{marginTop:'70px'}} >
+          <StyledDrawer anchor={anchor} open={isOpen} onClose={toggleDrawer(false)} style={{marginTop:'70px'}} isPrimaryBg={isPrimaryBg}>
               <>{children}</>
             </StyledDrawer>
         </div>
