@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"../src/providers/auth-provider/AuthProvider.tsx -> ./CheckRole":{"id":"../src/providers/auth-provider/AuthProvider.tsx -> ./CheckRole","files":["static/chunks/src_providers_auth-provider_CheckRole_tsx.js"]}}
+self.__REACT_LOADABLE_MANIFEST={"../src/providers/auth-provider/AuthProvider.tsx -> ./CheckRole":{id:9503,files:["static/chunks/503.a2c9dc6e217b6041.js"]}};

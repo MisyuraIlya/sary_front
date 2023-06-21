@@ -37,7 +37,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
         setValue(`collectionsRows[${orden}].orden`, orden);
         setValue(`collectionsRows[${orden}].youtube_link`, exercises?.youtube_link);
         setValue(`collectionsRows[${orden}].pdf`, exercises?.pdf);
-      }, [orden, setValue]);
+      }, [orden, setValue,exercises?.pdf,exercises?.youtube_link]);
 
 
       const handleSidebarToggle = () => {

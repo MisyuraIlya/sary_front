@@ -86,7 +86,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
     } else {
       setFilterArr([]);
     }
-  }, [data, filterData]);
+  }, [data, filterData,changedArray]);
 
 
   return (
