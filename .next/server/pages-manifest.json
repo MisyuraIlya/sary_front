@@ -1,8 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/teacherEnteringType": "pages/teacherEnteringType.js",
-  "/": "pages/index.js",
-  "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].js"
+  "/_document": "pages/_document.js"
 }
