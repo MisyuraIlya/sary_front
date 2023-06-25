@@ -2,6 +2,7 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect,useState} from 'react';
 import { Controller } from 'react-hook-form';
 interface InputModuleProps {
+    id: number
     answer: string
     placeholder: string
     register: any
@@ -12,8 +13,9 @@ interface InputModuleProps {
     
 }
 
-const InputModule: FC<InputModuleProps> = ({answer,placeholder, register, col, row, setValue,isFullText}) => {
+const InputModule: FC<InputModuleProps> = ({id, answer,placeholder, register, col, row, setValue,isFullText}) => {
     const {ExerciseMethods} = useExercise()
+    const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
         setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`collectionsRows[${col}].collectionRow[${row}].module_type`, 'input');
@@ -21,7 +23,11 @@ const InputModule: FC<InputModuleProps> = ({answer,placeholder, register, col, r
         setValue(`collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
       }, [col, row, setValue, isFullText]);
 
-      ExerciseMethods.setIsChanged(true)
+      const handleCheckBox = () => {
+        setIsChecked(!isChecked)
+        ExerciseMethods.handleEditCheckBox(id, !isChecked)
+      }
+
     return (
         <th className='bg-white pt-4'>
             <input 
@@ -37,8 +43,9 @@ const InputModule: FC<InputModuleProps> = ({answer,placeholder, register, col, r
             <div className=''>
             <input
                 type="checkbox"
-                onChange={ExerciseMethods.setIsChanged(true)}
-                {...register(`collectionsRows[${col}].collectionRow[${row}].isFullText`,isFullText)} 
+                // onClick={(e) => ExerciseMethods.handleEditCheckBox(id, isChecked)}
+                onClick={() => handleCheckBox()}
+                {...register(`collectionsRows[${col}].collectionRow[${row}].isFullText`,isChecked)} 
             />
                 <span className='text-sm pr-2'>בכתיב מלא</span>
             </div>

@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import SubHeading from '@/ui/heading/SubHeading';
 import ColsCard from './components/ColsCard';
-import { onAsk, onInfoAlert } from '@/utils/sweetAlert';
+import { onAsk, onInfoAlert, onSuccessAlert } from '@/utils/sweetAlert';
 import { Oval } from 'react-loader-spinner';
 import Image from 'next/image';
 import SideBars from '@/components/SideBars/SideBars';
@@ -30,7 +30,7 @@ const CreateModule = () => {
   const [isEmptySelect, setIsEmptySelect] = useState<number>()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
-  const {ExerciseMethods, exercises, isOnlineXml, loading, settingsEdit} = useExercise()
+  const {ExerciseMethods, exercises, isOnlineXml, loading, settingsEdit,isChanged, handleEditedCheckbox} = useExercise()
 
   const router = useRouter();
 
@@ -72,6 +72,7 @@ const CreateModule = () => {
   };
 
 
+
   useEffect(() => {
     if (exercises) {
       setValue('title', exercises?.title); 
@@ -98,7 +99,6 @@ const CreateModule = () => {
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
   const isSettingEdited = settingsEdit?.includes(0)
-  console.log('isSettingEdited',isSettingEdited)
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -157,8 +157,11 @@ const CreateModule = () => {
                       {selectedFile &&                     
                         <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
                       }
-
                         </>
+                      }
+                      {
+                        handleEditedCheckbox.length > 0 && 
+                        <Button className='bg-green text-white rounded-md' onClick={() => ExerciseMethods.handleSaveUpload()}>שמור</Button>
                       }
 
                       <div className={`${isSettingEdited ? 'bg-primary' : 'border-primary border'}   p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} >

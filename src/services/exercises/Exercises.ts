@@ -24,6 +24,11 @@ interface updateLink {
     tableType: 'exercises' | 'exercises_rows';
 }
 
+interface updateCheked {
+    id: number
+    checked: boolean;
+}
+
 export const ExercisesService = {
 
     async create (data: any) {
@@ -95,6 +100,17 @@ export const ExercisesService = {
 
         return response.data
     },
+    
+    async updateMultipleChecked (data: updateCheked[]) {
+        const response = await axios<any>({
+            url: `/exercises/updateChecked`,
+            method:'POST',
+            data: data
+        })
+
+
+        return response.data
+    }
     
 
 
