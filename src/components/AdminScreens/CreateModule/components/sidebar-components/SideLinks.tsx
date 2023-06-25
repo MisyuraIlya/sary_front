@@ -12,7 +12,7 @@ interface SideLinksProps {
 }
 
 const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,orden}) => {
-    const {isOnlineXml} = useExercise()
+    const {isOnlineXml, ExerciseMethods} = useExercise()
     const [openEditPdf, setOpenEditPdf] = useState(false)
     const [openEditVideo, setOpenEditVideo] = useState(false)
     const [localFile, setLocalFile] = useState<string>()
@@ -62,6 +62,18 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
 
         setIsUpdatedPdf(true)
         setOpenEditPdf(false)
+
+        if(tableType == 'exercises' && localFile) {
+            setValue('pdf', localFile); 
+            ExerciseMethods.updateExercisesState(tableType,'pdf',localFile, null)
+            ExerciseMethods.handleEdits(0)
+        } 
+
+        if(tableType == 'exercises_rows' && localFile && orden){
+            setValue(`collectionsRows[${orden}].pdf`, link);
+            ExerciseMethods.updateExercisesState(tableType,'pdf',localFile,orden)
+            ExerciseMethods.handleEdits(orden)
+        }
     }
 
     const handleSaveLink = () => {
@@ -76,9 +88,21 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
         setIsUpdatedLink(true)
         setOpenEditVideo(false)
         
+        if(tableType == 'exercises' && link) {
+            setValue('youtube_link', link); 
+            ExerciseMethods.updateExercisesState(tableType,'youtube_link',link, null)
+            ExerciseMethods.handleEdits(0)
+        } 
+
+        if(tableType == 'exercises_rows' && link && orden){
+            setValue(`collectionsRows[${orden}].youtube_link`, link);
+            ExerciseMethods.updateExercisesState(tableType,'youtube_link',link,orden)
+            ExerciseMethods.handleEdits(orden)
+        }
+
     }
 
-    const embedCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/rO3F9XQ4hoc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+
 
     return (
         <div className='mb-12'>

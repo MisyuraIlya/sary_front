@@ -22,16 +22,7 @@ interface FirstModule {
 const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , control}) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const {isOnlineXml} = useExercise()
-
-    const uploadPdf = async (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if(file) {
-          const data = await ExercisesService.uploadPdf(file)
-          setValue(`collectionsRows[${orden}].pdf`, data.path);
-        }
-    
-      }
+    const {isOnlineXml, settingsEdit} = useExercise()
 
     useEffect(() => {
         setValue(`collectionsRows[${orden}].orden`, orden);
@@ -48,18 +39,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
         setIsSidebarOpen(false);
       };
 
-      const openNewTab = () => {
-        if(exercises?.pdf){
-          window.open(`http://localhost:4000/${exercises?.pdf}`, '_blank', 'noopener');
-        }
-      }
-
-      const openNewTabYoutube = () => {
-        if(exercises?.pdf){
-          window.open(`${exercises?.youtube_link}`, '_blank', 'noopener');
-        }
-      }
-
+    const isSettingEdited = settingsEdit?.includes(orden)
 
     return (
         <>
@@ -76,9 +56,9 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
             }
             <th className='bg-white'>
                 <div className='flex gap-6 items-center justify-center pt-4'>
-                    <div className='bg-primary p-2 rounded-lg cursor-pointer' onClick={() => handleSidebarToggle()} >
-                        <Image src={'/images/settings.svg'} alt='settings' width={25} height={25}/>
-                    </div> 
+                      <div className={`${isSettingEdited ? 'bg-primary' : 'border-primary border'}   p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} >
+                        <Image src={`${isSettingEdited ? '/images/settings.svg' : '/images/settings primary.svg'}`} alt='settings' width={25} height={25}/>
+                      </div> 
 
                 </div>
             </th>

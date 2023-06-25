@@ -30,7 +30,7 @@ const CreateModule = () => {
   const [isEmptySelect, setIsEmptySelect] = useState<number>()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
-  const {ExerciseMethods, exercises, isOnlineXml, loading} = useExercise()
+  const {ExerciseMethods, exercises, isOnlineXml, loading, settingsEdit} = useExercise()
 
   const router = useRouter();
 
@@ -97,7 +97,8 @@ const CreateModule = () => {
 
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
-
+  const isSettingEdited = settingsEdit?.includes(0)
+  console.log('isSettingEdited',isSettingEdited)
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -160,8 +161,8 @@ const CreateModule = () => {
                         </>
                       }
 
-                      <div className='bg-primary p-2 rounded-lg' onClick={() => handleSidebarToggle()} >
-                        <Image src={'/images/settings.svg'} alt='settings' width={25} height={25}/>
+                      <div className={`${isSettingEdited ? 'bg-primary' : 'border-primary border'}   p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} >
+                        <Image src={`${isSettingEdited ? '/images/settings.svg' : '/images/settings primary.svg'}`} alt='settings' width={25} height={25}/>
                       </div> 
 
                   </form>

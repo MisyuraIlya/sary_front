@@ -2,9 +2,9 @@ import { ICourse } from "./course.interface";
 
 export interface IExercise {
     id:              number;
-    title:           string;
+    title?:           string;
     youtube_link: string;
-    pdf: string | null;
+    pdf?: string | null;
     description:     string;
     module: number;
     description2:    null | string;

@@ -11,10 +11,14 @@ interface ExerciseContextType {
     uploadXml: (file: File) => void
     createMoudle: (data: any) => void
     deleteModule: (id: any) => void
+    updateExercisesState: (tableType: 'exercises' | 'exercises_rows', field: 'youtube_link' | 'pdf', data: string, orden: number | null) => void
+    handleEdits: (orden: number) => void
+    setIsChanged: (change: boolean) =>void
   };
   exercises: IExercise | undefined;
   loading: boolean,
-  isOnlineXml: boolean
+  isOnlineXml: boolean,
+  settingsEdit: number[] | undefined
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -39,6 +43,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const [loading, setLoading] = useState(false)
     const [exercises, setExercises] = useState<IExercise | undefined>()
     const [isOnlineXml, setIsOnlineXml] = useState(false)
+    const [settingsEdit, setSettingsEdit] = useState<number[]>()
+    const [isChanged, setIsChanged] = useState(false)
     const router = useRouter();
     const moduleId = router.query.moduleId;
   // Helpers
@@ -106,6 +112,65 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
 
   }
   
+  const updateExercisesState = (tableType: 'exercises' | 'exercises_rows', field: 'youtube_link' | 'pdf', data: string, orden: number | null) => {
+
+    if(tableType === 'exercises') {
+      if(field === 'youtube_link'){
+        setExercises((e) => {
+          if (e) {
+            return { ...e, youtube_link: data };
+          }
+          return e;
+        });
+      }
+
+      if(field === 'pdf'){
+        setExercises((e) => {
+          if (e) {
+            return { ...e, pdf: data };
+          }
+          return e;
+        });
+      }
+    } 
+
+    if (tableType === 'exercises_rows') {
+        if(field === 'youtube_link') {
+          setExercises((e) => {
+            if (e) {
+              const updatedCollectionsRows = e.collectionsRows?.map((i) => {
+                if (i.orden === orden) {
+                  return { ...i, youtube_link: data };
+                }
+                return i;
+              });
+              return { ...e, collectionsRows: updatedCollectionsRows };
+            }
+            return e;
+          });
+        }
+
+        if(field === 'pdf'){
+          setExercises((e) => {
+            if (e) {
+              const updatedCollectionsRows = e.collectionsRows?.map((i) => {
+                if (i.orden === orden) {
+                  return { ...i, pdf: data };
+                }
+                return i;
+              });
+              return { ...e, collectionsRows: updatedCollectionsRows };
+            }
+            return e;
+          });
+        }
+    }
+  }
+
+  const handleEdits = (orden: number) => {
+    setSettingsEdit((prevSettings: number[] | undefined) => [...(prevSettings || []), orden]);
+  }
+  
 
 
   useEffect(() => {
@@ -117,13 +182,17 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     setId,
     uploadXml,
     createMoudle,
-    deleteModule
+    deleteModule,
+    updateExercisesState,
+    handleEdits,
+    setIsChanged
   };
   const value: ExerciseContextType = {
     exercises,
     ExerciseMethods,
     loading,
-    isOnlineXml
+    isOnlineXml,
+    settingsEdit
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;
