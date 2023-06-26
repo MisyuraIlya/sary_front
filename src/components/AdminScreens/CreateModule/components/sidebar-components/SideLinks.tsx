@@ -1,9 +1,10 @@
-import React, {ChangeEvent, FC, useState, useRef} from 'react';
+import React, {ChangeEvent, FC, useState, useRef, use} from 'react';
 
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { CollectionsRow, IExercise } from '@/types/exercise.interface';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import Image from 'next/image';
+import { useAuth } from '@/hooks/useAuth';
 interface SideLinksProps {
     exercises: CollectionsRow | IExercise | undefined
     register: any
@@ -22,6 +23,7 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
     const [isUpdatedPdf, setIsUpdatedPdf] = useState(false)
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
+    const {user} = useAuth()
 
     const uploadPdf = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -171,9 +173,6 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
         }
     }
 
-
-
-
     return (
         <div className='mb-12'>
 
@@ -181,13 +180,16 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
                 {isOnlineXml &&
                     <>
                             <div className='items-center gap-4 mb-2'>
-                                <button 
-                                className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4'
-                                style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.pdf ? '1' : '0.5'}`}}
-                                onClick={(e) => {e.preventDefault(); setOpenEditPdf(!openEditPdf)}}
-                                >
-                                    העלאת קובץ PDF
-                                </button>
+                                {user?.isAdmin &&
+                                    <button 
+                                    className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4'
+                                    style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.pdf ? '1' : '0.5'}`}}
+                                    onClick={(e) => {e.preventDefault(); setOpenEditPdf(!openEditPdf)}}
+                                    >
+                                        העלאת קובץ PDF
+                                    </button>
+                                }
+
                                 { openEditPdf &&
                                 <div className='flex gap-4'>
                                     <div className='fileInput w-full border border-gray rounded-md px-2 cursor-pointer' onClick={() => {fileInputRef.current?.click(); }}>
@@ -212,21 +214,26 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
 
                                 {exercises?.pdf &&
                                     <div className='flex gap-4'>
-                                        <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removePdf()} />
+                                        {user?.isAdmin &&
+                                            <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removePdf()} />                                    
+                                        }
                                         <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => openNewTab()} />
-                                        {exercises?.pdf}
+                                        <p>לינק לתמונה</p>
                                     </div>        
                                 
                                 }
 
                         </div>
                         <div className='items-center gap-4 mb-2'>
-                            <button  
-                            onClick={(e) => {e.preventDefault(); setOpenEditVideo(!openEditVideo)}} 
-                            className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4' 
-                            style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.youtube_link ? '1' : '0.5'}`}}>
-                                העלאת סרטון
-                            </button>
+                            {user?.isAdmin &&
+                                <button  
+                                onClick={(e) => {e.preventDefault(); setOpenEditVideo(!openEditVideo)}} 
+                                className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4' 
+                                style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.youtube_link ? '1' : '0.5'}`}}>
+                                    העלאת סרטון
+                                </button>
+                            }
+
                             {openEditVideo &&
                             <div className='flex gap-4'>
                                 <input placeholder='לינק ליוטיוב' className='w-full border border-gray rounded-md px-2' value={link} onChange={(e) => setLink(e.target.value) }/>
@@ -241,7 +248,9 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
                         </div>
                         {exercises?.youtube_link &&
                             <div className='flex gap-4'>
+                                {user?.isAdmin &&
                                 <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removeVideo()}/>
+                                }
                                 <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => openNewTabYoutube()} />
                                 {exercises?.youtube_link}
                             </div>        

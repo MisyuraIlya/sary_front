@@ -22,6 +22,7 @@ import TextField from '@mui/material/TextField';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import SideLinks from './components/sidebar-components/SideLinks';
 import { substring10 } from '@/helpers/Substring10';
+import { useAuth } from '@/hooks/useAuth';
 const options = [
   { value: 1, label: 'מודול ראשון' }
 ]
@@ -31,7 +32,7 @@ const CreateModule = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
   const {ExerciseMethods, exercises, isOnlineXml, loading,isChanged, handleEditedCheckbox} = useExercise()
-
+  const {user} = useAuth()
   const router = useRouter();
 
   const moduleId = router.query.moduleId
@@ -98,7 +99,6 @@ const CreateModule = () => {
 
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
-
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -148,14 +148,24 @@ const CreateModule = () => {
 
                       {selectedFile && 
                         <div className='relative'>
-                          <Button className='bg-primary text-white rounded-md '>העלה</Button>      
+                          {user?.isAdmin &&
+                          <>
+                          <Button className='bg-primary text-white rounded-md '>העלה</Button>                              
                           <div className='absolute '>
                             {substring10(selectedFile.name)}
                           </div>
+                          </>
+ 
+                          }
+
                         </div>   
                       }
                       {selectedFile &&                     
-                        <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>
+                        <>
+                          {user?.isAdmin &&
+                            <Button className='bg-green text-white rounded-md' onClick={handleSubmitForm(onSubmit)}>שמור</Button>                        
+                          }
+                        </>
                       }
                         </>
                       }
@@ -243,11 +253,12 @@ const CreateModule = () => {
                       <div className='text-center'>
                         <Heading>{exercises?.title}</Heading>
                       </div>
+                      <h3 className='font-bold text-primary text-center'>הוראות תרגיל</h3>
                       <div>
                         <SubHeading>{exercises?.description}</SubHeading>
                       </div>
-
                       <div className='pt-12'>
+                        <h3 className='font-bold text-primary text-center'>הדרכה</h3>
                         <textarea value={exercises?.description2 ?? ''}  readOnly className='w-full h-96 cursor-default'/> 
                         
                       </div>

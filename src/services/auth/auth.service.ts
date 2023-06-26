@@ -4,14 +4,18 @@ import { IAuthResponse } from "@/store/user/user.interface"
 import { getContentType } from "@/api/api.helper"
 import { saveToStorage } from "./auth.helper"
 import { instance } from "@/api/api.interceptor"
+import { onErrorAlert } from "@/utils/sweetAlert"
 export const AuthService = {
 
     async main (type: 'login' | 'register', data: any) {
+        
         const response = await axios<IAuthResponse>({
             url: `/auth/${type}`,
             method:'POST',
             data
         })
+
+        console.log('response',response)
 
         if(response.data.accessToken) saveToStorage(response.data)
 

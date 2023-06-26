@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/tableOfContents/[first]": [
+    "/admin/createModule/[moduleId]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/tableOfContents/[first].js"
+      "static/chunks/pages/admin/createModule/[moduleId].js"
     ]
   },
   "ampFirstPages": []
