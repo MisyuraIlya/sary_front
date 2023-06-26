@@ -13,7 +13,7 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({Component: {
       if (isOnlyUser && !isOnlyAdmin) {
         // User is logged in and only users are allowed
         return <>{children}</>;
-      } else if (!isOnlyUser && isOnlyAdmin && user.userType.title === 'admin') {
+      } else if (!isOnlyUser && isOnlyAdmin ) {
         // User is logged in and is an admin
         return <>{children}</>;
       }
