@@ -2,5 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/signInStudent": "pages/signInStudent.js",
+  "/admin/tableOfContents": "pages/admin/tableOfContents.js",
+  "/admin/tableOfContents/[first]": "pages/admin/tableOfContents/[first].js",
+  "/admin/tableOfContents/[first]/[second]/[third]/[fourth]": "pages/admin/tableOfContents/[first]/[second]/[third]/[fourth].js",
+  "/admin/tableOfContents/[first]/[second]": "pages/admin/tableOfContents/[first]/[second].js",
+  "/admin/tableOfContents/[first]/[second]/[third]": "pages/admin/tableOfContents/[first]/[second]/[third].js",
   "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].js"
 }

@@ -245,7 +245,7 @@ const CreateModule = () => {
                 </tbody>
               </table>
             </form>
-              }
+            }
 
               <SideBars anchor="left" isOpen={isSidebarOpen} onClose={handleSidebarClose}>
                   <div style={{width:'700px'}} className='myCenter'>
@@ -253,17 +253,15 @@ const CreateModule = () => {
                       <div className='text-center'>
                         <Heading>{exercises?.title}</Heading>
                       </div>
-                      <h3 className='font-bold text-primary text-center'>הוראות תרגיל</h3>
+                      <h3 className='font-bold text-primary text-right underline'>הוראות תרגיל</h3>
                       <div>
                         <SubHeading>{exercises?.description}</SubHeading>
                       </div>
                       <div className='pt-12'>
-                        <h3 className='font-bold text-primary text-center'>הדרכה</h3>
+                        <h3 className='font-bold text-primary text-right underline'>הדרכה</h3>
                         <textarea value={exercises?.description2 ?? ''}  readOnly className='w-full h-96 cursor-default'/> 
-                        
                       </div>
                       <SideLinks exercises={exercises} register={register} setValue={setValue} tableType={'exercises'}/>
-
                     </div>
 
                   </div>

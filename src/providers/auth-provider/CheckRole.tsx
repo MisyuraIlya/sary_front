@@ -8,7 +8,6 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({Component: {
 },children}) => {
     const {user} = useAuth()
     const router = useRouter()
-
     if (user) {
       if (isOnlyUser && !isOnlyAdmin) {
         // User is logged in and only users are allowed
@@ -18,7 +17,7 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({Component: {
         return <>{children}</>;
       }
     }
-    router.pathname !== '/entering' && router.replace('/')
+    router.pathname !== '/signInStudent' && router.replace('/signInStudent')
     return null
 }
 
