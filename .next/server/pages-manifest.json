@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/admin/createModule/[moduleId]": "pages/admin/createModule/[moduleId].js",
   "/admin/tableOfContents/[first]": "pages/admin/tableOfContents/[first].js",
-  "/admin/tableOfContents": "pages/admin/tableOfContents.js"
+  "/": "pages/index.js"
 }
