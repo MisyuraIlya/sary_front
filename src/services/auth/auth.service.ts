@@ -21,7 +21,7 @@ export const AuthService = {
     async getNewTokens() {
         const refreshToken = Cookies.get('refreshToken')
 
-        const response = await axios.post<string, { data:IAuthResponse}>('auth/login/access-token', 
+        const response = await axios.post<string, { data:IAuthResponse}>('/auth/login/access-token', 
         { refreshToken},
         {
             headers: getContentType()
