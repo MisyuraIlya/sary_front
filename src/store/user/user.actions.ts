@@ -3,7 +3,7 @@ import { errorCatch } from "@/api/api.helper";
 import { IAuthResponse, IEmailPassword } from "./user.interface";
 import { removeFromStorage } from "@/services/auth/auth.helper";
 import { AuthService } from "@/services/auth/auth.service";
-
+import { onErrorAlert } from "@/utils/sweetAlert";
 export const register = createAsyncThunk<IAuthResponse, IEmailPassword> ('auth/register',
     async(data,thunkApi) => {
         try {
@@ -21,7 +21,10 @@ export const login = createAsyncThunk<IAuthResponse, IEmailPassword>(
         try {
             const response = await AuthService.main('login',data)
             return response
-        } catch(error) {
+        } catch(error: any) {
+            if (error.response) {
+                onErrorAlert(error.response.data.message, 'כדאי לבדוק את הפרטים שהזנת ולנסות שוב')
+            }
             return thunkAPI.rejectWithValue(error)
         }
     }
