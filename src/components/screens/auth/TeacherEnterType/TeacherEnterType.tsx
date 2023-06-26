@@ -10,7 +10,7 @@ const TeacherEnterType = () => {
             <AuthLayout>
                 <div className='content px-44 pt-44'>
                     <SubHeading className='font-bold text-xl'>איך תרצו להתחבר?</SubHeading>
-                    <div className='grid grid-cols-5 gap-8'>
+                    <div className='grid grid-cols-5 gap-56'>
                         <MiniCard title='התחברות' imageLink='images/auth/signIn' link={Links.SIGN_IN_STUDENT}/>
                         <MiniCard title='רכישת מנוי' imageLink='images/auth/subscription' link={Links.ENTERING_PURCHASE}/>
                     </div>

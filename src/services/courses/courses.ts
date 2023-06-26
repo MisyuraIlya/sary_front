@@ -3,6 +3,7 @@ import { IFirstModuleResponse } from "@/types/ModulesTypes.ts/FirstModule.interf
 import { ICourse } from "@/types/course.interface"
 import axios, { AxiosResponse } from 'axios';
 import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
+import { onErrorAlert } from "@/utils/sweetAlert";
 interface courseDtoRequest {
     name: string
     grade?: string
@@ -17,19 +18,25 @@ interface courseDtoRequest {
 export const CourseService = {
 
     async create (data: courseDtoRequest) {
-        const response = await axios<ICourse[]>({
-            url: `/courses`,
-            method:'POST',
-            data: data
-        })
+        try {
+            const response = await instance<ICourse[]>({
+                url: `/courses`,
+                method:'POST',
+                data: data
+            })
+            return response.data
+        } catch(e: any) {
+            if (e.response) {
+                console.log('Response data:', e.response.data.message);
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
 
-
-        return response.data
     },
 
 
     async getCoursesLvl1 () {
-        const response = await axios<ICourse[]>({
+        const response = await instance<ICourse[]>({
             url: `/courses`,
             method:'GET'
         })
@@ -39,7 +46,7 @@ export const CourseService = {
     },
 
     async getChildrenById(id: number) {
-        const response = await axios<ICourse>({
+        const response = await instance<ICourse>({
             url: `/courses/parent/${id}`,
             method:'GET'
         })
@@ -48,7 +55,7 @@ export const CourseService = {
     },
 
     async getRecursiveChildren(id: number) {
-        const response = await axios<ICourse>({
+        const response = await instance<ICourse>({
             url: `/courses/recursiveId/${id}`,
             method:'GET'
         })
@@ -57,24 +64,36 @@ export const CourseService = {
     },
 
     async update (id: number, data: courseDtoRequest) {
-        const response = await axios<ICourse[]>({
-            url: `/courses/${id}`,
-            method:'PUT',
-            data: data
-        })
+        try {
+            const response = await instance<ICourse[]>({
+                url: `/courses/${id}`,
+                method:'PUT',
+                data: data
+            })
+    
+    
+            return response.data
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
 
-
-        return response.data
     },
 
     async remove (id: number) {
-        const response = await axios<ICourse[]>({
-            url: `/courses/${id}`,
-            method:'DELETE'
-        })
+        try {
+            const response = await instance<ICourse[]>({
+                url: `/courses/${id}`,
+                method:'DELETE'
+            })
+            return response.data
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
 
-
-        return response.data
     },
 
 

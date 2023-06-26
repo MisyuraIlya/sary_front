@@ -1,8 +1,9 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, useState, useRef} from 'react';
 
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { CollectionsRow, IExercise } from '@/types/exercise.interface';
 import { ExercisesService } from '@/services/exercises/Exercises';
+import Image from 'next/image';
 interface SideLinksProps {
     exercises: CollectionsRow | IExercise | undefined
     register: any
@@ -19,13 +20,16 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
     const [link, setLink] = useState<string>()
     const [isUpdatedLink, setIsUpdatedLink] = useState(false)
     const [isUpdatedPdf, setIsUpdatedPdf] = useState(false)
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
     const uploadPdf = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if(file) {
             const data = await ExercisesService.uploadPdf(file)
-            setValue(`${tableType == 'exercises' ? 'pdf' : `collectionsRows[${orden}].pdf`}`,data.path); 
-            setLocalFile(data.path)
+            setValue(`${tableType == 'exercises' ? 'pdf' : `collectionsRows[${orden}].pdf`}`,data?.path); 
+            setLocalFile(data?.path)
+            setSelectedFile(file);
         }
     }
 
@@ -102,113 +106,220 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
 
     }
 
+    const closeVideo = () => {
+        setSelectedFile(undefined)
+        setOpenEditPdf(false)
+        setLocalFile('')
+
+    }
+
+    const closeLink = () => {
+        setValue(`${tableType == 'exercises' ? 'youtube_link' : `collectionsRows[${orden}].youtube_link`}`, '')
+        setLink('')
+        setOpenEditVideo(false)
+
+
+
+    }
+
+    const removeVideo = () => {
+        setIsUpdatedLink(false)
+        if(exercises?.id && tableType) {
+            let data = {
+                link: '',
+                tableType
+            }
+            ExercisesService.updateLink(exercises?.id, data)
+        }
+
+        if(tableType == 'exercises') {
+            setValue('youtube_link', ''); 
+            ExerciseMethods.updateExercisesState(tableType,'youtube_link','', null)
+            ExerciseMethods.handleEdits(0)
+        } 
+
+        if(tableType == 'exercises_rows'  && orden){
+            setValue(`collectionsRows[${orden}].youtube_link`, '');
+            ExerciseMethods.updateExercisesState(tableType,'youtube_link','',orden)
+            ExerciseMethods.handleEdits(orden)
+        }
+    }
+
+    const removePdf = () => {
+        if(exercises?.id  && tableType) {
+
+            let data = {
+                pdf: '',
+                tableType
+            }
+            ExercisesService.updatePdf(exercises?.id, data)
+        }
+
+        setIsUpdatedPdf(true)
+        setOpenEditPdf(false)
+
+        if(tableType == 'exercises') {
+            setValue('pdf', ''); 
+            ExerciseMethods.updateExercisesState(tableType,'pdf','', null)
+            ExerciseMethods.handleEdits(0)
+        } 
+
+        if(tableType == 'exercises_rows' && orden){
+            setValue(`collectionsRows[${orden}].pdf`, '');
+            ExerciseMethods.updateExercisesState(tableType,'pdf','',orden)
+            ExerciseMethods.handleEdits(orden)
+        }
+    }
+
+
 
 
     return (
         <div className='mb-12'>
 
-            <form>
-                {isOnlineXml ?
+            <form >
+                {isOnlineXml &&
                     <>
-                        <div className='m-2'>
-                        <div className=' items-center flex'>
-                            <span className={`${isUpdatedPdf ? isUpdatedPdf : exercises?.pdf ? 'bg-primary text-white' : ' bg-gray text-black'}  p-2 rounded-md material-symbols-outlined fill cursor-pointer`} onClick={openNewTab}>
-                                picture_as_pdf 
-                            </span>
-                            <span className='pr-4'>
-                                {exercises?.pdf ? 
-                                    <>
-                                    לינק ל PDF 
-                                    </>
-                                    : 
-                                    <>
-                                    לא קיים קובץ PDF
-                                    </>
+                            <div className='items-center gap-4 mb-2'>
+                                <button 
+                                className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4'
+                                style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.pdf ? '1' : '0.5'}`}}
+                                onClick={(e) => {e.preventDefault(); setOpenEditPdf(!openEditPdf)}}
+                                >
+                                    העלאת קובץ PDF
+                                </button>
+                                { openEditPdf &&
+                                <div className='flex gap-4'>
+                                    <div className='fileInput w-full border border-gray rounded-md px-2 cursor-pointer' onClick={() => {fileInputRef.current?.click(); }}>
+                                        <input id="pdfInput" ref={fileInputRef} type="file" onChange={uploadPdf} className=''/>
+                                        <div className='flex items-center h-full'>
+                                        {selectedFile ? (
+                                        <p>{selectedFile.name}</p>
+                                        ) : (
+                                        <p>בחר קובץ</p>    
+                                        )}
+                                        
+                                        </div>    
+                                    </div>
+                                    <button onClick={(e) => {e.preventDefault(); handleSavePdf()}} className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                                        אישור
+                                    </button>
+                                    <button onClick={(e) => {e.preventDefault(); closeVideo()}} className='px-2 py-1 font-bold'>
+                                        ביטול
+                                    </button>
+                                </div>
                                 }
-                            </span>
-                            <button 
-                                className='bg-primary text-white rounded-lg py-1 px-2 mr-12 cursor-pointer'   
-                                onClick={(event) => {
-                                event.preventDefault();
-                                setOpenEditPdf(!openEditPdf);
-                                }}>
-                                עדכן
+
+                                {exercises?.pdf &&
+                                    <div className='flex gap-4'>
+                                        <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removePdf()} />
+                                        <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => openNewTab()} />
+                                        {exercises?.pdf}
+                                    </div>        
+                                
+                                }
+
+                        </div>
+                        <div className='items-center gap-4 mb-2'>
+                            <button  
+                            onClick={(e) => {e.preventDefault(); setOpenEditVideo(!openEditVideo)}} 
+                            className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4' 
+                            style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.youtube_link ? '1' : '0.5'}`}}>
+                                העלאת סרטון
                             </button>
-                        </div>
-
-                        {isUpdatedPdf &&
-                            <div className='text-green/60'>
-                                עודכן בהצלחה!
-                            </div>    
-                        }
-
-                        {openEditPdf &&
-                        <div className=''>
-                            <input type='file' placeholder='עדכן קובץ PDF' className='border border-gray m-2 px-2 rounded-md' onChange={uploadPdf}/>
-                            <button className='bg-primary text-white px-2 py-1 rounded-lg' onClick={(event) => {event.preventDefault(), handleSavePdf()}}>שמור</button>
-                        </div>  
-                        }
-                        </div>
-                        <div className='m-2'>
-                            <div className='flex items-center'>
-                            <span className={`${isUpdatedLink ? isUpdatedLink : exercises?.youtube_link ? 'bg-primary text-white' : ' bg-gray text-black'}  p-2 rounded-md material-symbols-outlined fill cursor-pointer`} onClick={openNewTabYoutube}>
-                                youtube_activity
-                            </span>
-                            <span className='pr-4'>
-                                {exercises?.youtube_link ?
-                                    <>
-                                    לינק לסרטון
-                                    </>
-                                :
-                                    <>
-                                    לא קיים לינק לסרטון
-                                    </>
-                                }
-                            </span>
-                                <button className='bg-primary text-white rounded-lg py-1 px-2 mr-12 cursor-pointer'   onClick={(event) => {
-                                        event.preventDefault();
-                                        setOpenEditVideo(!openEditVideo);
-                                    }}>
-                                        עדכן
+                            {openEditVideo &&
+                            <div className='flex gap-4'>
+                                <input placeholder='לינק ליוטיוב' className='w-full border border-gray rounded-md px-2' value={link} onChange={(e) => setLink(e.target.value) }/>
+                                <button onClick={(e) => {e.preventDefault();handleSaveLink()}} className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                                    אישור
+                                </button>
+                                <button className='px-2 py-1 font-bold' onClick={(e) => {e.preventDefault(); closeLink()}}>
+                                    ביטול
                                 </button>
                             </div>
-
-                            {isUpdatedLink &&
-                                <div className='text-green/60'>
-                                    עודכן בהצלחה!
-                                </div>    
-                            }
-
-                            {
-                            openEditVideo &&
-                            <div className=''>
-                                <input type='text' placeholder='עדכן לינק לסרטון' className='border border-gray m-2 px-2 rounded-md' value={link} onChange={(e) => setLink(e.target.value) }/>
-                                <button className='bg-primary text-white px-2 py-1 rounded-lg' onClick={(event) => {event.preventDefault(); handleSaveLink()}}>שמור</button>
-                            </div>  
                             }
                         </div>
+                        {exercises?.youtube_link &&
+                            <div className='flex gap-4'>
+                                <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removeVideo()}/>
+                                <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => openNewTabYoutube()} />
+                                {exercises?.youtube_link}
+                            </div>        
+                        }
                     </>
-                :
-                    <>
-                        <div className='flex items-center gap-4 mb-2'>
-                            <span className={`${isUpdatedLink ? isUpdatedLink : exercises?.youtube_link ? 'bg-primary text-white' : ' bg-gray text-black'}  p-2 rounded-md material-symbols-outlined fill cursor-pointer`} onClick={openNewTabYoutube}>
-                                youtube_activity
-                            </span>
-                            <input placeholder='לינק ליוטיוב' className='w-full border border-gray rounded-md px-2' {...register(`${tableType == 'exercises' ? 'youtube_link' : `collectionsRows[${orden}].youtube_link`}`)} />
-                        </div>
+                // :
+                //     <>
 
+                //         <div className='items-center gap-4 mb-2'>
+                //             <button 
+                //             className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4'
+                //             style={{backgroundColor:'#31B0F2',fontWeight:'600', opacity:`${exercises?.pdf ? '1' : '0.5'}`}}
+                //             onClick={(e) => {e.preventDefault(); setOpenEditPdf(!openEditPdf)}}
+                //             >
+                //                 העלאת קובץ PDF
+                //             </button>
+                //             { openEditPdf &&
+                //             <div className='flex gap-4'>
+                //                 <div className='fileInput w-full border border-gray rounded-md px-2 cursor-pointer' onClick={() => {fileInputRef.current?.click(); }}>
+                //                     <input id="pdfInput" ref={fileInputRef} type="file" onChange={uploadPdf} className=''/>
+                //                     <div className='flex items-center h-full'>
+                //                     {selectedFile ? (
+                //                     <p>{selectedFile.name}</p>
+                //                     ) : (
+                //                     <p>בחר קובץ</p>    
+                //                     )}
+                //                     </div>    
+                //                 </div>
+                //                 <button onClick={(e) => {e.preventDefault(); setOpenEditPdf(false)}} className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                //                     אישור
+                //                 </button>
+                //                 <button onClick={(e) => {e.preventDefault(); closeVideo()}} className='px-2 py-1 font-bold'>
+                //                     ביטול
+                //                 </button>
+                //             </div>
+                //             }
+
+                //         </div>
+
+                //         {selectedFile  &&
+                //             <div className='flex gap-4'>
+                //                 <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => setSelectedFile(undefined)} />
+                //                 <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => handleOpenFileUrl()} />
+                //                 {selectedFile.name}
+                //             </div>        
                         
-                        <div className='flex items-center gap-4 mg-2'>
-                            <span className={`${isUpdatedPdf ? isUpdatedPdf : exercises?.pdf ? 'bg-primary text-white' : ' bg-gray text-black'}  p-2 rounded-md material-symbols-outlined fill cursor-pointer`} onClick={openNewTab}>
-                                picture_as_pdf 
-                            </span>
-                            <input  type="file" onChange={uploadPdf} className='w-full border border-gray rounded-md px-2'/>
+                //         }
 
-                        </div>
-                    
-                    
-                    
-                    </>
+
+                //         <div className='items-center gap-4 mb-2'>
+                //             <button  
+                //             onClick={(e) => {e.preventDefault(); setOpenEditVideo(!openEditVideo)}} 
+                //             className='text-white px-6 bord rounded-md py-2 activeShadow w-1/3 mb-4' 
+                //             style={{backgroundColor:'#31B0F2',fontWeight:'600',opacity:`${exercises?.youtube_link ? '1' : '0.5'}`}}>
+                //                 העלאת סרטון
+                //             </button>
+                //             {openEditVideo &&
+                //             <div className='flex gap-4'>
+                //                 <input placeholder='לינק ליוטיוב' className='w-full border border-gray rounded-md px-2' {...register(`${tableType == 'exercises' ? 'youtube_link' : `collectionsRows[${orden}].youtube_link`}`)} />
+                //                 <button onClick={(e) => {e.preventDefault();handleSaveLink()}} className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                //                     אישור
+                //                 </button>
+                //                 <button className='px-2 py-1 font-bold' onClick={(e) => {e.preventDefault(); closeLink()}}>
+                //                     ביטול
+                //                 </button>
+                //             </div>
+                //             }
+                //         </div>
+                //         {inputValue&&
+                //             <div className='flex gap-4'>
+                //                 <Image src={'/images/trash.svg'} width={25} height={25} alt='trash' className='cursor-pointer' onClick={() => removeVideo()}/>
+                //                 <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer' onClick={() => openNewTabUrl()} />
+                //                 {inputValue}
+                //             </div>        
+                //         }
+                            
+
+                //     </>
                 }
 
             </form>

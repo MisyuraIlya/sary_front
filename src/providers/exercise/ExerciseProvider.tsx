@@ -197,7 +197,9 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       const res = await onAsk('האם לשמור את הנתונים?','')
       if(res) {
         const response = await ExercisesService.updateMultipleChecked(handleEditedCheckbox)
-        onSuccessAlert('נתונים נשמרו בהצלחה!','');
+        if(response) {
+          onSuccessAlert('נתונים נשמרו בהצלחה!','');
+        }
         setHandleEditedCheckbox([])
       }
     }

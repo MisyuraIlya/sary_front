@@ -30,7 +30,7 @@ const CreateModule = () => {
   const [isEmptySelect, setIsEmptySelect] = useState<number>()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [module, setModule] = useState<IFirstModule>()
-  const {ExerciseMethods, exercises, isOnlineXml, loading, settingsEdit,isChanged, handleEditedCheckbox} = useExercise()
+  const {ExerciseMethods, exercises, isOnlineXml, loading,isChanged, handleEditedCheckbox} = useExercise()
 
   const router = useRouter();
 
@@ -98,13 +98,13 @@ const CreateModule = () => {
 
 
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
-  const isSettingEdited = settingsEdit?.includes(0)
+
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
               <div className='mr-12'>
                 <Heading>{exercises?.title}</Heading>
-                <SubHeading>{exercises?.description}</SubHeading>
+                {/* <SubHeading>{exercises?.description}</SubHeading> */}
                 {exercises?.title &&
                   <div className="border-b border-solid border-2 border-gray-400"></div>
                 }
@@ -160,13 +160,21 @@ const CreateModule = () => {
                         </>
                       }
                       {
-                        handleEditedCheckbox.length > 0 && 
+                        (handleEditedCheckbox.length > 0 &&  isOnlineXml) &&
                         <Button className='bg-green text-white rounded-md' onClick={() => ExerciseMethods.handleSaveUpload()}>שמור</Button>
                       }
 
-                      <div className={`${isSettingEdited ? 'bg-primary' : 'border-primary border'}   p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} >
-                        <Image src={`${isSettingEdited ? '/images/settings.svg' : '/images/settings primary.svg'}`} alt='settings' width={25} height={25}/>
-                      </div> 
+                      <div className='relative flex items-center'>
+                        <div className=''>
+                          {exercises?.youtube_link && exercises?.pdf && <Image src={`/images/v.svg`} width={15} height={15} alt='v' />}
+                        </div>
+                        <div className={`p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} > 
+                          <Image src={`${exercises?.pdf && exercises?.youtube_link ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>
+                        </div> 
+
+
+                      </div>
+
 
                   </form>
                 </div>
@@ -240,7 +248,8 @@ const CreateModule = () => {
                       </div>
 
                       <div className='pt-12'>
-                        <textarea value={exercises?.description2 ?? ''} className='w-full h-96'/> 
+                        <textarea value={exercises?.description2 ?? ''}  readOnly className='w-full h-96 cursor-default'/> 
+                        
                       </div>
                       <SideLinks exercises={exercises} register={register} setValue={setValue} tableType={'exercises'}/>
 

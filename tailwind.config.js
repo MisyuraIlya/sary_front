@@ -11,6 +11,7 @@ const colors = {
   red: twColors.red[600],
   green: twColors.green[600],
   gray: twColors.gray[200],
+  cardBg: '#39C7BB21'
 }
 
 module.exports = {

@@ -43,7 +43,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
     }
 
     return (
-        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-green/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
+        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-cardBg/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
             {editMode && <span className='absolute m-4 text-white' onClick={() => setEditMode(false)}>X</span>}
             <div className='text-center h-full flex justify-center items-center'>
                 <div>
@@ -52,12 +52,12 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
                             <>
                                 {editMode ? 
                                     <>
-                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                        <form>
                                             <input {...register("grade")} type='text' placeholder='כיתה' className='px-2 rounded-md py-2 m-1 text-black'/>
                                             <input {...register("name")} type='text' placeholder='שם הקורס' className='px-2 rounded-md py-2 m-1 text-black' />
-                                            <div>
+                                            {/* <div>
                                                 <button className='bg-primary text-white mt-2 px-4 py-2 rounded-lg' type='submit'>שמירה</button>
-                                            </div>
+                                            </div> */}
                                         </form>
                                     </>
                                 :
@@ -82,21 +82,38 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
             </div>
             {
                 !isNew ?
-                <div className={`bg-green/30 absolute rounded-b-md bottom-0 w-full flex text-center items-center justify-center py-1 h-16`}>
+                <div className={`bg-cardBg/90 absolute rounded-b-md bottom-0 w-full flex text-center items-center justify-center py-1 h-16`}>
                     {/* {!openInput && */}
-                    <div className='grid grid-cols-12 w-full mr-5 mt-2 mb-2'>
-                        <div className={`col-span-8 flex gap-4`}>
-                            <div className='bg-white rounded-full cursor-pointer flex justify-center p-4' onClick={() => setEditMode(!editMode)}>
-                                <Image src={`/images/draw.svg`} width={15} height={15} alt='draw'/>
+                    {editMode ? 
+                        <>
+                            <div className='flex gap-12'>
+                                <div>
+                                    <button className='bg-primary text-white mt-2 px-4 py-2 rounded-lg' type='submit' onClick={handleSubmit(onSubmit)}>שמירה</button>
+                                </div>
+                                <div>
+                                    <button className='bg-primary text-white mt-2 px-4 py-2 rounded-lg' type='submit' onClick={() => setEditMode(false)}>ביטול</button>
+                                </div>
                             </div>
-                            <div className='bg-white rounded-full  cursor-pointer flex justify-center p-4' onClick={() => handleRemoveCourse()}>
-                                <Image src={'/images/trash.svg'} width={19} height={15} alt='draw'/>
+                        </>
+                
+                    :
+                        <>
+                            <div className='grid grid-cols-12 w-full mr-5 mt-2 mb-2'>
+                                <div className={`col-span-8 flex gap-4`}>
+                                    <div className='bg-white rounded-full cursor-pointer flex justify-center p-4' onClick={() => setEditMode(!editMode)}>
+                                        <Image src={`/images/draw.svg`} width={15} height={15} alt='draw'/>
+                                    </div>
+                                    <div className='bg-white rounded-full  cursor-pointer flex justify-center p-4' onClick={() => handleRemoveCourse()}>
+                                        <Image src={'/images/trash.svg'} width={19} height={15} alt='draw'/>
+                                    </div>
+                                </div>
+                                <div className='col-span-4 items-center flex justify-center'>
+                                    <Switch onChange={handleChange} checked={checked} />
+                                </div>
                             </div>
-                        </div>
-                        <div className='col-span-4 items-center flex justify-center'>
-                            <Switch onChange={handleChange} checked={checked} />
-                        </div>
-                    </div>
+                        </>
+                    }
+
                     {/* }  */}
 
                     {/* {openInput &&

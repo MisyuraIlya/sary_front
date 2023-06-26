@@ -23,18 +23,19 @@ const MiniCard: FC<MiniCardProps> = ({title, imageLink, link}) => {
         onMouseEnter={handleHover}
         onMouseLeave={handleHoverEnd}
         onClick={() => router.push(link)}
+        style={{width:'184px'}}
         >
             <div>
                 <div className={`border border-auth_card_image_border  rounded-xl ${isHovered ? 'bg-bg_link' : ''}`}>
                     <div className='px-4 py-4'>
                         {isHovered ?                    
-                            <Image src={imageLink+'_hover.svg'} width={80} height={80} alt='img' priority  className='fill-current text-primary'/>
+                            <Image src={imageLink+'_hover.svg'} width={80} height={80} alt='img' priority  className='fill-current text-primary' style={{width:'70px', height:'70px'}}/>
                         :
-                            <Image src={imageLink+'.svg'} width={80} height={80} alt='img' priority  className='fill-current text-primary'/>
+                            <Image src={imageLink+'.svg'} width={80} height={80} alt='img' priority  className='fill-current text-primary'  style={{width:'70px', height:'70px'}}/>
                         }
                     </div>
                 </div>
-                <p className='pt-4'>
+                <p className='pt-4' style={{fontWeight:'500'}}>
                     {title}
                 </p>
             </div>

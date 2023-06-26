@@ -22,7 +22,7 @@ interface FirstModule {
 const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , control}) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const {isOnlineXml, settingsEdit} = useExercise()
+    const {isOnlineXml} = useExercise()
 
     useEffect(() => {
         setValue(`collectionsRows[${orden}].orden`, orden);
@@ -39,7 +39,6 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
         setIsSidebarOpen(false);
       };
 
-    const isSettingEdited = settingsEdit?.includes(orden)
 
     return (
         <>
@@ -54,12 +53,16 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
                     if(item.module_type == 'textarea') return <TextAreaModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue}/>
                 })
             }
-            <th className='bg-white'>
-                <div className='flex gap-6 items-center justify-center pt-4'>
-                      <div className={`${isSettingEdited ? 'bg-primary' : 'border-primary border'}   p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} >
-                        <Image src={`${isSettingEdited ? '/images/settings.svg' : '/images/settings primary.svg'}`} alt='settings' width={25} height={25}/>
-                      </div> 
+            <th className='bg-white relative'>
+                <div className='flex gap-6 items-center justify-center pt-4 '>
+                    <div className={`p-2 rounded-lg cursor-pointer `} onClick={() => handleSidebarToggle()} >
 
+
+                        <Image src={`${exercises?.youtube_link && exercises?.pdf ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>
+                    </div> 
+                    <div className='absolute right-0'>
+                        {exercises?.youtube_link && exercises?.pdf && <Image src={`/images/v.svg`} width={15} height={15} alt='v' />}
+                    </div>
                 </div>
             </th>
 

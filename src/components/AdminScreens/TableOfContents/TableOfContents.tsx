@@ -34,6 +34,11 @@ const TableOfContents = () => {
                     <div className='mr-12 mb-10'>
                         <Heading className='pt-12 pb-4'>תוכן העניינים</Heading>
                             <div className='gap-8 flex overflow-x-auto w-full'>
+                                {courses?.map((item,index) =>
+                                    <div onClick={() => handleChooseCourse(item)} className='flex-shrink-0 ' key={index}>
+                                        <CourseCard  item={item} key={index} isNew={false} handleCourse={onSubmit}/>
+                                    </div>    
+                                )}
                                 <div>
                                 <CourseCard
                                     item={{
@@ -50,11 +55,6 @@ const TableOfContents = () => {
                                     handleCourse={onSubmit}
                                 />
                                 </div>
-                                {courses?.map((item,index) =>
-                                    <div onClick={() => handleChooseCourse(item)} className='flex-shrink-0 ' key={index}>
-                                        <CourseCard  item={item} key={index} isNew={false} handleCourse={onSubmit}/>
-                                    </div>    
-                                )}
                             </div>
                     </div>
                     <div  className='bg-white' style={{minHeight:'45%'}}>

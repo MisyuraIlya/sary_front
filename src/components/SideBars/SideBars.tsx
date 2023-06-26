@@ -45,7 +45,11 @@ const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children, is
 
     return (
         <div>
-          <StyledDrawer anchor={anchor} open={isOpen} onClose={toggleDrawer(false)} style={{marginTop:'70px'}} isPrimaryBg={isPrimaryBg}>
+            <StyledDrawer anchor={anchor} open={isOpen} onClose={toggleDrawer(false)} style={{marginTop:'70px'}} isPrimaryBg={isPrimaryBg} className='relative'>
+              <div className='absolute left-5 top-5 flex gap-2 cursor-pointer' onClick={() => onClose()}>
+                <p className='font-bold'>חזרה</p>
+                <p className='font-bold'>{">"}</p>
+              </div>
               <>{children}</>
             </StyledDrawer>
         </div>
