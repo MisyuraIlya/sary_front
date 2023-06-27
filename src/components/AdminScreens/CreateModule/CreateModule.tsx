@@ -40,7 +40,6 @@ const CreateModule = () => {
   const { register, handleSubmit: handleSubmitForm, watch, formState: { errors } , setValue,control} = useForm<any>();
   
   const onSubmit = (data: any) => {
-    console.log('data',data)
     ExerciseMethods.createMoudle(data)
   };
 
@@ -52,7 +51,6 @@ const CreateModule = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('isEmptySelect',isEmptySelect)
     if(!isEmptySelect) {
       onInfoAlert('אנא בחרו מודל רצוי','')
     } else {
@@ -97,7 +95,7 @@ const CreateModule = () => {
     setIsSidebarOpen(false);
   };
 
-
+  console.log('user?.isAdmin',user?.isAdmin)
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
     return (
         <Meta title='יצירת מודול'>
@@ -117,7 +115,6 @@ const CreateModule = () => {
                         
                         return(
                         <>
-                        {console.log('value',value)}
                         <ReactSelect
                         placeholder={'בחירת מודול'}
                         options={options}

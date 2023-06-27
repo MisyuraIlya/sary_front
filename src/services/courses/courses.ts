@@ -27,7 +27,6 @@ export const CourseService = {
             return response.data
         } catch(e: any) {
             if (e.response) {
-                console.log('Response data:', e.response.data.message);
                 onErrorAlert(e.response.data.message, '')
             }
         }

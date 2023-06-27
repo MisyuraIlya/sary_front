@@ -5,10 +5,11 @@ import {FC} from 'react'
 import SideBars from '@/components/SideBars/SideBars';
 import { onAsk } from '@/utils/sweetAlert';
 import { useActions } from '@/hooks/useActions';
+import { useAuth } from '@/hooks/useAuth';
 const Header: FC = () => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    const {user} = useAuth()
     const { logout } = useActions();
 
     const handleSidebarToggle = () => {
@@ -144,7 +145,7 @@ const Header: FC = () => {
                                     className='cursor-pointer'
                                     onClick={() => handleSidebarToggle()}
                                 />
-                                <p>admin@gmail.com</p>
+                                <p>{user?.email}</p>
                             </div>
                         </div>
                     </div>
