@@ -47,7 +47,7 @@ const SignInForm = () => {
                             placeholder='סיסמה'
                             error={errors.password?.message}
                             />
-                            <p className='underline cursor-pointer'>שחכתי סיסמה</p>
+                            <p className='underline cursor-pointer'>שכחתי סיסמא</p>
                             <button className='bg-primary text-white w-full py-4 rounded-sm'>כניסה</button>
                         </form>
                     </div>

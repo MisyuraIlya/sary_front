@@ -7,7 +7,7 @@ const Sidebar = () => {
         <aside className='bg-primary flex flex-col justify-between fixed' style={{ height:'100%'}}>
             <div className='pt-12'>
                 {sideBarList?.map((item, index) => 
-                    <div className='hover:bg-white/10 py-2 m-4 rounded-lg' key={index}>
+                    <div className='hover:bg-white/10 py-2 m-4 rounded-lg px-2' key={index}>
                         <Link href={item.href} className=''>
                             <Image
                             priority
