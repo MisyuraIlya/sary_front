@@ -133,7 +133,7 @@ const CreateModule = () => {
                   />
                   <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
                       {exercises?.title && moduleId && isOnlineXml && 
-                        <Button className='bg-red text-white rounded-md' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</Button>                    
+                        <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>                    
                       }
 
                       {!isOnlineXml &&
@@ -168,7 +168,7 @@ const CreateModule = () => {
                       }
                       {
                         (handleEditedCheckbox.length > 0 &&  isOnlineXml) &&
-                        <Button className='bg-green text-white rounded-md' onClick={() => ExerciseMethods.handleSaveUpload()}>שמור</Button>
+                        <div className='bg-green text-white rounded-md cursor-pointer px-10 py-2 shadow' onClick={() => ExerciseMethods.handleSaveUpload()}>שמור</div>
                       }
 
                       <div className='relative flex items-center'>
