@@ -13,7 +13,9 @@ interface SelectModuleProps {
     control: any
 }
 const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, row, register, setValue, control}) => {
-    const optionsNew = options?.map(item => ({ value: item.value, label: item.value }));
+    const optionsNew = Array.isArray(options)
+    ? options.map((item) => ({ value: item.value, label: item.value }))
+    : [];
     const getValue = (value:any) => value ? optionsNew.find((option) => option.value.trim() == value) : {value:answer, label:answer}
     useEffect(() => {
         setValue(`collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -25,7 +27,7 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
 
     return (
         <th className='bg-white pt-4'>
-             <Controller control={control} name={`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`} rules={{required:'צריך לבחור את התשובה'}} render={
+             <Controller control={control} name={`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`}  render={
                 ({field:{onChange,value},fieldState:{error}}) => (
                 <>
                 <ReactSelect
@@ -35,11 +37,11 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
                 onChange={(newValue) => onChange((newValue?.value))}
                 className='ml-4 mr-4'
                 />
-                {error && (
+                {/* {error && (
                     <div style={{color:'red'}}>
                         {error.message}
                     </div>
-                )}
+                )} */}
                 </>
                 )
                 }

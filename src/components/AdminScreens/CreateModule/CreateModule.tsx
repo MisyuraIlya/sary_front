@@ -252,11 +252,23 @@ const CreateModule = () => {
                       </div>
                       <h3 className='font-bold text-primary text-right underline'>הוראות תרגיל</h3>
                       <div>
-                        <SubHeading>{exercises?.description}</SubHeading>
+                      <div 
+                         
+                        // onInput={handleInputChange} 
+                        dangerouslySetInnerHTML={{ __html: exercises?.description ?? '' }}
+                        className='text-right pr-2'
+                        />
+                        {/* <SubHeading>{exercises?.description}</SubHeading> */}
                       </div>
                       <div className='pt-12'>
                         <h3 className='font-bold text-primary text-right underline'>הדרכה</h3>
-                        <textarea value={exercises?.description2 ?? ''}  readOnly className='w-full h-96 cursor-default'/> 
+                        {/* <textarea value={exercises?.description2 ?? ''}  readOnly className='w-full h-96 cursor-default'/>  */}
+                        <div 
+                         
+                        // onInput={handleInputChange} 
+                        dangerouslySetInnerHTML={{ __html: exercises?.description2 ?? '' }}
+                        className='text-right pr-2'
+                        />
                       </div>
                       <SideLinks exercises={exercises} register={register} setValue={setValue} tableType={'exercises'}/>
                     </div>
