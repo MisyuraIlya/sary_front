@@ -96,7 +96,6 @@ const CreateModule = () => {
     setIsSidebarOpen(false);
   };
 
-  console.log('user?.isAdmin',user?.isAdmin)
   const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
     return (
         <Meta title='יצירת מודול'>
