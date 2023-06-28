@@ -133,7 +133,14 @@ const CreateModule = () => {
                   />
                   <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
                       {exercises?.title && moduleId && isOnlineXml && 
+                      <>
                         <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>                    
+                      
+                        <div className='justify-center items-center h-full flex'>
+                          <Image src={'/images/eye.svg'} width={25} height={25} alt='eye' className='cursor-pointer flex ' onClick={() =>  window.open(exercises?.xl, '_blank', 'noopener')} />
+                        </div>
+                      
+                      </>
                       }
 
                       {!isOnlineXml &&
@@ -142,7 +149,6 @@ const CreateModule = () => {
                         בחר קובץ
                       </label>
                       <input id="fileInput" type="file" onChange={handleFileChange} className="hidden" />
-
                       {selectedFile && 
                         <div className='relative'>
                           {user?.isAdmin &&
