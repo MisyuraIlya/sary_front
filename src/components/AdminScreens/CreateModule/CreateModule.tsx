@@ -137,12 +137,10 @@ const CreateModule = () => {
                       <>
                         <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>                    
                       
-                        <div className='justify-center items-center h-full flex'>
-                          <a href={`http://3.74.228.194:4000/${exercises?.xl}`} download>
-                            <Image src={'/images/xl.svg'} width={45} height={45} alt='xl' className='cursor-pointer flex' />
-                          </a>
+                        {/* <div className='justify-center items-center h-full flex'> */}
+                          {/* here my logs */}
                           {/* <Image src={'/images/xl.svg'} width={45} height={45} alt='xl' className='cursor-pointer flex ' onClick={() =>  window.open(`http://3.74.228.194:4000/${exercises?.xl}`, '_blank')} /> */}
-                        </div>
+                        {/* </div> */}
                       
                       </>
                       }
