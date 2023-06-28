@@ -81,6 +81,7 @@ const CreateModule = () => {
       setValue('courseId', moduleId); 
       setValue('youtube_link', exercises?.youtube_link); 
       setValue('pdf', exercises?.pdf); 
+      setValue('pdf', exercises?.xl); 
     }
   }, [exercises, moduleId, setValue]);
 

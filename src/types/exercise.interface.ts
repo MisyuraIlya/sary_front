@@ -9,6 +9,7 @@ export interface IExercise {
     module: number;
     description2:    null | string;
     course:          ICourse;
+    xl: string;
     collectionsCols: CollectionsCol[];
     collectionsRows: CollectionsRow[];
 }
