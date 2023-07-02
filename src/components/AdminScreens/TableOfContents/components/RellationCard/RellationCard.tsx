@@ -36,15 +36,15 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
     const handleChoose = (id: number) => {
         // choosedLVl(item.id)
         if(query.first && level === 2){
-            router.push(`/admin/tableOfContents/${query.first}/${id}`)
+            router.push(`/admin/tableOfContents/${query.first}/${id}`, undefined, {scroll:false})
         } else if ((query.first && query.second) && level === 3) {
-            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${id}`)
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${id}`, undefined, {scroll:false})
         } else if ((query.first && query.second && query.third) && level === 4) {
-            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${id}`)
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${id}`, undefined, {scroll:false})
         } else if ((query.first && !query.second && query.third && query.fourth) && level === 5) {
-            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${id}`)
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${id}`, undefined, {scroll:false})
         } else if ((query.first && !query.second && query.third && query.fourth &&  query.fifth)) {
-            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${query.fifth}`)
+            router.push(`/admin/tableOfContents/${query.first}/${query.second}/${query.third}/${query.fourth}/${query.fifth}`, undefined, {scroll:false})
         } 
     }
 
