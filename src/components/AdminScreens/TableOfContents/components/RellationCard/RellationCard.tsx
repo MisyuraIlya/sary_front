@@ -34,7 +34,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
     const {query} = router
 
     const handleChoose = (id: number) => {
-        // choosedLVl(item.id)
+        console.log('1')
         if(query.first && level === 2){
             router.push(`/admin/tableOfContents/${query.first}/${id}`, undefined, {scroll:false})
         } else if ((query.first && query.second) && level === 3) {
