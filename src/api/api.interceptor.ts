@@ -18,12 +18,8 @@ instance.interceptors.response.use(
     (config) => config,
     async (error) => {
       const originalRequest = error.config;
-      if (
-        (error.response &&
-          error.response.status === 401 &&
-          errorCatch(error) === 'jwt expired') ||
-        errorCatch(error) === 'jwy must be provided'
-      ) {
+      console.log('error',error)
+      if (error.response && error.response.status === 401) {
         if (originalRequest && !originalRequest._isRetry) {
           originalRequest._isRetry = true;
   

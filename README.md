@@ -86,4 +86,5 @@ module.exports = nextConfig
 19. npm i react-beautiful-dnd
 20. npm i --save-dev @types/react-beautiful-dnd
 21. npm install sweetalert2
-22.npm i react-loader-spinner
+22. npm i react-loader-spinner
+23. npm install react-router-scroll-4
