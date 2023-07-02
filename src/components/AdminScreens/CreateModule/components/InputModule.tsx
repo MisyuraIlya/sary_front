@@ -29,7 +29,7 @@ const InputModule: FC<InputModuleProps> = ({id, answer,placeholder, register, co
       }
 
     return (
-        <th className='bg-white pt-4'>
+        <th className='bg-white align-text-top' style={{padding:'1rem 10px 0 10px'}}>
             <input 
             type='text' 
             // disabled={isOnlineXml ? true : false}
@@ -40,10 +40,10 @@ const InputModule: FC<InputModuleProps> = ({id, answer,placeholder, register, co
             />
 
             {answer &&
-            <div className=''>
+            <div className='text-right flex items-center'>
             <input
                 type="checkbox"
-                className=''
+                className='w-4 h-4'
                 // onClick={(e) => ExerciseMethods.handleEditCheckBox(id, isChecked)}
                 onClick={() => handleCheckBox()}
                 {...register(`collectionsRows[${col}].collectionRow[${row}].isFullText`,isChecked)} 

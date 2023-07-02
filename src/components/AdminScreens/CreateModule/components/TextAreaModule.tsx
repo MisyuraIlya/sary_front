@@ -22,7 +22,7 @@ const TextAreaModule: FC<TextAreaModuleProps> = ({value, register, col, row, set
 
       
     return (
-        <th className='bg-white pt-4'>
+        <th className='bg-white align-text-top'>
             <textarea 
             // disabled={isOnlineXml ? true : false} 
             disabled

@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useCourse } from '@/providers/course/CourseProvider';
 import { onAsk } from '@/utils/sweetAlert';
 import { useRouter } from 'next/router';
+
 type Inputs = {
     name: string,
   };

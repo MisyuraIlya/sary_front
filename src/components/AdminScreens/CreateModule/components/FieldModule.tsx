@@ -24,7 +24,7 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
   }, [col, row, setValue]);
 
   return (
-    <th className='pt-4'>
+    <th className='align-text-top'>
       <div>
         <div 
         contentEditable 

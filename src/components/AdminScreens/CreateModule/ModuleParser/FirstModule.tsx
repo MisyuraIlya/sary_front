@@ -42,7 +42,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
 
     return (
         <>
-            <th className='bg-primary text-white pt-5'>
+            <th className='bg-primary text-white align-text-top'>
                 {orden}
             </th>
             {
@@ -53,9 +53,9 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
                     if(item.module_type == 'textarea') return <TextAreaModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue}/>
                 })
             }
-            <th className='bg-white relative'>
-                <div className='flex gap-6 items-center justify-center pt-4 '>
-                    <div className={`p-2 rounded-lg cursor-pointer `} onClick={() => handleSidebarToggle()} >
+            <th className='bg-white relative pl-4'>
+                <div className='pb-4'>
+                    <div className={` rounded-lg cursor-pointer `} onClick={() => handleSidebarToggle()} >
 
 
                         <Image src={`${exercises?.youtube_link && exercises?.pdf ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>

@@ -26,7 +26,7 @@ const SelectModule:FC<SelectModuleProps> = ({placeholder, options, answer,col, r
       }, [answer, col, options, row, setValue]);
 
     return (
-        <th className='bg-white pt-4'>
+        <th className='bg-white align-text-top '>
              <Controller control={control} name={`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`}  render={
                 ({field:{onChange,value},fieldState:{error}}) => (
                 <>
