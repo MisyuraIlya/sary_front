@@ -10,6 +10,8 @@ export interface IExercise {
     description2:    null | string;
     course:          ICourse;
     xl: string;
+    isInTheBook: boolean;
+
     collectionsCols: CollectionsCol[];
     collectionsRows: CollectionsRow[];
 }
@@ -25,6 +27,7 @@ export interface CollectionsRow {
     orden:         number;
     youtube_link: string;
     pdf: string | null;
+    isInTheBook: boolean;
     collectionRow: CollectionRow[];
 }
 

@@ -11,7 +11,7 @@ InputHTMLAttributes<HTMLInputElement> {
 const SearchInput: FC<SearchInputProps> = ({placeholder, ...rest}) => {
     return (
         <div className='flex border border-black/50 px-2 rounded-md'>
-            <input placeholder={placeholder} {...rest} className='hover:border-none'/>
+            <input placeholder={placeholder} {...rest} className='hover:border-none' style={{width:'95%'}}/>
             <Image src={'/images/search.svg'} width={15} height={15} alt='search' priority/>
         </div>
     );

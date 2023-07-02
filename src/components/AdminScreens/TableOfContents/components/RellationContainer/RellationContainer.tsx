@@ -39,6 +39,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
 
   const onSubmitAdd: SubmitHandler<Inputs> = (data) => {
     CourseMethods.createFunction(data.name, level, parentId);
+    setChangedArray([])
     setActiveAdd(false)
     clearArray()
   };
@@ -98,7 +99,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
               <p>{title}</p>
             </div>
           </div>
-          <div className='flex py-4 m-auto px-4'>
+          <div className='flex py-4 m-auto px-4 gap-4'>
             <div
               style={{ backgroundColor: '#31B0F2' }}
               className='w-11 h-10 rounded-lg text-center items-center justify-center cursor-pointer  flex'

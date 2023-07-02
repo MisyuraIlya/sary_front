@@ -35,7 +35,7 @@ const InputModule: FC<InputModuleProps> = ({id, answer,placeholder, register, co
             // disabled={isOnlineXml ? true : false}
             disabled
             placeholder={placeholder} 
-            className='w-28 px-4 h-full py-2 border border-gray rounded-md'  
+            className='w-auto px-4 h-full py-2 border border-gray rounded-md '  
             {...register(`collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer})}
             />
 
@@ -43,6 +43,7 @@ const InputModule: FC<InputModuleProps> = ({id, answer,placeholder, register, co
             <div className=''>
             <input
                 type="checkbox"
+                className=''
                 // onClick={(e) => ExerciseMethods.handleEditCheckBox(id, isChecked)}
                 onClick={() => handleCheckBox()}
                 {...register(`collectionsRows[${col}].collectionRow[${row}].isFullText`,isChecked)} 

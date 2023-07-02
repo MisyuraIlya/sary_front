@@ -30,7 +30,7 @@ const FieldModule: FC<FieldModule> = ({ value, register, col, row, setValue }) =
         contentEditable 
         // onInput={handleInputChange} 
         dangerouslySetInnerHTML={{ __html: value }}
-        className='text-right pr-2'
+        className='text-right pr-5 pl-5'
         />
         
         <input 

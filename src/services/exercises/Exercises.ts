@@ -30,6 +30,10 @@ interface updateCheked {
     checked: boolean;
 }
 
+interface updateIsInTheBook {
+    isInTheBook: boolean;
+}
+
 export const ExercisesService = {
 
     async create (data: any) {
@@ -153,7 +157,22 @@ export const ExercisesService = {
             }
         }
 
+    },
 
+    async updateIsInTheBook (id:number, data: updateIsInTheBook) {
+        try {
+            const response = await instance<any>({
+                url: `/exercises/isInTheBook/${id}`,
+                method:'PUT',
+                data: data
+            })
+            return response.data
+
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
 
     }
     

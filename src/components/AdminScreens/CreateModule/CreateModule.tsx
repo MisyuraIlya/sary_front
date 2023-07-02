@@ -214,7 +214,7 @@ const CreateModule = () => {
 
             :
             <form onSubmit={handleSubmitForm(onSubmit)} className='mr-12'>
-              <table className='w-full'>
+              <table className=''>
                 <tbody className=''>
                   <tr className='heading bg-primary'>
                       <div className='text-center justify-center text-white'>
