@@ -5,7 +5,7 @@ const nextConfig = {
     SERVER_URL: process.env.SERVER_URL
   }, 
   images: {
-    domains: ['localhost']
+    domains: ['localhost','3.74.228.194']
   },
   async rewrites() {
     return [
