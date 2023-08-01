@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     SERVER_URL: process.env.SERVER_URL
   }, 
+  images: {
+    domains: ['localhost']
+  },
   async rewrites() {
     return [
       {
@@ -17,6 +20,10 @@ const nextConfig = {
       {
         source: '/exercises/:slug*',
         destination: `http://3.74.228.194:4000/exercises/:slug*`
+      },
+      {
+        source: '/answers/:slug*',
+        destination: `http://3.74.228.194:4000/answers/:slug*`
       }
     ]
   }

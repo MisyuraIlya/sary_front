@@ -5,6 +5,9 @@ import { getContentType } from "@/api/api.helper"
 import { saveToStorage } from "./auth.helper"
 import { instance } from "@/api/api.interceptor"
 import { onErrorAlert } from "@/utils/sweetAlert"
+
+
+
 export const AuthService = {
 
     async main (type: 'login' | 'register', data: any) {

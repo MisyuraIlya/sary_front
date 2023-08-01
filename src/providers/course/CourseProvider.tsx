@@ -21,6 +21,7 @@ interface CourseContextType {
     removeFunction: (id: number, lvl:number) => void
     createFunction: (name: string, level: number, parent: number | null) => void,
     setChoosedCourse: (title: string) => void
+    handleUploadImage: (file: File, id: number) => void
   };
   courses: ICourse[] | undefined;
   lvl1: ICourse | null | undefined
@@ -155,6 +156,14 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     refetchingLvlFunc(level - 1)
   }
 
+  const handleUploadImage = async (file: File, id: number) => {
+    const res = await CourseService.saveImage(file, id)
+    if(res) {
+      refetchCourses()
+
+    }
+  }
+
   useEffect(() => {
     const handleRouter = () => {
       const { query } = router;
@@ -193,7 +202,8 @@ const CourseProvider: React.FC<CourseProviderProps> = (props) => {
     silentUpdate,
     removeFunction,
     createFunction,
-    setChoosedCourse
+    setChoosedCourse,
+    handleUploadImage
   };
   const value: CourseContextType = {
     courses,

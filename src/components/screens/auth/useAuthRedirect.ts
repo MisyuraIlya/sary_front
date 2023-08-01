@@ -7,6 +7,7 @@ export const useAuthRedirect = () => {
     const {replace} = useRouter()
 
     useEffect(() => {
+      console.log('user',user)
         if (user?.userType.title === 'admin') {
           replace('/admin/tableOfContents')
         } 

@@ -1,10 +1,9 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useRef, ChangeEvent} from 'react';
 import SubHeading from '../heading/SubHeading';
 import Heading from '../heading/Heading';
 import Image from 'next/image';
 import Switch from "react-switch";
 import Field from '../input/Field';
-import { CourseService } from '@/services/courses/courses';
 import { useCourse } from '@/providers/course/CourseProvider';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ICourse } from '@/types/course.interface';
@@ -22,11 +21,13 @@ type CourseForm = {
 };
 
 const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
+
     const [checked, setChecked] = useState(item.published)
     const [editMode, setEditMode] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<CourseForm>();
     const router = useRouter()
     const {CourseMethods, choosedLvl1} = useCourse();
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit: SubmitHandler<CourseForm> = (data) => {
         CourseMethods.updateFunction(item.id,data.name, data.grade, 1,checked, item.orden)
@@ -42,11 +43,30 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
         if(res) {CourseMethods.removeFunction(item.id, 1)}
     }
 
+
+    const uploadImg = () => {
+        if (fileInputRef.current) {
+          fileInputRef.current.click(); // Click the hidden file input
+        }
+      };
+    
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if(file){
+            CourseMethods.handleUploadImage(file, item.id)
+        }
+    };
+
     return (
         <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-cardBg/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
             {editMode && <span className='absolute m-4 text-white' onClick={() => setEditMode(false)}>X</span>}
             <div className='text-center h-full flex justify-center items-center'>
-                <div>
+                {item.image &&
+                <div className='absolute h-full w-full'>
+                    <Image src={process.env.SERVER_URL + "/" + item.image} alt='image' width={300} height={100}  />            
+                </div>    
+                }
+                <div className='relative'>
                     {
                         !isNew ?
                             <>
@@ -55,16 +75,18 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
                                         <form>
                                             <input {...register("grade")} type='text' placeholder='כיתה' className='px-2 rounded-md py-2 m-1 text-black'/>
                                             <input {...register("name")} type='text' placeholder='שם הקורס' className='px-2 rounded-md py-2 m-1 text-black' />
-                                            {/* <div>
-                                                <button className='bg-primary text-white mt-2 px-4 py-2 rounded-lg' type='submit'>שמירה</button>
-                                            </div> */}
                                         </form>
                                     </>
                                 :
-                                    <>
-                                        <SubHeading>{item.grade}</SubHeading>
-                                        <Heading className='text-xl'>{item.name}</Heading>
-                                    </>
+                                <>
+                                    <div className='bg-white rounded-full cursor-pointer flex justify-center p-4' onClick={uploadImg}>
+                                    <Image src={`/images/draw.svg`} width={15} height={15} alt='draw' />
+                                    </div>
+                                    <SubHeading>{item.grade}</SubHeading>
+                                    <Heading className='text-xl'>{item.name}</Heading>
+                                    {/* Hidden file input */}
+                                    <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+                                </>
                                 }
 
                             </>
@@ -83,7 +105,6 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
             {
                 !isNew ?
                 <div className={`bg-cardBg/90 absolute rounded-b-md bottom-0 w-full flex text-center items-center justify-center py-1 h-16`}>
-                    {/* {!openInput && */}
                     {editMode ? 
                         <>
                             <div className='flex gap-12'>
@@ -114,16 +135,6 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
                         </>
                     }
 
-                    {/* }  */}
-
-                    {/* {openInput &&
-                    <div className='flex gap-4'>
-                        <input type='text' placeholder='שם הקורס' className='px-2 rounded-sm'/>
-                        <div className='bg-white rounded-full cursor-pointer flex justify-center p-4'  onClick={() => setOpenInput(false)}>
-                            <Image src={`/images/v.svg`} width={15} height={15} alt='draw' />
-                        </div>
-                    </div> 
-                    } */}
                 </div>
                 :
                 <div className={`bg-gray absolute rounded-b-md bottom-0 w-full flex text-center items-center justify-center py-1 h-16`}>

@@ -11,7 +11,12 @@ const colors = {
   red: twColors.red[600],
   green: twColors.green[600],
   gray: twColors.gray[200],
-  cardBg: '#39C7BB21'
+  cardBg: '#39C7BB21',
+  sideBarCourseCardBg:'#EFF7F7',
+  cardPrimary: '#0172E8',
+  sideBarCourseCardBgSecond: '#DDEDFF',
+  exerciseCardBg: '#EDF2F9',
+  mainExerciseBg: '#e5f0fe'
 }
 
 module.exports = {
@@ -66,8 +71,9 @@ module.exports = {
         authBg:'#F0FBFF',
         auth_card_hover:'#DDEAF7',
         auth_card_border:'#899BCB',
-        auth_card_image_border:'#798DC4',
-        bg_link: '#256EF6'
+        auth_card_image_border:'#E6E6E6',
+        bg_link: '#256EF6',
+        button_primary: 'rgba(29, 153, 255, 1)'
       },
       minWidth: {
         '0': '0',

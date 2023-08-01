@@ -13,6 +13,7 @@ body {
     outline: none;
   }
 
+  
   th {
     font-weight: 400;
   }
@@ -99,3 +100,34 @@ textarea:focus {
   /* Reset your desired focus styles here */
 }
 
+
+
+.authBg {
+  background: linear-gradient(137deg, #0990FF 0%, #58B4FF 100%);
+}
+
+.sideBg {
+  background: linear-gradient(227deg, #2E68F7 0%, #45C3F3 100%);
+}
+
+// table.myTable tr {
+//   margin: 0px 12px 0px 12px;
+//   padding: 0px 12px 0px 12px;
+// }
+
+.myTable {
+  border-collapse:separate;
+  border-spacing: 10px 5px;
+  // *border-collapse: expression('separate', cellSpacing='10px');
+}
+
+// th {
+//   border-left: 5px solid white;
+// }
+
+.specific-th {
+  border-collapse: collapse;
+  border-spacing: 0; /* Set the specific spacing value for the specific <th> element */
+  border-left: 5px solid white; /* Add a border to the specific header cell */
+  // padding: 8px; /* Add some padding to the content inside the specific header cell */
+}

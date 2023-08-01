@@ -4,6 +4,7 @@ import { IAuthResponse, IEmailPassword } from "./user.interface";
 import { removeFromStorage } from "@/services/auth/auth.helper";
 import { AuthService } from "@/services/auth/auth.service";
 import { onErrorAlert } from "@/utils/sweetAlert";
+
 export const register = createAsyncThunk<IAuthResponse, IEmailPassword> ('auth/register',
     async(data,thunkApi) => {
         try {

@@ -1,9 +1,7 @@
 import { instance } from "@/api/api.interceptor"
-import { IFirstModuleResponse } from "@/types/ModulesTypes.ts/FirstModule.interface"
-import { ICourse } from "@/types/course.interface"
 import axios, { AxiosResponse } from 'axios';
-import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
-import { IExercise, ResponseUploadedPdf } from "@/types/exercise.interface";
+import { IFirstModule, ResponseUploadedPdf} from "@/types/ModulesTypes.ts/FirstModule.interface";
+import { ISecondModule } from "@/types/ModulesTypes.ts/SecondModule.interface";
 import { onErrorAlert } from "@/utils/sweetAlert";
 interface courseDtoRequest {
     title: string
@@ -34,12 +32,15 @@ interface updateIsInTheBook {
     isInTheBook: boolean;
 }
 
+type ModuleIdToExercise<ModuleId extends number> = ModuleId extends 1 ? IFirstModule : ISecondModule
+
+
 export const ExercisesService = {
 
-    async create (data: any) {
+    async createFirstModule (data: any) {
         try {
             const response = await instance<any>({
-                url: `/exercises`,
+                url: `/exercises/1`,
                 method:'POST',
                 data: data
             })
@@ -54,9 +55,33 @@ export const ExercisesService = {
 
     },
 
+    async createSecondModule (data: any) {
+        try {
+            const response = await instance<any>({
+                url: `/exercises/2`,
+                method:'POST',
+                data: data
+            })
+    
+    
+            return response.data
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
 
-    async getOne (id: number) {
-        const response = await instance<IExercise>({
+    },
+
+    async ReadStudentExerciseWithAnswersPerStudent(idExercise: number, idStudent: number) {
+        const response = await instance<IFirstModule>({
+            url: `/exercises/${idExercise}/${idStudent}`,
+            method:'GET',
+        })
+        return response.data
+    },
+    async getOne (id: number | string) {
+        const response = await instance<IFirstModule>({
             url: `/exercises/${id}`,
             method:'GET',
         })
@@ -64,17 +89,13 @@ export const ExercisesService = {
 
         return response.data
     },
-
-
-    async parseXlFile(file: File): Promise<IExercise> {
+    async parseXlFile<ModuleId extends number>(file: File, ModuleId: number): Promise<ModuleIdToExercise<ModuleId>> {
         
         const formData = new FormData();
-        formData.append('file', file); // Assuming the backend expects the file to be named 'xlFile'
-        const response: AxiosResponse<IExercise> = await axios.post('/courses/uploadXl', formData);
+        formData.append('file', file); 
+        const response:  AxiosResponse<ModuleIdToExercise<ModuleId>> = await axios.post(`/courses/uploadXl/${ModuleId}`, formData);
         return response.data;
     },
-
-
     async delete(id: string | number): Promise<any> {
         try {
             const response = await instance<any>({
@@ -91,7 +112,6 @@ export const ExercisesService = {
         }
 
     },
-
     async uploadPdf(file: File) {
 
         // try {
@@ -106,8 +126,6 @@ export const ExercisesService = {
         // }
 
     },
-
-
     async updatePdf (id: number, data: updatePdf) {
         try {
             const response = await instance<void>({
@@ -141,7 +159,6 @@ export const ExercisesService = {
         }
 
     },
-    
     async updateMultipleChecked (data: updateCheked[]) {
         try {
             const response = await instance<any>({
@@ -158,7 +175,6 @@ export const ExercisesService = {
         }
 
     },
-
     async updateIsInTheBook (id:number, data: updateIsInTheBook) {
         try {
             const response = await instance<any>({
@@ -174,8 +190,12 @@ export const ExercisesService = {
             }
         }
 
+    },
+
+    async createImage (id:number, file: File) {
+        const formData = new FormData();
+        formData.append('file', file); // Assuming the backend expects the file to be named 'xlFile'
+        const response: AxiosResponse<ResponseUploadedPdf> = await axios.post(`/exercises/image/${id}`, formData);
+        return response.data;
     }
-    
-
-
 }

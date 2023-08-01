@@ -18,7 +18,7 @@ export const userSlice = createSlice({
         }),
         builder.addCase(register.fulfilled, (state, {payload}) => {
             state.isLoading = false
-            state.user = { ...payload.user, isAdmin:  payload.user.isAdmin , userType:{id:1, title:'admin'} };
+            state.user = { ...payload.user, isAdmin:  payload.user.isAdmin , userType:{id:1, title:'admin'}, firstName:'test', lastName:'test' };
         })
         builder.addCase(register.rejected, state => {
             state.isLoading = false
@@ -28,7 +28,8 @@ export const userSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, {payload}) => {
             state.isLoading = false
-            state.user = { ...payload.user, isAdmin: payload.user.isAdmin , userType:{id:1, title:'admin'} };
+            // TODO FIX
+            state.user = { ...payload.user, isAdmin: payload.user.isAdmin , userType:{id:1, title:'admin'}, firstName:'test', lastName:'test' };
         })
         builder.addCase(login.rejected, state => {
             state.isLoading = false
@@ -39,7 +40,8 @@ export const userSlice = createSlice({
             state.user = null
         })
         builder.addCase(checkAuth.fulfilled, (state, {payload}) => {
-            state.user = { ...payload.user, isAdmin:  payload.user.isAdmin , userType:{id:1, title:'admin'} };
+             // TODO FIX
+            state.user = { ...payload.user, isAdmin:  payload.user.isAdmin , userType:{id:1, title:'admin'}, firstName:'test', lastName:'test'  };
         })
 
 

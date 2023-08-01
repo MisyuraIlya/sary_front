@@ -14,7 +14,7 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 }) => {
   const { user } = useAuth();
   const { checkAuth, logout } = useActions();
-
+  
   const { pathname } = useRouter();
 
   useEffect(() => {

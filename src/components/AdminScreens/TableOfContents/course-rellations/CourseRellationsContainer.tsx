@@ -17,7 +17,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
     return (
         <>
 
-        {isLoadingLvl1 ||loadingLvl2 || loadingLvl3 || loadingLvl4 ?
+        {/* {isLoadingLvl1 ||loadingLvl2 || loadingLvl3 || loadingLvl4 ?
             <div className='myCenter'>
                 <ThreeDots 
                 height="80" 
@@ -29,7 +29,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                 visible={true}
                 />
             </div>
-        :
+        : */}
             <div className='grid grid-cols-4 gap-4 px-12 pb-12'>
                 {lvl1?.children &&
                     <RellationContainer 
@@ -70,7 +70,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                     />        
                 }
         </div>
-        }
+        {/* } */}
 
 
             

@@ -3,10 +3,14 @@ import { FLUSH,PAUSE,PERSIST, persistReducer, persistStore,PURGE, REGISTER, REHY
 import storage from 'redux-persist/lib/storage'
 // import { cartSlice } from "./cart/cart.slice";
 import { userSlice } from "./user/user.slice";
+import { courseSlice } from "./courses/courses.slice";
+import { exerciseSlice } from "./exercises/exercises.slice";
 
 const rootReducer = combineReducers({
 //   cart: cartSlice.reducer,
-  user: userSlice.reducer
+  user: userSlice.reducer,
+  courses: courseSlice.reducer,
+  exercises: exerciseSlice.reducer
 })
 
 const persistConfig = {

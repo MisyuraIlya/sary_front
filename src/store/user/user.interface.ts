@@ -1,13 +1,19 @@
 import { IUser } from "@/types/user.interface"
 
 export interface IUserState {
+    id: number
     email: string
-    userType: {
-        id: number
-        title: 'admin' | 'student'| 'teacher'
-    }
+    name: string
+    firstName: string
+    lastName: string
+    userType: { id: number; title: string };
     isAdmin: boolean
 }
+
+export interface IRegisterFulfilledPayload {
+    user: IUser;
+    // other payload properties, if any
+  }
 
 export interface ITokens {
     accessToken: string

@@ -1,6 +1,5 @@
 import { instance } from "@/api/api.interceptor"
-import { IFirstModuleResponse } from "@/types/ModulesTypes.ts/FirstModule.interface"
-import { ICourse } from "@/types/course.interface"
+import { ICourse, CoursesPerUserResponse } from "@/types/course.interface"
 import axios, { AxiosResponse } from 'axios';
 import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
 import { onErrorAlert } from "@/utils/sweetAlert";
@@ -15,6 +14,9 @@ interface courseDtoRequest {
     parent?: number | null
 }
 
+export interface ResponseUploadedImage {
+    path: string
+}
 export const CourseService = {
 
     async create (data: courseDtoRequest) {
@@ -32,7 +34,6 @@ export const CourseService = {
         }
 
     },
-
 
     async getCoursesLvl1 () {
         const response = await instance<ICourse[]>({
@@ -95,6 +96,27 @@ export const CourseService = {
 
     },
 
+    async getCoursesPerStudent(id: number) {
+        const response = await instance<CoursesPerUserResponse[]>({
+            url: `/courses/curserPerStudent/${id}`,
+            method:'GET'
+        })
+
+        return response.data
+    },
+
+    async saveImage(file: File, id: number) {
+        try {
+            const formData = new FormData();
+            formData.append('image', file); 
+            const response: AxiosResponse<ResponseUploadedImage> = await axios.post(`/courses/image/${id}`, formData);
+            return response.data;
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
+    }
 
     
 

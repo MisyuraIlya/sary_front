@@ -50,6 +50,7 @@ const TableOfContents = () => {
                                         grade: '',
                                         orden: 0,
                                         image: '',
+                                        bgColor: ''
                                     }}
                                     isNew={true}
                                     handleCourse={onSubmit}

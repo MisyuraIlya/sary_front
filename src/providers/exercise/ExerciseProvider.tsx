@@ -2,9 +2,10 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import { useQuery } from '@tanstack/react-query';
-import { IExercise } from '@/types/exercise.interface';
+import { IFirstModule } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import { useRouter } from 'next/router';
 import { onAsk, onSuccessAlert, onErrorAlert } from '@/utils/sweetAlert';
+import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 interface ExerciseContextType {
   ExerciseMethods: {
     setId: (id: number) => void
@@ -16,13 +17,15 @@ interface ExerciseContextType {
     setIsChanged: (change: boolean) =>void
     handleEditCheckBox: (id: number, cheked: boolean) => void
     handleSaveUpload: () => void
+    chooseModule: (number: number) => void
   };
-  exercises: IExercise | undefined;
+  exercises: IFirstModule | ISecondModule |undefined;
   loading: boolean,
   isOnlineXml: boolean,
   settingsEdit: number[] | undefined
   isChanged: boolean,
-  handleEditedCheckbox: { id: number, checked: boolean }[]
+  handleEditedCheckbox: { id: number, checked: boolean }[],
+  choosedModule: number | null
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -45,11 +48,12 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     // state
     const [id, setId] = useState<number | null>();
     const [loading, setLoading] = useState(false)
-    const [exercises, setExercises] = useState<IExercise | undefined>()
+    const [exercises, setExercises] = useState<IFirstModule | ISecondModule | undefined>()
     const [isOnlineXml, setIsOnlineXml] = useState(false)
     const [settingsEdit, setSettingsEdit] = useState<number[]>()
     const [isChanged, setIsChanged] = useState(false)
     const [handleEditedCheckbox, setHandleEditedCheckbox] = useState<{ id: number, checked: boolean }[]>([]);
+    const [choosedModule, setChoosedModule] = useState<number | null>(null)
     const router = useRouter();
     const moduleId = router.query.moduleId;
     // Helpers
@@ -61,6 +65,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
         if(response){
           setExercises(response)
           setIsOnlineXml(true)
+          setChoosedModule(response.module)
         } 
       } catch(e) {
         console.log('error',e)
@@ -70,23 +75,34 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     }
 
     const uploadXml = async (file: File) => {
-      setLoading(true)
-      try {
-        const response = await ExercisesService.parseXlFile(file)
-        setExercises(response)
-        setIsOnlineXml(false)
-      } catch(e) {
-        console.log('error',e)
-        onErrorAlert('שגיאה בלפרסס את המודול','XL אינו תקין')
-      } finally {
-        setLoading(false)
+      if(choosedModule) {
+        setLoading(true)
+        try {
+          const response = await ExercisesService.parseXlFile(file,choosedModule)
+          // console.log(response)
+          setExercises(response)
+          setIsOnlineXml(false)
+        } catch(e) {
+          console.log('error',e)
+          onErrorAlert('שגיאה בלפרסס את המודול','XL אינו תקין')
+        } finally {
+          setLoading(false)
+        }
       }
     }
 
     const createMoudle = async (data: any) => {
       setLoading(true)
       try {
-        const response = await ExercisesService.create(data)
+        if(choosedModule === 1) {
+          const response = await ExercisesService.createFirstModule(data)
+
+        }
+
+        if(choosedModule === 2) {
+          const response = await ExercisesService.createSecondModule(data)
+
+        }
         setTimeout(() => {
           fetchOnline(moduleId)
           onSuccessAlert('תרגיל נשמר בהצלחה!','')
@@ -143,13 +159,13 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           if(field === 'youtube_link') {
             setExercises((e) => {
               if (e) {
-                const updatedCollectionsRows = e.collectionsRows?.map((i) => {
+                const updatedCollectionsRows = (e as IFirstModule).collectionsRows?.map((i) => {
                   if (i.orden === orden) {
                     return { ...i, youtube_link: data };
                   }
                   return i;
                 });
-                return { ...e, collectionsRows: updatedCollectionsRows };
+                return { ...(e as IFirstModule), collectionsRows: updatedCollectionsRows };
               }
               return e;
             });
@@ -158,7 +174,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           if(field === 'pdf'){
             setExercises((e) => {
               if (e) {
-                const updatedCollectionsRows = e.collectionsRows?.map((i) => {
+                const updatedCollectionsRows = (e as IFirstModule).collectionsRows?.map((i) => {
                   if (i.orden === orden) {
                     return { ...i, pdf: data };
                   }
@@ -203,6 +219,10 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
         setHandleEditedCheckbox([])
       }
     }
+
+    const chooseModule = (number: number) => {
+      setChoosedModule(number)
+    }
   
 
 
@@ -220,7 +240,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     handleEdits,
     setIsChanged,
     handleEditCheckBox,
-    handleSaveUpload
+    handleSaveUpload,
+    chooseModule
   };
   const value: ExerciseContextType = {
     exercises,
@@ -229,7 +250,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     isOnlineXml,
     settingsEdit,
     isChanged,
-    handleEditedCheckbox
+    handleEditedCheckbox,
+    choosedModule
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;

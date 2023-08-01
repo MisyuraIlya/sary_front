@@ -1,19 +1,19 @@
 import React, {FC, useEffect, useState} from 'react';
-import { Exercise } from '@/types/ModulesTypes.ts/FirstModule.interface';
-import FieldModule from '../components/FieldModule';
-import InputModule from '../components/InputModule';
-import SelectModule from '../components/SelectModule';
-import { CollectionsRow } from '@/types/exercise.interface';
-import TextAreaModule from '../components/TextAreaModule';
+import Exercise from '@/components/ClientScreens/Exercise/Exercise';
+import FieldModule from '../../components/models/FieldModule';
+import InputModule from '../../components/models/InputModule';
+import SelectModule from '../../components/models/SelectModule';
+import { collectionRow, collectionsRows } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import TextAreaModule from '../../components/models/TextAreaModule';
 import SideBars from '@/components/SideBars/SideBars';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import Heading from '@/ui/heading/Heading';
-import SideLinks from '../components/sidebar-components/SideLinks';
+import SideLinks from '../../components/sidebar-components/SideLinks';
 interface FirstModule {
-    exercises: CollectionsRow;
+    exercises: collectionsRows;
     register: any;
     orden: number
     setValue:any
@@ -38,7 +38,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
       const handleSidebarClose = () => {
         setIsSidebarOpen(false);
       };
-
+      console.log('exercises',exercises)
 
     return (
         <>

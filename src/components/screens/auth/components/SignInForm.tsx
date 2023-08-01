@@ -6,6 +6,9 @@ import { validEmail } from '../valid-email';
 import { IEmailPassword } from '@/store/user/user.interface';
 import { useActions } from '@/hooks/useActions';
 import { useAuth } from '@/hooks/useAuth';
+import LoginInput from './LoginInput/LoginInput';
+import Link from 'next/link';
+import { Links } from '../enum';
 const SignInForm = () => {
 
     const {isLoading} = useAuth()
@@ -24,34 +27,40 @@ const SignInForm = () => {
 
 
     return (
-        <div>
-            <div className='content px-44 py-44'>
-                <SubHeading className='font-bold text-xl'>התחברות באמצעות קוד משתמש וסיסמה</SubHeading>
-                <div className='py-14'>
-                    <div className='border border-auth_card_image_border py-12 px-8 rounded-xl'>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <AuthInput  {...formRegister('email', {
-                                required: 'מייל שדה חובה',
-                                pattern: validEmail
-                            })}
-                            placeholder='שם משתמש'
-                            error={errors.email?.message}/>
-                            <AuthInput  {...formRegister('password', {
-                                required: 'סיסמה שדה חובה',
-                                minLength: {
-                                    value:6,
-                                    message:'מינימום 6 תווים'
-                                }
-                            })}
-                            type='password'
-                            placeholder='סיסמה'
-                            error={errors.password?.message}
-                            />
-                            <p className='underline cursor-pointer'>שכחתי סיסמא</p>
-                            <button className='bg-primary text-white w-full py-4 rounded-sm'>כניסה</button>
-                        </form>
+        <div className='content '>
+            <div className='py-12 px-8 rounded-xl'>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <LoginInput  
+                    {...formRegister('email', {
+                        required: 'מספר טלפון',
+                        pattern: validEmail
+                    })}
+                    heading='מספר טלפון'
+                    placeholder='שם משתמש'
+                    error={errors.email?.message}/>
+                    <LoginInput  {...formRegister('password', {
+                        required: 'סיסמה שדה חובה',
+                        minLength: {
+                            value:6,
+                            message:'מינימום 6 תווים'
+                        }
+                    })}
+                    type='password'
+                    heading='סיסמה'
+                    placeholder='סיסמה'
+                    error={errors.password?.message}
+                    />
+                    <div className='flex justify-between'>
+                        <div>
+                            <Link href={Links.FORGOT_PASSWORD} className='text-button_primary cursor-pointer'>שחכתי סיסמה</Link>
+                        </div>
+                        <div className='flex gap-2'>
+                            <input type='checkbox' checked={true} className='w-5 rounded-2xl' />
+                            <p>זכור אותי</p>
+                        </div>
                     </div>
-                </div>
+                    <button type='submit' className='font-bold mt-10 text-center bg-button_primary w-full rounded-3xl py-2 text-white'>כניסה</button>
+                </form>
             </div>
         </div>
     );

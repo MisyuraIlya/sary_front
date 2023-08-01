@@ -1,12 +1,12 @@
 import React, {ChangeEvent, FC, useState, useRef, use} from 'react';
 
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-import { CollectionsRow, IExercise } from '@/types/exercise.interface';
+import { IFirstModule, collectionRow, collectionsRows } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import Image from 'next/image';
 import { useAuth } from '@/hooks/useAuth';
 interface SideLinksProps {
-    exercises: CollectionsRow | IExercise | undefined
+    exercises: any
     register: any
     setValue: any
     tableType: 'exercises' | 'exercises_rows'
@@ -120,9 +120,6 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
         setValue(`${tableType == 'exercises' ? 'youtube_link' : `collectionsRows[${orden}].youtube_link`}`, '')
         setLink('')
         setOpenEditVideo(false)
-
-
-
     }
 
     const removeVideo = () => {
