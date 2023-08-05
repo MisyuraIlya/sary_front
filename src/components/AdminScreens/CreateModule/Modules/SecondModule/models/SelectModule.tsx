@@ -14,8 +14,9 @@ interface SelectModuleProps {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
-const SelectModule:FC<SelectModuleProps> = ({checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId}) => {
+const SelectModule:FC<SelectModuleProps> = ({checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable}) => {
     const optionsNew = Array.isArray(options)
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
@@ -29,7 +30,7 @@ const SelectModule:FC<SelectModuleProps> = ({checkIsThereImage, placeholder, opt
       }, [answer, col, options, row, setValue, exerciseId, dataObjectId]);
 
     return (
-        <th className={checkIsThereImage ? '' : 'specific-th'}>
+        <th className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`}>
             <div className='py-2'>
                 <Controller control={control} name={`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionAnswers[0].value`}  render={
                     ({field:{onChange,value},fieldState:{error}}) => (

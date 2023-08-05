@@ -9,8 +9,9 @@ type SubInstructionProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
-const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row}) => {
+const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -21,7 +22,7 @@ const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setVa
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
     return (
-        <th className={checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4 specific-th'} >
+        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4 specific-th'} ${isTable ? 'tableModule' : ''}`}   >
             <div className='text-right' >
                 <div
                     // onInput={handleInputChange}

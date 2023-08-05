@@ -118,12 +118,22 @@ textarea:focus {
 .myTable {
   border-collapse:separate;
   border-spacing: 10px 5px;
+  border-bottom: 5px ;
   // *border-collapse: expression('separate', cellSpacing='10px');
 }
 
-// th {
-//   border-left: 5px solid white;
-// }
+
+th {
+  border-left: 5px solid white;
+}
+
+.tableModule {
+  th {
+    border-bottom: 5px solid white;
+
+  }
+  
+}
 
 .specific-th {
   border-collapse: collapse;

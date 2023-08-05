@@ -9,8 +9,9 @@ type OrdenModuleProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
-const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row}) => {
+const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -21,7 +22,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, e
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
 
     return (
-        <th  style={{width:'50px'}} className={checkIsThereImage ? '' : 'specific-th'} >
+        <th  style={{width:'50px'}} className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`} >
             <div className='text-center flex justify-center items-center py-1'>
                 <div style={{background:'#BACEE9'}} className='px-2 rounded-md '>
                     {value}

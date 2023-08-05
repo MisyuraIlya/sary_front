@@ -10,9 +10,10 @@ type BankModuleProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
 
-const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row}) => {
+const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -23,7 +24,7 @@ const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, e
 
     return (
         <th>
-            <div className={checkIsThereImage ? 'grid grid-cols-12 px-4' : 'grid grid-cols-12 px-4 specific-th'}>
+            <div className={`${checkIsThereImage ? 'grid grid-cols-12 px-4' : 'grid grid-cols-12 px-4 specific-th'} ${isTable ? 'tableModule' : ''}`} >
                 {values?.map((item,index) => {
                 setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
                     return (

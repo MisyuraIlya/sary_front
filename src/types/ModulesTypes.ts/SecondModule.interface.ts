@@ -63,5 +63,5 @@ export interface collectionAnswers {
     value: string
 }
 
-export type module_type =  "word" | "orden" | "instruction" | "subInstruction" | "text" | "input" | "selectbox" | "textarea" | "rootInput" | "mix" | "bank" | 'mixDrag' | 'checkBox' | 'image' | 'merged' |''
+export type module_type =  "word" | "orden" | "instruction" | "subInstruction" | "text" | "input" | "selectbox" | "textarea" | "rootInput" | "mix" | "bank" | 'mixDrag' | 'checkBox' | 'image' | 'merged' | 'table' |''
 

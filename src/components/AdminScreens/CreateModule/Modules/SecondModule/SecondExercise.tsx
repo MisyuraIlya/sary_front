@@ -12,8 +12,9 @@ type SecondExerciseProps = {
     dataObjectId: number
     checkIsThereMergedBackground: boolean
     checkIsThereImage: boolean
+    isTable: boolean
 }
-const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId, dataObjectId}) => {
+const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId, dataObjectId,isTable}) => {
 
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
@@ -21,7 +22,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
 
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
-                if(subItem.module_type !== 'word' && subItem.module_type !== 'instruction' && subItem.module_type !== 'subInstruction' && subItem.module_type !== '') {
+                if(subItem?.module_type !== 'word' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '') {
                     moduleTypeCount++
                 }
             })
@@ -89,6 +90,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     register={register}
                                     setValue={setValue}
                                     control={control}
+                                    isTable={isTable}
                                     index={index}
                                 />                            
                                 )}

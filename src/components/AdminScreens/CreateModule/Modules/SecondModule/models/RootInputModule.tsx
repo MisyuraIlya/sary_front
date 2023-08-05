@@ -14,9 +14,10 @@ interface RootInputModuleProps {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable :boolean
 }
 
-const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId}) => {
+const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
@@ -32,7 +33,7 @@ const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answe
       }
 
     return (
-        <th className={checkIsThereImage ? 'align-text-top' : 'align-text-top specific-th'}  style={{padding:'1rem 10px 0 10px'}}>
+        <th className={`${checkIsThereImage ? 'align-text-top' : 'align-text-top specific-th'} ${isTable ? 'tableModule' : ''}`} style={{padding:'1rem 10px 0 10px'}}>
             <input 
             type='text' 
             // disabled={isOnlineXml ? true : false}

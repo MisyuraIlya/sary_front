@@ -13,11 +13,13 @@ interface InputModuleProps {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
 
-const InputModule: FC<InputModuleProps> = ({checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId}) => {
+const InputModule: FC<InputModuleProps> = ({checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
+    console.log('isTableisTable',isTable)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'input');
@@ -31,7 +33,7 @@ const InputModule: FC<InputModuleProps> = ({checkIsThereImage, id, answer,placeh
       }
 
     return (
-        <th className={checkIsThereImage ? '' : 'specific-th'}>
+        <th className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`}>
             <div className='px-4 py-2 bg-pad '>
                 <input 
                 type='text' 

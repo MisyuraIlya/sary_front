@@ -19,9 +19,10 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
         <div>
             {(exercises as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {
                 const propertyName = `exercise${item.exercise}`;
-                const checkIsThereImage = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row.module_type === 'image')))
-                const checkIsThereImageData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row.module_type === 'image')))
-                const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row.module_type === 'merged')))
+                const checkIsThereImage = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'image')))
+                const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
+                const checkIsThereImageData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'image')))
+                const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
                 return (
                 <div className='bg-white  ml-4 mr-4' key={indexx}>
                     <div className={`p-2 grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
@@ -34,7 +35,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                                 style={checkIsThereMergedBackground ? {} : {borderBottom:'10px solid white'}}
                                 key={dataObjectId}
                                 >
-                                    <SecondExercise checkIsThereImage={checkIsThereImage} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                    <SecondExercise isTable={isTable} checkIsThereImage={checkIsThereImage} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                 </div>    
                             )}
                         </div>  

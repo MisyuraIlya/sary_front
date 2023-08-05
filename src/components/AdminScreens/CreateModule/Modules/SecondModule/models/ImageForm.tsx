@@ -7,10 +7,11 @@ type ImageFormProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isTable: boolean
 }
 
 
-const ImageForm:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage}) => {
+const ImageForm:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
