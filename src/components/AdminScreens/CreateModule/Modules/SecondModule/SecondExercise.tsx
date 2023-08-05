@@ -44,7 +44,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
 
     },[exerciseId,dataObjectId, data.orden, setValue ])
     return (
-        <table  className={`myTable w-full ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'}`} style={{borderSpacing:'0'}}>
+        <table  className={`myTable w-full ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
                 <tbody>
                     <tr className='w-full'>
@@ -95,7 +95,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                 />                            
                                 )}
                             {!isExistInstruction && !isExistSubInstruction&&  !isExistImage && !isExistCheckBox && !isBank &&
-                            <th style={{ float:'left'}} className='flex items-center absolute left-0' colSpan={data.collectionsCols.length}>
+                            <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0' colSpan={data.collectionsCols.length} >
                                 <div className='px-2'>
                                     <Image src={'/images/folder.svg'} alt='folder' width={30} height={30} />
                                     <span>וידיאו</span>
