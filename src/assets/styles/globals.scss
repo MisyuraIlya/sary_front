@@ -116,20 +116,28 @@ textarea:focus {
 // }
 
 .myTable {
-  border-collapse:separate;
-  border-spacing: 10px 5px;
-  border-bottom: 5px ;
+  border-collapse:collapse;
+  // border-spacing: 10px 5px;
+  width: 100%;
+  // border-bottom: 5px ;
   // *border-collapse: expression('separate', cellSpacing='10px');
 }
 
 
 th {
-  border-left: 5px solid white;
+  // border-left: 5px solid white;
+  // border-bottom: 5px solid white;
+}
+
+.inOnlyTable {
+  th {
+    border-left: 5px solid white;
+  }
 }
 
 .tableModule {
   th {
-    border-bottom: 5px solid white;
+    // border-bottom: 5px solid white;
 
   }
   
@@ -140,4 +148,8 @@ th {
   border-spacing: 0; /* Set the specific spacing value for the specific <th> element */
   border-left: 5px solid white; /* Add a border to the specific header cell */
   // padding: 8px; /* Add some padding to the content inside the specific header cell */
+}
+
+.css-1nmdiq5-menu {
+  z-index: 100000000000 !important;
 }

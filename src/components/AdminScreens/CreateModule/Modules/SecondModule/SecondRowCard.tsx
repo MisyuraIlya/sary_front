@@ -17,6 +17,7 @@ import EmptyType from './models/EmptyType';
 import ImageForm from './models/ImageForm';
 import UnitedForm from './models/UnitedForm';
 import TableModule from './models/TableModule';
+import OpenQuestion from './models/OpenQuestion';
 type SecondRowCard = {
     row: collectionRow 
     orden: number
@@ -34,19 +35,20 @@ type SecondRowCard = {
 
     return (
         <>
-            {row?.module_type === 'input' && <InputModule isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers.length > 0 ? row.collectionAnswers[0].value : ""  } placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
+            {row?.module_type === 'input' && <InputModule isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
             {row?.module_type === 'instruction' && <Instruction isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} setValue={setValue} value={row.collectionValues[0].value} col={orden} row={row.orden} register={register} />}
             {row?.module_type === 'orden' && <OrdenModule isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value} />}
-            {row?.module_type === 'selectbox' && <SelectModule isTable={isTable} checkIsThereImage={checkIsThereImage} exerciseId={exerciseId} dataObjectId={dataObjectId} key={index} placeholder={row.placeholder || ''} options={row.collectionValues} answer={row.collectionAnswers.length > 0 ? row.collectionAnswers[0].value : ""} register={register}   col={orden} row={row.orden} setValue={setValue} control={control} />}
+            {row?.module_type === 'selectbox' && <SelectModule isTable={isTable} checkIsThereImage={checkIsThereImage} exerciseId={exerciseId} dataObjectId={dataObjectId} key={index} placeholder={row.placeholder || ''} options={row.collectionValues} answer={row.collectionAnswers} register={register}   col={orden} row={row.orden} setValue={setValue} control={control} />}
             {row?.module_type === 'subInstruction' && <SubInstruction isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value} />}
             {row?.module_type === 'text' && <TextModule isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
-            {row?.module_type === 'rootInput' && <RootInputModule isTable={isTable}checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} key={index} exerciseId={exerciseId} id={row.id} answer={ row.collectionAnswers[0].value  } placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText}/>}
+            {row?.module_type === 'rootInput' && <RootInputModule isTable={isTable}checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} key={index} exerciseId={exerciseId} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText}/>}
             {row?.module_type === 'textarea' && <th>textarea</th>}
             {row?.module_type === 'word' && <WordModule isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
-            {row?.module_type === 'bank' && <BankModule  isTable={isTable} checkIsThereImage={checkIsThereImage} values={row.collectionValues} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} />}
             {row?.module_type === 'mix' && <MixModule/>}
             
+            {row?.module_type === 'bank' && <BankModule  isTable={isTable} checkIsThereImage={checkIsThereImage} values={row.collectionValues} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} />}
             {row?.module_type === 'mixDrag' && <MixDrag  isTable={isTable}checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0].value}/>}
+            
             {row?.module_type === 'checkBox' && <CheckBoxModule  isTable={isTable}checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} values={row.collectionValues} answer={row.collectionAnswers.length > 0 ? row.collectionAnswers[0].value : ""}/>}
             {row?.module_type === '' && <EmptyType  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
 
@@ -54,6 +56,7 @@ type SecondRowCard = {
             {row?.module_type === 'image' && <ImageForm  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'merged' && <UnitedForm  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'table' && <TableModule  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
+            {row?.module_type === 'openQuestion' && <OpenQuestion  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
         </>
 
     );

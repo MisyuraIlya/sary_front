@@ -23,8 +23,10 @@ const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, e
       }, [col, row, setValue, exerciseId, dataObjectId]);
 
     return (
+        <>
+        {/* 
         <th>
-            <div className={`${checkIsThereImage ? 'grid grid-cols-12 px-4' : 'grid grid-cols-12 px-4 specific-th'} ${isTable ? 'tableModule' : ''}`} >
+            <div className={`${checkIsThereImage ? 'grid grid-cols-12 px-4' : 'grid grid-cols-12 px-4'} ${isTable ? 'tableModule' : ''}`} >
                 {values?.map((item,index) => {
                 setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
                     return (
@@ -36,7 +38,9 @@ const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, e
                     )
                 })}
             </div>
-        </th>
+        </th> 
+        */}
+        </>
 
     );
 };

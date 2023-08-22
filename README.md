@@ -88,3 +88,4 @@ module.exports = nextConfig
 21. npm install sweetalert2
 22. npm i react-loader-spinner
 23. npm install react-router-scroll-4
+24. npm i @material-tailwind/react

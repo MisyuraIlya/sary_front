@@ -10,9 +10,10 @@ type SecondExerciseColumnsProps = {
     col: number
     setValue: any
     checkIsAllCategoryColsEmpty: boolean
+    isTable: boolean
 }
 
-const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col}) => {
+const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].orden`, data.orden ? data.orden : '');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].title`, data.title ? data.title : '');
@@ -21,9 +22,9 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
     return (
         <>
             {!checkIsAllCategoryColsEmpty &&
-                    <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '100px' }} key={data.id} className='specific-th'>
-                        <div className='px-2 py-2'>{data.title}</div>
-                    </th>
+            <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '100px' }} key={data.id} className={`${isTable && data.title ? 'bg-[#BACEE9]' : ''}`}>
+                <div className='px-2 py-2'>{data.title}</div>
+            </th>
             }
 
             
