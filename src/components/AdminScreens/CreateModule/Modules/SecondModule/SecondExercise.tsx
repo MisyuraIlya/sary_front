@@ -50,7 +50,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                 <tbody>
                     <tr className='w-full'>
                         {data.collectionsCols.map((column, index) => {
-                            if(isDragModule) return null
                             return (
                             <SecondExerciseColumns
                                 key={index} // Add a unique key prop here
@@ -62,6 +61,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                 exerciseId={exerciseId}
                                 dataObjectId={dataObjectId}
                                 isTable={isTable}
+                                isDragModule={isDragModule}
                             />
                             );
                         })}

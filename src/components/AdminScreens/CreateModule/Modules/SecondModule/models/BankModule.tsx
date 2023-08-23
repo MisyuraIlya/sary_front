@@ -20,6 +20,9 @@ const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, e
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'bank');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
+        {values?.map((item,index) => {
+            setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
+        })}
       }, [col, row, setValue, exerciseId, dataObjectId]);
 
     return (
