@@ -23,9 +23,9 @@ const OpenQuestion:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObj
       }, [col, row, setValue, exerciseId, dataObjectId]);
 
     return (
-        <th className={`${checkIsThereImage ? 'h-full justify-center text-centerc w-full' : 'h-full justify-center text-centerc w-full specific-th'} ${isTable ? 'tableModule' : ''}`}  >
+        <th className={`${checkIsThereImage ? 'h-full justify-center text-centerc w-full' : 'h-full justify-center text-centerc w-full '} ${isTable ? 'tableModule' : ''}`}  >
             <div className='flex items-center py-4 px-2'>
-                <div className='rounded-md bg-primary text-white px-2'  >
+                <div className='rounded-md bg-white text-white px-2'  >
                     <RichTextEditor/>
                 </div>
             </div>
