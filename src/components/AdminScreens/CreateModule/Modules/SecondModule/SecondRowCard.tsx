@@ -18,6 +18,7 @@ import ImageForm from './models/ImageForm';
 import UnitedForm from './models/UnitedForm';
 import TableModule from './models/TableModule';
 import OpenQuestion from './models/OpenQuestion';
+import MergedExercise from './models/MergedExercise';
 type SecondRowCard = {
     row: collectionRow 
     orden: number
@@ -57,6 +58,7 @@ type SecondRowCard = {
             {row?.module_type === 'merged' && <UnitedForm  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'table' && <TableModule  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'openQuestion' && <OpenQuestion  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
+            {row?.module_type === 'mergedExercise' && <MergedExercise  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
         </>
 
     );

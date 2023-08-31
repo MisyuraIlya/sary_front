@@ -3,7 +3,6 @@ import React, {FC, useEffect} from 'react';
 
 type SecondExerciseColumnsProps = {
     data: collectionsCols
-
     index: number
     exerciseId:number
     dataObjectId:number
