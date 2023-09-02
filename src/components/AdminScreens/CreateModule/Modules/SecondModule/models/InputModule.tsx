@@ -29,7 +29,7 @@ const InputModule: FC<InputModuleProps> = ({checkIsThereImage, id, answer,placeh
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
         
-      }, [col, row, setValue, isFullText, exerciseId, dataObjectId]);
+      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer]);
 
       const handleCheckBox = () => {
         setIsChecked(!isChecked)

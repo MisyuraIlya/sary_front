@@ -27,7 +27,7 @@ const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answe
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, isFullText);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
-      }, [col, row, setValue, isFullText, exerciseId, dataObjectId]);
+      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer]);
 
       const handleCheckBox = () => {
         setIsChecked(!isChecked)

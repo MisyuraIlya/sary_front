@@ -18,7 +18,7 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].orden`, data.orden ? data.orden : '');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].title`, data.title ? data.title : '');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].type`, data.type ? data.type : '');
-      }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId]);
+      }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId,data.type]);
     if (isDragModule) return null
     return (
         <>

@@ -23,7 +23,7 @@ const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, e
         {values?.map((item,index) => {
             setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
         })}
-      }, [col, row, setValue, exerciseId, dataObjectId]);
+      }, [col, row, setValue, exerciseId, dataObjectId,values]);
 
     return (
         <>

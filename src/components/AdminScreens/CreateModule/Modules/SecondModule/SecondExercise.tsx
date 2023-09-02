@@ -81,8 +81,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
 
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
-                        console.log('mergedExercise',mergedExercise)
-                        console.log('rows',rows)
                         return (
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>

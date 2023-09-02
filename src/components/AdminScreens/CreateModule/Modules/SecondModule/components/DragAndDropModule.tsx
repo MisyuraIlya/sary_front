@@ -30,8 +30,8 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
         <div className='w-full  h-auto'>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className='flex gap-5'>
-                    {data?.map((column) => 
-                        <div className={`${column.title === 'מחסן מילים' ? 'bg-[#E5F0FE] w-[400px]' : 'border border-1 border-[#E5F0FE] w-[200px] min-h-[300px]'} relative`}>
+                    {data?.map((column,indexx) => 
+                        <div className={`${column.title === 'מחסן מילים' ? 'bg-[#E5F0FE] w-[400px]' : 'border border-1 border-[#E5F0FE] w-[200px] min-h-[300px]'} relative`} key={indexx}>
                             <h2 className='bg-[#BACEE9] text-black font-bold px-4 text-center'>{column.title}</h2>
                             {column.title !== 'מחסן מילים' &&
                             <div className='absolute top-1 right-2'>
@@ -44,7 +44,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
                                                 {getColumnAnswers(column.orden, item).map((item,index) => {
                                                     
                                                     return (
-                                                        <div>
+                                                        <div key={index}>
                                                             תשובה {index + 1}: {item}
                                                         </div>
                                                     )

@@ -25,7 +25,7 @@ const ToolTip = ({placeholder, answers}: Props) => {
     
 
                         {answers?.length > 1 && answers?.map((item, index) => 
-                        <Typography color="black" className="font-medium">
+                        <Typography color="black" className="font-medium" key={index}>
                             תשובה {index + 1}: {item.value}
                         </Typography>
                         )}
