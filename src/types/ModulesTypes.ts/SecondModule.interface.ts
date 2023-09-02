@@ -29,11 +29,16 @@ export interface ISecondModuleSubExercises {
     collectionsRows: collectionsRows[]
 }
 
+
+
 export interface collectionsCols {
     id: number
     orden: number
     title: string
+    type: string
+    questionIds: collectionValues[] 
 }
+
 
 export interface collectionsRows {
     id: number
@@ -63,5 +68,5 @@ export interface collectionAnswers {
     value: string
 }
 
-export type module_type =  "word" | "orden" | "instruction" | "subInstruction" | "text" | "input" | "selectbox" | "textarea" | "rootInput" | "mix" | "bank" | 'mixDrag' | 'checkBox' | 'image' | 'merged' | 'table' |''
+export type module_type =  "word" | "orden" | "instruction" | "subInstruction" | "text" | "input" | "selectbox" | "textarea" | "rootInput" | "mix" | "bank" | 'mixDrag' | 'checkBox' | 'image' | 'merged' | 'table' | 'questInstruction' | 'openQuestion' | 'mergedExercise' | ''
 

@@ -24,7 +24,7 @@ const WordModule:FC<WordModuleProps> = ({checkIsThereImage, value, setValue, exe
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? 'h-full justify-center text-centerc w-12' : 'h-full justify-center text-centerc w-12 specific-th'} ${isTable ? 'tableModule' : ''}`}  >
+        <th className={`${checkIsThereImage ? 'h-full justify-center text-centerc w-12' : 'h-full justify-center text-centerc w-12 specific-th'} ${isTable ? 'tableModule' : ''}`}  style={{minWidth:'55px'}}>
             <div className='flex items-center py-4 px-2'>
                 <div className='rounded-md bg-primary text-white px-2'  >
                     {value}

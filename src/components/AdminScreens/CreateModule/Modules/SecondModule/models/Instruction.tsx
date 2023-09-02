@@ -27,7 +27,7 @@ const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register,
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <th className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`} style={{background:'#E5F0FE'}}>
+        <th className={`${checkIsThereImage ? '' : ''} ${isTable ? 'tableModule' : ''}`} style={{background:'#E5F0FE'}}>
             <div  className='text-right px-4 py-4'>
                 <div
                     // onInput={handleInputChange}

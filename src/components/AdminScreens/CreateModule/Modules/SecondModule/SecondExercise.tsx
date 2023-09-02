@@ -13,8 +13,9 @@ type SecondExerciseProps = {
     checkIsThereMergedBackground: boolean
     checkIsThereImage: boolean
     isTable: boolean
+    isDragModule: boolean
 }
-const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId, dataObjectId,isTable}) => {
+const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable, isDragModule}) => {
 
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
@@ -49,6 +50,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                 <tbody>
                     <tr className='w-full'>
                         {data.collectionsCols.map((column, index) => {
+                            console.log('column',column)
                             return (
                             <SecondExerciseColumns
                                 key={index} // Add a unique key prop here
@@ -59,6 +61,8 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                 setValue={setValue}
                                 exerciseId={exerciseId}
                                 dataObjectId={dataObjectId}
+                                isTable={isTable}
+                                isDragModule={isDragModule}
                             />
                             );
                         })}
@@ -75,10 +79,18 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'image' && item?.collectionValues[0]?.value !== null);
                         const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
+
+                        const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
                         return (
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
+                            <>
+                            { !checkIsThereMergedBackground &&
+                                <div className='bg-white h-1 absolute z-10 w-full '></div>                        
+                            }
                             <tr className='w-full' key={keys}>
+                                
                                 {rows?.collectionRow.map((row, index) => 
+                                <>
                                 <SecondRowCard
                                     key={index} // Add a unique key prop here
                                     checkIsThereImage={checkIsThereImage}
@@ -92,13 +104,16 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     control={control}
                                     isTable={isTable}
                                     index={index}
-                                />                            
+                                />  
+                                </>
+                          
                                 )}
-                            {!isExistInstruction && !isExistSubInstruction&&  !isExistImage && !isExistCheckBox && !isBank &&
+                                
+                            {keys == 0 && isExistInstruction &&
                             <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0' colSpan={data.collectionsCols.length} >
-                                <div className='px-2'>
+                                <div className='px-2 py-2'>
                                     <Image src={'/images/folder.svg'} alt='folder' width={30} height={30} />
-                                    <span>וידיאו</span>
+                                    <span className='text-sm'>וידיאו</span>
                                 </div>
                                 <div className='px-2 rounded-full flex text-center items-center justify-center'  >
                                     <div>
@@ -108,15 +123,21 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                             </div>
                                         </div>
                                         <div>
-                                            <span>הסבר</span>
+                                            <span className='text-sm'>הסבר</span>
                                         </div>
                                     </div>
                                 </div>
                             </th>
                             }
+                            
 
                             </tr>
+                            { !checkIsThereMergedBackground &&
+                                <div className='bg-white h-1 absolute z-10 w-full '></div>                        
+                            }
+                            </>
                         )}
+                        
                     )}
                     
                 </tbody>

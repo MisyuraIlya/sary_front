@@ -23,13 +23,15 @@ const MixDrag:FC<MixDragProps> = ({checkIsThereImage, value, setValue, exerciseI
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`}>
-            <div className='py-4 px-4' >
+        <>
+        {/* <th className={`${checkIsThereImage ? '' : ''} ${isTable ? 'tableModule' : ''}`}>
+            <div className='py-4 px-4 w-48 bg-white' >
                 <div className=''>
                     {value}
                 </div>
             </div>
-        </th>
+        </th> */}
+        </>
     );
 };
 

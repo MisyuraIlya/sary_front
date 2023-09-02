@@ -22,7 +22,10 @@ const TextModule:FC<TextModuleProps> = ({checkIsThereImage, value, setValue, exe
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`}>
+        <th className={`
+        ${checkIsThereImage ? '' : ''} 
+       
+        `}>
             <div className='text-right px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
