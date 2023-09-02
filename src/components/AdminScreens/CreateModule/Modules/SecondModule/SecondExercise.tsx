@@ -50,6 +50,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                 <tbody>
                     <tr className='w-full'>
                         {data.collectionsCols.map((column, index) => {
+                            console.log('column',column)
                             return (
                             <SecondExerciseColumns
                                 key={index} // Add a unique key prop here

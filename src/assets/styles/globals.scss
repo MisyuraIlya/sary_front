@@ -127,11 +127,13 @@ textarea:focus {
 th {
   // border-left: 5px solid white;
   // border-bottom: 5px solid white;
+ 
 }
 
 .inOnlyTable {
   th {
     border-left: 5px solid white;
+    width: 200px !important;
   }
 }
 
