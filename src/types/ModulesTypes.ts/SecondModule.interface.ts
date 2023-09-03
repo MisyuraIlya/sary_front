@@ -55,7 +55,8 @@ export interface collectionRow {
     collectionValues: collectionValues[]
     collectionAnswers: collectionAnswers[]
     placeholder?: string
-    isFullText: boolean
+    isFullText: boolean,
+    isMerged: boolean
 }
 
 export interface collectionValues {

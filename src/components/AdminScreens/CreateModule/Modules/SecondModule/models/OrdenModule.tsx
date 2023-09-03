@@ -22,7 +22,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, e
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
 
     return (
-        <th  style={{width:'50px'}} className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`} >
+        <th  style={{minWidth:'55px', maxWidth:'60px'}} className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? '' : ''}`} >
             <div className='text-center flex justify-center items-center py-1'>
                 <div style={{background:'#BACEE9'}} className='px-2 rounded-md '>
                     {value}

@@ -3,6 +3,7 @@ import { ISecondModuleSubExercises } from '@/types/ModulesTypes.ts/SecondModule.
 import SecondRowCard from './SecondRowCard';
 import Image from 'next/image';
 import SecondExerciseColumns from './SecondExerciseColumns';
+import { handleMergedExercise } from './helpers/handleMergedExercise';
 type SecondExerciseProps = {
     data: ISecondModuleSubExercises
     register: any
@@ -50,7 +51,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                 <tbody>
                     <tr className='w-full'>
                         {data.collectionsCols.map((column, index) => {
-                            console.log('column',column)
                             return (
                             <SecondExerciseColumns
                                 key={index} // Add a unique key prop here
@@ -81,6 +81,10 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
 
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
+                        let mergedData: any = null
+                        if(mergedExercise) {
+                            mergedData = handleMergedExercise(rows.collectionRow)
+                        } 
                         return (
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
@@ -104,6 +108,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     control={control}
                                     isTable={isTable}
                                     index={index}
+                                    mergedData={mergedData}
                                 />  
                                 </>
                           

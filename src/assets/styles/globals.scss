@@ -133,17 +133,24 @@ th {
 .inOnlyTable {
   th {
     border-left: 5px solid white;
-    width: 200px !important;
+    // width: 200px !important;
+    // min-width: 200px;
   }
 }
 
 .tableModule {
   th {
     // border-bottom: 5px solid white;
+    min-width: 200px;
 
   }
+
+  
   
 }
+
+
+
 
 .specific-th {
   border-collapse: collapse;
