@@ -30,10 +30,10 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({checkIsThereImage, values, setV
                 {values?.map((item,index) =>  {
                     setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
                     const isTheAnswer = item.value === answer
-
+                    const isLastItem = index === values.length - 1
                     return (
                         <div style={{width:'100%'}} key={index}>
-                            <div className='px-4 py-4'>
+                            <div className='px-4 py-4 ' style={!isLastItem ?{borderBottom:'5px solid white'} : {}}>
                                 <span className='flex gap-2'>
                                     <div 
                                     style={{background:'#BACEE9'}} 
