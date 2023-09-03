@@ -137,11 +137,14 @@ th {
     // min-width: 200px;
   }
 }
+.onlyWordAndOrden {
+    width: 60px !important;
+}
 
 .tableModule {
   th {
     // border-bottom: 5px solid white;
-    min-width: 200px;
+    width: 200px;
 
   }
 

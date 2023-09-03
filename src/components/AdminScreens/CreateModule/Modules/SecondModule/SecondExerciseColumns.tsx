@@ -20,10 +20,11 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].type`, data.type ? data.type : '');
       }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId,data.type]);
     if (isDragModule) return null
+    console.log('data',data)
     return (
         <>
             {!checkIsAllCategoryColsEmpty &&
-            <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '100px' }} key={data.id} className={`${isTable && data.title ? 'bg-[#BACEE9]' : ''}`}>
+            <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '60px' }} key={data.id} className={`${isTable && data.title ? 'bg-[#BACEE9] ' : ''} ${(data.type === 'אות' || data.type === 'מספור')  ? 'onlyWordAndOrden' : ''}`}>
                 <div className='px-2 py-2'>{data.title}</div>
             </th>
             }
