@@ -15,7 +15,6 @@ const LoginForm = () => {
 
 
     const onSubmit :SubmitHandler<LoginForm> = (data) => {
-        console.log('data',data)
     }   
 
 

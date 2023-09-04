@@ -37,7 +37,6 @@ const CreateModule = () => {
   
   const onSubmit = (data: any) => {
     ExerciseMethods.createMoudle(data)
-    // console.log('data',data)
   };
   
   const handleSidebarToggle = () => {

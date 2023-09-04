@@ -4,6 +4,7 @@ import SecondRowCard from './SecondRowCard';
 import Image from 'next/image';
 import SecondExerciseColumns from './SecondExerciseColumns';
 import { handleMergedExercise } from './helpers/handleMergedExercise';
+import { getFirstTextModuleIdInArray } from './helpers/getFirstTextModuleIdInArray';
 type SecondExerciseProps = {
     data: ISecondModuleSubExercises
     register: any
@@ -85,6 +86,8 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         if(mergedExercise) {
                             mergedData = handleMergedExercise(rows.collectionRow)
                         } 
+                        const firstIdTextModule = getFirstTextModuleIdInArray(rows?.collectionRow)
+                        
                         return (
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
@@ -109,6 +112,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     isTable={isTable}
                                     index={index}
                                     mergedData={mergedData}
+                                    firstIdTextModule={firstIdTextModule}
                                 />  
                                 </>
                           

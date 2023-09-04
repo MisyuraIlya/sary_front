@@ -16,9 +16,10 @@ interface RootInputModuleProps {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable :boolean
+    isMerged: boolean
 }
 
-const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable}) => {
+const RootInputModule: FC<RootInputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
@@ -35,22 +36,40 @@ const RootInputModule: FC<RootInputModuleProps> = ({checkIsThereImage, id, answe
       }
 
     return (
-        <th className={`${checkIsThereImage ? 'align-text-top' : 'align-text-top '} ${isTable ? 'tableModule' : ''}`} style={{padding:'1rem 10px 0 10px'}}>
-            <input 
-            type='text' 
-            // disabled={isOnlineXml ? true : false}
-            disabled
-            placeholder={placeholder} 
-            className='w-auto px-4 h-full py-2 border border-gray rounded-md bg-white' 
-            value={answer[0].value} 
-            // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer})}
-            />
-
-
-            {(placeholder || answer.length > 1) &&
-                <ToolTip placeholder={placeholder} answers={answer} />
+        <>
+            {!isMerged &&
+                <th className={`${checkIsThereImage ? '' : ''} ${isTable ? 'tableModule ' : ''} relative `}>
+                    <div className='px-4 py-2 bg-pad '>
+                        <input 
+                        type='text' 
+                        // disabled={isOnlineXml ? true : false}
+                        disabled
+                        placeholder={placeholder} 
+                        className='w-40 px-4 h-full py-2 border border-white rounded-md bg-white'  
+                        value={answer[0].value}
+                        // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer[0].value})}
+                        />
+                        {/* {answer &&
+                        <div className='text-right flex items-center'>
+                        <input
+                            type="checkbox"
+                            className='w-4 h-4'
+        
+                            // onClick={(e) => ExerciseMethods.handleEditCheckBox(id, isChecked)}
+                            onClick={() => handleCheckBox()}
+                            {...register(`collectionsRows[${col}].collectionRow[${row}].isFullText`,isChecked)} 
+                        />
+                            <span className='text-sm pr-2'>בכתיב מלא</span>
+                        </div>
+                        } */}
+                    </div>
+                    {(placeholder || answer.length > 1) &&
+                        <ToolTip placeholder={placeholder} answers={answer} />
+                    }
+                </th>
+            
             }
-        </th>
+        </>
     );
 };
 

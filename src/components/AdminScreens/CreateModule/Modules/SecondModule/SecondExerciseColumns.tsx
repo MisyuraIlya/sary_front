@@ -20,7 +20,6 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].type`, data.type ? data.type : '');
       }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId,data.type]);
     if (isDragModule) return null
-    console.log('data',data)
     return (
         <>
             {!checkIsAllCategoryColsEmpty &&

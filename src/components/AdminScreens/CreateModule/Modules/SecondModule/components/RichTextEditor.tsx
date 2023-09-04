@@ -29,7 +29,7 @@ function RichTextEditor() {
   };
 
   return (
-    <div>
+    <div className='w-full'>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}

@@ -22,7 +22,7 @@ const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setVa
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4 specific-th'} ${isTable ? 'tableModule' : ''}`}   >
+        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'} ${isTable ? 'tableModule' : ''}`}   >
             <div className='text-right' >
                 <div
                     // onInput={handleInputChange}

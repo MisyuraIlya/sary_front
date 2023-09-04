@@ -10,8 +10,9 @@ type TextModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable : boolean
+    firstIdTextModule: string
 }
-const TextModule:FC<TextModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -23,9 +24,11 @@ const TextModule:FC<TextModuleProps> = ({checkIsThereImage, value, setValue, exe
 
     return (
         <th className={`
-        ${checkIsThereImage ? '' : ''} 
-       
-        `}>
+        ${checkIsThereImage ? '' : ''}
+        ${firstIdTextModule === value ? 'specific-th ' : ''}
+        `}
+        
+        >
             <div className='text-right px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
