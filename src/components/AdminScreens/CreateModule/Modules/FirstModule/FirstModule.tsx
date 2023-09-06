@@ -12,6 +12,7 @@ import { ExercisesService } from '@/services/exercises/Exercises';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import Heading from '@/ui/heading/Heading';
 import SideLinks from '../../components/sidebar-components/SideLinks';
+
 interface FirstModule {
     exercises: collectionsRows;
     register: any;
@@ -38,7 +39,6 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
       const handleSidebarClose = () => {
         setIsSidebarOpen(false);
       };
-      console.log('exercises',exercises)
 
     return (
         <>

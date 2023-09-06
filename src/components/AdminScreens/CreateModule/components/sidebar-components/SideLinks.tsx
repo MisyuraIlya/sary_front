@@ -97,6 +97,7 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
         
         if(tableType == 'exercises' && link) {
             setValue('youtube_link', link); 
+            console.log('link',link)
             ExerciseMethods.updateExercisesState(tableType,'youtube_link',link, null)
             ExerciseMethods.handleEdits(0)
         } 

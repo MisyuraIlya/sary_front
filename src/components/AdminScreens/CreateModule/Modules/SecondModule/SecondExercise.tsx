@@ -1,10 +1,12 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { ISecondModuleSubExercises } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import SecondRowCard from './SecondRowCard';
 import Image from 'next/image';
 import SecondExerciseColumns from './SecondExerciseColumns';
 import { handleMergedExercise } from './helpers/handleMergedExercise';
 import { getFirstTextModuleIdInArray } from './helpers/getFirstTextModuleIdInArray';
+import SideBars from '@/components/SideBars/SideBars';
+import SideBarIcons from './components/SideBarIcons';
 type SecondExerciseProps = {
     data: ISecondModuleSubExercises
     register: any
@@ -19,6 +21,7 @@ type SecondExerciseProps = {
 }
 const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable, isDragModule}) => {
 
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
         let moduleTypeCount = 0;
@@ -46,6 +49,15 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].orden`, data.orden);
 
     },[exerciseId,dataObjectId, data.orden, setValue ])
+
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+      };
+    
+      const handleSidebarClose = () => {
+        setIsSidebarOpen(false);
+      };
+
     return (
         <table  className={`myTable w-full ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
@@ -119,24 +131,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                 )}
                                 
                             {keys == 0 && isExistInstruction &&
-                            <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0' colSpan={data.collectionsCols.length} >
-                                <div className='px-2 py-2'>
-                                    <Image src={'/images/folder.svg'} alt='folder' width={30} height={30} />
-                                    <span className='text-sm'>וידיאו</span>
-                                </div>
-                                <div className='px-2 rounded-full flex text-center items-center justify-center'  >
-                                    <div>
-                                        <div  className=' flex text-center items-center justify-center'>
-                                            <div style={{background:'#BACEE9'}} className='rounded-full px-3 py-2'>
-                                                <Image src={'/images/quest.svg'} alt='quest' width={10} height={10}/>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span className='text-sm'>הסבר</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </th>
+                                <SideBarIcons data={data} rows={rows}/>
                             }
                             
 

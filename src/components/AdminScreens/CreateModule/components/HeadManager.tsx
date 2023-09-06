@@ -68,12 +68,9 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handle
         }
     };
 
-
-
-
-
     return (
         <div className='mr-12'>
+            
             <Heading>{exercises?.title}</Heading>
             {exercises?.title &&
             <div className="border-b border-solid border-2 border-gray-400"></div>
@@ -154,11 +151,11 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handle
                         <div className=''>
                             {exercises?.youtube_link && exercises?.pdf && <Image src={`/images/v.svg`} width={15} height={15} alt='v' />}
                         </div>
-                        { choosedModule === 1 &&
+                        {/* { choosedModule === 1 && */}
                             <div className={`p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} > 
                                 <Image src={`${exercises?.pdf && exercises?.youtube_link ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>
                             </div> 
-                        }
+                        {/* } */}
 
                     </div>
                 </form>

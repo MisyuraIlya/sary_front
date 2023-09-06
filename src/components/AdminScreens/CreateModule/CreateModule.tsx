@@ -26,11 +26,12 @@ import { useAuth } from '@/hooks/useAuth';
 import HeadManager from './components/HeadManager';
 import TableManager from './components/TableManager';
 import SideBar from './components/SideBar';
+import SideBarModuleTwo from './Modules/SecondModule/components/SideBarModuleTwo';
 
 const CreateModule = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const {ExerciseMethods, exercises} = useExercise()
+  const {ExerciseMethods, exercises, choosedModule} = useExercise()
   const router = useRouter();
   const moduleId = router.query.moduleId
   const { register, handleSubmit: handleSubmitForm, watch, formState: { errors } , setValue,control} = useForm<any>();
@@ -70,7 +71,12 @@ const CreateModule = () => {
             <AdminLayout>
               <HeadManager control={control} handleSubmitForm={handleSubmitForm} onSubmit={onSubmit} handleSidebarToggle={handleSidebarToggle}/>  
               <TableManager handleSubmitForm={handleSubmitForm} onSubmit={onSubmit} register={register} setValue={setValue} control={control}/>
-              <SideBar isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose} register={register} setValue={setValue}/>
+              {choosedModule === 1 &&
+                <SideBar isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose} register={register} setValue={setValue}/>            
+              }
+              {choosedModule === 2 && 
+                <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
+              }
             </AdminLayout>
         </Meta>
     );

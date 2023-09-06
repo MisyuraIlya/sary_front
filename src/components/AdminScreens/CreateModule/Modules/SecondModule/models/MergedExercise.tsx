@@ -16,7 +16,6 @@ type MergedExerciseProps = {
 }
 
 const MergedExercise:FC<MergedExerciseProps> = ({mergedData,setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,control}) => {
-    console.log('mergedData',mergedData)
     let optionsNew: any = []
     if(mergedData?.previous?.module_type === 'selectbox' || mergedData?.next?.module_type === 'selectbox') {
         optionsNew = Array.isArray((mergedData?.previous?.collectionValues || mergedData?.next?.collectionValues))
