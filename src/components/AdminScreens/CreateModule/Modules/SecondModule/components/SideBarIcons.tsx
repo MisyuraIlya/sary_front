@@ -21,7 +21,7 @@ const SideBarIcons: FC<Props> = ({data,rows}) => {
       };
 
     return (
-        <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0' colSpan={data.collectionsCols.length} >
+        <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0 mt' colSpan={data.collectionsCols.length} >
             
             <div className={`px-2 py-2 cursor-pointer`} onClick={() => handleSidebarToggle()} >
                 <div className='flex items-center justify-center'>
