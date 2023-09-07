@@ -27,7 +27,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
 
 
     return (
-        <div className='w-full  h-auto'>
+        <div className='w-full  h-auto px-2'>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className='flex gap-5'>
                     {data?.map((column,indexx) => 

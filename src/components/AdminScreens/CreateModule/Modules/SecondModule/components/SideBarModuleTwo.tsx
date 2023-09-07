@@ -40,7 +40,7 @@ const SideBarModuleTwo:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose}) =
                 className='text-right pr-2'
                 />
                 </div>
-                
+                {/*@ts-ignore */}
                 <SideLinkMain rows={exercises}/>
             </div>
 

@@ -25,14 +25,14 @@ const SideBarIcons: FC<Props> = ({data,rows}) => {
             
             <div className={`px-2 py-2 cursor-pointer`} onClick={() => handleSidebarToggle()} >
                 <div className='flex items-center justify-center'>
-                    <Image src={`/images/settings_clear.svg`} alt='settings' width={25} height={25}/>
+                    <Image src={`/images/settings_clear.svg`} alt='settings' width={27} height={27}/>
                 </div>
                 <div>
                     <span className='text-sm'>הגדרות</span>
                 </div>
             </div> 
 
-            <div className={`px-2 py-2 cursor-pointer`} onClick={() => handleSidebarToggle()} >
+            <div className={`px-2 py-2 cursor-pointer`} >
                 <div className='flex items-center justify-center'>
                     <Image src={'/images/folder.svg'} alt='folder' width={30} height={30} />
                 </div>
@@ -46,7 +46,7 @@ const SideBarIcons: FC<Props> = ({data,rows}) => {
                 <div>
                     <div  className=' flex text-center items-center justify-center'>
                         <div style={{background:'#BACEE9'}} className='rounded-full px-3 py-2'>
-                            <Image src={'/images/quest.svg'} alt='quest' width={10} height={10}/>
+                            <Image src={'/images/quest.svg'} alt='quest' width={7} height={7} />
                         </div>
                     </div>
                     <div>
