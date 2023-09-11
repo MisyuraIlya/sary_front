@@ -24,7 +24,7 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
 
-    const getValue = (value:any) => value ? optionsNew.find((option) => option.value.trim() == value) : {value:answer[0].value, label:answer[0].value}
+    const getValue = (value:any) => value ? optionsNew.find((option) => option.value.trim() == value) : {value:answer[0]?.value, label:answer[0]?.value}
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);

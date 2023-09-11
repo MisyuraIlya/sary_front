@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 
-type TextModuleProps = {
+type TextCopyModuleProps = {
     value: string
 
     col: any;
@@ -12,11 +12,11 @@ type TextModuleProps = {
     isTable : boolean
     firstIdTextModule: string
 }
-const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'textCopy');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -24,24 +24,21 @@ const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, v
 
     return (
         <th className={`
+        
         ${checkIsThereImage ? '' : ''}
         ${firstIdTextModule === value ? 'specific-th ' : ''}
         `}
-        style={{
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',   // Align text to the right
-        }}
         
         >
-            <div className='text-right  px-4 py-4'>
+            <div className='text-center px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: value }}
-                    className=""
+                    className="bg-white rounded-md"
                 />
             </div>
         </th>
     );
 };
 
-export default TextModule;
+export default TextCopy;

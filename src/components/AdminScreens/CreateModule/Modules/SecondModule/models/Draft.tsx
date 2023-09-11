@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 
-type OrdenModuleProps = {
+type DraftProps = {
     value: string
 
     col: any;
@@ -9,34 +9,37 @@ type OrdenModuleProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
-    isTable: boolean
+    isTable : boolean
 }
-const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'orden');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'draft');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue, exerciseId, dataObjectId, value]);
+      }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
     return (
-        <th  style={{
-            minWidth:'55px', 
-            maxWidth:'60px',
+        <th className={`
+        ${checkIsThereImage ? '' : ''}
+        `}
+        style={{
             verticalAlign: 'top', // Align text to the top
-            textAlign: 'right', 
-            }} 
-            className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? '' : ''} pt-4`} 
-            >
-            <div className='text-center flex justify-center items-center py-1'>
-                <div style={{background:'#BACEE9'}} className='px-2 rounded-md '>
-                    {value}
-                </div>
+            textAlign: 'right',   // Align text to the right
+        }}
+        
+        >
+            <div className='text-right  px-4 py-4'>
+                <div
+                    // onInput={handleInputChange}
+                    dangerouslySetInnerHTML={{ __html: value }}
+                    className=""
+                />
             </div>
         </th>
     );
 };
 
-export default OrdenModule;
+export default Draft;

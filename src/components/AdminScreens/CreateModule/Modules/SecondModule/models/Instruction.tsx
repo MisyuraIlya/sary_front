@@ -16,7 +16,7 @@ type InstructionProps = {
 
 const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable}) => {
     // Replace newlines "\n" with "<br>" tags
-    const formattedValue = value.replace(/\n/g, '<br>');
+    const formattedValue = value?.replace(/\n/g, '<br>');
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

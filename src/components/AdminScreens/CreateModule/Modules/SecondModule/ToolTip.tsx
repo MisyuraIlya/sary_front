@@ -19,7 +19,7 @@ const ToolTip = ({placeholder, answers}: Props) => {
                         <div className="w-30">
                         {placeholder &&
                             <Typography color="black" className="font-medium">
-                                פלייסחולדר: {placeholder}
+                                פלייס הולדר: {placeholder}
                             </Typography>
                         }
     

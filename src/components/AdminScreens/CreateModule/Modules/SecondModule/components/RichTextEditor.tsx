@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import dynamic from 'next/dynamic'; // Import dynamic from 'next/dynamic'
 import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -9,7 +9,11 @@ const Editor = dynamic(() => import('react-draft-wysiwyg').then((module) => modu
   ssr: false, // Disable server-side rendering for the Editor component
 });
 
-function RichTextEditor() {
+ type Props = {
+  placholder: string
+}
+
+const RichTextEditor:FC<Props> = ({placholder}) => {
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 
   useEffect(() => {
@@ -33,6 +37,7 @@ function RichTextEditor() {
       <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
+        placeholder={placholder}
       />
       <button onClick={handleSave}>שמירה</button>
     </div>

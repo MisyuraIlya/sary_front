@@ -35,11 +35,6 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({checkIsThereImage, values, setV
                         <div style={{width:'100%'}} key={index}>
                             <div className='px-4 py-4 ' style={!isLastItem ?{borderBottom:'5px solid white'} : {}}>
                                 <span className='flex gap-2'>
-                                    <div 
-                                    style={{background:'#BACEE9'}} 
-                                    className='px-2 rounded-md w-8 font-thin'>
-                                        {index}
-                                    </div>
                                     <input type='checkbox'  className='w-5' checked={isTheAnswer}/>
                                     {item.value}
                                 </span>

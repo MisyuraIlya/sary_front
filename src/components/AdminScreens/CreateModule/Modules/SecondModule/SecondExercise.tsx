@@ -99,7 +99,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                             mergedData = handleMergedExercise(rows.collectionRow)
                         } 
                         const firstIdTextModule = getFirstTextModuleIdInArray(rows?.collectionRow)
-                        
                         return (
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>

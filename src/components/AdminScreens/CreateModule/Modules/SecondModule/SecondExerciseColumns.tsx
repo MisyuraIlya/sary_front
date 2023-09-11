@@ -24,7 +24,12 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
         <>
             {!checkIsAllCategoryColsEmpty &&
             <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '60px' }} key={data.id} className={`${isTable && data.title ? 'bg-[#BACEE9] ' : ''} ${(data.type === 'אות' || data.type === 'מספור')  ? 'onlyWordAndOrden' : ''}`}>
-                <div className='px-2 py-2'>{data.title}</div>
+                {/* <div className='px-2 py-2'>{}</div> */}
+                <div
+                    // onInput={handleInputChange}
+                    dangerouslySetInnerHTML={{ __html: data.title }}
+                    className=""
+                />
             </th>
             }
 

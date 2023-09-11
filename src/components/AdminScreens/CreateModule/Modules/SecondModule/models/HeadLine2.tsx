@@ -2,7 +2,6 @@ import React, {FC, useEffect} from 'react';
 
 type TextModuleProps = {
     value: string
-
     col: any;
     row: any;
     setValue: any
@@ -12,11 +11,11 @@ type TextModuleProps = {
     isTable : boolean
     firstIdTextModule: string
 }
-const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const HeadLine2:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'headline2');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -25,15 +24,9 @@ const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, v
     return (
         <th className={`
         ${checkIsThereImage ? '' : ''}
-        ${firstIdTextModule === value ? 'specific-th ' : ''}
         `}
-        style={{
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',   // Align text to the right
-        }}
-        
         >
-            <div className='text-right  px-4 py-4'>
+            <div className='text-center  px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: value }}
@@ -44,4 +37,4 @@ const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, v
     );
 };
 
-export default TextModule;
+export default HeadLine2;
