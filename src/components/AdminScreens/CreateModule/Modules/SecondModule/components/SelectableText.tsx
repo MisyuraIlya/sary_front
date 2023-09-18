@@ -5,7 +5,6 @@ import {
   PopoverContent,
   Button,
 } from "@material-tailwind/react";
-import { setSelecteableWord, getSelecteableWord } from '../helpers/localstorage';
 
 interface SelectableTextProps {
   text: string;
