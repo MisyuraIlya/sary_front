@@ -1,5 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import SelectableText from '../components/SelectableText';
+
 type DraftProps = {
     value: string
 
@@ -38,7 +39,7 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
                     className=""
                 />
             </div>
-            <SelectableText text='This is a sample text that can be selected.' />
+            <SelectableText text="יש להיכנס בתפריט הראשי (מסומן בשלושה קווים אופקיים) למסך ההזמנה שלי ולבצע הזמנה" />
         </th>
     );
 };
