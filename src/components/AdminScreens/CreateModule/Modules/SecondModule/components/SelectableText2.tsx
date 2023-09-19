@@ -131,9 +131,9 @@ function SelectableText2({text}: {text:string}) {
           'העירייה חילקה חבילות שי לחג לאזרחיה הותיקים',
         )}
       </div>
-      {/* <p>Selection:</p>
+      <p>Selection:</p>
       <p>Start: {selection.start}</p>
-      <p>End: {selection.end}</p> */}
+      <p>End: {selection.end}</p>
     </div>
   );
 }
