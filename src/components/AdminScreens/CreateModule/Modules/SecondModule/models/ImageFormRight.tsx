@@ -12,11 +12,11 @@ type ImageFormProps = {
 }
 
 
-const ImageForm:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, isClearTable}) => {
+const ImageFormRight:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'image');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'imageRight');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -29,4 +29,4 @@ const ImageForm:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col ,
     );
 };
 
-export default ImageForm;
+export default ImageFormRight;

@@ -14,7 +14,7 @@ import MixDrag from './models/MixDrag';
 import TextModule from './models/TextModule';
 import CheckBoxModule from './models/CheckBoxModule';
 import EmptyType from './models/EmptyType';
-import ImageForm from './models/ImageForm';
+import ImageForm from './models/ImageFormRight';
 import UnitedForm from './models/UnitedForm';
 import TableModule from './models/TableModule';
 import OpenQuestion from './models/OpenQuestion';
@@ -27,6 +27,8 @@ import OpenQuestionHamarot from './models/OpenQuestionHamarot';
 import Draft from './models/Draft';
 import DraftBank from './models/DraftBank';
 import TableClearModule from './models/TableClearModule';
+import ImageFormRight from './models/ImageFormRight';
+import ImageFormLeft from './models/ImageFormLeft';
 
 type SecondRowCard = {
     row: collectionRow 
@@ -66,8 +68,8 @@ type SecondRowCard = {
             {row?.module_type === '' && <EmptyType  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
 
             {/* IMAGE and UNITED  FORM USED AS PARAMETERS ONLY FOR REACT HOOK FORM THE MAIN COMPONENT IN SecondForm.tsx */}
-            {row?.module_type === 'imageRight' && <ImageForm  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
-            {row?.module_type === 'imageLeft' && <ImageForm  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
+            {row?.module_type === 'imageRight' && <ImageFormRight  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
+            {row?.module_type === 'imageLeft' && <ImageFormLeft  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'merged' && <UnitedForm  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'table' && <TableModule  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
             {row?.module_type === 'tableClear' && <TableClearModule  isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}/>}
