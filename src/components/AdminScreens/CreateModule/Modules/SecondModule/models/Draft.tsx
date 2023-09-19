@@ -24,7 +24,7 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
-      console.log('here')
+      console.log('heree')
     return (
         <th className={`
         ${checkIsThereImage ? '' : ''}
