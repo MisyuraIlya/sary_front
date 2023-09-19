@@ -8,9 +8,10 @@ type EmtyTypeProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    isClearTable: boolean
 }
 
-const EmptyType:FC<EmtyTypeProps> = ({setValue, exerciseId, dataObjectId, col , row,checkIsThereImage, isTable}) => {
+const EmptyType:FC<EmtyTypeProps> = ({setValue, exerciseId, dataObjectId, col , row,checkIsThereImage, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

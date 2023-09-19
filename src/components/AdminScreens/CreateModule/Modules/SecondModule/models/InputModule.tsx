@@ -15,11 +15,12 @@ interface InputModuleProps {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
+    isClearTable: boolean
     isTable: boolean,
     isMerged: boolean
 }
 
-const InputModule: FC<InputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable}) => {
+const InputModule: FC<InputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
@@ -40,7 +41,7 @@ const InputModule: FC<InputModuleProps> = ({isMerged, checkIsThereImage, id, ans
     return (
         <>
             {!isMerged &&
-                <th className={`${checkIsThereImage ? '' : ''} ${isTable ? 'tableModule ' : ''} relative `}>
+                <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable)  ? 'tableModule ' : ''} relative `}>
                     <div className='px-4 py-2 bg-pad '>
                         <input 
                         type='text' 

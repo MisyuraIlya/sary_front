@@ -12,9 +12,10 @@ type OpenQuestionModuleProps = {
     isTable: boolean
     answer: Collection[]
     placeholder: string
+    isClearTable: boolean
 }
 
-const OpenQuestionHamarot:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, answer, placeholder}) => {
+const OpenQuestionHamarot:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, answer, placeholder, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -25,7 +26,7 @@ const OpenQuestionHamarot:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, 
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
       }, [col, row, setValue, exerciseId, dataObjectId]);
     return (
-        <th className={`${checkIsThereImage ? 'h-full justify-left text-center float-left' : 'h-full justify-lefttext-center float-left'} ${isTable ? 'tableModule' : ''} w-full relative`}  >
+        <th className={`${checkIsThereImage ? 'h-full justify-left text-center float-left' : 'h-full justify-lefttext-center float-left'} ${(isTable || isClearTable) ? 'tableModule' : ''} w-full relative`}  >
             <div className='flex items-center py-4 px-2 w-full float-left'>
                 <div className='rounded-md bg-white text-white px-2  float-left w-full'  >
                     <RichTextEditor placholder={placeholder}/>

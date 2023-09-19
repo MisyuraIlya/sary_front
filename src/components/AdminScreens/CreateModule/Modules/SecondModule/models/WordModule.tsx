@@ -10,9 +10,10 @@ type WordModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    isClearTable: boolean
 }
 
-const WordModule:FC<WordModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const WordModule:FC<WordModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
@@ -24,7 +25,7 @@ const WordModule:FC<WordModuleProps> = ({checkIsThereImage, value, setValue, exe
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${isTable ? 'onlyWordAndOrden' : 'onlyWordAndOrden'}`}  >
+        <th className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'}`}  >
             <div className='flex items-center justify-center'>
                 <div className='rounded-md bg-primary text-white px-2'  >
                     {value}

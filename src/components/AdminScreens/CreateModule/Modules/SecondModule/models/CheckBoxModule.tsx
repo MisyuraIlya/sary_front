@@ -11,8 +11,9 @@ type CheckBoxModuleProps = {
     checkIsThereImage: boolean
     answer:string
     isTable: boolean
+    isClearTable: boolean
 }
-const CheckBoxModule:FC<CheckBoxModuleProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, answer, isTable}) => {
+const CheckBoxModule:FC<CheckBoxModuleProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, answer, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -24,7 +25,7 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({checkIsThereImage, values, setV
     return (
         <th 
         style={{width:'100%'}}
-        className={`${checkIsThereImage ? '' : 'specific-th'} ${isTable ? 'tableModule' : ''}`}
+        className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? 'tableModule' : ''}`}
         >
             <div>
                 {values?.map((item,index) =>  {

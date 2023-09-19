@@ -11,8 +11,9 @@ type MixDragProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    isClearTable: boolean
 }
-const MixDrag:FC<MixDragProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const MixDrag:FC<MixDragProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

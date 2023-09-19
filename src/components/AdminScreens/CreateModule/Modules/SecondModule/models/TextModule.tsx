@@ -11,8 +11,9 @@ type TextModuleProps = {
     checkIsThereImage: boolean
     isTable : boolean
     firstIdTextModule: string
+    isClearTable: boolean
 }
-const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -25,7 +26,7 @@ const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, v
     return (
         <th className={`
         ${checkIsThereImage ? '' : ''}
-        ${firstIdTextModule === value ? 'specific-th ' : ''}
+        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
         `}
         style={{
             verticalAlign: 'top', // Align text to the top

@@ -10,10 +10,11 @@ type SecondExerciseColumnsProps = {
     setValue: any
     checkIsAllCategoryColsEmpty: boolean
     isTable: boolean
+    isClearTable: boolean
     isDragModule: boolean
 }
 
-const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable,isDragModule}) => {
+const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable, isClearTable, isDragModule}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].orden`, data.orden ? data.orden : '');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].title`, data.title ? data.title : '');

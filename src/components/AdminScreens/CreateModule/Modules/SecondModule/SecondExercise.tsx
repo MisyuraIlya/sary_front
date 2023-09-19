@@ -17,9 +17,10 @@ type SecondExerciseProps = {
     checkIsThereMergedBackground: boolean
     checkIsThereImage: boolean
     isTable: boolean
+    isClearTable: boolean
     isDragModule: boolean
 }
-const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable, isDragModule}) => {
+const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule}) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
@@ -75,6 +76,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                 exerciseId={exerciseId}
                                 dataObjectId={dataObjectId}
                                 isTable={isTable}
+                                isClearTable={isClearTable}
                                 isDragModule={isDragModule}
                             />
                             );
@@ -120,6 +122,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     register={register}
                                     setValue={setValue}
                                     control={control}
+                                    isClearTable={isClearTable}
                                     isTable={isTable}
                                     index={index}
                                     mergedData={mergedData}

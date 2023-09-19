@@ -18,8 +18,9 @@ interface SelectModuleProps {
     checkIsThereImage: boolean
     isTable: boolean
     isMerged: boolean
+    isClearTable: boolean
 }
-const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable}) => {
+const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const optionsNew = Array.isArray(options)
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
@@ -39,7 +40,7 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
         {!isMerged &&
                 <th className={`
 
-                ${isTable ? 'tableModule' : ''} relative
+                ${(isTable || isClearTable) ? 'tableModule' : ''} relative
                 `}>
                     
                     <div className='py-2'>

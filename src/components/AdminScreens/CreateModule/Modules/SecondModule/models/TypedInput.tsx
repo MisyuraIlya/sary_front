@@ -17,9 +17,10 @@ interface TypedInputModuleProps {
     checkIsThereImage: boolean
     isTable: boolean,
     isMerged: boolean
+    isClearTable: boolean
 }
 
-const TypedInput: FC<TypedInputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable}) => {
+const TypedInput: FC<TypedInputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
 
@@ -41,7 +42,7 @@ const TypedInput: FC<TypedInputModuleProps> = ({isMerged, checkIsThereImage, id,
     return (
         <>
             {!isMerged &&
-                <th className={`${checkIsThereImage ? '' : ''} ${isTable ? 'tableModule ' : ''} relative `}>
+                <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule ' : ''} relative `}>
                     <div className='px-4 py-2 bg-pad '>
                         <input 
                         type='text' 

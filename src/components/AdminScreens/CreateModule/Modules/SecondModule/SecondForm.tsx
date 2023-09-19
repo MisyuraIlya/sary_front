@@ -22,6 +22,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const propertyName = `exercise${item.exercise}`;
                 const checkIsThereImage = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'image')))
                 const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
+                const isClearTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'tableClear')))
                 const checkIsThereImageData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'image')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
             
@@ -45,7 +46,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                                 key={dataObjectId}
                                 className={`${isTable ? 'inOnlyTable' : ''} `}
                                 >
-                                    <SecondExercise isTable={isTable} checkIsThereImage={checkIsThereImage} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                    <SecondExercise isClearTable={isClearTable} isTable={isTable} checkIsThereImage={checkIsThereImage} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                 </div>    
                             )}
                         </div>  
