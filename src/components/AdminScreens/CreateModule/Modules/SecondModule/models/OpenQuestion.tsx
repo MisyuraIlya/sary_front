@@ -23,7 +23,7 @@ const OpenQuestion:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObj
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue, exerciseId, dataObjectId]);
+      }, [col, row, setValue, exerciseId, dataObjectId,placeholder]);
 
     return (
         <th className={`${checkIsThereImage ? 'h-full justify-left text-center float-left' : 'h-full justify-lefttext-center float-left'} ${(isTable || isClearTable) ? 'tableModule' : ''} w-full`}  >
