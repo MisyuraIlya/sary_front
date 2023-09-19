@@ -42,7 +42,7 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
                     className=""
                 />
             </div>
-            <TextAnnotation draftBankCollectionValues={draftBankCollectionValues} text={value}/>
+            <TextAnnotation draftBankCollectionValues={draftBankCollectionValues} text={value} row={row} col={col} exerciseId={exerciseId} dataObjectId={dataObjectId}/>
         </th>
     );
 };

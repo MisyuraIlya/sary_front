@@ -3,14 +3,29 @@ import { TokenAnnotator } from "react-text-annotate";
 import ReactDOM from "react-dom";
 import { collectionValues } from "@/types/ModulesTypes.ts/SecondModule.interface";
 const TAG_COLORS: Record<string, string> = {
-  נושא: "#A5EEA8",
-  נשוא: "#FFDB50",
+  'נושא / יחידת הנושא': "#FFDB50",
+  נשוא: "#A5EEA8",
+  'נושא + נשוא': '#A1E1F5',
+  'נשוא מורחב': '#B6CFFF',
+  'תמורה': '#CFFF93',
+  'מילת קישור': '#D8DDEB',
+  'נושא סתמי + נשוא': '#FED3FA',
+  'מושא / יחידת המושא': '#EEA5B6',
+  'תיאור / יחידת התיאור': '#E7D0DE',
+  'לוואי': '#FFEAB6',
+  'פסוקית': '#D0E7E3',
+  'מילת שעבוד': '#CDFFEA',
+  'איבר א': '#79BFFF',
+  'איבר ב': '#B4DBFF',
+  'אוגד': '#62FEEB',
+
 };
 
 interface Span {
   start: number;
   end: number;
   tag: string;
+  color:string;
 }
 
 interface CardProps {
@@ -33,9 +48,13 @@ const Card: React.FC<CardProps> = ({ children }) => (
 type TextAnnotationProps = {
   draftBankCollectionValues: collectionValues[];
   text: string;
+  row: any
+  col: any
+  exerciseId: number
+  dataObjectId: number
 };
 
-const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, text }) => {
+const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, text, row, col, exerciseId, dataObjectId }) => {
   const [value, setValue] = useState<Span[]>([]);
   const [tag, setTag] = useState<string>("");
   const [modal, setModal] = useState(false);
@@ -49,15 +68,16 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
         let clientChoose = '';
         clientChoose = await chooseNewTag();
         newValue[lastValueIndex].tag = clientChoose;
+        newValue[lastValueIndex].color = TAG_COLORS[clientChoose];
+        console.log('newValue',newValue)
       }
 
     }
   
-    const modalElement = document.getElementById("modal-root");
+    const modalElement = document.getElementById(`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`);
     if (modalElement) {
       ReactDOM.unmountComponentAtNode(modalElement);
     }
-  
     setTag("");
     setValue(newValue);
   };
@@ -70,16 +90,18 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
       };
 
       // Render the tag options if the modal element exists
-      const modalElement = document.getElementById("modal-root");
-      console.log('modalElement', modalElement)
+      const modalElement = document.getElementById(`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`);
       if (modalElement) {
         const tagOptions = draftBankCollectionValues.map((item) => (
           <div
             key={item.value}
             onClick={() => handleOptionSelect(item.value)}
-            style={{ cursor: "pointer", padding: "4px 8px", marginBottom: "4px", backgroundColor: TAG_COLORS[item.value] }}
+            className=""
           >
-            {item.value}
+            <div className="rounded-full flex " style={{ cursor: "pointer", padding: "4px 10px", marginBottom: "4px", backgroundColor: TAG_COLORS[item.value] }}>
+              {item.value}
+            </div>
+
           </div>
         ));
 
@@ -94,13 +116,12 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   };
 
   return (
-    <div style={{ padding: 24, fontFamily: "IBM Plex Sans" }}>
+    <div style={{ padding: 24, fontFamily: "IBM Plex Sans" }} className="relative">
       <div style={{ display: "flex", marginBottom: 24 }}>
         <Card>
           {/* {modal && ( */}
-          <div>
-            <p>Select a tag:</p>
-            <div id="modal-root"></div>
+          <div className=" w-full absolute top-0">
+            <div id={`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`} className="flex"></div>
           </div>
           {/* )} */}
 
