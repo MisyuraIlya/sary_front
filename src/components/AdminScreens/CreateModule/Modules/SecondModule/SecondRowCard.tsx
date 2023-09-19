@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { collectionRow } from '@/types/ModulesTypes.ts/SecondModule.interface';
+import { collectionRow, collectionValues } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import Image from 'next/image';
 import SelectModule from './models/SelectModule';
 import InputModule from './models/InputModule';
@@ -45,8 +45,9 @@ type SecondRowCard = {
     isClearTable: boolean,
     mergedData: any
     firstIdTextModule: string
+    draftBankCollectionValues: collectionValues[]
 }
-    const SecondRowCard:FC<SecondRowCard> = ({firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable  }) => {
+    const SecondRowCard:FC<SecondRowCard> = ({firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues }) => {
 
     return (
         <>
@@ -81,7 +82,7 @@ type SecondRowCard = {
             {row?.module_type === 'typedInput' && <TypedInput isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
             {row?.module_type === 'openQuestionHamarot' && <OpenQuestionHamarot  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} answer={row.collectionAnswers} placeholder={row.placeholder || ''}/>}
             {row?.module_type === 'draftBank' && <DraftBank isTable={isTable} checkIsThereImage={checkIsThereImage} values={row.collectionValues} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}  />}
-            {row?.module_type === 'draft' && <Draft  isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/> }
+            {row?.module_type === 'draft' && <Draft draftBankCollectionValues={draftBankCollectionValues}  isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/> }
         </>
 
     );

@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import { ISecondModuleSubExercises } from '@/types/ModulesTypes.ts/SecondModule.interface';
+import { ISecondModuleSubExercises, collectionValues } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import SecondRowCard from './SecondRowCard';
 import Image from 'next/image';
 import SecondExerciseColumns from './SecondExerciseColumns';
@@ -19,8 +19,9 @@ type SecondExerciseProps = {
     isTable: boolean
     isClearTable: boolean
     isDragModule: boolean
+    draftBankCollectionValues: collectionValues[]
 }
-const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule}) => {
+const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
@@ -94,7 +95,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'imageRight' && item?.collectionValues[0]?.value !== null);
                         const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
-
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
                         let mergedData: any = null
                         if(mergedExercise) {
@@ -127,6 +127,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     index={index}
                                     mergedData={mergedData}
                                     firstIdTextModule={firstIdTextModule}
+                                    draftBankCollectionValues={draftBankCollectionValues}
                                 />  
                                 </>
                           

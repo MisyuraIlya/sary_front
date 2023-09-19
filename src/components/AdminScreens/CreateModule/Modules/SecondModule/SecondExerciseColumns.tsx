@@ -12,6 +12,7 @@ type SecondExerciseColumnsProps = {
     isTable: boolean
     isClearTable: boolean
     isDragModule: boolean
+    
 }
 
 const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable, isClearTable, isDragModule}) => {

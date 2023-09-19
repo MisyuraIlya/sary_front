@@ -2,6 +2,7 @@ import React, {FC, useEffect} from 'react';
 import SelectableText from '../components/SelectableText';
 import SelectableText2 from '../components/SelectableText2';
 import TextAnnotation from '../components/TextAnnotation';
+import { collectionValues } from '@/types/ModulesTypes.ts/SecondModule.interface';
 
 
 type DraftProps = {
@@ -14,8 +15,9 @@ type DraftProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable : boolean
+    draftBankCollectionValues: collectionValues[]
 }
-const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, draftBankCollectionValues}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -44,7 +46,7 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
             </div>
             {/* <SelectableText text="יש להיכנס בתפריט הראשי (מסומן בשלושה קווים אופקיים) למסך ההזמנה שלי ולבצע הזמנה" /> */}
             {/* <SelectableText2 text={value} /> */}
-            <TextAnnotation/>
+            <TextAnnotation draftBankCollectionValues={draftBankCollectionValues} text={value}/>
         </th>
     );
 };
