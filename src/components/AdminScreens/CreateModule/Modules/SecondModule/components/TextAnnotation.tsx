@@ -39,14 +39,23 @@ const TextAnnotation = () => {
     const [tag, setTag] = useState<string>("נושא");
 
     const handleChange = (newValue: Span[]) => {
-        console.log('newValue,',newValue)
-    setValue(newValue);
+        setValue(newValue);
     };
 
     const handleTagChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setTag(e.target.value);
     };
 
+    const handleTokenClick = (start: number, end: number) => {
+        // Handle token click by setting the tag for the selected text
+        const selectedText = TEXT.slice(start, end);
+        const tag = prompt(`Enter a tag for "${selectedText}":`);
+        if (tag) {
+          const newSpan = { start, end, tag };
+          setValue((prevValue) => [...prevValue, newSpan]);
+        }
+      };
+      
 
 
     return (
@@ -79,9 +88,9 @@ const TextAnnotation = () => {
             />
           </Card>
         </div>
-        <Card>
+        {/* <Card>
           <pre>{JSON.stringify(value, null, 2)}</pre>
-        </Card>
+        </Card> */}
       </div>
     );
 };

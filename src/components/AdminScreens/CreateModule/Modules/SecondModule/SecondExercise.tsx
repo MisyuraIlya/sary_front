@@ -91,7 +91,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isExistWord = rows?.collectionRow.some((item) => item?.module_type === 'word' && item?.collectionValues[0]?.value !== null);
                         const isExistInstruction = rows?.collectionRow.some((item) => item?.module_type === 'instruction' && item?.collectionValues[0]?.value !== null);
                         const isExistSubInstruction = rows?.collectionRow.some((item) => item?.module_type === 'subInstruction' && item?.collectionValues[0]?.value !== null);
-                        const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'image' && item?.collectionValues[0]?.value !== null);
+                        const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'imageRight' && item?.collectionValues[0]?.value !== null);
                         const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
 
