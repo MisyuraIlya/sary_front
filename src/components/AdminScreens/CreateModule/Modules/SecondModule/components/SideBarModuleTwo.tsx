@@ -12,7 +12,6 @@ type SideBarProps = {
 const SideBarModuleTwo:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose}) => {
 
     const {exercises} = useExercise()
-    console.log('exercises',exercises)
     return (
         <SideBars anchor="left" isOpen={isSidebarOpen} onClose={handleSidebarClose}>
             <div style={{width:'700px'}} className='myCenter'>
