@@ -17,6 +17,7 @@ const SideLinks:FC<Props> = ({rows}) => {
     const { register, handleSubmit, watch, formState: { errors } , setValue, control} = useForm<any>();
 
     const onSubmit = async (data: any) => {
+        console.log('data1',data)
         if(data?.pdf) {
             const res = await ExercisesService.updatePdf(rows.id, {tableType:'exercises_rows',pdf:data.pdf})
             setNewPdf(data.pdf)

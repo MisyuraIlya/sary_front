@@ -21,6 +21,7 @@ const SideLinkMain:FC<Props> = ({rows}) => {
             const res = await ExercisesService.updatePdf(rows.id, {tableType:'exercises',pdf:data.pdf})
             setNewPdf(data.pdf)
             setOpenEditPdf(false)
+            
         }
 
         if(data?.youtube_link){
@@ -98,7 +99,7 @@ const SideLinkMain:FC<Props> = ({rows}) => {
                                     
                                     </div>    
                                 </div>
-                                <button  type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}} onClick={() => setOpenEditPdf(false)}>
+                                <button  type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}} >
                                     אישור
                                 </button>
                                 <button type='button' className='px-2 py-1 font-bold' onClick={(e) => setOpenEditPdf(false)}>
