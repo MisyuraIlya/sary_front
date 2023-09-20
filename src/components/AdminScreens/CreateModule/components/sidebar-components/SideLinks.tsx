@@ -65,6 +65,7 @@ const SideLinks:FC <SideLinksProps> = ({exercises,register,setValue, tableType,o
                 tableType
             }
             ExercisesService.updatePdf(exercises?.id, data)
+            
         }
 
         setIsUpdatedPdf(true)

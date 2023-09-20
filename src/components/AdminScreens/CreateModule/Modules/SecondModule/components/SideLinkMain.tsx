@@ -8,7 +8,6 @@ type Props = {
 }
 
 const SideLinkMain:FC<Props> = ({rows}) => {
-    console.log('r',rows)
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
     const [openEditPdf, setOpenEditPdf] = useState(false)
@@ -21,11 +20,13 @@ const SideLinkMain:FC<Props> = ({rows}) => {
         if(data?.pdf) {
             const res = await ExercisesService.updatePdf(rows.id, {tableType:'exercises',pdf:data.pdf})
             setNewPdf(data.pdf)
+            setOpenEditPdf(false)
         }
 
         if(data?.youtube_link){
             const res = await ExercisesService.updateLink(rows.id, {tableType:'exercises',link:data.youtube_link})
             setNewLink(data?.youtube_link)
+            setOpenEditVideo(false)
         }
     };
 
@@ -97,7 +98,7 @@ const SideLinkMain:FC<Props> = ({rows}) => {
                                     
                                     </div>    
                                 </div>
-                                <button  type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                                <button  type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}} onClick={() => setOpenEditPdf(false)}>
                                     אישור
                                 </button>
                                 <button type='button' className='px-2 py-1 font-bold' onClick={(e) => setOpenEditPdf(false)}>
@@ -127,7 +128,7 @@ const SideLinkMain:FC<Props> = ({rows}) => {
                             {openEditVideo &&
                             <div className='flex gap-4'>
                                 <input placeholder='לינק ליוטיוב' className='w-full border border-gray rounded-md px-2' {...register('youtube_link')}/>
-                                <button type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}}>
+                                <button type='submit' className='px-5 py-2 text-white rounded-md' style={{backgroundColor:'#31B0F2',fontWeight:'600'}} >
                                     אישור
                                 </button>
                                 <button type='button' className='px-2 py-1 font-bold' onClick={(e) => setOpenEditVideo(false)}>
