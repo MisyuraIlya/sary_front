@@ -4,7 +4,8 @@ import ReactDOM from "react-dom";
 import { collectionValues } from "@/types/ModulesTypes.ts/SecondModule.interface";
 const TAG_COLORS: Record<string, string> = {
   'נושא / יחידת הנושא': "#FFDB50",
-  נשוא: "#A5EEA8",
+  'נושא': "#A5EEA8",
+  'נשוא': "#A5EEA8",
   'נושא + נשוא': '#A1E1F5',
   'נשוא מורחב': '#B6CFFF',
   'תמורה': '#CFFF93',
@@ -96,7 +97,7 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
           <div
             key={item.value}
             onClick={() => handleOptionSelect(item.value)}
-            className=""
+            className="p-2"
           >
             <div className="rounded-full flex " style={{ cursor: "pointer", padding: "4px 10px", marginBottom: "4px", backgroundColor: TAG_COLORS[item.value] }}>
               {item.value}
@@ -116,11 +117,11 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   };
 
   return (
-    <div style={{ padding: 24, fontFamily: "IBM Plex Sans" }} className="relative">
+    <div style={{ padding: 24, fontFamily: "IBM Plex Sans" }} className="">
       <div style={{ display: "flex", marginBottom: 24 }}>
         <Card>
           {/* {modal && ( */}
-          <div className=" w-full absolute top-0">
+          <div className=" w-full absolute top-14">
             <div id={`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`} className="flex"></div>
           </div>
           {/* )} */}
