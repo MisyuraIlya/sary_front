@@ -17,7 +17,7 @@ type InstructionProps = {
 
 const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
     // Replace newlines "\n" with "<br>" tags
-    const formattedValue = value?.replace(/\n/g, '<br>');
+    const formattedValue = value.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -26,7 +26,7 @@ const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register,
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
-
+    
     return (
         <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''}`} style={{background:'#E5F0FE'}}>
             <div  className='text-right px-4 py-4'>

@@ -14,7 +14,6 @@ const ImageModule:FC<ImageModuleProps> = ({data}) => {
 
     const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
         const id = getImageId(data)
-        console.log('id',id)
         if(id) {
             const file = event.target.files?.[0];
             if(file) {
@@ -27,16 +26,15 @@ const ImageModule:FC<ImageModuleProps> = ({data}) => {
 
 
     }
-
     const imageLink = getImageValue(data)
-
+    const isThereOnlyOneInLine = data.length === 1
 
 
       
 
     return (
         <div className='col-span-4' >
-            <div className='px-4 py-4 h-full'>
+            <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'px-24' : 'px-4'}`}>
                 {selectedFile ? (
                     <div className=' h-full flex justify-center items-center bg-white'>
                         <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 

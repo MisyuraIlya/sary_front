@@ -197,5 +197,26 @@ export const ExercisesService = {
         formData.append('file', file); // Assuming the backend expects the file to be named 'xlFile'
         const response: AxiosResponse<ResponseUploadedPdf> = await axios.post(`/exercises/image/${id}`, formData);
         return response.data;
+    },
+
+    async updateExerciseLinkVideo (id: number, link: string) {
+        try {
+            const response = await instance<any>({
+                url: `/exercises/exerciseLinkVideo/${id}`,
+                method:'PUT',
+                data: {
+                    link
+                }
+            })
+            return response.data
+
+        } catch(e: any) {
+            console.log('e',e)
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
     }
+
+
 }

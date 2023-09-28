@@ -35,12 +35,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children }) => (
   <div
-    style={{
-      boxShadow: "0 2px 4px rgba(0,0,0,.1)",
-      margin: 6,
-      maxWidth: 500,
-      padding: 16,
-    }}
+
   >
     {children}
   </div>
@@ -70,7 +65,6 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
         clientChoose = await chooseNewTag();
         newValue[lastValueIndex].tag = clientChoose;
         newValue[lastValueIndex].color = TAG_COLORS[clientChoose];
-        console.log('newValue',newValue)
       }
 
     }
@@ -93,7 +87,7 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
       // Render the tag options if the modal element exists
       const modalElement = document.getElementById(`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`);
       if (modalElement) {
-        const tagOptions = draftBankCollectionValues.map((item) => (
+        const tagOptions = draftBankCollectionValues?.map((item) => (
           <div
             key={item.value}
             onClick={() => handleOptionSelect(item.value)}
@@ -117,20 +111,16 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   };
 
   return (
-    <div style={{ padding: 24, fontFamily: "IBM Plex Sans" }} className="">
-      <div style={{ display: "flex", marginBottom: 24 }}>
+    <div className="w-full h-14 flex items-center px-4">
+      <div className="">
         <Card>
           {/* {modal && ( */}
-          <div className=" w-full absolute top-14">
+          <div className=" w-full absolute top-[-20px] z-50">
             <div id={`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`} className="flex"></div>
           </div>
           {/* )} */}
 
           <TokenAnnotator
-            style={{
-              maxWidth: 500,
-              lineHeight: 1.5,
-            }}
             tokens={text.split(" ")}
             value={value}
             onChange={handleChange}

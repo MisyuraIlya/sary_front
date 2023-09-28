@@ -4,9 +4,16 @@ interface IHeading {
     className?: string
 }
 const Heading: FC<PropsWithChildren<IHeading>> = ({ className, children  }) => {
+    console.log('children',children)
     return (
         <h1 className={cn('font-semibold text-3xl' ,className)}>
-            {children}
+            {/* {children} */}
+            <div 
+                
+                // onInput={handleInputChange} 
+                dangerouslySetInnerHTML={{ __html: children ?? ''}}
+                className='text-right pr-2'
+                />
         </h1>
     );
 };

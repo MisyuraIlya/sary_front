@@ -1,3 +1,4 @@
+import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import React, {FC, useEffect} from 'react';
 
 type TextModuleProps = {
@@ -12,8 +13,10 @@ type TextModuleProps = {
     isTable : boolean
     firstIdTextModule: string
     isClearTable: boolean
+    collectionsCols: collectionsCols[]
+
 }
-const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -23,8 +26,11 @@ const TextModule:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, v
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
+    
+      const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
         <th className={`
+        ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
         `}

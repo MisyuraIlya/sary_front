@@ -29,18 +29,20 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
         ${checkIsThereImage ? '' : ''}
         `}
         style={{
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',   // Align text to the right
+            verticalAlign: 'top', 
+            textAlign: 'right', 
+            paddingTop:'25px',
+            width:'100%' 
         }}
         
         >
-            <div className='text-right  px-4 py-4'>
+            {/* <div className='text-right  px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: value }}
                     className=""
                 />
-            </div>
+            </div> */}
             <TextAnnotation draftBankCollectionValues={draftBankCollectionValues} text={value} row={row} col={col} exerciseId={exerciseId} dataObjectId={dataObjectId}/>
         </th>
     );

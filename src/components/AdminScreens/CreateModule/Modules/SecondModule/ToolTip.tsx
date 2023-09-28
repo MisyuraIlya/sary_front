@@ -11,7 +11,7 @@ type Props = {
 const ToolTip = ({placeholder, answers}: Props) => {
     return (
         <div>
-             <div className='absolute right-[-2px] top-[4px]'>
+             <div className='absolute right-[-2px] top-[4px] z-[9999999]'>
                 <Tooltip
                     placement="bottom"
                     className="border border-blue-gray-50 bg-white px-4 py-3 shadow-xl shadow-black/10"
@@ -24,7 +24,7 @@ const ToolTip = ({placeholder, answers}: Props) => {
                         }
     
 
-                        {answers?.length > 1 && answers?.map((item, index) => 
+                        {answers?.length > 0 && answers?.map((item, index) => 
                         <Typography color="black" className="font-medium" key={index}>
                             תשובה {index + 1}: {item.value}
                         </Typography>

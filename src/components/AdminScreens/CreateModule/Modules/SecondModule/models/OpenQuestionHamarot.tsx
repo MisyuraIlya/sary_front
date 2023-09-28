@@ -16,7 +16,7 @@ type OpenQuestionModuleProps = {
 }
 
 const OpenQuestionHamarot:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, answer, placeholder, isClearTable}) => {
-
+    console.log('answer',answer)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'openQuestionHamarot');
@@ -33,7 +33,7 @@ const OpenQuestionHamarot:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, 
                 </div>
             </div>
 
-            {( answer.length > 1) &&
+            {( answer.length > 0) &&
                 <ToolTip placeholder={placeholder} answers={answer} />
             }
 

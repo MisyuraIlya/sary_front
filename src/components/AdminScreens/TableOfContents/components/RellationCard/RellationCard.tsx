@@ -94,7 +94,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
             {editMode &&
             <form className='flex pt-4 m-auto px-4 py-4'>
                 <div className='w-full flex items-center'>
-                    <input {...register("name")} type='text' placeholder='עריכה' className='border border-gray p-2 rounded-md'/>
+                    <input {...register("name")} type='text' placeholder='עריכה' className='border border-gray p-2 rounded-md'  defaultValue={item.name}/>
                 </div>
                 <div className='flex gap-2 justify-end'>
                     <div className=' rounded-full flex justify-center w-12 h-12' style={{backgroundColor:'#31B0F2'}} > 

@@ -56,9 +56,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
         setIsSidebarOpen(!isSidebarOpen);
       };
     
-      const handleSidebarClose = () => {
+    const handleSidebarClose = () => {
         setIsSidebarOpen(false);
-      };
+    };
 
     return (
         <table  className={`myTable w-full ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
@@ -96,6 +96,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                         const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
+
+
+
                         let mergedData: any = null
                         if(mergedExercise) {
                             mergedData = handleMergedExercise(rows.collectionRow)
@@ -128,6 +131,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({checkIsThereImage, data,registe
                                     mergedData={mergedData}
                                     firstIdTextModule={firstIdTextModule}
                                     draftBankCollectionValues={draftBankCollectionValues}
+                                    collectionsCols={data.collectionsCols}
                                 />  
                                 </>
                           

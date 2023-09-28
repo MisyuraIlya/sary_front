@@ -25,13 +25,17 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({checkIsAllCategor
     return (
         <>
             {!checkIsAllCategoryColsEmpty &&
-            <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '60px' }} key={data.id} className={`${isTable && data.title ? 'bg-[#BACEE9] ' : ''} ${(data.type === 'אות' || data.type === 'מספור')  ? 'onlyWordAndOrden' : ''}`}>
+            <th style={ index === 0 && data.title === '' ? { borderLeft:'' } :{ minWidth: '60px' }} key={data.id} className={`${isTable && data.title && data.title !== 'h' ? 'bg-[#BACEE9] ' : ''} ${(data.type === 'אות' || data.type === 'מספור')  ? 'onlyWordAndOrden' : ''} ${data.title == 'h' && 'disbleTh'}  `}>
                 {/* <div className='px-2 py-2'>{}</div> */}
+                {data.title !== 'h' &&
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: data.title }}
                     className=""
                 />
+
+                }
+
             </th>
             }
 

@@ -43,7 +43,9 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
                 ${(isTable || isClearTable) ? 'tableModule' : ''} relative
                 `}>
                     
-                    <div className='py-2'>
+                    {options?.length > 0 &&
+                        <>
+                        <div className='py-2'>
                         <Controller control={control} name={`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionAnswers[0].value`}  render={
                             ({field:{onChange,value},fieldState:{error}}) => {
         
@@ -69,6 +71,9 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
                     {(placeholder || answer.length > 1) &&
                         <ToolTip placeholder={placeholder} answers={answer} />
                     }
+                        </>
+                    }
+
         
                 </th>
         }

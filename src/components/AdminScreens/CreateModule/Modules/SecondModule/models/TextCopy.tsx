@@ -1,3 +1,4 @@
+import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import React, {FC, useEffect} from 'react';
 
 type TextCopyModuleProps = {
@@ -11,8 +12,9 @@ type TextCopyModuleProps = {
     checkIsThereImage: boolean
     isTable : boolean
     firstIdTextModule: string
+    collectionsCols: collectionsCols[]
 }
-const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, collectionsCols}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -22,9 +24,10 @@ const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage,
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
+    //   const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
+
     return (
         <th className={`
-        
         ${checkIsThereImage ? '' : ''}
         ${firstIdTextModule === value ? 'specific-th ' : ''}
         `}
