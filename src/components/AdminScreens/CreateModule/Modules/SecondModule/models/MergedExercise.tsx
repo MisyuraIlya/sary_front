@@ -13,9 +13,10 @@ type MergedExerciseProps = {
     checkIsThereImage: boolean
     isTable: boolean
     control: any
+    CustomTableWidth: number
 }
 
-const MergedExercise:FC<MergedExerciseProps> = ({mergedData,setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,control}) => {
+const MergedExercise:FC<MergedExerciseProps> = ({CustomTableWidth, mergedData,setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,control}) => {
     let optionsNew: any = []
     if(mergedData?.previous?.module_type === 'selectbox' || mergedData?.next?.module_type === 'selectbox') {
         optionsNew = Array.isArray((mergedData?.previous?.collectionValues || mergedData?.next?.collectionValues))
@@ -35,7 +36,11 @@ const MergedExercise:FC<MergedExerciseProps> = ({mergedData,setValue, exerciseId
       }, [col, row, setValue, exerciseId, dataObjectId]);
 
     return (
-        <th>
+        <th
+        style={{
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
+        }}
+        >
             <div>
                 {mergedData?.previous?.module_type === 'input' &&
                 <div >

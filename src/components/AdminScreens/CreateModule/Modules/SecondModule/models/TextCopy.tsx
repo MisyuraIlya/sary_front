@@ -13,8 +13,9 @@ type TextCopyModuleProps = {
     isTable : boolean
     firstIdTextModule: string
     collectionsCols: collectionsCols[]
+    CustomTableWidth: number
 }
-const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, collectionsCols}) => {
+const TextCopy:FC<TextCopyModuleProps> = ({CustomTableWidth, firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, collectionsCols}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -31,7 +32,9 @@ const TextCopy:FC<TextCopyModuleProps> = ({firstIdTextModule, checkIsThereImage,
         ${checkIsThereImage ? '' : ''}
         ${firstIdTextModule === value ? 'specific-th ' : ''}
         `}
-        
+        style={{
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
+        }}
         >
             <div className='text-center px-4 py-4'>
                 <div

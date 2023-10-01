@@ -18,9 +18,10 @@ interface RootInputModuleProps {
     isTable :boolean
     isMerged: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
 
-const RootInputModule: FC<RootInputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable, isClearTable}) => {
+const RootInputModule: FC<RootInputModuleProps> = ({CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
@@ -39,7 +40,11 @@ const RootInputModule: FC<RootInputModuleProps> = ({isMerged, checkIsThereImage,
     return (
         <>
             {!isMerged &&
-                <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule ' : ''} relative `}>
+                <th className={`${checkIsThereImage ? '' : ''} relative `}
+                style={{
+                    minWidth: isTable ? `${CustomTableWidth}px` : '',
+                }}
+                >
                     <div className='px-4 py-2 bg-pad '>
                         <input 
                         type='text' 

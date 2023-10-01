@@ -6,6 +6,8 @@ import Image from 'next/image';
 import ImageModule from './models/ImageModule';
 import DragAndDropModule from './components/DragAndDropModule';
 import VideoModule from './models/VideoModule';
+import ChartModule from './models/ChartModule';
+import { getTableCustomValue } from './helpers/getTableCustomValue';
 
 type SecondFormProps = {
     handleSubmitForm: any
@@ -38,16 +40,20 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const propertyName = `exercise${item.exercise}`;
                 const checkIsThereImageRight = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageRight')))
                 const checkIsThereImageLeft = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageLeft')))
-                const checkIsThereVideoRight = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'videoRight')))
-                const checkIsThereVideoLeft = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'videoLeft')))
+                const checkIsThereVideo = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'video')))
+                const checkIsThereChart = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'chart')))
                 const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
                 const isClearTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'tableClear')))
                 const checkIsThereImageRightData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageRight')))
                 const checkIsThereImageLeftData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageLeft')))
-                const checkIsThereImageVideoRightData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'videoRight')))
-                const checkIsThereImageVideoLeftData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'videoLeft')))
+                const checkIsThereImageVideo = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'video')))
+                const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
+                let CustomTableWidth = 300;
+                if(isTable) {
+                    CustomTableWidth = getTableCustomValue(item)
+                }
                 return (
                 <div className='bg-white  ml-4 mr-4' key={indexx}>
                         {
@@ -60,28 +66,29 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                             <ImageModule data={checkIsThereImageRightData}/>
                         }
                         {
-                            checkIsThereVideoRight&&
+                            checkIsThereVideo&&
 
-                            <VideoModule data={checkIsThereImageVideoRightData} />
+                            <VideoModule data={checkIsThereImageVideo} />
                         }
 
-                        <div className={`col-span-${(checkIsThereImageRight || checkIsThereImageLeft || checkIsThereVideoRight || checkIsThereVideoLeft ) ? '8' : '12'} `}  >
+                        {
+                            checkIsThereChart &&
+
+                            <ChartModule data={checkIsThereImageChart} />
+                        }
+
+                        <div className={`col-span-${(checkIsThereImageRight || checkIsThereImageLeft ) ? '8' : '12'} `}  >
                             {item[propertyName].data.map((exercise,dataObjectId) =>  
                                 <div 
                                 style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
                                 key={dataObjectId}
                                 className={`${isTable ? 'inOnlyTable' : ''} `}
                                 >
-                                    <SecondExercise draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                    <SecondExercise CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                 </div>    
                             )}
                         </div>  
 
-                        {
-                            checkIsThereVideoLeft &&
-
-                            <VideoModule data={checkIsThereImageVideoLeftData} />
-                        }
 
                         {
                             checkIsThereImageLeft &&

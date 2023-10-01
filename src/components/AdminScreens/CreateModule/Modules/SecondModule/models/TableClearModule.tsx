@@ -8,6 +8,7 @@ type TableClearModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    CustomTableWidth: number
 }
 
 const TableClearModule:FC<TableClearModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {

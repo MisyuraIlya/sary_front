@@ -12,9 +12,10 @@ type BankModuleProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
 
-const BankModule:FC <BankModuleProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const BankModule:FC <BankModuleProps> = ({CustomTableWidth, checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

@@ -10,8 +10,9 @@ type TextModuleProps = {
     checkIsThereImage: boolean
     isTable : boolean
     firstIdTextModule: string
+    CustomTableWidth: number
 }
-const HeadLine2:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const HeadLine2:FC<TextModuleProps> = ({CustomTableWidth, firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -25,6 +26,9 @@ const HeadLine2:FC<TextModuleProps> = ({firstIdTextModule, checkIsThereImage, va
         <th className={`
         ${checkIsThereImage ? '' : ''}
         `}
+        style={{
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
+        }}
         >
             <div className='text-center  px-4 py-4'>
                 <div

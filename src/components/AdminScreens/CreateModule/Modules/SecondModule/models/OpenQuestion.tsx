@@ -11,10 +11,11 @@ type OpenQuestionModuleProps = {
     isTable: boolean,
     placeholder: string
     isClearTable: boolean
+    CustomTableWidth: number
 }
 
 
-const OpenQuestion:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,placeholder, isClearTable}) => {
+const OpenQuestion:FC<OpenQuestionModuleProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,placeholder, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -26,8 +27,12 @@ const OpenQuestion:FC<OpenQuestionModuleProps> = ({setValue, exerciseId, dataObj
       }, [col, row, setValue, exerciseId, dataObjectId,placeholder]);
 
     return (
-        <th className={`${checkIsThereImage ? 'h-full justify-left text-center float-left' : 'h-full justify-lefttext-center float-left'} ${(isTable || isClearTable) ? 'tableModule' : ''} w-full`}  >
-            <div className='flex items-center py-4 px-2 w-full float-left w-full'>
+        <th className={`${checkIsThereImage ? 'h-full justify-left text-center float-left' : 'h-full justify-lefttext-center float-left'} w-full`} 
+            style={{
+                minWidth: isTable ? `${CustomTableWidth}px` : '',
+            }}
+        >
+            <div className='flex items-center py-4 px-2 w-full float-left'>
                 <div className='rounded-md bg-white text-white px-2  float-left w-full'  >
                     <RichTextEditor placholder={placeholder}/>
                 </div>

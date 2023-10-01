@@ -19,8 +19,9 @@ interface SelectModuleProps {
     isTable: boolean
     isMerged: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
-const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
+const SelectModule:FC<SelectModuleProps> = ({CustomTableWidth, isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const optionsNew = Array.isArray(options)
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
@@ -39,9 +40,14 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
         <>
         {!isMerged &&
                 <th className={`
-
-                ${(isTable || isClearTable) ? 'tableModule' : ''} relative
-                `}>
+        
+                ${(isTable || isClearTable) ? 'tableModule' : ''} 
+                relative
+                `}
+                style={{
+                    minWidth: isTable ? `${CustomTableWidth}px` : '',
+                }}
+                >
                     
                     {options?.length > 0 &&
                         <>
@@ -56,7 +62,7 @@ const SelectModule:FC<SelectModuleProps> = ({isMerged,checkIsThereImage, placeho
                             options={optionsNew}
                             value={getValue(value)}
                             onChange={(newValue) => onChange((newValue?.value))}
-                            className='ml-4 mr-4'
+                            className='ml-4 mr-4 min-w-[240px]'
                             />
                             {/* {error && (
                                 <div style={{color:'red'}}>

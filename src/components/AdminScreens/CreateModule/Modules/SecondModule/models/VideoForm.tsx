@@ -9,14 +9,15 @@ type ImageFormProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
 
 
-const VideoFormRight:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, isClearTable}) => {
+const VideoForm:FC<ImageFormProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'videoRight');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'video');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -29,4 +30,4 @@ const VideoFormRight:FC<ImageFormProps> = ({setValue, exerciseId, dataObjectId, 
     );
 };
 
-export default VideoFormRight;
+export default VideoForm;

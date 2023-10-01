@@ -14,8 +14,9 @@ type DraftProps = {
     checkIsThereImage: boolean
     isTable : boolean
     draftBankCollectionValues: collectionValues[]
+    CustomTableWidth: number
 }
-const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, draftBankCollectionValues}) => {
+const Draft:FC<DraftProps> = ({ CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, draftBankCollectionValues}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -27,12 +28,15 @@ const Draft:FC<DraftProps> = ({ checkIsThereImage, value, setValue, exerciseId, 
     return (
         <th className={`
         ${checkIsThereImage ? '' : ''}
+        bg-white
         `}
+        
         style={{
             verticalAlign: 'top', 
             textAlign: 'right', 
             paddingTop:'25px',
-            width:'100%' 
+            width:'100%',
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
         }}
         
         >

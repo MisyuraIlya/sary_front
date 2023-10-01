@@ -18,9 +18,10 @@ interface TypedInputModuleProps {
     isTable: boolean,
     isMerged: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
 
-const TypedInput: FC<TypedInputModuleProps> = ({isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
+const TypedInput: FC<TypedInputModuleProps> = ({CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
 
@@ -42,7 +43,9 @@ const TypedInput: FC<TypedInputModuleProps> = ({isMerged, checkIsThereImage, id,
     return (
         <>
             {!isMerged &&
-                <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule ' : ''} relative `}>
+                <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule ' : ''} relative `}
+                style={{minWidth: isTable ? `${CustomTableWidth}px` : '',}}
+                >
                     <div className='px-4 py-2 bg-pad '>
                         <input 
                         type='text' 

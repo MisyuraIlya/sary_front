@@ -13,9 +13,10 @@ type InstructionProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 };
 
-const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
+const Instruction: FC<InstructionProps> = ({ CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
     // Replace newlines "\n" with "<br>" tags
     const formattedValue = value.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
 
@@ -28,7 +29,11 @@ const Instruction: FC<InstructionProps> = ({ checkIsThereImage, value, register,
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
     
     return (
-        <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''}`} style={{background:'#E5F0FE'}}>
+        <th className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''}`} 
+        style={{
+            background:'#E5F0FE',
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
+            }}>
             <div  className='text-right px-4 py-4'>
                 <div
                     // onInput={handleInputChange}

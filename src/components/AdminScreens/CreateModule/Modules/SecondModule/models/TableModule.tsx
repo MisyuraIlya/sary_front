@@ -8,9 +8,10 @@ type TableModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    CustomTableWidth: number
 }
 
-const TableModule:FC<TableModuleProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {
+const TableModule:FC<TableModuleProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

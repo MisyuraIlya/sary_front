@@ -12,8 +12,9 @@ type MixDragProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
-const MixDrag:FC<MixDragProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const MixDrag:FC<MixDragProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

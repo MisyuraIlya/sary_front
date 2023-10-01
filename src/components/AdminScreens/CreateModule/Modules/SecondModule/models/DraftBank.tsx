@@ -11,9 +11,10 @@ type DraftBankProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    CustomTableWidth: number
 }
 
-const DraftBank:FC <DraftBankProps> = ({checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const DraftBank:FC <DraftBankProps> = ({CustomTableWidth, checkIsThereImage, values, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'draftBank');

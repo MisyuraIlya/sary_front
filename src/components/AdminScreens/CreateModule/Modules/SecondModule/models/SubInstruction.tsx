@@ -11,8 +11,9 @@ type SubInstructionProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
-const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -23,7 +24,7 @@ const SubInstruction:FC<SubInstructionProps> = ({checkIsThereImage, value, setVa
       }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
     return (
-        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'} ${(isTable || isClearTable) ? 'tableModule' : ''}`}   >
+        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'}`}   >
             <div className='text-right' >
                 <div
                     // onInput={handleInputChange}

@@ -29,7 +29,7 @@ const style = {
     p: 4,
   };
 
-const VideoModule:FC<ImageModuleProps> = ({data}) => {
+const ChartModule:FC<ImageModuleProps> = ({data}) => {
     const [link, setLink] = useState<string>('')
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -54,60 +54,54 @@ const VideoModule:FC<ImageModuleProps> = ({data}) => {
 
     const videoLink = getVideoValue(data)
     return (
-        
-        <div className='col-span-12' >
-            <div className='flex items-center justify-center'>
-                <div className='px-4 py-4 h-full w-1/3'>
-                    {(videoLink && !link)?
-                        <>
-                            <div className='relative'>
+        <div className='col-span-4' >
+            <div className='px-4 py-4 h-full'>
+                {(videoLink && !link)?
+                    <>
+                        <div className='relative'>
+                            <button 
+                            onClick={() => handleOpen()}
+                            className='absolute bottom-[-45px] z-50 bg-primary text-white px-2 py-2 rounded-lg left-1/3 cursor-pointer'>
+                                שינוי סרטון
+                            </button>
+                            <div 
+                            dangerouslySetInnerHTML={{ __html: videoLink?? '' }}
+                            onClick={() => handleOpen()}
+                            />
+                        </div>
+ 
+                    
+                    </>
+
+
+                    :
+                    
+                    <>
+                        {link ? (
+                            <div className=' h-full flex justify-center items-center bg-white relative'>
                                 <button 
                                 onClick={() => handleOpen()}
-                                className='absolute bottom-[-45px] z-50 bg-primary text-white px-2 py-2 rounded-lg  cursor-pointer'>
+                                className='absolute bottom-[-45px] z-50 bg-primary text-white px-2 py-2 rounded-lg left-1/3 cursor-pointer'>
                                     שינוי סרטון
                                 </button>
                                 <div 
-                                dangerouslySetInnerHTML={{ __html: videoLink?? '' }}
-                                onClick={() => handleOpen()}
+                                dangerouslySetInnerHTML={{ __html: link?? '' }}
                                 />
                             </div>
-    
-                        
-                        </>
+                        ) : (
 
+                            <div className='border-8 border-mainExerciseBg border-dashed h-full flex justify-center items-center bg-white'>
+                                <div className='cursor-pointer' onClick={() => handleOpen()}> 
+                                    <Image src={'/images/upload.svg'} alt="upload image" width={100} height={100} />
+                                    <h4>העלאת לינק לסרטון</h4>
+                                </div>    
+                            </div>
+                        )}
+                    </>
+                
+                }
 
-                        :
-                        
-                        <>
-                            {link ? (
-                                <div className=' h-full flex justify-center items-center bg-white relative'>
-                                    <button 
-                                    onClick={() => handleOpen()}
-                                    className='absolute bottom-[-45px] z-50 bg-primary text-white px-2 py-2 rounded-lg cursor-pointer'>
-                                        שינוי סרטון
-                                    </button>
-                                    <div 
-                                    dangerouslySetInnerHTML={{ __html: link?? '' }}
-                                    />
-                                </div>
-                            ) : (
-
-                                <div className='border-8 border-mainExerciseBg border-dashed h-full flex justify-center items-center bg-white text-center'>
-                                    <div className='cursor-pointer ' onClick={() => handleOpen()}> 
-                                        <div className='flex justify-center items-center'>
-                                            <Image src={'/images/upload.svg'} alt="upload image"  width={100} height={100} />
-                                        </div>
-                                        <h4>העלאת לינק לסרטון</h4>
-                                    </div>    
-                                </div>
-                            )}
-                        </>
-                    
-                    }
-
-                </div>  
-            </div>
- 
+            </div>   
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -127,4 +121,4 @@ const VideoModule:FC<ImageModuleProps> = ({data}) => {
     );
 };
 
-export default VideoModule;
+export default ChartModule;

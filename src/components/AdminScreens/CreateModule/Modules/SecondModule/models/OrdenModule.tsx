@@ -11,8 +11,9 @@ type OrdenModuleProps = {
     checkIsThereImage: boolean
     isTable: boolean
     isClearTable: boolean
+    CustomTableWidth: number
 }
-const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const OrdenModule:FC<OrdenModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -28,6 +29,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({checkIsThereImage, value, setValue, e
             maxWidth:'60px',
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right', 
+            
             }} 
             className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} pt-4`} 
             >

@@ -11,7 +11,7 @@ type Props = {
 const ToolTip = ({placeholder, answers}: Props) => {
     return (
         <div>
-             <div className='absolute right-[-2px] top-[4px] z-[9999999]'>
+             <div className='absolute right-[-2px] top-[4px]'>
                 <Tooltip
                     placement="bottom"
                     className="border border-blue-gray-50 bg-white px-4 py-3 shadow-xl shadow-black/10"

@@ -8,9 +8,10 @@ type UnitedFormProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
+    CustomTableWidth: number
 }
 
-const UnitedForm:FC<UnitedFormProps> = ({setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {
+const UnitedForm:FC<UnitedFormProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
