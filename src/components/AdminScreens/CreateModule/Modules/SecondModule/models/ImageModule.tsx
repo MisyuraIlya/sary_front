@@ -28,15 +28,15 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
 
     }
     const imageLink = getImageValue(data)
-    const isThereOnlyOneInLine = data.length === 1
-
+    const isThereOnlyOneInLine = (data.length === 1  || data.length === 2)
+    console.log('isThereOnlyOneInLine',isThereOnlyOneInLine)
 
       
     
 
     return (
         <div className={`col-span-${CustomImageCol}`} >
-            <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'px-24' : 'px-4'}`}>
+            <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'mr-16' : 'mr-4'}`}>
                 {selectedFile ? (
                     <div className=' h-full flex justify-center items-center bg-white'>
                         <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
