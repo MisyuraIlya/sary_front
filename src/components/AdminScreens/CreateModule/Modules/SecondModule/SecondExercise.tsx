@@ -21,10 +21,11 @@ type SecondExerciseProps = {
     isDragModule: boolean
     draftBankCollectionValues: collectionValues[]
     CustomTableWidth: number
+    CustomInputWidth: number
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
@@ -137,6 +138,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomTableWidth, checkIsThereI
                                     draftBankCollectionValues={draftBankCollectionValues}
                                     collectionsCols={data.collectionsCols}
                                     CustomTableWidth={CustomTableWidth}
+                                    CustomInputWidth={CustomInputWidth}
                                 />  
                                 </>
                           

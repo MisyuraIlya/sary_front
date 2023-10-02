@@ -19,9 +19,10 @@ interface InputModuleProps {
     isTable: boolean,
     isMerged: boolean
     CustomTableWidth: number
+    CustomInputWidth: number
 }
 
-const InputModule: FC<InputModuleProps> = ({CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
+const InputModule: FC<InputModuleProps> = ({CustomInputWidth, CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
@@ -62,7 +63,8 @@ const InputModule: FC<InputModuleProps> = ({CustomTableWidth, isMerged, checkIsT
                             // disabled={isOnlineXml ? true : false}
                             disabled
                             placeholder={splitPlaceHolder[1] ? '' : placeholder} 
-                            className='w-full px-4 h-full py-2 border border-white rounded-md bg-white'  
+                            className={` px-4 h-full py-2 border border-white rounded-md bg-white`}
+                            style={{width: CustomInputWidth}} 
                             value={answer[0].value}
                             // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer[0].value})}
                             />

@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 
-type ImageFormProps = {
+type PropertiesProps = {
     col: any;
     row: any;
     setValue: any
@@ -8,21 +8,20 @@ type ImageFormProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable: boolean
-    isClearTable: boolean
     CustomTableWidth: number
     value: string
 }
 
-
-const ImageFormRight:FC<ImageFormProps> = ({CustomTableWidth, setValue, value , exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, isClearTable}) => {
+const Properties:FC<PropertiesProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, value}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'imageRight');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'properties');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId,value]);
+      }, [col, row, setValue, exerciseId, dataObjectId,value]);
+
 
     return (
         <>
@@ -31,4 +30,4 @@ const ImageFormRight:FC<ImageFormProps> = ({CustomTableWidth, setValue, value , 
     );
 };
 
-export default ImageFormRight;
+export default Properties;

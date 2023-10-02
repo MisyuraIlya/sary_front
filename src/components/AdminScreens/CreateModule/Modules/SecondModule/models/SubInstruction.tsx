@@ -1,8 +1,8 @@
-import React, {FC, useEffect} from 'react';
-
+import React, {FC, useEffect, useState} from 'react';
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
+import BoldChanger from '../components/BoldChanger';
 type SubInstructionProps = {
     value: string
-
     col: any;
     row: any;
     setValue: any
@@ -15,20 +15,33 @@ type SubInstructionProps = {
 }
 const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
+    const {isOnlineXml} = useExercise()
+    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
+    formattedValue = value?.replaceAll(';', "<br/>");
+    const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+
+    const handleUpdateHtml = (updatedHtml: string) => {
+        setHtmlTal(updatedHtml)
+    }
+
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'subInstruction');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId, value]);
+      }, [col, row, setValue,exerciseId, dataObjectId, value,htmlTag]);
 
     return (
         <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'}`}   >
             <div className='text-right' >
+                {!isOnlineXml &&
+                    <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
+                }
+
                 <div
                     // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: value }}
+                    dangerouslySetInnerHTML={{ __html: htmlTag }}
                     className=""
                 />
             </div>

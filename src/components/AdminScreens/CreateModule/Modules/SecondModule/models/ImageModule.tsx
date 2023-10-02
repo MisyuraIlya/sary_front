@@ -6,9 +6,10 @@ import { getImageId, getImageValue } from '../helpers/ImageModuleHelper';
 import { onErrorAlert } from '@/utils/sweetAlert';
 type ImageModuleProps = {
     data: ISecondModuleSubExercises[]
+    CustomImageCol: number
 }
 
-const ImageModule:FC<ImageModuleProps> = ({data}) => {
+const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
@@ -34,7 +35,7 @@ const ImageModule:FC<ImageModuleProps> = ({data}) => {
     
 
     return (
-        <div className='col-span-4' >
+        <div className={`col-span-${CustomImageCol}`} >
             <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'px-24' : 'px-4'}`}>
                 {selectedFile ? (
                     <div className=' h-full flex justify-center items-center bg-white'>

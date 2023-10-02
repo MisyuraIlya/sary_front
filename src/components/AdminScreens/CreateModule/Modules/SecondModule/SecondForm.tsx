@@ -42,6 +42,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const checkIsThereImageLeft = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageLeft')))
                 const checkIsThereVideo = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'video')))
                 const checkIsThereChart = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'chart')))
+                const checkIsThereProperties= item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'properties')))
                 const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
                 const isClearTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'tableClear')))
                 const checkIsThereImageRightData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageRight')))
@@ -51,23 +52,35 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
                 let CustomTableWidth = 300;
+                let CustomImageCol = 4 ;
+                let CustomInputWidth = 300;
                 if(isTable) {
-                    CustomTableWidth = getTableCustomValue(item)
+                    CustomTableWidth = getTableCustomValue(item, 'table')
                 }
+                if(checkIsThereImageRight) {
+                    CustomImageCol = getTableCustomValue(item, 'imageRight')
+                }
+                if(checkIsThereImageLeft) {
+                    CustomImageCol = getTableCustomValue(item, 'imageLeft')
+                }
+                if(checkIsThereProperties) {
+                    CustomInputWidth = getTableCustomValue(item, 'properties')
+                }
+
+
                 return (
                 <div className='bg-white  ml-4 mr-4' key={indexx}>
                         {
                             isDragModule &&
                             <DragAndDropModule item={item} />
                         }
-                    <div className={`p-2 grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
+                    <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
                         {
                             checkIsThereImageRight &&
-                            <ImageModule data={checkIsThereImageRightData}/>
+                            <ImageModule data={checkIsThereImageRightData} CustomImageCol={CustomImageCol}/>
                         }
                         {
-                            checkIsThereVideo&&
-
+                            checkIsThereVideo &&
                             <VideoModule data={checkIsThereImageVideo} />
                         }
 
@@ -77,14 +90,14 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                             <ChartModule data={checkIsThereImageChart} />
                         }
 
-                        <div className={`col-span-${(checkIsThereImageRight || checkIsThereImageLeft ) ? '8' : '12'} `}  >
+                        <div className={`col-span-${(checkIsThereImageRight || checkIsThereImageLeft ) ? `${12 - CustomImageCol}` : '12'}`}  >
                             {item[propertyName].data.map((exercise,dataObjectId) =>  
                                 <div 
                                 style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
                                 key={dataObjectId}
                                 className={`${isTable ? 'inOnlyTable' : ''} `}
                                 >
-                                    <SecondExercise CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                    <SecondExercise CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                 </div>    
                             )}
                         </div>  
@@ -92,7 +105,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
 
                         {
                             checkIsThereImageLeft &&
-                            <ImageModule data={checkIsThereImageLeftData}/>
+                            <ImageModule data={checkIsThereImageLeftData} CustomImageCol={CustomImageCol}/>
                         }
                     </div>  
       
