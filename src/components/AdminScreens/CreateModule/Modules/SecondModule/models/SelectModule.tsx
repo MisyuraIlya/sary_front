@@ -35,7 +35,6 @@ const SelectModule:FC<SelectModuleProps> = ({CustomTableWidth, isMerged,checkIsT
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].placeholder`, placeholder);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
       }, [answer, col, options, row, setValue, exerciseId, dataObjectId,placeholder]);
-
     return (
         <>
         {!isMerged &&

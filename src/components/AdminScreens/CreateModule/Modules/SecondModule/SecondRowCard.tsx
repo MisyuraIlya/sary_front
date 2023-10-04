@@ -36,6 +36,7 @@ import ChartForm from './models/ChartForm';
 import TextModuleCentered from './models/TextModuleCentered';
 import Properties from './models/Properties';
 import InputCenteredModule from './models/InputCenteredModule';
+import Explanation from './models/Explanation';
 
 type SecondRowCard = {
     row: collectionRow 
@@ -70,7 +71,7 @@ type SecondRowCard = {
             {row?.module_type === 'text' && <TextModule CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'textCentered' && <TextModuleCentered CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'rootInput' && <RootInputModule CustomTableWidth={CustomTableWidth} isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} key={index} exerciseId={exerciseId} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText}/>}
-            {/* {row?.module_type === 'textarea' && <th>textarea</th>} */}
+            {row?.module_type === 'explanation' && <Explanation CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'word' && <WordModule CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row?.collectionValues[0]?.value}/>}
             {row?.module_type === 'mix' && <MixModule/>}
             

@@ -51,9 +51,9 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
-                let CustomTableWidth = 300;
+                let CustomTableWidth = 200;
                 let CustomImageCol = 4 ;
-                let CustomInputWidth = 300;
+                let CustomInputWidth = 200;
                 if(isTable) {
                     CustomTableWidth = getTableCustomValue(item, 'table')
                 }
@@ -66,7 +66,6 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 if(checkIsThereProperties) {
                     CustomInputWidth = getTableCustomValue(item, 'properties')
                 }
-
 
                 return (
                 <div className='bg-white  ml-4 mr-4' key={indexx}>

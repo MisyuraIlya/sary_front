@@ -1,19 +1,24 @@
+import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import React, {FC, useEffect, useState} from 'react';
-import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import BoldChanger from '../components/BoldChanger';
-type SubInstructionProps = {
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
+type ExplanationProps = {
     value: string
+
     col: any;
     row: any;
     setValue: any
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
-    isTable: boolean
+    isTable : boolean
+    firstIdTextModule: string
     isClearTable: boolean
+    collectionsCols: collectionsCols[]
     CustomTableWidth: number
+
 }
-const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const Explanation:FC<ExplanationProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml} = useExercise()
     let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -24,21 +29,37 @@ const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereI
         setHtmlTal(updatedHtml)
     }
 
+
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'subInstruction');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'explanation');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId, value,htmlTag]);
+      }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
+    
+      const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
-        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'}`}   >
-            <div className='text-right' >
-                {!isOnlineXml &&
-                    <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
-                }
+        <th className={`
+        relative
+        bg-white
+        ${isDisabledTh && 'disbleTh'}
+        ${checkIsThereImage ? '' : ''}
+        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
+        `}
+        style={{
+            verticalAlign: 'top', // Align text to the top
+            textAlign: 'right',   // Align text to the right
+            minWidth: isTable ? `${CustomTableWidth}px` : '',
+        }}
+        
+        >
+            {!isOnlineXml &&
+                <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
+            }
 
+            <div className='text-right  px-4 py-4'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
@@ -49,4 +70,4 @@ const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereI
     );
 };
 
-export default SubInstruction;
+export default Explanation;
