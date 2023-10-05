@@ -57,16 +57,13 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   const [modal, setModal] = useState(false);
   const handleChange = async (newValue: Span[]) => {
     let currentLength = value.length
-    console.log('currentLength',currentLength)
     setModal(true);
     let tokess = ['']
     let restokess = ''
-    console.log('newValue',newValue)
     if(newValue[currentLength] && newValue[currentLength]?.tokens){
       tokess = newValue[currentLength]?.tokens
       restokess = tokess.join(' ')
     }
-    console.log('tokess',tokess)
     if (newValue.length > 0) {
       const lastValueIndex = newValue.length - 1;
       if (value.length < newValue.length) {

@@ -18,7 +18,6 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
             const words = html.split(' ');
             let newWord = '';
             let count = 1; 
-            console.log('value',value)
             const updatedWords = words.map((word) => {
                 if (word === value.trim()) {
                     if(count === +number){

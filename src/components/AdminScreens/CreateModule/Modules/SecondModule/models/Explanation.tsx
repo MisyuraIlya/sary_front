@@ -23,7 +23,7 @@ const Explanation:FC<ExplanationProps> = ({CustomTableWidth,firstIdTextModule, c
 
     const {isOnlineXml} = useExercise()
     let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    formattedValue = value?.replaceAll('@', "<br/>");
+    formattedValue = value?.replaceAll(';', "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
 
     const handleUpdateHtml = (updatedHtml: string) => {
