@@ -8,7 +8,7 @@ import DragAndDropModule from './components/DragAndDropModule';
 import VideoModule from './models/VideoModule';
 import ChartModule from './models/ChartModule';
 import { getTableCustomValue } from './helpers/getTableCustomValue';
-
+import { getTableCustomAnswer } from './helpers/getTableCustomAnswer';
 type SecondFormProps = {
     handleSubmitForm: any
     onSubmit: any
@@ -58,10 +58,10 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                     CustomTableWidth = getTableCustomValue(item, 'table')
                 }
                 if(checkIsThereImageRight) {
-                    CustomImageCol = getTableCustomValue(item, 'imageRight')
+                    CustomImageCol = getTableCustomAnswer(item, 'imageRight')
                 }
                 if(checkIsThereImageLeft) {
-                    CustomImageCol = getTableCustomValue(item, 'imageLeft')
+                    CustomImageCol = getTableCustomAnswer(item, 'imageLeft')
                 }
                 if(checkIsThereProperties) {
                     CustomInputWidth = getTableCustomValue(item, 'properties')

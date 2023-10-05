@@ -38,18 +38,18 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
         <div className={`col-span-${CustomImageCol}`} >
             <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'mr-16' : 'mr-4'}`}>
                 {selectedFile ? (
-                    <div className=' h-full flex justify-center items-center bg-white'>
+                    <div className=' h-full flex justify-center items-center bg-white relative'>
                         <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                            <Image src={URL.createObjectURL(selectedFile)} alt="uploaded image w-full h-full"  width={500} height={500} />
-                            <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
+                            <img src={URL.createObjectURL(selectedFile)} alt="uploaded image w-full h-full" />
+                            <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden' />
                         </div>    
                     </div>
                 ) : (
 
                     imageLink ? 
-                        <div className=' h-full flex justify-center items-center bg-white'>
+                        <div className=' h-full flex justify-center items-center bg-white relative'>
                             <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                                <Image src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"  width={500} height={100} />
+                                <img src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"     />
                                 <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
                             </div>    
                         </div>   
