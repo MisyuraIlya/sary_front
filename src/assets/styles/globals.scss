@@ -191,18 +191,19 @@ th {
 // mark {
 //   position: relative;
 // }
-// mark > span {
-//   position: absolute;
-//   top: -30px;
-//   right: 40%;
-//   min-width: 100px;
-//   text-align: center;
-//   white-space: nowrap;
-//   font-size: 16px !important;
-//   border-radius: 30px ;
-//   padding: 1px 10px 1px 10px;
-//   background-color: inherit; 
-// }
+mark > span {
+  padding: 0 10px 0 15px;
+  // position: absolute;
+  // top: -30px;
+  // right: 40%;
+  // min-width: 100px;
+  // text-align: center;
+  // white-space: nowrap;
+  // font-size: 16px !important;
+  // border-radius: 30px ;
+  // padding: 1px 10px 1px 10px;
+  // background-color: inherit; 
+}
 
 
 .handleColor {

@@ -17,24 +17,20 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
         if(number) {
             const words = html.split(' ');
             let newWord = '';
-            let count = 1; // Move count outside the map function
-            
+            let count = 1; 
+            console.log('value',value)
             const updatedWords = words.map((word) => {
-                console.log(word);
-            
-                if (word === value) {
+                if (word === value.trim()) {
                     if(count === +number){
                         word = `<b>${word}</b>`;
                     }
                     count++;
                 }
             
-                newWord += word + ' '; // Add a space character
+                newWord += word + ' '; 
             
-                return word; // Return the modified word for updatedWords
+                return word; 
             });
-            
-            console.log('newWord',newWord)
             handleUpdateHtml(newWord)
             setValue('')
             setIsOpen(false)

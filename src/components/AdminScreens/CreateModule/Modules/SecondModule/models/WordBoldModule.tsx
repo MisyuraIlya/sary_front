@@ -14,12 +14,12 @@ type WordModuleProps = {
     CustomTableWidth: number
 }
 
-const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const WordBoldModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'word');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'wordBold');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -37,7 +37,7 @@ const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, va
 
         >
             <div className='flex items-center justify-center'>
-                <div style={{background:'#BACEE9'}} className='px-2 rounded-md'>
+                <div className='rounded-md bg-primary text-white px-2'  >
                     {value}
                 </div>
             </div>
@@ -45,4 +45,4 @@ const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, va
     );
 };
 
-export default WordModule;
+export default WordBoldModule;

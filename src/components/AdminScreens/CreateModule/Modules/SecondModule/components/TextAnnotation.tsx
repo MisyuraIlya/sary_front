@@ -27,6 +27,7 @@ interface Span {
   end: number;
   tag: string;
   color:string;
+  tokens:string[]
 }
 
 interface CardProps {
@@ -54,21 +55,28 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   const [value, setValue] = useState<Span[]>([]);
   const [tag, setTag] = useState<string>("");
   const [modal, setModal] = useState(false);
-
   const handleChange = async (newValue: Span[]) => {
+    let currentLength = value.length
+    console.log('currentLength',currentLength)
     setModal(true);
-  
+    let tokess = ['']
+    let restokess = ''
+    console.log('newValue',newValue)
+    if(newValue[currentLength] && newValue[currentLength]?.tokens){
+      tokess = newValue[currentLength]?.tokens
+      restokess = tokess.join(' ')
+    }
+    console.log('tokess',tokess)
     if (newValue.length > 0) {
       const lastValueIndex = newValue.length - 1;
       if (value.length < newValue.length) {
         let clientChoose = '';
-        clientChoose = await chooseNewTag();
+        clientChoose = await chooseNewTag(restokess);
         newValue[lastValueIndex].tag = clientChoose;
         newValue[lastValueIndex].color = TAG_COLORS[clientChoose];
       }
 
     }
-  
     const modalElement = document.getElementById(`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`);
     if (modalElement) {
       ReactDOM.unmountComponentAtNode(modalElement);
@@ -77,7 +85,8 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
     setValue(newValue);
   };
 
-  const chooseNewTag = () => {
+  const chooseNewTag = (tokess: string) => {
+    
     return new Promise<string>((resolve) => {
       // This function will be called when an option is selected
       const handleOptionSelect = (selectedTag: string) => {
@@ -87,20 +96,32 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
       // Render the tag options if the modal element exists
       const modalElement = document.getElementById(`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`);
       if (modalElement) {
-        const tagOptions = draftBankCollectionValues?.map((item) => (
-          <div
-            key={item.value}
-            onClick={() => handleOptionSelect(item.value)}
-            className="p-2"
-          >
-            <div className="rounded-full flex " style={{ cursor: "pointer", padding: "4px 10px", marginBottom: "4px", backgroundColor: TAG_COLORS[item.value] }}>
-              {item.value}
-            </div>
+        const newTagOptions = 
+        <>
+              {tokess &&
+                <div className="pt-3">
+                  <b>{tokess}:</b>           
+                </div>
+              }
+              {
+                draftBankCollectionValues?.map((item) => (
+                  <div
+                    key={item.value}
+                    onClick={() => handleOptionSelect(item.value)}
+                    className="p-2"
+                  >
+                    <div className="rounded-full flex " style={{ cursor: "pointer", padding: "4px 10px", marginBottom: "4px", backgroundColor: TAG_COLORS[item.value] }}>
+                      {item.value}
+                    </div>
+                  </div>
+                ))
+              }
+              
+        
+        </>
 
-          </div>
-        ));
 
-        ReactDOM.render(tagOptions, modalElement);
+        ReactDOM.render(newTagOptions, modalElement);
 
         // Cleanup when the modal is closed or the component unmounts
         return () => {
@@ -111,12 +132,17 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
   };
 
   return (
-    <div className="w-full h-14 flex items-center px-4">
-      <div className="">
+    <div className="w-full h-32 flex items-center px-4 relative"    style={{
+      
+      }}>
+      <div className=""               
+       >
         <Card>
           {/* {modal && ( */}
-          <div className=" w-full absolute top-[-20px] z-50">
-            <div id={`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`} className="flex"></div>
+
+          <div className=" w-full relative top-[-20px] z-50 right-20">
+            <div id={`modal-root-${exerciseId}-${dataObjectId}-${col}-${row}`} className="flex">
+            </div>
           </div>
           {/* )} */}
 
@@ -124,7 +150,7 @@ const TextAnnotation: FC<TextAnnotationProps> = ({ draftBankCollectionValues, te
             tokens={text.split(" ")}
             value={value}
             onChange={handleChange}
-            className=""
+            className="pr-20"
             getSpan={(span) => ({
               ...span,
               tag: tag,

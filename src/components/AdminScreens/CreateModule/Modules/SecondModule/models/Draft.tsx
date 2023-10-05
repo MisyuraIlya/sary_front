@@ -34,9 +34,10 @@ const Draft:FC<DraftProps> = ({ CustomTableWidth, checkIsThereImage, value, setV
         style={{
             verticalAlign: 'top', 
             textAlign: 'right', 
-            paddingTop:'25px',
             width:'100%',
+            paddingTop:'20px',
             minWidth: isTable ? `${CustomTableWidth}px` : '',
+            
         }}
         
         >
@@ -47,7 +48,14 @@ const Draft:FC<DraftProps> = ({ CustomTableWidth, checkIsThereImage, value, setV
                     className=""
                 />
             </div> */}
+            <div style={{
+                          border: `2px solid #388FF5`, 
+                          borderRadius: '5px',
+                          paddingTop:'27px'
+            }}>
             <TextAnnotation draftBankCollectionValues={draftBankCollectionValues} text={value} row={row} col={col} exerciseId={exerciseId} dataObjectId={dataObjectId}/>
+
+            </div>
         </th>
     );
 };

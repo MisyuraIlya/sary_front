@@ -2,6 +2,7 @@ import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface'
 import React, {FC, useEffect, useState} from 'react';
 import BoldChanger from '../components/BoldChanger';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
+import Image from 'next/image';
 type ExplanationProps = {
     value: string
 
@@ -42,30 +43,50 @@ const Explanation:FC<ExplanationProps> = ({CustomTableWidth,firstIdTextModule, c
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
         <th className={`
-        relative
-        bg-white
-        ${isDisabledTh && 'disbleTh'}
-        ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
-        `}
-        style={{
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',   // Align text to the right
-            minWidth: isTable ? `${CustomTableWidth}px` : '',
-        }}
-        
+            relative
+            bg-white
+            w-full
+            
+            ${isDisabledTh && 'disbleTh'}
+            ${checkIsThereImage ? '' : ''}
+            ${(firstIdTextModule === value && !isClearTable) ? 'specific-th ' : ''}
+            `}
+            style={{
+                verticalAlign: 'top', 
+                textAlign: 'right',   
+                minWidth: isTable ? `${CustomTableWidth}px` : '',
+            }}
+            
         >
-            {!isOnlineXml &&
-                <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
-            }
+            <div 
+                
+                style={{
+                    border: `2px solid #388FF5`, 
+                    borderRadius: '5px' 
+                }}
+            >
+                {!isOnlineXml &&
+                    <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
+                }
 
-            <div className='text-right  px-4 py-4'>
-                <div
-                    // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: htmlTag }}
-                    className=""
-                />
+                <div className='flex'>
+                    <div className='pt-5 pr-5'>
+                        <div style={{background:'#BACEE9'}} className='rounded-full px-4 py-3'>
+                            <Image src={'/images/quest.svg'} alt='quest' width={12} height={12} />
+                        </div>
+                    </div>
+
+
+                    <div className='text-right  px-4 py-4'>
+                        <div
+                            // onInput={handleInputChange}
+                            dangerouslySetInnerHTML={{ __html: htmlTag }}
+                            className=""
+                        />
+                    </div>
+                </div>
             </div>
+
         </th>
     );
 };

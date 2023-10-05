@@ -9,6 +9,7 @@ import VideoModule from './models/VideoModule';
 import ChartModule from './models/ChartModule';
 import { getTableCustomValue } from './helpers/getTableCustomValue';
 import { getTableCustomAnswer } from './helpers/getTableCustomAnswer';
+import { getPropertiesValue } from './helpers/getPropertiesValue';
 type SecondFormProps = {
     handleSubmitForm: any
     onSubmit: any
@@ -54,6 +55,7 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 let CustomTableWidth = 200;
                 let CustomImageCol = 4 ;
                 let CustomInputWidth = 200;
+                let CustomSelectBoxWidth = 300;
                 if(isTable) {
                     CustomTableWidth = getTableCustomValue(item, 'table')
                 }
@@ -64,8 +66,12 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                     CustomImageCol = getTableCustomAnswer(item, 'imageLeft')
                 }
                 if(checkIsThereProperties) {
-                    CustomInputWidth = getTableCustomValue(item, 'properties')
+                    CustomInputWidth = getPropertiesValue(item, 'properties','הקלדה')
+                    CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
                 }
+
+
+                let calulcatedImageColSpan = 12 - CustomImageCol
 
                 return (
                 <div className='bg-white  ml-4 mr-4' key={indexx}>
@@ -89,14 +95,14 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                             <ChartModule data={checkIsThereImageChart} />
                         }
 
-                        <div className={`col-span-${(checkIsThereImageRight || checkIsThereImageLeft ) ? `${12 - CustomImageCol}` : '12'}`}  >
+                        <div  style={(checkIsThereImageRight || checkIsThereImageLeft) ?{gridColumn:`span ${calulcatedImageColSpan} / span ${calulcatedImageColSpan}`} : {gridColumn:'span 12 / span 12'}}>
                             {item[propertyName].data.map((exercise,dataObjectId) =>  
                                 <div 
                                 style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
                                 key={dataObjectId}
                                 className={`${isTable ? 'inOnlyTable' : ''} `}
                                 >
-                                    <SecondExercise CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                    <SecondExercise CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                 </div>    
                             )}
                         </div>  

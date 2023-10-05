@@ -34,7 +34,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({CustomTableWidth, checkIsThereImage, 
             className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} pt-4`} 
             >
             <div className='text-center flex justify-center items-center py-1'>
-                <div style={{background:'#BACEE9'}} className='px-2 rounded-md '>
+                <div style={{background:'#BACEE9'}} className='px-2 rounded-md'>
                     {value}
                 </div>
             </div>

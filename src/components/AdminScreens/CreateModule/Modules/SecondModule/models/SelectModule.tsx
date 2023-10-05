@@ -20,8 +20,9 @@ interface SelectModuleProps {
     isMerged: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    CustomSelectBoxWidth: number
 }
-const SelectModule:FC<SelectModuleProps> = ({CustomTableWidth, isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
+const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWidth, isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const optionsNew = Array.isArray(options)
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
@@ -50,7 +51,7 @@ const SelectModule:FC<SelectModuleProps> = ({CustomTableWidth, isMerged,checkIsT
                     
                     {options?.length > 0 &&
                         <>
-                        <div className='py-2'>
+                        <div className='py-2' style={{width: CustomSelectBoxWidth}}>
                         <Controller control={control} name={`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionAnswers[0].value`}  render={
                             ({field:{onChange,value},fieldState:{error}}) => {
         
@@ -61,7 +62,8 @@ const SelectModule:FC<SelectModuleProps> = ({CustomTableWidth, isMerged,checkIsT
                             options={optionsNew}
                             value={getValue(value)}
                             onChange={(newValue) => onChange((newValue?.value))}
-                            className='ml-4 mr-4 min-w-[240px]'
+                            className={`ml-4 mr-4`}
+                            
                             />
                             {/* {error && (
                                 <div style={{color:'red'}}>

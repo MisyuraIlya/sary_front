@@ -29,10 +29,6 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
     }
     const imageLink = getImageValue(data)
     const isThereOnlyOneInLine = (data.length === 1  || data.length === 2)
-    console.log('isThereOnlyOneInLine',isThereOnlyOneInLine)
-
-      
-    
 
     return (
         <div className={`col-span-${CustomImageCol}`} >
@@ -49,7 +45,7 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
                     imageLink ? 
                         <div className=' h-full flex justify-center items-center bg-white relative'>
                             <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                                <img src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"     />
+                                <img src={`http://localhost:4000/${imageLink}`} alt="uploaded image w-full h-full"     />
                                 <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
                             </div>    
                         </div>   
