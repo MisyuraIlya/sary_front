@@ -13,7 +13,6 @@ export const getPropertiesValue = (item :ISecondModuleExercises, type : module_t
 
     let data = (values[0].split(';'))
     let res = '';
-
     data?.map((item) => {
         const splited = item.split(':')
         if(typeHewbrew == splited[0].trim()){

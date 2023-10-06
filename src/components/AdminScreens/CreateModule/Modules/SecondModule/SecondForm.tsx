@@ -66,10 +66,9 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                     CustomImageCol = getTableCustomAnswer(item, 'imageLeft')
                 }
                 if(checkIsThereProperties) {
-                    CustomInputWidth = getPropertiesValue(item, 'properties','הקלדה')
+                    CustomInputWidth = getPropertiesValue(item, 'properties','שדה הקלדה')
                     CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
                 }
-
 
                 let calulcatedImageColSpan = 12 - CustomImageCol
 
