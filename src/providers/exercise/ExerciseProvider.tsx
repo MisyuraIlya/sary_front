@@ -18,6 +18,7 @@ interface ExerciseContextType {
     handleEditCheckBox: (id: number, cheked: boolean) => void
     handleSaveUpload: () => void
     chooseModule: (number: number) => void
+    setChoosedTab: (number: number) => void
   };
   exercises: IFirstModule | ISecondModule |undefined;
   loading: boolean,
@@ -25,7 +26,8 @@ interface ExerciseContextType {
   settingsEdit: number[] | undefined
   isChanged: boolean,
   handleEditedCheckbox: { id: number, checked: boolean }[],
-  choosedModule: number | null
+  choosedModule: number | null,
+  choosedTab: number
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -56,6 +58,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const [choosedModule, setChoosedModule] = useState<number | null>(null)
     const router = useRouter();
     const moduleId = router.query.moduleId;
+    const [choosedTab, setChoosedTab] = useState(1)
     // Helpers
 
     const fetchOnline = async (id: any) => {
@@ -241,7 +244,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     setIsChanged,
     handleEditCheckBox,
     handleSaveUpload,
-    chooseModule
+    chooseModule,
+    setChoosedTab
   };
   const value: ExerciseContextType = {
     exercises,
@@ -251,7 +255,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     settingsEdit,
     isChanged,
     handleEditedCheckbox,
-    choosedModule
+    choosedModule,
+    choosedTab
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;

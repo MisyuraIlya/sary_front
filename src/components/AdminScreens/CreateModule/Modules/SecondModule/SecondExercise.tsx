@@ -23,10 +23,11 @@ type SecondExerciseProps = {
     CustomTableWidth: number
     CustomInputWidth: number
     CustomSelectBoxWidth: number
+    isStory: boolean
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
@@ -91,11 +92,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTab
                         })}
                     </tr>
                     {data?.collectionsRows?.map((rows,keys) => {
-
                         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].orden`, rows.orden);
                         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].youtube_link`, null);
                         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].pdf`, null);
-                        
                         const isExistWord = rows?.collectionRow.some((item) => item?.module_type === 'word' && item?.collectionValues[0]?.value !== null);
                         const isExistInstruction = rows?.collectionRow.some((item) => item?.module_type === 'instruction' && item?.collectionValues[0]?.value !== null);
                         const isExistSubInstruction = rows?.collectionRow.some((item) => item?.module_type === 'subInstruction' && item?.collectionValues[0]?.value !== null);
@@ -103,9 +102,10 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTab
                         const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
+                        const isExplanationRow =  rows?.collectionRow.some((item) => item?.module_type === 'explanation' && item?.collectionValues[0]?.value !== null);
 
 
-
+                        const isStoryInstruction = rows?.collectionRow.some((item) => item?.module_type === 'storyInstruction');
                         let mergedData: any = null
                         if(mergedExercise) {
                             mergedData = handleMergedExercise(rows.collectionRow)
@@ -115,9 +115,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTab
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
                             { !checkIsThereMergedBackground &&
-                                <div className='bg-white h-1 absolute z-10 w-full '></div>                        
+                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-10 w-full`}></div>                        
                             }
-                            <tr className='w-full' key={keys}>
+                            <tr className={`w-full ${isStory && 'bg-[#EDF2F9]'}`} key={keys} >
                                 
                                 {rows?.collectionRow.map((row, index) => 
                                 <>
@@ -142,10 +142,14 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTab
                                     CustomTableWidth={CustomTableWidth}
                                     CustomInputWidth={CustomInputWidth}
                                     CustomSelectBoxWidth={CustomSelectBoxWidth}
+                                    isExplanationRow={isExplanationRow}
+                                    isStoryInstruction={isStoryInstruction}
                                 />  
                                 </>
                           
                                 )}
+
+
                                 
                             {keys == 0 && isExistInstruction &&
                                 <SideBarIcons data={data} rows={rows}/>
@@ -154,7 +158,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({CustomSelectBoxWidth, CustomTab
 
                             </tr>
                             { !checkIsThereMergedBackground &&
-                                <div className='bg-white h-1 absolute z-10 w-full '></div>                        
+                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-10 w-full`}></div>                        
                             }
                             </>
                         )}

@@ -41,7 +41,7 @@ const Instruction: FC<InstructionProps> = ({ CustomTableWidth, checkIsThereImage
     
     return (
         <th 
-            className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''}`} 
+            className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} text-[18px] leading-10`} 
             style={{
                 background:'#E5F0FE',
                 minWidth: isTable ? `${CustomTableWidth}px` : '',

@@ -12,8 +12,9 @@ type OrdenModuleProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    isExplanationRow: boolean
 }
-const OrdenModule:FC<OrdenModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const OrdenModule:FC<OrdenModuleProps> = ({isExplanationRow, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -22,19 +23,21 @@ const OrdenModule:FC<OrdenModuleProps> = ({CustomTableWidth, checkIsThereImage, 
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
-
     return (
         <th  style={{
-            minWidth:'55px', 
-            maxWidth:'60px',
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right', 
-            
+                minWidth:'55px', 
+                maxWidth:'60px',
+                verticalAlign: 'top', // Align text to the top
+                textAlign: 'right', 
+                
             }} 
-            className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} pt-4`} 
+            className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} 
+                pt-4
+                ${isExplanationRow && 'bg-white'}
+                `} 
             >
             <div className='text-center flex justify-center items-center py-1'>
-                <div style={{background:'#BACEE9'}} className='px-2 rounded-md'>
+                <div style={(col == 0 || col == 1) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}} className='px-2 rounded-md'>
                     {value}
                 </div>
             </div>

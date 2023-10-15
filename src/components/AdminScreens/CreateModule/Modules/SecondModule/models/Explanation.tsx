@@ -59,7 +59,7 @@ const Explanation:FC<ExplanationProps> = ({CustomTableWidth,firstIdTextModule, c
             
         >
             <div 
-                
+                className='mt-2'
                 style={{
                     border: `2px solid #388FF5`, 
                     borderRadius: '5px' 

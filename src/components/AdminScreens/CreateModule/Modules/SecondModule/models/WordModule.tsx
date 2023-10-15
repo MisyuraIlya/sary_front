@@ -12,10 +12,11 @@ type WordModuleProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    isExplanationRow: boolean
+    isStoryInstruction: boolean
 }
 
-const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
-
+const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRow, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -27,7 +28,12 @@ const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, va
 
     return (
         <th 
-        className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'}`}  
+        className={`
+        ${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} 
+        ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} 
+        ${isExplanationRow && 'bg-white'}
+        ${isStoryInstruction && 'bg-[#005BBB]'}
+        `}  
         style={{
             width:'50px',
             paddingTop:'20px',
@@ -37,7 +43,7 @@ const WordModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, va
 
         >
             <div className='flex items-center justify-center'>
-                <div style={{background:'#BACEE9'}} className='px-2 rounded-md'>
+                <div  style={(col == 0 || col == 1 ) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}}  className='px-2 rounded-md'>
                     {value}
                 </div>
             </div>

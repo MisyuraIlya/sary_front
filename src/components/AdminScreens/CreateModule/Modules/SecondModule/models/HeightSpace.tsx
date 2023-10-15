@@ -23,7 +23,6 @@ const HeightSpace:FC<HeightSpaceProps> = ({CustomTableWidth, setValue, value , e
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, [{value}]);
       }, [col, row, setValue,exerciseId, dataObjectId,value]);
-      console.log('value',value)
     return (
         <th style={{height:`${value}px`}} className='bg-white w-screen'>
         </th>

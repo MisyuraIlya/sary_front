@@ -45,7 +45,7 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
                     imageLink ? 
                         <div className=' h-full flex justify-center items-center bg-white relative'>
                             <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                                <Image src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"  unoptimized  width={500} height={500} />
+                                <img src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"   />
                                 <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
                             </div>    
                         </div>   

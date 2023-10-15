@@ -9,9 +9,7 @@ export const getPropertiesValue = (item :ISecondModuleExercises, type : module_t
         const allValues = filteredRows.flatMap((item3) => item3.collectionValues);
         return allValues.flatMap((item4) => item4.value);
       });
-
-
-    let data = (values[0].split(';'))
+    let data = (values[0]?.split(';'))
     let res = '';
     data?.map((item) => {
         const splited = item.split(':')

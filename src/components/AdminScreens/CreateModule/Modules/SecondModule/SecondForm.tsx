@@ -10,6 +10,8 @@ import ChartModule from './models/ChartModule';
 import { getTableCustomValue } from './helpers/getTableCustomValue';
 import { getTableCustomAnswer } from './helpers/getTableCustomAnswer';
 import { getPropertiesValue } from './helpers/getPropertiesValue';
+import TabsModule from './components/TabsModule';
+import { getStoryTab } from './helpers/getStoryTab';
 type SecondFormProps = {
     handleSubmitForm: any
     onSubmit: any
@@ -19,7 +21,7 @@ type SecondFormProps = {
 }
 
 const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, setValue, control}) => {
-    const {exercises} = useExercise()
+    const {exercises, choosedTab} = useExercise()
 
     const findDraftsArray = (exercises as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {
         const propertyName = `exercise${item.exercise}`;
@@ -52,6 +54,8 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
+                const TabCounter = 2;
+
                 let CustomTableWidth = 200;
                 let CustomImageCol = 4 ;
                 let CustomInputWidth = 200;
@@ -72,8 +76,11 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
 
                 let calulcatedImageColSpan = 12 - CustomImageCol
 
+
+                const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
+                const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
                 return (
-                <div className='bg-white  ml-4 mr-4' key={indexx}>
+                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-white'} ml-4 mr-4`} key={indexx}>
                         {
                             isDragModule &&
                             <DragAndDropModule item={item} />
@@ -95,16 +102,45 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                         }
 
                         <div  style={(checkIsThereImageRight || checkIsThereImageLeft) ?{gridColumn:`span ${calulcatedImageColSpan} / span ${calulcatedImageColSpan}`} : {gridColumn:'span 12 / span 12'}}>
-                            {item[propertyName].data.map((exercise,dataObjectId) =>  
-                                <div 
-                                style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
-                                key={dataObjectId}
-                                className={`${isTable ? 'inOnlyTable' : ''} `}
-                                >
-                                    <SecondExercise CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
-                                </div>    
+                            {item[propertyName].data.map((exercise,dataObjectId) =>   {
+
+                                const tubNumber = getStoryTab(exercise)
+                                console.log('tubNumber',tubNumber)
+                                if(isStory) {
+                                    if(1 === choosedTab) {
+                                        return (
+                                            <div 
+                                            style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
+                                            key={dataObjectId}
+                                            className={`${isTable ? 'inOnlyTable' : ''} `}
+                                            >
+                                                <SecondExercise isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                            </div>    
+        
+                                        )
+                                    }
+                                } else {
+                                    return (
+                                        <div 
+                                        style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
+                                        key={dataObjectId}
+                                        className={`${isTable ? 'inOnlyTable' : ''} `}
+                                        >
+                                            <SecondExercise isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                        </div>    
+    
+                                    )
+                                }
+
+                            }
                             )}
                         </div>  
+
+                        {isHaveStoryInstruction &&
+                            <div style={{gridColumn: 'span 12 / span 12'}} className='mr-10 mt-2'>
+                                <TabsModule tabsCounter={TabCounter}/>
+                            </div>    
+                        }
 
 
                         {

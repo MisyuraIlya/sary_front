@@ -12,9 +12,10 @@ type WordModuleProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    isExplanationRow: boolean
 }
 
-const WordBoldModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const WordBoldModule:FC<WordModuleProps> = ({isExplanationRow, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
@@ -27,7 +28,7 @@ const WordBoldModule:FC<WordModuleProps> = ({CustomTableWidth, checkIsThereImage
 
     return (
         <th 
-        className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'}`}  
+        className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} ${isExplanationRow && 'bg-white'}`}  
         style={{
             width:'50px',
             paddingTop:'20px',

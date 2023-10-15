@@ -43,6 +43,7 @@ const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWi
         
                 ${(isTable || isClearTable) ? 'tableModule' : ''} 
                 relative
+                
                 `}
                 style={{
                     minWidth: isTable ? `${CustomTableWidth}px` : '',
@@ -50,7 +51,7 @@ const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWi
                 >
                     
                     {options?.length > 0 &&
-                        <>
+                        <div className='flex items-center justify-center'>
                         <div className='py-2' style={{width: CustomSelectBoxWidth}}>
                         <Controller control={control} name={`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionAnswers[0].value`}  render={
                             ({field:{onChange,value},fieldState:{error}}) => {
@@ -78,7 +79,7 @@ const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWi
                     {(placeholder || answer.length > 1) &&
                         <ToolTip placeholder={placeholder} answers={answer} />
                     }
-                        </>
+                        </div>
                     }
 
         

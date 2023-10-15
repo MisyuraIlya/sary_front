@@ -49,7 +49,7 @@ const InputCenteredModule: FC<InputModuleProps> = ({CustomInputWidth, CustomTabl
                     minWidth: isTable ? `${CustomTableWidth}px` : '',
                 }}
                 >
-                    <div className='px-4 py-2 bg-pad flex'>
+                    <div className='px-4 py-2 bg-pad flex items-center justify-center'>
                         {splitPlaceHolder[1] && answer[0].value &&
                             <div className='flex items-center text-center w-full'>
                                 <p>{splitPlaceHolder}</p>
