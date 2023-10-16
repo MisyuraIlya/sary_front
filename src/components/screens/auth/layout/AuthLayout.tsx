@@ -25,7 +25,7 @@ const AuthLayout: FC<PropsWithChildren> = ({children}) => {
                         לחטיבה העליונה
                     </Heading>
                 </div> */}
-                <div className='float-left z-10 relative'>
+                <div className='float-left z-1 relative'>
                     <div className='w-full mt-24 flex items-center text-center justify-end'>
                         <Image src={'/images/ilustrate.png'} width={500} height={185} alt='logo' priority />
                     </div>

@@ -31,13 +31,15 @@ const OrdenModule:FC<OrdenModuleProps> = ({isExplanationRow, CustomTableWidth, c
                 textAlign: 'right', 
                 
             }} 
-            className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} 
+            className={`
+                ${checkIsThereImage ? '' : 'specific-th'} 
+                ${(isTable || isClearTable) ? '' : ''} 
                 pt-4
                 ${isExplanationRow && 'bg-white'}
                 `} 
             >
             <div className='text-center flex justify-center items-center py-1'>
-                <div style={(col == 0 || col == 1) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}} className='px-2 rounded-md'>
+                <div style={(col == 0 ) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}} className='px-2 rounded-md'>
                     {value}
                 </div>
             </div>

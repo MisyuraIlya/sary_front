@@ -115,7 +115,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
                             { !checkIsThereMergedBackground &&
-                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-10 w-full`}></div>                        
+                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full`}></div>                        
                             }
                             <tr className={`w-full ${isStory && 'bg-[#EDF2F9]'}`} key={keys} >
                                 
@@ -158,7 +158,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
                             </tr>
                             { !checkIsThereMergedBackground &&
-                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-10 w-full`}></div>                        
+                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full`}></div>                        
                             }
                             </>
                         )}

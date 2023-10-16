@@ -35,7 +35,7 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
                     const isLastItem = index === values.length - 1
                     return (
                         <div style={{width:'100%'}} key={index}>
-                            <div className='px-4 py-4 ' style={!isLastItem ?{borderBottom:'5px solid white'} : {}}>
+                            <div className='px-4 py-4 '>
                                 <span className='flex gap-2'>
                                     <input type='checkbox'  className='w-5' checked={isTheAnswer}/>
                                     {item.value}

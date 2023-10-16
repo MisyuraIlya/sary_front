@@ -33,7 +33,7 @@ const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereI
       }, [col, row, setValue,exerciseId, dataObjectId, value,htmlTag]);
 
     return (
-        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'}`}   >
+        <th className={`${checkIsThereImage ? 'm-1 px-4 py-4 ' : 'm-1 px-4 py-4'} text-[23px]`}   >
             <div className='text-right' >
                 {!isOnlineXml &&
                     <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>

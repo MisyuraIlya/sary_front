@@ -21,8 +21,7 @@ type SecondFormProps = {
 }
 
 const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, setValue, control}) => {
-    const {exercises, choosedTab} = useExercise()
-
+    const {exercises, choosedTab,isOnlineXml} = useExercise()
     const findDraftsArray = (exercises as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {
         const propertyName = `exercise${item.exercise}`;
         const draftBankCollectionValues = item[propertyName]?.data
@@ -76,18 +75,21 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
 
                 let calulcatedImageColSpan = 12 - CustomImageCol
 
-
                 const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
+                const getStoryNumber = getTableCustomAnswer(item, 'story')
                 const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
+                
                 return (
                 <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-white'} ml-4 mr-4`} key={indexx}>
                         {
-                            isDragModule &&
+                            isDragModule && 
+                            // ( isStory && getStoryNumber === choosedTab ) &&
                             <DragAndDropModule item={item} />
                         }
                     <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
                         {
-                            checkIsThereImageRight &&
+                            checkIsThereImageRight && 
+                            // ( isStory && getStoryNumber === choosedTab ) &&
                             <ImageModule data={checkIsThereImageRightData} CustomImageCol={CustomImageCol}/>
                         }
                         {
@@ -104,22 +106,23 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                         <div  style={(checkIsThereImageRight || checkIsThereImageLeft) ?{gridColumn:`span ${calulcatedImageColSpan} / span ${calulcatedImageColSpan}`} : {gridColumn:'span 12 / span 12'}}>
                             {item[propertyName].data.map((exercise,dataObjectId) =>   {
 
-                                const tubNumber = getStoryTab(exercise)
-                                console.log('tubNumber',tubNumber)
-                                if(isStory) {
-                                    if(1 === choosedTab) {
-                                        return (
-                                            <div 
-                                            style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
-                                            key={dataObjectId}
-                                            className={`${isTable ? 'inOnlyTable' : ''} `}
-                                            >
-                                                <SecondExercise isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
-                                            </div>    
+                                // const tubNumber = getStoryTab(exercise)
+                                // console.log('tubNumber',tubNumber,exercise)
+                                // if(isStory && getStoryNumber) {
+                                //     // console.log('getStoryNumber === choosedTab',getStoryNumber === choosedTab)
+                                //     if(getStoryNumber === choosedTab) {
+                                //         return (
+                                //             <div 
+                                //             style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
+                                //             key={dataObjectId}
+                                //             className={`${isTable ? 'inOnlyTable' : ''} `}
+                                //             >
+                                //                 <SecondExercise isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                //             </div>    
         
-                                        )
-                                    }
-                                } else {
+                                //         )
+                                //     }
+                                // } else {
                                     return (
                                         <div 
                                         style={checkIsThereMergedBackground ? {} : {borderBottom:'4px solid white'}}
@@ -130,13 +133,14 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
                                         </div>    
     
                                     )
-                                }
+                                // }
 
                             }
                             )}
                         </div>  
 
-                        {isHaveStoryInstruction &&
+                        {isHaveStoryInstruction && 
+                        // ( isStory && getStoryNumber === choosedTab ) &&
                             <div style={{gridColumn: 'span 12 / span 12'}} className='mr-10 mt-2'>
                                 <TabsModule tabsCounter={TabCounter}/>
                             </div>    
@@ -144,7 +148,8 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
 
 
                         {
-                            checkIsThereImageLeft &&
+                            checkIsThereImageLeft && 
+                            // ( isStory && getStoryNumber === choosedTab ) &&
                             <ImageModule data={checkIsThereImageLeftData} CustomImageCol={CustomImageCol}/>
                         }
                     </div>  

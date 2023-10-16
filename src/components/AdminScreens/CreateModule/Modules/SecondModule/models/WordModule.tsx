@@ -29,10 +29,10 @@ const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRow, C
     return (
         <th 
         className={`
-        ${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} 
+        ${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 '} 
         ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} 
         ${isExplanationRow && 'bg-white'}
-        ${isStoryInstruction && 'bg-[#005BBB]'}
+        ${isStoryInstruction && 'bg-[#005BBB] specific-th'}
         `}  
         style={{
             width:'50px',

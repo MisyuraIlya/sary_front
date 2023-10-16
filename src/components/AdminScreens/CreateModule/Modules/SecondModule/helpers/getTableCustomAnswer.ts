@@ -9,6 +9,7 @@ export const getTableCustomAnswer = (item :ISecondModuleExercises, type : module
         const allValues = filteredRows.flatMap((item3) => item3.collectionAnswers);
         return allValues.flatMap((item4) => item4.value);
       });
+      console.log('values',values)
       if(type === 'properties') {
         return +(values[0].split(':'))[1]
       }
