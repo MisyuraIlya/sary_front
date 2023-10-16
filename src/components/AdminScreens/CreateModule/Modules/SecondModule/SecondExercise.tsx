@@ -7,6 +7,8 @@ import { handleMergedExercise } from './helpers/handleMergedExercise';
 import { getFirstTextModuleIdInArray } from './helpers/getFirstTextModuleIdInArray';
 import SideBars from '@/components/SideBars/SideBars';
 import SideBarIcons from './components/SideBarIcons';
+import ExplanationModule from './components/ExplanationModule';
+import { getExplanationData } from './helpers/getExplanationData';
 type SecondExerciseProps = {
     data: ISecondModuleSubExercises
     register: any
@@ -103,8 +105,8 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
                         const isExplanationRow =  rows?.collectionRow.some((item) => item?.module_type === 'explanation' && item?.collectionValues[0]?.value !== null);
-
-
+                        const isExplanationRowSplited =  rows?.collectionRow.some((item) => item?.module_type === 'explanationSplited' && item?.collectionValues[0]?.value !== null);
+                        const explanationData = getExplanationData(rows)
                         const isStoryInstruction = rows?.collectionRow.some((item) => item?.module_type === 'storyInstruction');
                         let mergedData: any = null
                         if(mergedExercise) {
@@ -120,36 +122,35 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                             <tr className={`w-full ${isStory && 'bg-[#EDF2F9]'}`} key={keys} >
                                 
                                 {rows?.collectionRow.map((row, index) => 
-                                <>
-                                <SecondRowCard
-                                    key={index} // Add a unique key prop here
-                                    checkIsThereImage={checkIsThereImage}
-                                    isExistWord={isExistWord}
-                                    exerciseId={exerciseId}
-                                    dataObjectId={dataObjectId}
-                                    row={row}
-                                    orden={rows.orden}
-                                    register={register}
-                                    setValue={setValue}
-                                    control={control}
-                                    isClearTable={isClearTable}
-                                    isTable={isTable}
-                                    index={index}
-                                    mergedData={mergedData}
-                                    firstIdTextModule={firstIdTextModule}
-                                    draftBankCollectionValues={draftBankCollectionValues}
-                                    collectionsCols={data.collectionsCols}
-                                    CustomTableWidth={CustomTableWidth}
-                                    CustomInputWidth={CustomInputWidth}
-                                    CustomSelectBoxWidth={CustomSelectBoxWidth}
-                                    isExplanationRow={isExplanationRow}
-                                    isStoryInstruction={isStoryInstruction}
-                                />  
-                                </>
-                          
+                                    <>
+                                    <SecondRowCard
+                                        key={index} // Add a unique key prop here
+                                        checkIsThereImage={checkIsThereImage}
+                                        isExistWord={isExistWord}
+                                        exerciseId={exerciseId}
+                                        dataObjectId={dataObjectId}
+                                        row={row}
+                                        orden={rows.orden}
+                                        register={register}
+                                        setValue={setValue}
+                                        control={control}
+                                        isClearTable={isClearTable}
+                                        isTable={isTable}
+                                        index={index}
+                                        mergedData={mergedData}
+                                        firstIdTextModule={firstIdTextModule}
+                                        draftBankCollectionValues={draftBankCollectionValues}
+                                        collectionsCols={data.collectionsCols}
+                                        CustomTableWidth={CustomTableWidth}
+                                        CustomInputWidth={CustomInputWidth}
+                                        CustomSelectBoxWidth={CustomSelectBoxWidth}
+                                        isExplanationRow={isExplanationRow}
+                                        isStoryInstruction={isStoryInstruction}
+                                    />  
+                                    </>
                                 )}
 
-
+                                
                                 
                             {keys == 0 && isExistInstruction &&
                                 <SideBarIcons data={data} rows={rows}/>
@@ -157,6 +158,11 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                             
 
                             </tr>
+
+                            {isExplanationRowSplited &&
+                                <ExplanationModule htmlTag={explanationData}/>
+                            } 
+
                             { !checkIsThereMergedBackground &&
                                 <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full`}></div>                        
                             }
