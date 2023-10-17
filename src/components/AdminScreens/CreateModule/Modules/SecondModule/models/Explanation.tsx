@@ -71,13 +71,13 @@ const Explanation:FC<ExplanationProps> = ({CustomTableWidth,firstIdTextModule, c
 
                 <div className='flex'>
                     <div className='pt-5 pr-5'>
-                        <div style={{background:'#BACEE9'}} className='rounded-full px-4 py-3'>
+                        <div style={{background:'#BACEE9'}} className='rounded-full px-4 py-3 '>
                             <Image src={'/images/quest.svg'} alt='quest' width={12} height={12} />
                         </div>
                     </div>
 
 
-                    <div className='text-right  px-4 py-4 fontSizeExercise'>
+                    <div className='text-right  px-4 py-4 fontSizeExercise 0'>
                         <div
                             // onInput={handleInputChange}
                             dangerouslySetInnerHTML={{ __html: htmlTag }}

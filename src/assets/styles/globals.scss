@@ -220,11 +220,16 @@ mark > span {
 
 .fontSizeExercise {
   font-size: 23px !important;
+  line-height: 55px;
+
   span {
+    line-height: 55px;
     font-size: 23px !important;
   } 
   br {
+    line-height: 55px;
     font-size: 23px !important;
   }
 }
+
 
