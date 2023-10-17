@@ -144,7 +144,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                                         CustomTableWidth={CustomTableWidth}
                                         CustomInputWidth={CustomInputWidth}
                                         CustomSelectBoxWidth={CustomSelectBoxWidth}
-                                        isExplanationRow={isExplanationRow}
+                                        isExplanationRowSplited={isExplanationRowSplited}
                                         isStoryInstruction={isStoryInstruction}
                                     />  
                                     </>
@@ -159,7 +159,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
                             </tr>
 
-                            {isExplanationRowSplited &&
+                            {isExplanationRow &&
                                 <ExplanationModule htmlTag={explanationData}/>
                             } 
 

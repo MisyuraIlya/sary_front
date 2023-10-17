@@ -12,9 +12,9 @@ type OrdenModuleProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
-    isExplanationRow: boolean
+    isExplanationRowSplited: boolean
 }
-const OrdenModule:FC<OrdenModuleProps> = ({isExplanationRow, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const OrdenModule:FC<OrdenModuleProps> = ({isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -35,7 +35,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({isExplanationRow, CustomTableWidth, c
                 ${checkIsThereImage ? '' : 'specific-th'} 
                 ${(isTable || isClearTable) ? '' : ''} 
                 pt-4
-                ${isExplanationRow && 'bg-white'}
+                ${isExplanationRowSplited && 'bg-white'}
                 `} 
             >
             <div className='text-center flex justify-center items-center py-1'>

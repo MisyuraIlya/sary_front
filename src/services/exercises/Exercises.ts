@@ -55,10 +55,10 @@ export const ExercisesService = {
 
     },
 
-    async createSecondModule (data: any) {
+    async createSecondModule (data: any, module: number) {
         try {
             const response = await instance<any>({
-                url: `/exercises/2`,
+                url: `/exercises/${module}`,
                 method:'POST',
                 data: data
             })

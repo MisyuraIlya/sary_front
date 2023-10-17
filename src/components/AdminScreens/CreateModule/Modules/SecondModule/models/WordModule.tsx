@@ -12,11 +12,11 @@ type WordModuleProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
-    isExplanationRow: boolean
+    isExplanationRowSplited: boolean
     isStoryInstruction: boolean
 }
 
-const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRow, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -31,7 +31,7 @@ const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRow, C
         className={`
         ${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 '} 
         ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} 
-        ${isExplanationRow && 'bg-white'}
+        ${isExplanationRowSplited && 'bg-white'}
         ${isStoryInstruction && 'bg-[#005BBB] specific-th'}
         `}  
         style={{

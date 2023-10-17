@@ -57,7 +57,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-4 py-4'>
+            <div className='text-right  px-4 py-4 fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}

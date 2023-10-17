@@ -43,6 +43,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
+        leading-[60px]
         `}
         
         style={{
@@ -55,7 +56,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-4 py-4'>
+            <div className='text-right  px-4 py-4  fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}

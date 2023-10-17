@@ -55,7 +55,7 @@ const Instruction: FC<InstructionProps> = ({ CustomTableWidth, checkIsThereImage
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
-                    className=""
+                    className="fontSizeExercise"
                 />
             </div>
         </th>

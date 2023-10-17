@@ -1,48 +1,29 @@
-import React, {FC, useRef, ChangeEvent, useState} from 'react';
-import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { ISecondModuleExercises } from '@/types/ModulesTypes.ts/SecondModule.interface';
-import SecondExercise from './SecondExercise';
-import Image from 'next/image';
-import ImageModule from './models/ImageModule';
-import DragAndDropModule from './components/DragAndDropModule';
-import VideoModule from './models/VideoModule';
-import ChartModule from './models/ChartModule';
-import { getTableCustomValue } from './helpers/getTableCustomValue';
-import { getTableCustomAnswer } from './helpers/getTableCustomAnswer';
-import { getPropertiesValue } from './helpers/getPropertiesValue';
-import TabsModule from './components/TabsModule';
-import { getStoryTab } from './helpers/getStoryTab';
-import { getStroryNumber } from './helpers/getStoryNumber';
-import SecondModuleShared from '../sharedModule/SecondModuleShared';
-type SecondFormProps = {
-    handleSubmitForm: any
-    onSubmit: any
+import React, {FC} from 'react';
+import { getTableCustomValue } from '../SecondModule/helpers/getTableCustomValue';
+import { getTableCustomAnswer } from '../SecondModule/helpers/getTableCustomAnswer';
+import { getPropertiesValue } from '../SecondModule/helpers/getPropertiesValue';
+import { getStroryNumber } from '../SecondModule/helpers/getStoryNumber';
+import DragAndDropModule from '../SecondModule/components/DragAndDropModule';
+import ImageModule from '../SecondModule/models/ImageModule';
+import VideoModule from '../SecondModule/models/VideoModule';
+import ChartModule from '../SecondModule/models/ChartModule';
+import SecondExercise from '../SecondModule/SecondExercise';
+import TabsModule from '../SecondModule/components/TabsModule';
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
+type SecondModuleSharedProps = {
+    exercises: ISecondModuleExercises[]
+    findDraftsArray: any
     register: any
     setValue: any
     control: any
 }
 
-const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, setValue, control}) => {
-    const {exercises, choosedTab,isOnlineXml} = useExercise()
-    const findDraftsArray = (exercises as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {
-        const propertyName = `exercise${item.exercise}`;
-        const draftBankCollectionValues = item[propertyName]?.data
-        .flatMap((subItem) =>
-        subItem.collectionsRows.flatMap((rows) =>
-            rows.collectionRow
-            .filter((row) => row?.module_type === "draftBank")
-            .map((row) => row.collectionValues)
-        )
-        );
-        return draftBankCollectionValues;
-    })
-    .filter((array: any) => array.length > 0)?.[0]?.[0]; 
-
+const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsArray, register, setValue, control}) => {
+    const {choosedTab} = useExercise()
     return (
-        <div>
-            <SecondModuleShared exercises={(exercises as any)?.exercises} findDraftsArray={findDraftsArray} register={register} setValue={setValue} control={control} />
-            {/* {(exercises as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {
-                console.log('item',item)
+        <>
+        {exercises.map((item: ISecondModuleExercises, indexx:number) => {
                 const propertyName = `exercise${item.exercise}`;
                 const checkIsThereImageRight = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageRight')))
                 const checkIsThereImageLeft = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageLeft')))
@@ -143,9 +124,9 @@ const SecondForm:FC<SecondFormProps> = ({handleSubmitForm,onSubmit, register, se
   
    
 
-            )} */}
-        </div>
+        )}     
+        </>
     );
 };
 
-export default SecondForm;
+export default SecondModuleShared;

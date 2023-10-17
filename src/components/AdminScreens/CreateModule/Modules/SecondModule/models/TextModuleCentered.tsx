@@ -43,7 +43,7 @@ const TextModuleCentered:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextMod
         }}
         
         >
-            <div className='text-right  px-4 py-4'>
+            <div className='text-right  px-4 py-4 fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: value }}

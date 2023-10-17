@@ -7,9 +7,10 @@ import { onErrorAlert } from '@/utils/sweetAlert';
 type ImageModuleProps = {
     data: ISecondModuleSubExercises[]
     CustomImageCol: number
+    isStory: boolean
 }
 
-const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
+const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol, isStory}) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
@@ -29,9 +30,8 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
     }
     const imageLink = getImageValue(data)
     const isThereOnlyOneInLine = (data.length === 1  || data.length === 2)
-
     return (
-        <div className={`col-span-${CustomImageCol}`} >
+        <div className={`col-span-${CustomImageCol} ${!isStory && 'hidden'}`} >
             <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'mr-16' : 'mr-4'}`}>
                 {selectedFile ? (
                     <div className=' h-full flex justify-center items-center bg-white relative'>
@@ -45,7 +45,7 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
                     imageLink ? 
                         <div className=' h-full flex justify-center items-center bg-white relative'>
                             <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                                <Image src={`http://3.74.228.194:4000/${imageLink}`} alt="uploaded image w-full h-full"  width={500} height={500} />
+                                <Image src={`http://localhost:4000/${imageLink}`} alt="uploaded image w-full h-full"  width={500} height={500} />
                                 <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
                             </div>    
                         </div>   
@@ -53,7 +53,7 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol}) => {
 
                     <div className='border-8 border-mainExerciseBg border-dashed h-full flex justify-center items-center bg-white'>
                         <div className='cursor-pointer' onClick={() => {fileInputRef.current?.click()}}> 
-                            <Image src={'/images/upload.svg'} alt="upload image" width={500} height={500} />
+                            <Image src={'/images/upload.svg'} alt="upload image" width={125} height={125} />
                             <input id="pdfInput"  ref={fileInputRef} type="file" onChange={uploadImage} className='hidden'/>
                             <h4>העלאת תמונה</h4>
                         </div>    
