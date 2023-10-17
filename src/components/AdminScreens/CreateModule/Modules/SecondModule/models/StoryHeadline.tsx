@@ -24,7 +24,7 @@ const StoryHeadline:FC<StoryHeadlineProps> = ({CustomTableWidth, setValue, exerc
 
     return (
         <div>
-            
+            <h1 className='text-4xl font-bold'>{value}</h1>
         </div>
     );
 };
