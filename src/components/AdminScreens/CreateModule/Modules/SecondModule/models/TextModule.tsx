@@ -44,7 +44,6 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         text-[23px]
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
         `}
         style={{
             verticalAlign: 'top', // Align text to the top
