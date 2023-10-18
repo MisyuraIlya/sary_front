@@ -53,6 +53,7 @@ const RootInputModule: FC<RootInputModuleProps> = ({CustomTableWidth, isMerged, 
                         placeholder={placeholder} 
                         className='w-40 px-4 h-full py-2 border border-white rounded-md bg-white'  
                         value={answer[0].value}
+                        style={{fontSize:'22px'}}
                         // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer[0].value})}
                         />
                         {/* {answer &&

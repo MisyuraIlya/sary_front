@@ -28,14 +28,14 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
         style={{width:'100%',minWidth: isTable ? `${CustomTableWidth}px` : '',}}
         className={`${checkIsThereImage ? '' : 'specific-th'}`}
         >
-            <div>
+            <div className='fontSizeExercise' style={{lineHeight:'30px'}}> 
                 {values?.map((item,index) =>  {
                     setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
                     const isTheAnswer = item.value === answer
                     const isLastItem = index === values.length - 1
                     return (
                         <div style={{width:'100%'}} key={index}>
-                            <div className='px-4 py-4 '>
+                            <div className=''>
                                 <span className='flex gap-2'>
                                     <input type='checkbox'  className='w-5' checked={isTheAnswer}/>
                                     {item.value}

@@ -14,9 +14,10 @@ type WordModuleProps = {
     CustomTableWidth: number
     isExplanationRowSplited: boolean
     isStoryInstruction: boolean
+    index: number
 }
 
-const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -25,7 +26,7 @@ const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRowSpl
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
-
+      console.log('index',index)
     return (
         <th 
         className={`
@@ -33,17 +34,19 @@ const WordModule:FC<WordModuleProps> = ({isStoryInstruction, isExplanationRowSpl
         ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} 
         ${isExplanationRowSplited && 'bg-white'}
         ${isStoryInstruction && 'bg-[#005BBB] specific-th'}
+        specific-th
         `}  
         style={{
-            width:'50px',
-            paddingTop:'20px',
+            minWidth:'60px', 
+            maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',  
+            textAlign: 'right', 
+            paddingTop:'30px', 
         }}
 
         >
             <div className='flex items-center justify-center'>
-                <div  style={(col == 0 || col == 1 ) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}}  className='px-2 rounded-md'>
+                <div  style={(index == 1 ) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}}  className='px-2 rounded-md'>
                     {value}
                 </div>
             </div>

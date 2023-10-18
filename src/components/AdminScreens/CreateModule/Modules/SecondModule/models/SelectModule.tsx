@@ -63,7 +63,8 @@ const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWi
                             options={optionsNew}
                             value={getValue(value)}
                             onChange={(newValue) => onChange((newValue?.value))}
-                            className={`ml-4 mr-4`}
+                            className={`ml-4 mr-4 text-[22px]`}
+                            
                             
                             />
                             {/* {error && (

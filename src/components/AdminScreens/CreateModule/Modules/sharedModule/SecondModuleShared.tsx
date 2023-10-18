@@ -62,9 +62,8 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
                 const getStoryNumber = getStroryNumber(item)
                 const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
-                console.log('getStoryNumber',getStoryNumber,'isStory',isStory)
                 return (
-                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-white'} ml-4 mr-4`} key={indexx}>
+                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-white'} ml-4 mr-4 ${isDragModule && 'pr-[65px]'}`} key={indexx}>
                         {
                             isDragModule && 
                             <DragAndDropModule item={item} />
@@ -72,7 +71,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                     <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
                         {
                             checkIsThereImageRight && 
-                            <ImageModule data={checkIsThereImageRightData} CustomImageCol={CustomImageCol} isStory={( isStory && getStoryNumber === choosedTab )}/>
+                            <ImageModule data={checkIsThereImageRightData} CustomImageCol={CustomImageCol}  isStory={isStory} choosedTab={ getStoryNumber === choosedTab }/>
                         }
                         {
                             checkIsThereVideo &&
@@ -114,7 +113,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
 
                         {
                             checkIsThereImageLeft && 
-                            <ImageModule data={checkIsThereImageLeftData} CustomImageCol={CustomImageCol} isStory={( isStory && getStoryNumber === choosedTab )}/>
+                            <ImageModule data={checkIsThereImageLeftData} CustomImageCol={CustomImageCol} isStory={isStory} choosedTab={ getStoryNumber === choosedTab }/>
                         }
                     </div>  
       

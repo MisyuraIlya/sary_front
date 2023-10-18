@@ -5,7 +5,7 @@ const AdminLayout:FC <PropsWithChildren> = ({children}) => {
     return (
         <div>
             <Header/>
-            <div className="grid grid-cols-12" style={{backgroundColor:'#F0FBFF', paddingTop:'70px'}}>
+            <div className="grid grid-cols-12 bg-white" style={{ paddingTop:'70px'}}>
                 <div className="col-span-1" style={{height:'100%'}}>
                     <Sidebar/>
                 </div>

@@ -30,10 +30,11 @@ const WordBoldModule:FC<WordModuleProps> = ({isExplanationRowSplited, CustomTabl
         <th 
         className={`${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 specific-th'} ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} ${isExplanationRowSplited && 'bg-white'}`}  
         style={{
-            width:'50px',
-            paddingTop:'20px',
+            minWidth:'60px', 
+            maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',  
+            textAlign: 'right', 
+            paddingTop:'30px',  
         }}
 
         >

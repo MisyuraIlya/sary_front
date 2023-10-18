@@ -26,10 +26,12 @@ const OrdenBoldModule:FC<OrdenBoldModuleProps> = ({isExplanationRowSplited, Cust
 
     return (
         <th  style={{
-            minWidth:'55px', 
-            maxWidth:'60px',
+            minWidth:'60px', 
+            maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right', 
+            paddingTop:'25px',
+
             
             }} 
             className={`${checkIsThereImage ? '' : 'specific-th'} ${(isTable || isClearTable) ? '' : ''} pt-4 ${isExplanationRowSplited && 'bg-white'}`} 
