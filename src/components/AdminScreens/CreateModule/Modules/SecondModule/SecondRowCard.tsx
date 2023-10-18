@@ -36,20 +36,20 @@ import ChartForm from './models/ChartForm';
 import TextModuleCentered from './models/TextModuleCentered';
 import Properties from './models/Properties';
 import InputCenteredModule from './models/InputCenteredModule';
-import Explanation from './models/Explanation';
 import HeightSpace from './models/HeightSpace';
 import WordBoldModule from './models/WordBoldModule';
 import OrdenBoldModule from './models/OrdenBoldModule';
 import StoryModule from './models/StoryModule';
 import StoryInstruction from './models/StoryInstruction';
 import StoryHeadline from './models/StoryHeadline';
-import ExplanationSplited from './models/ExplanationSplited';
 import OriginModule from './models/OriginModule';
 import SplitedScreenRight from './models/SplitedScreenRight';
 import DoneSplitedScreenRight from './models/DoneSplitedScreenRight';
 import SplitedScreenLeft from './models/SplitedScreenLeft';
 import DoneSplitedScreenLeft from './models/DoneSplitedScreenLeft';
 
+import Explanation from './models/Explanation';
+import ExplanationSplited from './models/ExplanationSplited';
 type SecondRowCard = {
     row: collectionRow 
     orden: number
@@ -88,8 +88,8 @@ type SecondRowCard = {
             {row?.module_type === 'textCentered' && <TextModuleCentered CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'rootInput' && <RootInputModule CustomTableWidth={CustomTableWidth} isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} key={index} exerciseId={exerciseId} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText}/>}
             
-            {row?.module_type === 'explanation' && <Explanation CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
-            {row?.module_type === 'explanationSplited' && <ExplanationSplited CustomTableWidth={CustomTableWidth}  isTable={isTable}   checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+            {row?.module_type === 'explanationSplited' && <ExplanationSplited CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+            {row?.module_type === 'explanation' && <Explanation CustomTableWidth={CustomTableWidth}  isTable={isTable}   checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             
             {row?.module_type === 'word' && <WordModule index={index} isStoryInstruction={isStoryInstruction} isExplanationRowSplited={isExplanationRowSplited} CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row?.collectionValues[0]?.value}/>}
             {row?.module_type === 'wordBold' && <WordBoldModule isExplanationRowSplited={isExplanationRowSplited} CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row?.collectionValues[0]?.value}/>}

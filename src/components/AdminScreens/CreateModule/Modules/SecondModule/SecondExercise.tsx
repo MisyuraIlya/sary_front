@@ -38,7 +38,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
-                if(subItem?.module_type !== 'word' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '') {
+                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '') {
                     moduleTypeCount++
                 }
             })
@@ -108,6 +108,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                         const isExplanationRowSplited =  rows?.collectionRow.some((item) => item?.module_type === 'explanationSplited' && item?.collectionValues[0]?.value !== null);
                         const explanationData = getExplanationData(rows)
                         const isStoryInstruction = rows?.collectionRow.some((item) => item?.module_type === 'storyInstruction');
+                        console.log('isStoryInstruction',isStoryInstruction)
                         let mergedData: any = null
                         if(mergedExercise) {
                             mergedData = handleMergedExercise(rows.collectionRow)
@@ -159,7 +160,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
                             </tr>
 
-                            {isExplanationRowSplited &&
+                            {isExplanationRow &&
                                 <ExplanationModule htmlTag={explanationData}/>
                             } 
 

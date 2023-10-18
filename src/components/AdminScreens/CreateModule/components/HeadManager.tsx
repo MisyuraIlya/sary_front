@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 import Button from '@/ui/button/Button';
 import { substring10 } from '@/helpers/Substring10';
 import Image from 'next/image';
+import { ExerciseDeletionStoredData } from '@/utils/local-storage-exercise-deletion-store';
 
 type HeadManager = {
     control: any
@@ -39,6 +40,8 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handle
 
     const moduleId = router.query.moduleId
     
+    const {pdf, link} = ExerciseDeletionStoredData.isExistData()
+
     const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
 
 
@@ -104,8 +107,11 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handle
                 <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
                     {exercises?.title && moduleId && isOnlineXml && 
                     <>
-                        <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>                    
-                    
+                        <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>       
+
+                        {(pdf || link) &&                    
+                            <div className='rounded-x1 font-medium px-10 py-2 shadow border-2 hover:bg-[#1D99FF] hover:text-white border-[#1D99FF]  text-[#1D99FF] rounded-md cursor-pointer' onClick={() => ExerciseMethods.resroteDeletionData()}>שחזור נתונים קודמים</div>
+                        }             
                         {/* <div className='justify-center items-center h-full flex'> */}
                         {/* here my logs */}
                         {/* <Image src={'/images/xl.svg'} width={45} height={45} alt='xl' className='cursor-pointer flex ' onClick={() =>  window.open(`http://3.74.228.194:4000/${exercises?.xl}`, '_blank')} /> */}

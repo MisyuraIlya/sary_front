@@ -6,6 +6,7 @@ import { IFirstModule } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import { useRouter } from 'next/router';
 import { onAsk, onSuccessAlert, onErrorAlert } from '@/utils/sweetAlert';
 import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
+import { ExerciseDeletionStoredData } from '@/utils/local-storage-exercise-deletion-store';
 interface ExerciseContextType {
   ExerciseMethods: {
     setId: (id: number) => void
@@ -19,6 +20,7 @@ interface ExerciseContextType {
     handleSaveUpload: () => void
     chooseModule: (number: number) => void
     setChoosedTab: (number: number) => void
+    resroteDeletionData: () => void
   };
   exercises: IFirstModule | ISecondModule |undefined;
   loading: boolean,
@@ -120,12 +122,17 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       } catch(e) {
         console.log('error',e)
       } finally {
+
       }
     }
     
     const deleteModule = async (id: any) => {
       const res = await onAsk('האם תרצו למחוק את המודול הזה?','')
       if(res){
+        if(exercises){
+          const {pdf, youtube_link} = exercises
+            ExerciseDeletionStoredData.saveExerciseDeletionStore(pdf, youtube_link)
+        }
         setLoading(true)
         setExercises(undefined)
         setIsOnlineXml(false)
@@ -231,6 +238,33 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const chooseModule = (number: number) => {
       setChoosedModule(number)
     }
+
+    const resroteDeletionData = async () => {
+      const ask = await onAsk('לעדכן נתונים קודמים?','');
+      if(ask){
+        try {
+          setLoading(true)
+          const {pdf, link} = ExerciseDeletionStoredData.isExistData()
+          if(link && exercises) {
+            await ExercisesService.updateLink(exercises.id, {link,tableType:'exercises'})
+          }  
+  
+          if(pdf && exercises) {
+            await ExercisesService.updatePdf(exercises.id, {pdf, tableType:'exercises'})
+          }
+          onSuccessAlert('נתונים עודכנו בהצלחה','');
+        } catch(e) {
+          console.log('[ExerciseProvier] resoreDeletionData error: ',e)
+        } finally {
+          setLoading(false)
+          ExerciseDeletionStoredData.deleteExerciseDeletionStore()
+        }
+
+        setTimeout(() => {
+          fetchOnline(moduleId)
+        },1000)
+      }
+    }
   
 
 
@@ -250,7 +284,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     handleEditCheckBox,
     handleSaveUpload,
     chooseModule,
-    setChoosedTab
+    setChoosedTab,
+    resroteDeletionData
   };
   const value: ExerciseContextType = {
     exercises,

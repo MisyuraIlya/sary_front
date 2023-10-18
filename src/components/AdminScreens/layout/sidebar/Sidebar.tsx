@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { sideBarList } from './sidebarList';
 const Sidebar = () => {
     return (
-        <aside className='bg-primary flex flex-col justify-between fixed' style={{ height:'100%'}}>
+        <aside className='bg-primary flex flex-col justify-between fixed z-50' style={{ height:'100%'}}>
             <div className='pt-12'>
                 {sideBarList?.map((item, index) => 
                     <div className='hover:bg-white/10 py-2 m-4 rounded-lg px-2' key={index}>
