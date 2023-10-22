@@ -34,10 +34,11 @@ const CreateModule = () => {
   const {ExerciseMethods, exercises, choosedModule} = useExercise()
   const router = useRouter();
   const moduleId = router.query.moduleId
-  const { register, handleSubmit: handleSubmitForm, watch, formState: { errors } , setValue,control} = useForm<any>();
+  const { register, handleSubmit: handleSubmitForm, reset ,watch, formState: { errors } , setValue,control} = useForm<any>();
   
   const onSubmit = (data: any) => {
     ExerciseMethods.createMoudle(data)
+    reset()
   };
   
   const handleSidebarToggle = () => {

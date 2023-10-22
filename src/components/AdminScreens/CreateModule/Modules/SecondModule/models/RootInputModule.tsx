@@ -45,7 +45,7 @@ const RootInputModule: FC<RootInputModuleProps> = ({CustomTableWidth, isMerged, 
                     minWidth: isTable ? `${CustomTableWidth}px` : '',
                 }}
                 >
-                    <div className='px-4 py-2 bg-pad '>
+                    <div className='px-4 py-2 bg-pad flex items-center text-center '>
                         <input 
                         type='text' 
                         // disabled={isOnlineXml ? true : false}
