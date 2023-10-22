@@ -15,13 +15,10 @@ const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
   }, [htmlTag,replacedText]);
 
   return (
-    <div className="w-[80vw]">
-      <div
-        className=" bg-white w-full"
-
-      >
+    <div className="w-[89vw] relative">
+      <div className=" bg-white w-full">
         <div className="flex mr-10">
-          <div className="pt-5 pr-5">
+          <div className="pt-8 pr-5">
               <Image src={'/images/textExpand.svg'} alt="quest" width={40} height={60} />
           </div>
           <div className="text-right px-4 py-4 mt-2 mr-5 fontSizeExercise">

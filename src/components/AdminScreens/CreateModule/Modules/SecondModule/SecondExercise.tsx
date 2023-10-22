@@ -160,8 +160,13 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
                             </tr>
 
+
                             {isExplanationRow &&
-                                <ExplanationModule htmlTag={explanationData}/>
+                                <tr>
+                                    <td colSpan={data.collectionsCols.length}>
+                                        <ExplanationModule htmlTag={explanationData} />
+                                    </td>
+                                </tr>
                             } 
 
                             { !checkIsThereMergedBackground &&
