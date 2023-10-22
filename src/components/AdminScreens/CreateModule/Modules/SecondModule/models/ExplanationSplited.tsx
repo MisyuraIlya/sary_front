@@ -23,9 +23,10 @@ const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstI
 
     const {isOnlineXml} = useExercise()
     let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    formattedValue = value?.replaceAll(';', "<br/>");
+    formattedValue = value?.replace(/;(?![^&]*&quot;)/g, "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
-
+    console.log('html',htmlTag)
+    console.log('vlaues',value)
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
     }

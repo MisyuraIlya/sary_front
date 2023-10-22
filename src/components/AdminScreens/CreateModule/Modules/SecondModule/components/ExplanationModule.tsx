@@ -15,7 +15,12 @@ const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
   }, [htmlTag,replacedText]);
 
   return (
-    <div className="w-[89vw] relative">
+    <div className="w-[89vw] relative" 
+    style={{
+      border: `2px solid #388FF5`, 
+      borderRadius: '5px' 
+  }}
+  >
       <div className=" bg-white w-full">
         <div className="flex mr-10">
           <div className="pt-8 pr-5">
