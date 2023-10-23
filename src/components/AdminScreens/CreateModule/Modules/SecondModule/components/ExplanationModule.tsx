@@ -15,18 +15,16 @@ const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
   }, [htmlTag,replacedText]);
 
   return (
-    <div className="w-[89vw] relative" 
-    style={{
-      border: `2px solid #388FF5`, 
-      borderRadius: '5px' 
-  }}
-  >
-      <div className=" bg-white w-full">
-        <div className="flex mr-10">
-          <div className="pt-8 pr-5">
+    <div className="w-[90vw] relative pt-10 pb-10 bg-white" >
+      <div className=" bg-white w-[95%]">
+        <div className="flex mr-10" style={{border: `1px solid #D0D0D0`, borderRadius: '5px' }}>
+          <div className="text-center flex pt-1 pr-5">
               <Image src={'/images/textExpand.svg'} alt="quest" width={40} height={60} />
           </div>
-          <div className="text-right px-4 py-4 mt-2 mr-5 fontSizeExercise">
+          <div className='pt-4 pr-4'>
+            <p className='text-[#00000099]'>הסבר  | </p>
+          </div>
+          <div className="text-right px-4 mr-5 fontSizeExercise">
             <div
               dangerouslySetInnerHTML={{ __html: htmlTagNew }}
               className=""

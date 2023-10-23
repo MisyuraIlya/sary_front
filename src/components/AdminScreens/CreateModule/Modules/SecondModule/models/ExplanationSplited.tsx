@@ -60,11 +60,8 @@ const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstI
             
         >
             <div 
-                className='mt-2'
-                style={{
-                    border: `2px solid #388FF5`, 
-                    borderRadius: '5px' 
-                }}
+                className='mt-10 mb-10 w-[95%]'
+                style={{border: `1px solid #D0D0D0`, borderRadius: '5px' }}
             >
                 {!isOnlineXml &&
                     <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
@@ -74,7 +71,9 @@ const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstI
                     <div className='pt-5 pr-5'>
                             <Image src={'/images/textExpand.svg'} alt='quest' width={50} height={50} />
                     </div>
-
+                    <div className='pt-8 pr-4'>
+                        <p className='text-[#00000099]'>הסבר  | </p>
+                    </div>
 
                     <div className='text-right  px-4 py-4 fontSizeExercise 0'>
                         <div

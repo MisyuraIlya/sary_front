@@ -36,7 +36,7 @@ const TextCopy:FC<TextCopyModuleProps> = ({CustomTableWidth, firstIdTextModule, 
             minWidth: isTable ? `${CustomTableWidth}px` : '',
         }}
         >
-            <div className='text-center px-4 py-4'>
+            <div className='text-center px-4 py-4 fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: value }}
