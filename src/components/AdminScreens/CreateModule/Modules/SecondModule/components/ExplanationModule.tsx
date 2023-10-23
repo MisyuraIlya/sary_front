@@ -16,7 +16,7 @@ const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
 
   return (
     <div className="w-[90vw] relative pt-10 pb-10 bg-white" >
-      <div className=" bg-white w-[95%]">
+      <div className=" bg-white w-[90%] mr-[100px]">
         <div className="flex mr-10" style={{border: `1px solid #D0D0D0`, borderRadius: '5px' }}>
           <div className="text-center flex pt-1 pr-5">
               <Image src={'/images/textExpand.svg'} alt="quest" width={40} height={60} />
