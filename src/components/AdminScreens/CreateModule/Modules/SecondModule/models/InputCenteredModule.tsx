@@ -63,7 +63,7 @@ const InputCenteredModule: FC<InputModuleProps> = ({CustomInputWidth, CustomTabl
                             // disabled={isOnlineXml ? true : false}
                             disabled
                             placeholder={splitPlaceHolder[1] ? '' : placeholder} 
-                            className={` px-4 h-full py-2 border border-white rounded-md bg-white text-center`}
+                            className={` px-4 h-full py-2 border border-white rounded-md bg-white text-center fontSizeExercise`}
                             style={{width: CustomInputWidth}} 
                             value={answer[0].value}
                             // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer[0].value})}

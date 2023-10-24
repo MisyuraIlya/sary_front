@@ -22,8 +22,8 @@ type ExplanationSplitedProps = {
 const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    formattedValue = value?.replace(/;(?![^&]*&quot;)/g, "<br/>");
+    let formattedValue = value?.replace(/@/g, '<br>');
+    // formattedValue = value?.replace(/;(?![^&]*&quot;)/g, "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
     console.log('html',htmlTag)
     console.log('vlaues',value)
