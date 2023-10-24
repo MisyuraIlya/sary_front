@@ -163,7 +163,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
                             {isExplanationRow &&
                                 <tr>
-                                    <td colSpan={data.collectionsCols.length}>
+                                    <td className='relative' colSpan={data.collectionsCols.length}>
                                         <ExplanationModule htmlTag={explanationData} />
                                     </td>
                                 </tr>
