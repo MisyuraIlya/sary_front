@@ -6,8 +6,8 @@ type ExplanationProps = {
 };
 
 const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
-  const replacedText = htmlTag.replace(/@/g, '<br>');
-
+  let replacedText = htmlTag.replaceAll(' ; ', '<br>');
+  // replacedText = replacedText?.replaceAll(';', "<br/>");
   const [htmlTagNew, setHtmlTagNew] = useState<string>(replacedText);
 
   useEffect(() => {

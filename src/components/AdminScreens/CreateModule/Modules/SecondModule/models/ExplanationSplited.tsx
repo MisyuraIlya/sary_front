@@ -22,11 +22,14 @@ type ExplanationSplitedProps = {
 const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replace(/@/g, '<br>');
-    // formattedValue = value?.replace(/;(?![^&]*&quot;)/g, "<br/>");
+    let formattedValue = value?.replaceAll(' ; ', '<br>');
+    // console.log('formattedValue',formattedValue)
+    // if(!formattedValue.includes('&quot;')){
+    //     console.log('true',true)
+    // }
+    // formattedValue = formattedValue?.replaceAll(';', "<br/>");
+    
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
-    console.log('html',htmlTag)
-    console.log('vlaues',value)
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
     }
