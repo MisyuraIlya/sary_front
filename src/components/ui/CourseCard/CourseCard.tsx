@@ -58,7 +58,7 @@ const CourseCard: FC <CourseCard> = ({item,isNew, handleCourse }) => {
     };
 
     return (
-        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-cardBg/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
+        <div className={`rounded-md relative ${editMode ? 'editMode' : ''} relative ${isNew ? 'bg-white' : 'bg-cardBg/10'} myShadowCard cursor-pointer ${choosedLvl1 == item.id ? 'activeShadow border-2' : ''}`} style={{height:'300px', width:'300px'}} onClick={() => router.push(`/admin/tableOfContents/${item.id}`)}>
             {editMode && <span className='absolute m-4 text-white' onClick={() => setEditMode(false)}>X</span>}
             <div className='text-center h-full flex justify-center items-center'>
                 {item.image &&
