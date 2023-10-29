@@ -20,11 +20,17 @@ type TextModuleProps = {
 const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     const {isOnlineXml} = useExercise()
+    
     const [htmlTag, setHtmlTal] = useState<string>(value)
 
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
     }
+
+    const checkIsString = (value: any) => {
+        return  typeof value === 'string';
+    }
+
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -34,7 +40,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
-
+      console.log('htmlTag',htmlTag)
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
 
     return (
@@ -52,7 +58,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
             minWidth: isTable ? `${CustomTableWidth}px` : '',
         }}
         >
-            {!isOnlineXml &&
+            {!isOnlineXml && checkIsString(htmlTag) &&
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 

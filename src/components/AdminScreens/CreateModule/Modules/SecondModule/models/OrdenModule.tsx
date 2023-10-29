@@ -25,7 +25,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({index, isExplanationRowSplited, Custo
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
     return (
         <th  style={{
-                minWidth:'60px', 
+                minWidth:'70px', 
                 maxWidth:'70px',
                 verticalAlign: 'top', // Align text to the top
                 textAlign: 'right', 

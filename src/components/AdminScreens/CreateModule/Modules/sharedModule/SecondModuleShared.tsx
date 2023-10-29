@@ -37,6 +37,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereImageVideo = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'video')))
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
+
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
                 const TabCounter = 2;
 
@@ -44,8 +45,18 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 let CustomImageCol = 4 ;
                 let CustomInputWidth = 200;
                 let CustomSelectBoxWidth = 300;
+                let defaultBackground = 'bg-exerciseCardBgg'
                 if(isTable) {
-                    CustomTableWidth = getTableCustomValue(item, 'table')
+                    CustomTableWidth = +getTableCustomValue(item, 'table')
+                }
+                if(checkIsThereMergedBackground) {
+                    defaultBackground = getTableCustomValue(item, 'merged') as string;
+                    if(defaultBackground === 'לבן'){
+                        defaultBackground = "bg-white"
+                    } 
+                    if(defaultBackground === 'כחול') {
+                        defaultBackground = 'bg-[#E5F0FE]';
+                    }
                 }
                 if(checkIsThereImageRight) {
                     CustomImageCol = getTableCustomAnswer(item, 'imageRight')
@@ -58,6 +69,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                     CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
                 }
 
+                console.log('defaultBackground',checkIsThereMergedBackground,defaultBackground)
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
                 const getStoryNumber = getStroryNumber(item)
@@ -68,7 +80,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                             isDragModule && 
                             <DragAndDropModule item={item} />
                         }
-                    <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && 'bg-exerciseCardBg'}`}>
+                    <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && `${defaultBackground}`}`}>
                         {
                             checkIsThereImageRight && 
                             <ImageModule data={checkIsThereImageRightData} CustomImageCol={CustomImageCol}  isStory={isStory} choosedTab={ getStoryNumber === choosedTab }/>

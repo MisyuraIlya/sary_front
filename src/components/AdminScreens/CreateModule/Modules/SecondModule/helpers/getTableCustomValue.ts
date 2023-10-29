@@ -14,8 +14,8 @@ export const getTableCustomValue = (item :ISecondModuleExercises, type : module_
       }
       
       if(values[0]) {
-        return  +values[0];
+        return  values[0];
       } else {
-        return 300
+        return '300'
       }
 }

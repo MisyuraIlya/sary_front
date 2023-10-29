@@ -32,7 +32,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
                 <div className='flex gap-5'>
                     {data?.map((column,indexx) => 
                         <div className={`${column.title === 'מחסן מילים' ? 'bg-[#E5F0FE] w-[400px]' : 'border-[3px] border-1 border-[#E5F0FE] w-[200px] min-h-[300px]'} relative`} key={indexx}>
-                            <h2 className='bg-[#BACEE9] text-black font-bold px-4 text-center'>{column.title}</h2>
+                            <h2 className='bg-[#BACEE9] text-black font-bold py-2 px-4 text-center'>{column.title}</h2>
                             {column.title !== 'מחסן מילים' &&
                             <div className='absolute top-1 right-2'>
                                 <Tooltip
@@ -86,10 +86,10 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
-                                                        className={`${column.title === 'מחסן מילים' ? 'col-span-3' : 'col-span-6'}`}
+                                                        className={`${column.title === 'מחסן מילים' ? 'col-span-4' : 'col-span-6'}`}
                                                     >
                                                         {column.title === 'מחסן מילים' ?
-                                                        <div className='bg-white m-2 text-center px-2 rounded-md w-auto'>
+                                                        <div className='bg-white m-2 text-center px-1 rounded-md w-auto fontSizeExercise'>
                                                             {questionId.value}
                                                         </div>                                                    
                                                         :

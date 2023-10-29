@@ -26,7 +26,6 @@ const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanatio
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue, exerciseId, dataObjectId, value]);
-      console.log('index',index)
     return (
         <th 
         className={`
@@ -37,7 +36,7 @@ const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanatio
         specific-th
         `}  
         style={{
-            minWidth:'60px', 
+            minWidth:'70px', 
             maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right', 

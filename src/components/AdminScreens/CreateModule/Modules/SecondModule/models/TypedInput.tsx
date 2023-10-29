@@ -51,7 +51,7 @@ const TypedInput: FC<TypedInputModuleProps> = ({CustomTableWidth, isMerged, chec
                         type='text' 
                         // disabled={isOnlineXml ? true : false}
                         disabled
-                        className='w-40 px-4 h-full py-2 border border-white rounded-md bg-white'  
+                        className='w-40 px-4 h-full py-2 border border-white rounded-md bg-white text-center fontSizeExercise'  
                         value={answer[0].value}
                         // {...register(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`,{value: answer[0].value})}
                         />

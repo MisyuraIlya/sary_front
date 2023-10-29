@@ -16,12 +16,17 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
     const handleClick = () => {
         setError('')
         setPreviousValue(html)
+        
+        if(!isNaN(+value)) {
+            html = html.replace(/1(?=<span)/g, '1 ');
+        }
 
         if(number) {
             const words = html.split(' ');
             let newWord = '';
             let count = 1; 
             const updatedWords = words.map((word) => {
+                console.log('word',word)
                 if (word === value.trim()) {
                     if(count === +number){
                         word = `<b>${word}</b>`;
@@ -33,6 +38,7 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
             
                 return word; 
             });
+            console.log('html',newWord)
             
             handleUpdateHtml(newWord)
             setValue('')
@@ -40,7 +46,7 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
             setNumber('')
         } else {
             const regex = new RegExp(value, 'g');
-            if (html.match(regex)) {
+            if (html?.match(regex)) {
               const updatedHtml = html.replace(regex, `<b>${value}</b>`);
               handleUpdateHtml(updatedHtml)
               setValue('')

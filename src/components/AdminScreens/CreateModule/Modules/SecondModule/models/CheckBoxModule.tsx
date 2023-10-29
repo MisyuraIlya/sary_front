@@ -21,29 +21,32 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'checkBox');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer);
-      }, [col, row, setValue, exerciseId, answer, dataObjectId]);
+    }, [col, row, setValue, exerciseId, answer, dataObjectId]);
 
+    const answers = answer?.split(';').map(item => item.trim());
     return (
         <th 
         style={{width:'100%',minWidth: isTable ? `${CustomTableWidth}px` : '',}}
         className={`${checkIsThereImage ? '' : 'specific-th'}`}
         >
-            <div className='fontSizeExercise' style={{lineHeight:'30px'}}> 
+            <div className='fontSizeExercise' style={{lineHeight:'30px',paddingRight:'20px'}}> 
                 {values?.map((item,index) =>  {
                     setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
-                    const isTheAnswer = item.value === answer
+                    const isTheAnswer = answers.includes(item.value)
+                    console.log('isTheAnswer',item.value, isTheAnswer)
                     const isLastItem = index === values.length - 1
-                    return (
-                        <div style={{width:'100%'}} key={index}>
-                            <div className=''>
-                                <span className='flex gap-2'>
-                                    <input type='checkbox'  className='w-5' checked={isTheAnswer}/>
-                                    {item.value}
-                                </span>
-                            </div>    
-                        </div>
-                    )
-                    
+                    if(item.value){
+                        return (
+                            <div style={{width:'100%'}} key={index}>
+                                <div className=''>
+                                    <span className='flex gap-2'>
+                                        <input type='checkbox'  className='w-5' checked={isTheAnswer}/>
+                                        {item.value}
+                                    </span>
+                                </div>    
+                            </div>
+                        )
+                    }
                 }
 
                 )}

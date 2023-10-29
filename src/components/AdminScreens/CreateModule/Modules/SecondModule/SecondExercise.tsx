@@ -32,10 +32,10 @@ type SecondExerciseProps = {
 const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
         let moduleTypeCount = 0;
-
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
                 if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '') {
@@ -43,7 +43,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                 }
             })
         })
-
         if(moduleTypeCount === 0) {
             return true
         } else {
@@ -108,7 +107,6 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                         const isExplanationRowSplited =  rows?.collectionRow.some((item) => item?.module_type === 'explanationSplited' && item?.collectionValues[0]?.value !== null);
                         const explanationData = getExplanationData(rows)
                         const isStoryInstruction = rows?.collectionRow.some((item) => item?.module_type === 'storyInstruction');
-                        console.log('isStoryInstruction',isStoryInstruction)
                         let mergedData: any = null
                         if(mergedExercise) {
                             mergedData = handleMergedExercise(rows.collectionRow)

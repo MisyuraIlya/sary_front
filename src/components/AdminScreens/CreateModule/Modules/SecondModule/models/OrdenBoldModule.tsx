@@ -26,7 +26,7 @@ const OrdenBoldModule:FC<OrdenBoldModuleProps> = ({isExplanationRowSplited, Cust
 
     return (
         <th  style={{
-            minWidth:'60px', 
+            minWidth:'70px', 
             maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right', 
