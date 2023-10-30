@@ -50,6 +50,8 @@ import DoneSplitedScreenLeft from './models/DoneSplitedScreenLeft';
 
 import Explanation from './models/Explanation';
 import ExplanationSplited from './models/ExplanationSplited';
+import NumberBold from './models/NumberBold';
+import IconModule from './models/IconModule';
 type SecondRowCard = {
     row: collectionRow 
     orden: number
@@ -72,14 +74,15 @@ type SecondRowCard = {
     CustomSelectBoxWidth: number
     isExplanationRowSplited: boolean
     isStoryInstruction: boolean
+    checkIsIcon: boolean
 }
-    const SecondRowCard:FC<SecondRowCard> = ({isStoryInstruction, isExplanationRowSplited, CustomSelectBoxWidth, CustomTableWidth, firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues, collectionsCols, CustomInputWidth }) => {
+    const SecondRowCard:FC<SecondRowCard> = ({checkIsIcon, isStoryInstruction, isExplanationRowSplited, CustomSelectBoxWidth, CustomTableWidth, firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues, collectionsCols, CustomInputWidth }) => {
 
     return (
         <>
             {row?.module_type === 'input' && <InputModule CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth}isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
             {row?.module_type === 'inputCentered' && <InputCenteredModule CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth}isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
-            {row?.module_type === 'instruction' && <Instruction CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} setValue={setValue} value={row.collectionValues[0].value} col={orden} row={row.orden} register={register} />}
+            {row?.module_type === 'instruction' && <Instruction checkIsIcon={checkIsIcon}CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} setValue={setValue} value={row.collectionValues[0].value} col={orden} row={row.orden} register={register} />}
             {row?.module_type === 'orden' && <OrdenModule index={index} isExplanationRowSplited={isExplanationRowSplited} CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value} />}
             {row?.module_type === 'ordenBold' && <OrdenBoldModule isExplanationRowSplited={isExplanationRowSplited} CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value} />}
             {row?.module_type === 'selectbox' && <SelectModule CustomSelectBoxWidth={CustomSelectBoxWidth} CustomTableWidth={CustomTableWidth}  isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} exerciseId={exerciseId} dataObjectId={dataObjectId} key={index} placeholder={row.placeholder || ''} options={row.collectionValues} answer={row.collectionAnswers} register={register}   col={orden} row={row.orden} setValue={setValue} control={control} />}
@@ -113,7 +116,13 @@ type SecondRowCard = {
             {row?.module_type === 'mergedExercise' && <MergedExercise CustomTableWidth={CustomTableWidth} mergedData={mergedData} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} control={control}/>}
             {row?.module_type === 'textCopy' && <TextCopy CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols} firstIdTextModule={firstIdTextModule} isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'headline2' && <HeadLine2 CustomTableWidth={CustomTableWidth} firstIdTextModule={firstIdTextModule} isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+
+            {row?.module_type === 'numberBold' && <NumberBold CustomTableWidth={CustomTableWidth} firstIdTextModule={firstIdTextModule} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value} isClearTable={false} collectionsCols={collectionsCols}/>}
+            
             {row?.module_type === 'clearText' && <ClearText collectionsCols={collectionsCols} isClearTable={isClearTable} CustomTableWidth={CustomTableWidth} firstIdTextModule={firstIdTextModule} isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+
+            {row?.module_type === 'icon' && <IconModule collectionsCols={collectionsCols} isClearTable={isClearTable} CustomTableWidth={CustomTableWidth} firstIdTextModule={firstIdTextModule} isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+
             {row?.module_type === 'typedInput' && <TypedInput CustomTableWidth={CustomTableWidth} isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
             {row?.module_type === 'openQuestionHamarot' && <OpenQuestionHamarot CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} answer={row.collectionAnswers} placeholder={row.placeholder || ''}/>}
             {row?.module_type === 'draftBank' && <DraftBank CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} values={row.collectionValues} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue}  />}

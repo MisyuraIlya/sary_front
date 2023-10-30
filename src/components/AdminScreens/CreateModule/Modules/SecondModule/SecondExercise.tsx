@@ -38,7 +38,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
         let moduleTypeCount = 0;
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
-                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '') {
+                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '' ) {
                     moduleTypeCount++
                 }
             })
@@ -50,9 +50,23 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
         }
     }
 
+    const checkIsIconModule = (array: ISecondModuleSubExercises) => {
+        let isThereIconModule = false
+        
+        array.collectionsRows.forEach((item) => {
+            item.collectionRow.forEach((subItem) => {
+                if (subItem?.module_type === 'icon') {
+                    isThereIconModule = true
+                }
+            })
+        })
+    
+        return isThereIconModule
+    }
+
     const checkIsAllCategoryColsEmpty = data.collectionsCols.every((item) => !item.title || item.title.length === 0);
     const checkLineColor = CheckLineIsWordOrInstructionOrEmpty(data)
-
+    const checkIsIcon = checkIsIconModule(data)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.exercise`, exerciseId);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].orden`, data.orden);
@@ -68,7 +82,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
     };
 
     return (
-        <table  className={`myTable w-full ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
+        <table  className={`myTable w-full ${checkIsIcon && 'bg-[#005CBB]'} ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
                 <tbody>
                     <tr className='w-full'>
@@ -145,6 +159,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                                         CustomSelectBoxWidth={CustomSelectBoxWidth}
                                         isExplanationRowSplited={isExplanationRowSplited}
                                         isStoryInstruction={isStoryInstruction}
+                                        checkIsIcon={checkIsIcon}
                                     />  
                                     </>
                                 )}

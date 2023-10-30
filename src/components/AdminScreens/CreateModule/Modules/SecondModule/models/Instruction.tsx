@@ -16,9 +16,10 @@ type InstructionProps = {
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    checkIsIcon: boolean
 };
 
-const Instruction: FC<InstructionProps> = ({ CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
+const Instruction: FC<InstructionProps> = ({ checkIsIcon, CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
     // Replace newlines "\n" with "<br>" tags
     const {isOnlineXml} = useExercise()
     let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -41,9 +42,8 @@ const Instruction: FC<InstructionProps> = ({ CustomTableWidth, checkIsThereImage
     
     return (
         <th 
-            className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} text-[23px] leading-10`} 
+            className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} ${checkIsIcon && 'bg-[#005CBB] text-white'} text-[23px] leading-10`} 
             style={{
-                background:'#E5F0FE',
                 minWidth: isTable ? `${CustomTableWidth}px` : '',
             }}
             >

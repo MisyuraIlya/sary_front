@@ -16,9 +16,9 @@ type SubInstructionProps = {
 const SubInstruction:FC<SubInstructionProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    formattedValue = value?.replaceAll(';', "<br/>");
-    const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+    // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
+    // formattedValue = value?.replaceAll(';', "<br/>");
+    const [htmlTag, setHtmlTal] = useState<string>(value)
 
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)

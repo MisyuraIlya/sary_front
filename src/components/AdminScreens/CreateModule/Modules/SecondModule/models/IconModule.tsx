@@ -1,10 +1,8 @@
+import React, {FC, useEffect} from 'react';
 import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
-import React, {FC, useEffect, useState} from 'react';
-import BoldChanger from '../components/BoldChanger';
-import { useExercise } from '@/providers/exercise/ExerciseProvider';
-type TextModuleProps = {
+import Image from 'next/image';
+type IconModuleProps = {
     value: string
-
     col: any;
     row: any;
     setValue: any
@@ -16,57 +14,59 @@ type TextModuleProps = {
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
-
 }
-const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
-    const {isOnlineXml} = useExercise()
-    const [htmlTag, setHtmlTal] = useState<string>(value)
-
-    const handleUpdateHtml = (updatedHtml: string) => {
-        setHtmlTal(updatedHtml)
-    }
 
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
+      }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
-    
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
+
+      console.log('value',value, value == 'דיון')
+      const handleIcon = () => {
+        if(value == 'דיון') {
+            return 'conversation.svg'
+        } else if(value == 'הוראה'){
+            return 'instruction.svg';
+        } else if(value == 'כתיבה') {
+            return 'write.svg'
+        } else if(value == 'נושא') {
+            return 'section.svg'
+        } else if (value === 'תרגול') {
+            return 'exercise.svg'
+        }else {
+            return ''
+        }
+      }
     return (
         <th className={`
         relative
-        text-[23px]
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
+        leading-[60px]
         `}
         
         style={{
-            verticalAlign: 'top', // Align text to the top
-            textAlign: 'right',   // Align text to the right
+            verticalAlign: 'top', 
+            textAlign: 'right',   
             minWidth: isTable ? `${CustomTableWidth}px` : '',
         }}
-        
         >
-            {!isOnlineXml &&
-                <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
-            }
+ 
 
-            <div className='text-right  px-4 py-4 fontSizeExercise ' >
-                <div
-                    // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: htmlTag }}
-                    className=""
-                />
+            <div className='text-right  px-4 py-4  fontSizeExercise'>
+                <Image src={'/images/' + handleIcon()} width={70} height={70} alt='image' />
             </div>
         </th>
     );
 };
 
-export default TextModule;
+export default IconModule;

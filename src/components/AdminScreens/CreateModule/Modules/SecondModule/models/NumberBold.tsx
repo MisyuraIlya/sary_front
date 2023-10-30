@@ -3,7 +3,7 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { useState } from 'react';
 import BoldChanger from '../components/BoldChanger';
 import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
-type TextModuleProps = {
+type NumberBoldProps = {
     value: string
     col: any;
     row: any;
@@ -17,31 +17,17 @@ type TextModuleProps = {
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
 }
-const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
-
-    const {isOnlineXml} = useExercise()
-    
-    const [htmlTag, setHtmlTal] = useState<string>(value)
-
-    const handleUpdateHtml = (updatedHtml: string) => {
-        setHtmlTal(updatedHtml)
-    }
-
-    const checkIsString = (value: any) => {
-        return  typeof value === 'string';
-    }
-
+const NumberBold:FC<NumberBoldProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
+      }, [col, row, setValue,exerciseId, dataObjectId, value]);
 
-      console.log('htmlTag',htmlTag)
-      const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
+    const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
 
     return (
         <th className={`
@@ -59,19 +45,11 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
             minWidth: isTable ? `${CustomTableWidth}px` : '',
         }}
         >
-            {!isOnlineXml && checkIsString(htmlTag) &&
-                <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
-            }
-
-            <div className='text-right  px-4 py-4  fontSizeExercise'>
-                <div
-                    // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: htmlTag }}
-                    className=""
-                />
+            <div className='text-right  px-4 py-4  fontSizeExercise font-bold'>
+                {value}
             </div>
         </th>
     );
 };
 
-export default ClearText;
+export default NumberBold;
