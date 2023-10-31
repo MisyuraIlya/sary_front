@@ -20,6 +20,7 @@ type HeadManager = {
 
 const options = [
     { value: 1, label: 'מודול ראשון' },
+    { value: 21, label: 'מודול שני - בנתיבי הצורות' },
     { value: 2, label: 'מודול שני' },
     { value: 3, label: 'מודול שלישי' },
   ]

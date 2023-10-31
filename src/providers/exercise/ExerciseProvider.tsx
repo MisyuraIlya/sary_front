@@ -109,6 +109,11 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
 
         }
 
+        if(choosedModule === 21) {
+          const response = await ExercisesService.createSecondModule(data, 21)
+
+        }
+
         if(choosedModule === 3) {
           const response = await ExercisesService.createSecondModule(data, 3)
 

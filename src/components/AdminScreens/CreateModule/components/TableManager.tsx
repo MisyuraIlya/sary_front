@@ -36,6 +36,7 @@ const TableManager:FC<TableManagerProps> = ({handleSubmitForm, onSubmit, registe
               :
               <>
               {choosedModule === 1 && exercises && <FirstForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
+              {choosedModule === 21 && exercises && <SecondForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
               {choosedModule === 2 && exercises && <SecondForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
               {choosedModule === 3 && exercises && <ThirdForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
               </>

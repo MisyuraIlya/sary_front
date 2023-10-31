@@ -77,6 +77,9 @@ const CreateModule = () => {
               {choosedModule === 1 &&
                 <SideBar isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose} register={register} setValue={setValue}/>            
               }
+              {choosedModule === 21 && 
+                <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
+              }
               {choosedModule === 2 && 
                 <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
               }
