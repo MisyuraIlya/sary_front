@@ -19,17 +19,42 @@ const SideBarIcons: FC<Props> = ({data,rows}) => {
       const handleSidebarClose = () => {
         setIsSidebarOpen(false);
       };
-
+      console.log('data',rows)
     return (
         <th style={{ float:'left', borderBottom:'0px'}} className='flex items-center absolute left-0 mt' colSpan={data.collectionsCols.length} >
             
             <div className={`px-2 py-2 cursor-pointer`} onClick={() => handleSidebarToggle()} >
-                <div className='flex items-center justify-center'>
-                    <Image src={`/images/settings_clear.svg`} alt='settings' width={27} height={27}/>
-                </div>
-                <div>
-                    <span className='text-sm'>הגדרות</span>
-                </div>
+                    <div className='relative flex items-center gap-1'>
+                        <div className=''>
+                            { rows?.pdf && 
+                                <div>
+                                    <div className='flex items-center justify-center'>
+                                        <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
+                                    </div>    
+                                    <p>PDF</p>
+                                </div>    
+                            }
+                        </div>
+                        <div className=''>
+                            {rows?.youtube_link && 
+                            <div>
+                                <div className='flex items-center justify-center'>
+                                    <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
+                                </div>    
+                                <p>סרטון</p>
+                            </div>   
+                            }
+                        </div>
+                        <div>
+                            <div className='flex items-center justify-center'>
+                                <Image src={`${rows?.pdf && rows?.youtube_link ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={27} height={27}/>
+                            </div>
+                            <span className='text-sm'>הגדרות</span>
+                        </div>
+
+
+                    </div>
+
             </div> 
 
             <div className={`px-2 py-2 cursor-pointer`} >

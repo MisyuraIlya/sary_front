@@ -21,6 +21,7 @@ interface ExerciseContextType {
     chooseModule: (number: number) => void
     setChoosedTab: (number: number) => void
     resroteDeletionData: () => void
+    fetchOnline: (id: string | string[] | undefined, bool: boolean) => void
   };
   exercises: IFirstModule | ISecondModule |undefined;
   loading: boolean,
@@ -29,7 +30,7 @@ interface ExerciseContextType {
   isChanged: boolean,
   handleEditedCheckbox: { id: number, checked: boolean }[],
   choosedModule: number | null,
-  choosedTab: number
+  choosedTab: number,
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -63,8 +64,10 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const [choosedTab, setChoosedTab] = useState(1)
     // Helpers
 
-    const fetchOnline = async (id: any) => {
-      setLoading(true)
+    const fetchOnline = async (id: any, useLoading = true) => {
+      if(useLoading){
+        setLoading(true)
+      }
       try {
         const response = await ExercisesService.getOne(id)
         if(response){
@@ -75,7 +78,9 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       } catch(e) {
         console.log('error',e)
       } finally {
-        setLoading(false)
+        if(useLoading){
+          setLoading(false)
+        }
       }
     }
 
@@ -273,10 +278,10 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
   
 
 
-  useEffect(() => {
-    const moduleId = router.query.moduleId;
-    fetchOnline(moduleId)
-  },[router.query.moduleId])
+    useEffect(() => {
+      const moduleId = router.query.moduleId;
+      fetchOnline(moduleId)
+    },[router.query.moduleId])
 
   const ExerciseMethods = {
     setId,
@@ -290,7 +295,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     handleSaveUpload,
     chooseModule,
     setChoosedTab,
-    resroteDeletionData
+    resroteDeletionData,
+    fetchOnline
   };
   const value: ExerciseContextType = {
     exercises,
@@ -301,7 +307,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     isChanged,
     handleEditedCheckbox,
     choosedModule,
-    choosedTab
+    choosedTab,
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;

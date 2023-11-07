@@ -1,5 +1,6 @@
 
 export interface ICourse {
+    pdf: string;
     orden: number;
     id: number;
     name: string;

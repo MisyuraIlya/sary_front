@@ -20,7 +20,7 @@ const UnitedForm:FC<UnitedFormProps> = ({CustomTableWidth, setValue, exerciseId,
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue, exerciseId, dataObjectId]);
+      }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
         <>

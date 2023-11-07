@@ -38,6 +38,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                     level={2} 
                     parentId={choosedLvl1!} 
                     isExercise={false}
+                    isHavePdf={false}
                     />        
                 }
                 {lvl2?.children &&
@@ -47,6 +48,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                     level={3} 
                     parentId={choosedLvl2!} 
                     isExercise={false}
+                    isHavePdf={false}
                     />        
                 }
 
@@ -57,6 +59,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                     level={4} 
                     parentId={choosedLvl3!} 
                     isExercise={false}
+                    isHavePdf={true}
                     />        
                 }
 
@@ -67,6 +70,7 @@ const CourseRellationsContainer: FC<CourseRellationsContainerProps> = () => {
                     level={5} 
                     parentId={choosedLvl4!} 
                     isExercise={true}
+                    isHavePdf={false}
                     />        
                 }
         </div>

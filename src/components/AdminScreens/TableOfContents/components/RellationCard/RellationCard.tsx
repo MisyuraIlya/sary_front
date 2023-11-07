@@ -1,5 +1,5 @@
 import { ICourse } from '@/types/course.interface';
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCourse } from '@/providers/course/CourseProvider';
@@ -13,14 +13,17 @@ type Inputs = {
 interface RellationCardProps {
     item: ICourse;
     isExercise: boolean
+    isHavePdf: boolean
     level: number
     clearArray: () => void
 }
-const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArray}) => {
+const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level, clearArray}) => {
     const router = useRouter();
     const [editMode, setEditMode] = useState(false)
     const {CourseMethods, choosedLvl1, choosedLvl2 , choosedLvl3 ,choosedLvl4} = useCourse()
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
         setEditMode(false)
@@ -69,6 +72,17 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
         }
     }
 
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if(file){
+            CourseMethods.uploadFile(file, item.id)
+        }
+    };
+
+
+    const openPdf = (pdf: string) => {
+            window.open(`http://localhost:4000/${pdf}`, '_blank', 'noopener');
+    }
 
     return (
         <div className={`border-t border-gray cardHover ${checkOnActive() ? 'clickedCard' : ''}`}>
@@ -77,6 +91,19 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
                     <p>{item.name}</p>
                 </div>
                 <div className='flex gap-2 '>
+                    {isHavePdf &&
+                        <div className={`border border-black rounded-full flex justify-center w-12 h-12 cursor-pointer text-center items-center ${item.pdf ? 'bg-primary text-white' : ''}`}>
+                            <label   className='cursor-pointer' htmlFor="fileInput">PDF</label>
+                            <input type="file" id="fileInput" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
+                    }
+                    {
+                        item.pdf &&
+                        <div className={`border border-black rounded-full flex justify-center w-12 h-12  text-center items-center bg-primary cursor-pointer text-white`} onClick={() => openPdf(item.pdf)}>
+                            <label className='cursor-pointer' style={{fontSize:'12px'}}>צפייה ב PDF</label>
+                        </div>
+
+                    }
                     {
                         isExercise &&
                         <div className=' border border-black rounded-full flex justify-center w-12 h-12 hover:bg-white'>
@@ -89,6 +116,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,level, clearArra
                     <div className='border border-black rounded-full flex justify-center w-12 h-12 hover:bg-white'>
                         <Image src={'/images/trash.svg'} width={25} height={25} priority alt='trash' className=' cursor-pointer rounded-lg p-1'onClick={() => handleRemove()}/>
                     </div>    
+
                 </div>    
             </div>  
             {editMode &&

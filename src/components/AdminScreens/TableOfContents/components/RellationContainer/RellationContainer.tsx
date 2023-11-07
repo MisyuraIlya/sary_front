@@ -18,7 +18,7 @@ interface RellationContainerProps {
   level: number;
   parentId: number;
   isExercise: boolean;
-
+  isHavePdf: boolean;
 }
 
 const RellationContainer: FC<RellationContainerProps> = ({
@@ -26,7 +26,8 @@ const RellationContainer: FC<RellationContainerProps> = ({
   title,
   level,
   parentId,
-  isExercise
+  isExercise,
+  isHavePdf
 }) => {
   const { CourseMethods } = useCourse();
   const [activeAdd, setActiveAdd] = useState(false);
@@ -34,7 +35,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
   const [filterArr, setFilterArr] = useState<ICourse[]>([]);
   const [loading, setLoading] = useState(false)
 
-  const [changedArray, setChangedArray] = useState<{ orden: number; id: number; name: string; grade: string; image: string; color: string; published: boolean; level: number; totalChildren?: number | undefined; children?: ICourse[] | undefined; }[]>([]);
+  const [changedArray, setChangedArray] = useState<{ pdf:string, orden: number; id: number; name: string; grade: string; image: string; color: string; published: boolean; level: number; totalChildren?: number | undefined; children?: ICourse[] | undefined; }[]>([]);
   const { register: registerAdd, handleSubmit: handleAdd } = useForm<Inputs>();
 
   const onSubmitAdd: SubmitHandler<Inputs> = (data) => {
@@ -173,7 +174,7 @@ const RellationContainer: FC<RellationContainerProps> = ({
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <RellationCard item={item}  key={index} isExercise={isExercise} level={level} clearArray={clearArray}/>
+                              <RellationCard item={item}  key={index} isHavePdf={isHavePdf} isExercise={isExercise} level={level} clearArray={clearArray}/>
                             </div>
                           )}
                         </Draggable>

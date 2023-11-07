@@ -69,7 +69,6 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                     CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
                 }
 
-                console.log('defaultBackground',checkIsThereMergedBackground,defaultBackground)
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
                 const getStoryNumber = getStroryNumber(item)

@@ -116,6 +116,19 @@ export const CourseService = {
                 onErrorAlert(e.response.data.message, '')
             }
         }
+    },
+
+    async savePdf(file: File, id: number) {
+        try {
+            const formData = new FormData();
+            formData.append('file', file); 
+            const response: AxiosResponse<ResponseUploadedImage> = await axios.post(`/courses/pdf/${id}`, formData);
+            return response.data;
+        } catch(e: any) {
+            if (e.response) {
+                onErrorAlert(e.response.data.message, '')
+            }
+        }
     }
 
     

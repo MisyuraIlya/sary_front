@@ -155,9 +155,26 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handle
                         <div className='bg-green text-white rounded-md cursor-pointer px-10 py-2 shadow' onClick={() => ExerciseMethods.handleSaveUpload()}>שמור</div>
                     }
 
-                    <div className='relative flex items-center'>
+                    <div className='relative flex items-center gap-1'>
                         <div className=''>
-                            {exercises?.youtube_link && exercises?.pdf && <Image src={`/images/v.svg`} width={15} height={15} alt='v' />}
+                            { exercises?.pdf && 
+                                <div>
+                                    <div className='flex items-center justify-center'>
+                                        <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
+                                    </div>    
+                                    <p>PDF</p>
+                                </div>    
+                            }
+                        </div>
+                        <div className=''>
+                            {exercises?.youtube_link && 
+                            <div>
+                                <div className='flex items-center justify-center'>
+                                    <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
+                                </div>    
+                                <p>סרטון</p>
+                            </div>   
+                            }
                         </div>
                         {/* { choosedModule === 1 && */}
                             <div className={`p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} > 
