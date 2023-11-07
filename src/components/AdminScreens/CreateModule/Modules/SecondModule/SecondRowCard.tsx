@@ -146,7 +146,7 @@ type SecondRowCard = {
             {row?.module_type === 'doneSplitedScreenRight' && <DoneSplitedScreenRight CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
             {row?.module_type === 'splitedScreenLeft' && <SplitedScreenLeft CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
             {row?.module_type === 'doneSplitedScreenLeft' && <DoneSplitedScreenLeft CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
-        
+            
 
         
         </>
