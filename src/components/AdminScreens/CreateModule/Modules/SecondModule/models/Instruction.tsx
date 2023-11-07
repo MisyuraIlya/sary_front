@@ -8,7 +8,6 @@ type InstructionProps = {
     register: any;
     col: any;
     row: any;
-    
     setValue: any
     exerciseId: number
     dataObjectId: number

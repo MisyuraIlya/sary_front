@@ -9,6 +9,7 @@ import SideBars from '@/components/SideBars/SideBars';
 import SideBarIcons from './components/SideBarIcons';
 import ExplanationModule from './components/ExplanationModule';
 import { getExplanationData } from './helpers/getExplanationData';
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 type SecondExerciseProps = {
     data: ISecondModuleSubExercises
     register: any
@@ -32,7 +33,8 @@ type SecondExerciseProps = {
 const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    
+    const {choosedModule} = useExercise()
+    console.log('choosedModule',choosedModule)
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
         let moduleTypeCount = 0;
@@ -82,7 +84,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
     };
 
     return (
-        <table  className={`myTable w-full ${checkIsIcon && 'bg-[#005CBB]'} ${checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
+        <table  className={`myTable w-full ${choosedModule == 3 && 'bg-white'} ${checkIsIcon && 'bg-[#005CBB]'} ${ checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
                 <tbody>
                     <tr className='w-full'>

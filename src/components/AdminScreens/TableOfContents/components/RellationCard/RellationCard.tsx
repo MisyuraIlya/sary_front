@@ -81,7 +81,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
 
 
     const openPdf = (pdf: string) => {
-            window.open(`http://localhost:4000/${pdf}`, '_blank', 'noopener');
+            window.open(`http://3.74.228.194:4000/${pdf}`, '_blank', 'noopener');
     }
 
     return (
