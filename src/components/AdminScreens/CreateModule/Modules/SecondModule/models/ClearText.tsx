@@ -20,9 +20,9 @@ type TextModuleProps = {
 const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
+    // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
     // formattedValue = value?.replaceAll(';', "<br/>");
-    const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+    const [htmlTag, setHtmlTal] = useState<string>(value)
 
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
@@ -41,7 +41,6 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
-      console.log('htmlTag',htmlTag)
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
 
     return (
@@ -67,7 +66,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
             <div className='text-right  px-4 py-4  fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: htmlTag }}
+                    dangerouslySetInnerHTML={{ __html: value }}
                     className=""
                 />
             </div>

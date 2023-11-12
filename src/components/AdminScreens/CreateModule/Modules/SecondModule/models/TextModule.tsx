@@ -21,9 +21,9 @@ type TextModuleProps = {
 const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
+    // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
     // formattedValue = value?.replaceAll(';', "<br/>");
-    const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+    const [htmlTag, setHtmlTal] = useState<string>(value)
 
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
