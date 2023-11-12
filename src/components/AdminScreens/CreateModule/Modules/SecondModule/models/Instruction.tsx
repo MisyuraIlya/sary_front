@@ -22,7 +22,7 @@ const Instruction: FC<InstructionProps> = ({ checkIsIcon, CustomTableWidth, chec
     // Replace newlines "\n" with "<br>" tags
     const {isOnlineXml} = useExercise()
     let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    formattedValue = value?.replaceAll(';', "<br/>");
+    // let formattedValue = value?.replaceAll(';', "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
 
     const handleUpdateHtml = (updatedHtml: string) => {
