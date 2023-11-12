@@ -31,7 +31,6 @@ const Instruction: FC<InstructionProps> = ({ checkIsIcon, CustomTableWidth, chec
 
 
     useEffect(() => {
-        console.log('htmlTag',htmlTag)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'instruction');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
