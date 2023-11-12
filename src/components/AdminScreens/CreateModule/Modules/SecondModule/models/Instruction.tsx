@@ -21,8 +21,8 @@ type InstructionProps = {
 const Instruction: FC<InstructionProps> = ({ checkIsIcon, CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
     // Replace newlines "\n" with "<br>" tags
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    // let formattedValue = value?.replaceAll(';', "<br/>");
+    // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
+    let formattedValue = value?.replaceAll('@', "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
 
     const handleUpdateHtml = (updatedHtml: string) => {
