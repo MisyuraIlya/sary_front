@@ -23,7 +23,9 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer);
     }, [col, row, setValue, exerciseId, answer, dataObjectId]);
 
+    console.log('answer',answer)
     const answers = answer?.split(';').map(item => item.trim());
+    console.log('answers2',answers)
     return (
         <th 
         style={{width:'100%',minWidth: isTable ? `${CustomTableWidth}px` : '',}}
