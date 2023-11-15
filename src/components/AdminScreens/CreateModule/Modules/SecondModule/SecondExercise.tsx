@@ -116,7 +116,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                         const isExistInstruction = rows?.collectionRow.some((item) => item?.module_type === 'instruction' && item?.collectionValues[0]?.value !== null);
                         const isExistSubInstruction = rows?.collectionRow.some((item) => item?.module_type === 'subInstruction' && item?.collectionValues[0]?.value !== null);
                         const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'imageRight' && item?.collectionValues[0]?.value !== null);
-                        const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
+                        // const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
                         const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
                         const isExplanationRow =  rows?.collectionRow.some((item) => item?.module_type === 'explanation' && item?.collectionValues[0]?.value !== null);

@@ -22,7 +22,7 @@ type ExplanationSplitedProps = {
 const ExplanationSplited:FC<ExplanationSplitedProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml} = useExercise()
-    let formattedValue = value?.replaceAll(' ; ', '<br>');
+    let formattedValue = value?.replaceAll('@', '<br>');
     // console.log('formattedValue',formattedValue)
     // if(!formattedValue.includes('&quot;')){
     //     console.log('true',true)

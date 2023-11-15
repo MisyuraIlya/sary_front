@@ -66,7 +66,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
             <div className='text-right  px-4 py-4  fontSizeExercise'>
                 <div
                     // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: value }}
+                    dangerouslySetInnerHTML={{ __html: htmlTag }}
                     className=""
                 />
             </div>
