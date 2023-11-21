@@ -35,7 +35,7 @@ const ThirdForm:FC<ThirdFormProps> = ({handleSubmitForm,onSubmit, register, setV
     const {resRight, resLeft, resRegular} = findSplitedScreens((exercises as any)?.exercises)
 
     return (
-        <div className='grid grid-cols-12'>
+        <div className='grid grid-cols-12 gap-4'>
             <div style={{gridColumn: 'span 6 / span 6'}}>
                 <SecondModuleShared exercises={resRight} findDraftsArray={findDraftsArray} register={register} setValue={setValue} control={control}/>
             </div>

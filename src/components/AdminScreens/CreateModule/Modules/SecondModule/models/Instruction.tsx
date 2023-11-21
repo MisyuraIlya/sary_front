@@ -40,7 +40,7 @@ const Instruction: FC<InstructionProps> = ({ checkIsIcon, CustomTableWidth, chec
     
     return (
         <th 
-            className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} ${checkIsIcon && 'bg-[#005CBB] text-white'} text-[23px] leading-10`} 
+            className={` bg-mainExerciseBg ${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} ${checkIsIcon && 'bg-[#005CBB] text-white'} text-[23px] leading-10`} 
             style={{
                 minWidth: isTable ? `${CustomTableWidth}px` : '',
             }}

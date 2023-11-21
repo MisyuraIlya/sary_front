@@ -74,7 +74,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const getStoryNumber = getStroryNumber(item)
                 const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
                 return (
-                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-white'} ${isDragModule && 'pr-[65px]'}`} key={indexx}>
+                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-[#EDF2F9]'} ${isDragModule && 'pr-[65px]'}`} key={indexx}>
                         {
                             isDragModule && 
                             <DragAndDropModule item={item} />
@@ -116,7 +116,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
 
                         {isHaveStoryInstruction && 
                         ( isStory && getStoryNumber === choosedTab ) &&
-                            <div style={{gridColumn: 'span 12 / span 12'}} className='mr-10 mt-2'>
+                            <div style={{gridColumn: 'span 12 / span 12'}} className=''>
                                 <TabsModule tabsCounter={TabCounter}/>
                             </div>    
                         }

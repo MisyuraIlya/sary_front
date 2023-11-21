@@ -18,7 +18,10 @@ const TabsModule:FC<TabsModuleProps> = ({tabsCounter}) => {
       ));
 
     return (
-        <div className='flex gap-5 w-full'>
+        <div className='flex gap-5 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
+            <div className='mr-4'>
+
+            </div>
             {elements}
         </div>
     );

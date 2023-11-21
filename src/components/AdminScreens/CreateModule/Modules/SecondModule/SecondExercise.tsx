@@ -34,13 +34,30 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {choosedModule} = useExercise()
-    console.log('choosedModule',choosedModule)
     const CheckLineIsWordOrInstructionOrEmpty = (array: ISecondModuleSubExercises) => {
         let moduleTypes = ["", "word", "instruction"];
         let moduleTypeCount = 0;
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
-                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '' ) {
+                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '' && subItem?.module_type !== 'properties' && subItem?.module_type !== 'doneSplitedScreenLeft' ) {
+                    moduleTypeCount++
+                    console.log('item',item)
+                }
+            })
+        })
+        console.log('moduleTypeCount',moduleTypeCount)
+        if(moduleTypeCount === 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const CheckLineIsWordOrInstructionModule3= (array: ISecondModuleSubExercises) => {
+        let moduleTypeCount = 0;
+        array.collectionsRows.map((item) => {
+            item.collectionRow.map((subItem) => {
+                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'storyInstruction' && subItem?.module_type !== '' && subItem?.module_type !== 'icon' && subItem?.module_type !== 'splitedScreenRight' && subItem?.module_type !== 'instruction' ) {
                     moduleTypeCount++
                 }
             })
@@ -68,6 +85,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
     const checkIsAllCategoryColsEmpty = data.collectionsCols.every((item) => !item.title || item.title.length === 0);
     const checkLineColor = CheckLineIsWordOrInstructionOrEmpty(data)
+    const checkModule3BgColor = CheckLineIsWordOrInstructionModule3(data)
     const checkIsIcon = checkIsIconModule(data)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.exercise`, exerciseId);
@@ -84,7 +102,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
     };
 
     return (
-        <table  className={`myTable w-full ${choosedModule == 3 && 'bg-white'} ${checkIsIcon && 'bg-[#005CBB]'} ${ checkLineColor ? 'bg-mainExerciseBg' : 'bg-exerciseCardBg'} ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
+        <table  className={`myTable w-full  ${checkModule3BgColor && 'bg-[#005CBB]'} ${ checkLineColor ? 'bg-mainExerciseBg' : ''}  ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
                 <tbody>
                     <tr className='w-full'>
@@ -132,9 +150,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
                             { !checkIsThereMergedBackground &&
-                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full`}></div>                        
+                                <div className={`h-1 absolute z-1 w-full`}></div>                        
                             }
-                            <tr className={`w-full ${isStory && 'bg-[#EDF2F9]'}`} key={keys} >
+                            <tr className={`w-full `} key={keys} >
                                 
                                 {rows?.collectionRow.map((row, index) => 
                                     <>

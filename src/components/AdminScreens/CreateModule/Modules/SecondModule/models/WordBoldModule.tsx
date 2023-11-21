@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect} from 'react';
 
 type WordModuleProps = {
@@ -17,6 +18,7 @@ type WordModuleProps = {
 
 const WordBoldModule:FC<WordModuleProps> = ({isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
 
+    const {choosedModule} = useExercise()
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);

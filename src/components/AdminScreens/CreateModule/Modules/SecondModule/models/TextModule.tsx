@@ -20,7 +20,7 @@ type TextModuleProps = {
 }
 const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
-    const {isOnlineXml} = useExercise()
+    const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
     let formattedValue = value?.replaceAll('@', "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
@@ -45,7 +45,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         text-[23px]
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
+        ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
         `}
         
         style={{

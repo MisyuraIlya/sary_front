@@ -23,8 +23,8 @@ const OriginModule:FC<OriginModuleProps> = ({CustomTableWidth, setValue, exercis
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <div>
-            
+        <div style={{paddingRight:'30px'}}>
+            <p style={{color:'#00000080'}}>{value}</p>
         </div>
     );
 };

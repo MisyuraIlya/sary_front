@@ -20,10 +20,10 @@ const StoryHeadline:FC<StoryHeadlineProps> = ({CustomTableWidth, setValue, exerc
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue, exerciseId, dataObjectId,value]);
+    }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <div>
+        <div >
             <h1 className='text-4xl font-bold'>{value}</h1>
         </div>
     );

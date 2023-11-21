@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect} from 'react';
 
 type WordModuleProps = {
@@ -18,6 +19,8 @@ type WordModuleProps = {
 }
 
 const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+    
+    const {choosedModule} = useExercise()
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`,row)
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
@@ -29,11 +32,13 @@ const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanatio
     return (
         <th 
         className={`
+        
         ${checkIsThereImage ? 'h-full justify-center text-center w-12' : 'h-full justify-center text-center w-12 '} 
         ${(isTable || isClearTable) ? 'onlyWordAndOrden' : 'onlyWordAndOrden'} 
         ${isExplanationRowSplited && 'bg-white'}
         ${isStoryInstruction && 'bg-[#005BBB] specific-th'}
-        specific-th
+        ${choosedModule !== 3 && 'specific-th '}
+        
         `}  
         style={{
             minWidth:'70px', 

@@ -66,7 +66,7 @@ const BoldChanger:FC<BoldChangerProps> = ({html, handleUpdateHtml}) => {
 
     return (
         <>
-            <div className='absolute top-[-10px] z-40 cursor-pointer ' onClick={() => setIsOpen(!isOpen)}>
+            <div className='absolute top-[-10px] z-40 cursor-pointer  ' onClick={() => setIsOpen(!isOpen)}>
                 <Image src={`/images/settings_clear.svg`} alt='settings' width={27} height={27}/>
             </div>
             {isOpen &&

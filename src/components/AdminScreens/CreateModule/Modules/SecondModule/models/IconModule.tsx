@@ -18,10 +18,10 @@ type IconModuleProps = {
 const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
 
-
+    console.log('value',value)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'icon');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -29,7 +29,7 @@ const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectio
 
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
 
-      console.log('value',value, value == 'דיון')
+      console.log('value',value,)
       const handleIcon = () => {
         if(value == 'דיון') {
             return 'conversation.svg'
@@ -47,23 +47,18 @@ const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectio
       }
     return (
         <th className={`
-        relative
+        bg-[#005CBB]
+        pt-2
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
-        leading-[60px]
-        `}
         
-        style={{
-            verticalAlign: 'top', 
-            textAlign: 'right',   
-            minWidth: isTable ? `${CustomTableWidth}px` : '',
-        }}
+        `}
         >
  
 
-            <div className='text-right  px-4 py-4  fontSizeExercise'>
-                <Image src={'/images/' + handleIcon()} width={70} height={70} alt='image' />
+            <div className=' text-right  fontSizeExercise pr-4 pt-1 flex items-center justify-center h-full'>
+                <Image src={'/images/' + handleIcon()} width={50} height={50} alt='image' />
             </div>
         </th>
     );

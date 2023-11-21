@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect} from 'react';
 
 type OrdenModuleProps = {
@@ -16,6 +17,7 @@ type OrdenModuleProps = {
     index: number
 }
 const OrdenModule:FC<OrdenModuleProps> = ({index, isExplanationRowSplited, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable}) => {
+    const {choosedModule} = useExercise()
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'orden');
@@ -34,12 +36,11 @@ const OrdenModule:FC<OrdenModuleProps> = ({index, isExplanationRowSplited, Custo
                 
             }} 
             className={`
-                ${checkIsThereImage ? '' : 'specific-th'} 
                 ${(isTable || isClearTable) ? '' : ''} 
                 pt-4
                 ${isExplanationRowSplited && 'bg-white'}
-                specific-th
                 `} 
+
             >
             <div className='text-center flex justify-center items-center py-1'>
                 <div style={(index == 1 ) ? {background:'#002536', color:'white'} : {background:'#BACEE9'}} className='px-2 rounded-md'>

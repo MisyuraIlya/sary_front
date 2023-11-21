@@ -24,9 +24,8 @@ const StoryInstruction:FC<StoryInstructionProps> = ({CustomTableWidth, setValue,
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
       
     return (
-        <th className='bg-[#005BBB] w-full text-right text-white h-[68px]'>
-            <div className='flex  gap-3 items-center mr-5'>
-                <Image src={'/images/story.svg'} width={50} height={50} alt='story' />
+        <th className='bg-[#005BBB] text-right text-white py-7'>
+            <div className='flex items-center mr-5 justify-center '>
                 <h4 >{value}</h4>
             </div>
         </th>
