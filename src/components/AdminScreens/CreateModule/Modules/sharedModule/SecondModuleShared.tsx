@@ -12,6 +12,7 @@ import SecondExercise from '../SecondModule/SecondExercise';
 import TabsModule from '../SecondModule/components/TabsModule';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { tabCounter } from '../SecondModule/helpers/tabCounter';
+import { isStoryFunc } from '../SecondModule/helpers/isStoryModule';
 type SecondModuleSharedProps = {
     exercises: ISecondModuleExercises[]
     findDraftsArray: any
@@ -72,7 +73,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 }
 
                 let calulcatedImageColSpan = 12 - CustomImageCol
-                const isStory = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'story')))
+                const isStory = isStoryFunc(exercises)
                 const getStoryNumber = getStroryNumber(item)
                 const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
                 return (

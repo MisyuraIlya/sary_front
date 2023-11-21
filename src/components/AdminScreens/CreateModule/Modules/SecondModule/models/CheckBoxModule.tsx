@@ -35,7 +35,6 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
                 {values?.map((item,index) =>  {
                     setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues.${index}.value`, item.value);
                     const isTheAnswer = answers.includes(item.value)
-                    console.log('isTheAnswer',item.value, isTheAnswer)
                     const isLastItem = index === values.length - 1
                     if(item.value){
                         return (
