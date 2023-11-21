@@ -11,6 +11,7 @@ import ChartModule from '../SecondModule/models/ChartModule';
 import SecondExercise from '../SecondModule/SecondExercise';
 import TabsModule from '../SecondModule/components/TabsModule';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
+import { tabCounter } from '../SecondModule/helpers/tabCounter';
 type SecondModuleSharedProps = {
     exercises: ISecondModuleExercises[]
     findDraftsArray: any
@@ -39,7 +40,8 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
 
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
-                const TabCounter = 2;
+                const tes = tabCounter(exercises);
+                const TabCounter = tes;
 
                 let CustomTableWidth = 200;
                 let CustomImageCol = 4 ;

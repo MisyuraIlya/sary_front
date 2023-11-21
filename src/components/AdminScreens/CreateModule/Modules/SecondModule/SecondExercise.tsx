@@ -41,11 +41,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
             item.collectionRow.map((subItem) => {
                 if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'instruction' && subItem?.module_type !== 'subInstruction' && subItem?.module_type !== '' && subItem?.module_type !== 'properties' && subItem?.module_type !== 'doneSplitedScreenLeft' ) {
                     moduleTypeCount++
-                    console.log('item',item)
                 }
             })
         })
-        console.log('moduleTypeCount',moduleTypeCount)
         if(moduleTypeCount === 0) {
             return true
         } else {

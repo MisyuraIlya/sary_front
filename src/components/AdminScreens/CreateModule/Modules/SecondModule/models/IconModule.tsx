@@ -18,7 +18,6 @@ type IconModuleProps = {
 const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
 
-    console.log('value',value)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'icon');
@@ -29,7 +28,6 @@ const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectio
 
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
 
-      console.log('value',value,)
       const handleIcon = () => {
         if(value == 'דיון') {
             return 'conversation.svg'
