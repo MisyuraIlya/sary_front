@@ -27,7 +27,7 @@ const options = [
 
   
 
-const HeadManager:FC<HeadManager> = ({control, handleSubmitForm,onSubmit, handleSidebarToggle}) => {
+const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handleSidebarToggle}) => {
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 

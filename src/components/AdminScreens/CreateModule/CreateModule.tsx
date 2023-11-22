@@ -50,7 +50,7 @@ const CreateModule = () => {
   };
 
   
-  
+  console.log('isSidebarOpen',isSidebarOpen)
   useEffect(() => {
     if (exercises) {
       setValue('title', exercises?.title); 
@@ -64,9 +64,6 @@ const CreateModule = () => {
     }
   }, [exercises, moduleId, setValue]);
 
-
-
-  
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -74,15 +71,23 @@ const CreateModule = () => {
               <div style={{boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.25)', marginLeft:'15px'}}>
                 <TableManager handleSubmitForm={handleSubmitForm} onSubmit={onSubmit} register={register} setValue={setValue} control={control}/>
               </div>
+
               {choosedModule === 1 &&
                 <SideBar isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose} register={register} setValue={setValue}/>            
               }
+
               {choosedModule === 21 && 
                 <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
               }
+
               {choosedModule === 2 && 
                 <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
               }
+
+              {choosedModule === 3 && 
+                <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
+              }
+
             </AdminLayout>
         </Meta>
     );

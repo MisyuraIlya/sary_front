@@ -23,7 +23,6 @@ const StyledDrawer = styled(Drawer)<{ isPrimaryBg?: boolean }>(
 );
 
 const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children, isPrimaryBg}) => {
-    
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -40,7 +39,6 @@ const SideBars:FC <RighSideBarProps> = ({anchor , isOpen , onClose, children, is
       }
     }
   };
-
 
 
     return (
