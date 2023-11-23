@@ -35,17 +35,15 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'clearText');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
-      console.log('firstIdTextModuleee',firstIdTextModule,isClearTable)
     return (
         <th className={`
-        specific-th 
         relative
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
@@ -63,7 +61,7 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-4 py-4  fontSizeExercise'>
+            <div className='text-right  px-4 py-4  fontSizeExercise '>
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}

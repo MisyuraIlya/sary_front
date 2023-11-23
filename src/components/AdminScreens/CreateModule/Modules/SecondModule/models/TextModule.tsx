@@ -43,6 +43,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         <th className={`
         relative
         text-[23px]
+        
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
