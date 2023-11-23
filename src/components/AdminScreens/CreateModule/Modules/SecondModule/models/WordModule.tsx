@@ -37,6 +37,7 @@ const WordModule:FC<WordModuleProps> = ({index, isStoryInstruction, isExplanatio
         ${isExplanationRowSplited && 'bg-white'}
         ${isStoryInstruction && 'bg-[#005BBB] specific-th'}
         ${choosedModule !== 3 && 'specific-th'}
+        specific-th
         `}  
         style={{
             minWidth:'70px', 

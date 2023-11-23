@@ -36,6 +36,7 @@ const OrdenModule:FC<OrdenModuleProps> = ({index, isExplanationRowSplited, Custo
                 
             }} 
             className={`
+                specific-th
                 ${(isTable || isClearTable) ? '' : ''} 
                 pt-4
                 ${isExplanationRowSplited && 'bg-white'}
