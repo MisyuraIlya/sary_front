@@ -127,12 +127,12 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           fetchOnline(moduleId)
           onSuccessAlert('תרגיל נשמר בהצלחה!','')
           setLoading(false)
-
+          location.reload()
         },2000)
       } catch(e) {
         console.log('error',e)
       } finally {
-        location.reload()
+        
       }
     }
     
