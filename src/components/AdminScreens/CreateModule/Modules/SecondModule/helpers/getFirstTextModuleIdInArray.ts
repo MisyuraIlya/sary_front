@@ -3,7 +3,7 @@ import { collectionRow } from "@/types/ModulesTypes.ts/SecondModule.interface";
 export const getFirstTextModuleIdInArray = (arr: collectionRow[]) => {
     let res = '';
     for(let i = 0; i < arr.length ; i++) {
-        if(arr[i]?.module_type === 'text'){
+        if(arr[i]?.module_type === 'text' || arr[i]?.module_type === 'clearText'){
              if(!res) {
                 res = arr[i]?.collectionValues[0]?.value;
              }

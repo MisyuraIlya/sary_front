@@ -9,7 +9,7 @@ type CheckBoxModuleProps = {
     exerciseId: number
     dataObjectId: number
     checkIsThereImage: boolean
-    answer:Array<collectionValues>
+    answer:collectionValues[]
     isTable: boolean
     isClearTable: boolean
     CustomTableWidth: number
@@ -20,12 +20,12 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'checkBox');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer);
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers[0].value`, answer[0]?.value);
     }, [col, row, setValue, exerciseId, answer, dataObjectId]);
-
-    // const answers = answer?.split(';').map(item => item.trim());
-    // console.log('answers',answers,answer)
-    const answers = answer.map((item) => { return item.value})
+    
+    const answers = answer[0]?.value?.split(';').map(item => item.trim());
+    // const answers = answer.map((item) => { return item.value})
+    // console.log('answers',answers)
     return (
         <th 
         style={{width:'100%',minWidth: isTable ? `${CustomTableWidth}px` : '',}}

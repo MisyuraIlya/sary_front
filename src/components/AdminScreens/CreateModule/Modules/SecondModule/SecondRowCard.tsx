@@ -80,7 +80,6 @@ type SecondRowCard = {
     checkIsIcon: boolean
 }
     const SecondRowCard:FC<SecondRowCard> = ({checkIsIcon, isStoryInstruction, isExplanationRowSplited, CustomSelectBoxWidth, CustomTableWidth, firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues, collectionsCols, CustomInputWidth }) => {
-
     return (
         <>
             {row?.module_type === 'input' && <InputModule CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth}isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}

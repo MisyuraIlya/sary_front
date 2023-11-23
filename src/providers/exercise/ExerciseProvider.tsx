@@ -132,7 +132,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       } catch(e) {
         console.log('error',e)
       } finally {
-
+        location.reload()
       }
     }
     

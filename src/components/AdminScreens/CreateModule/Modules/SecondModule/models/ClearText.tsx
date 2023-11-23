@@ -42,15 +42,15 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
-
+      console.log('firstIdTextModuleee',firstIdTextModule,isClearTable)
     return (
         <th className={`
+        specific-th 
         relative
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
         leading-[60px]
-        
         `}
         
         style={{
