@@ -12,13 +12,12 @@ type instructionWhiteProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable : boolean
-    firstIdinstructionWhite: string
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
 
 }
-const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth,firstIdinstructionWhite, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -46,7 +45,6 @@ const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth,firstIdins
         bg-white
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdinstructionWhite === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
         `}
         
         style={{
