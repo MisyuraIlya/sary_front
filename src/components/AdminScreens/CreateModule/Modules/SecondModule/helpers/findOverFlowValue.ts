@@ -11,7 +11,7 @@ export const findOverFlowValue = (exercises : ISecondModuleExercises[]): number 
             item.collectionsRows.map((item2,index2) => {
                 item2.collectionRow.map((item3,index3) => {
                     if(item3?.module_type === 'overflow') {
-                        value = +item3.collectionValues[0].value
+                        value = +item3.collectionValues[0]?.value
                     }
               
                 })
