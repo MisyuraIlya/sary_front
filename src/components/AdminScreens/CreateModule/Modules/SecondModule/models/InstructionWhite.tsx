@@ -2,7 +2,7 @@ import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface'
 import React, {FC, useEffect, useState} from 'react';
 import BoldChanger from '../components/BoldChanger';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-type TextModuleProps = {
+type instructionWhiteProps = {
     value: string
 
     col: any;
@@ -12,25 +12,26 @@ type TextModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable : boolean
-    firstIdTextModule: string
+    firstIdinstructionWhite: string
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
 
 }
-const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth,firstIdinstructionWhite, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
     let formattedValue = value?.replaceAll('@', "<br/>");
     const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
     }
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'instructionWhite');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -42,9 +43,10 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         <th className={`
         relative
         text-[23px]
+        bg-white
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
+        ${(firstIdinstructionWhite === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
         `}
         
         style={{
@@ -58,9 +60,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-2 py-4 fontSizeExercise'
-            style={choosedModule ? {paddingLeft:'70px'}: {}}
-            >
+            <div className='text-right  px-4 py-4 fontSizeExercise ' >
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
@@ -71,4 +71,4 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
     );
 };
 
-export default TextModule;
+export default InstructionWhite;

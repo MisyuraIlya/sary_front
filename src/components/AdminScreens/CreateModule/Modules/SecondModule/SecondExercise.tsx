@@ -51,20 +51,30 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
         }
     }
 
-    const CheckLineIsWordOrInstructionModule3= (array: ISecondModuleSubExercises) => {
-        let moduleTypeCount = 0;
+    const isIcon1Func = (array: ISecondModuleSubExercises): boolean => {
+        let isIcon1 = false;
         array.collectionsRows.map((item) => {
             item.collectionRow.map((subItem) => {
-                if(subItem?.module_type !== 'word' &&  subItem?.module_type !== 'orden' && subItem?.module_type !== 'storyInstruction' && subItem?.module_type !== '' && subItem?.module_type !== 'icon' && subItem?.module_type !== 'splitedScreenRight' && subItem?.module_type !== 'instruction' ) {
-                    moduleTypeCount++
+                if(subItem?.module_type == 'icon1') {
+                    isIcon1= true
                 }
             })
         })
-        if(moduleTypeCount === 0) {
-            return true
-        } else {
-            return false
-        }
+
+        return isIcon1;
+    }
+
+    const isIcon2Func = (array: ISecondModuleSubExercises): boolean => {
+        let isIcon2 = false;
+        array.collectionsRows.map((item) => {
+            item.collectionRow.map((subItem) => {
+                if(subItem?.module_type == 'icon2') {
+                    isIcon2= true
+                }
+            })
+        })
+
+        return isIcon2;
     }
 
     const checkIsIconModule = (array: ISecondModuleSubExercises) => {
@@ -72,7 +82,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
         
         array.collectionsRows.forEach((item) => {
             item.collectionRow.forEach((subItem) => {
-                if (subItem?.module_type === 'icon') {
+                if (subItem?.module_type == 'icon1') {
                     isThereIconModule = true
                 }
             })
@@ -83,7 +93,9 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
     const checkIsAllCategoryColsEmpty = data.collectionsCols.every((item) => !item.title || item.title.length === 0);
     const checkLineColor = CheckLineIsWordOrInstructionOrEmpty(data)
-    const checkModule3BgColor = CheckLineIsWordOrInstructionModule3(data)
+    const isIcon1 = isIcon1Func(data)
+    const isIcon2 = isIcon2Func(data)
+
     const checkIsIcon = checkIsIconModule(data)
     useEffect(() => {
         setValue(`exercises.${exerciseId}.exercise`, exerciseId);
@@ -100,7 +112,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
     };
 
     return (
-        <table  className={`myTable w-full  ${checkModule3BgColor && 'bg-[#005CBB]'} ${ checkLineColor ? 'bg-mainExerciseBg' : ''}  ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
+        <table  className={`myTable w-full  ${isIcon1 && 'bg-[#005CBB]'} ${isIcon2 && 'bg-[#3995F5]'} ${ checkLineColor ? 'bg-mainExerciseBg' : ''}  ${isTable ? 'tableModule' : ''}`} style={{borderSpacing:'0'}}>
             <div className='relative'>
                 <tbody>
                     <tr className='w-full'>
@@ -178,6 +190,8 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                                         isExplanationRowSplited={isExplanationRowSplited}
                                         isStoryInstruction={isStoryInstruction}
                                         checkIsIcon={checkIsIcon}
+                                        isIcon1={isIcon1}
+                                        isIcon2={isIcon2}
                                     />  
                                     </>
                                 )}

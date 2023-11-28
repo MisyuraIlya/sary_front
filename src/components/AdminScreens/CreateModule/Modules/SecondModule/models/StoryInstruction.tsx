@@ -24,7 +24,7 @@ const StoryInstruction:FC<StoryInstructionProps> = ({CustomTableWidth, setValue,
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
       
     return (
-        <th className='bg-[#005BBB] text-right text-white py-7'>
+        <th className='text-right text-white py-7'>
             <div className='flex items-center mr-5 justify-center '>
                 <h4 >{value}</h4>
             </div>

@@ -7,7 +7,7 @@ export const tabCounter = (item: ISecondModuleExercises[]): number => {
         item[propertyName].data.map((item2) => {
             item2.collectionsRows.map((item3) => {
                 item3.collectionRow.map((item4) => {
-                    if(item4.module_type === 'story'){
+                    if(item4?.module_type === 'story'){
                         counter = +item4.collectionValues[0].value
                     }
                 })

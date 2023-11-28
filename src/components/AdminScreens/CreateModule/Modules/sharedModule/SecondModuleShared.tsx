@@ -39,7 +39,8 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereImageVideo = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'video')))
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
-
+                const isBackgroundWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'instructionWhite')))
+                const checkIsThereBorder = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'border')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
                 const tes = tabCounter(exercises);
                 const TabCounter = tes;
@@ -77,7 +78,15 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const getStoryNumber = getStroryNumber(item)
                 const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
                 return (
-                <div className={` ${isStory ? 'bg-[#EDF2F9]' : 'bg-[#EDF2F9]'} ${isDragModule && 'pr-[65px]'}`} key={indexx}>
+                <div 
+                className={` 
+                ${isBackgroundWhite && 'bg-white border-sky-500 rounded-md'}
+                ${checkIsThereBorder && 'border '}
+                ${isStory ? 'bg-[#EDF2F9]' : 'bg-[#EDF2F9]'} 
+                ${isDragModule && 'pr-[65px]'}
+                `}  
+                key={indexx}
+                >
                         {
                             isDragModule && 
                             <DragAndDropModule item={item} />

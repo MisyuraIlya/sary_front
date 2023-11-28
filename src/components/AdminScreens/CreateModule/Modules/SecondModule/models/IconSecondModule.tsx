@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import Image from 'next/image';
-type IconModuleProps = {
+type IconSecondModuleProps = {
     value: string
     col: any;
     row: any;
@@ -15,12 +15,12 @@ type IconModuleProps = {
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
 }
-const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
+const IconSecondModule:FC<IconSecondModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
 
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'icon1');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'icon2');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: value}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -61,4 +61,4 @@ const IconModule:FC<IconModuleProps> = ({CustomTableWidth,isClearTable,collectio
     );
 };
 
-export default IconModule;
+export default IconSecondModule;

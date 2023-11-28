@@ -31,8 +31,8 @@ const SecondHead: FC<SecondHeadProps> = ({ checkIsIcon, CustomTableWidth, checkI
                 minWidth: isTable ? `${CustomTableWidth}px` : '',
             }}
             >
-            <div  className='text-right px-4 py-4'>
-                <h3 className='text-[35px] font-semibold'>{value}</h3>
+            <div  className='text-right px-4'>
+                <h3 className='text-[26px] font-semibold'>{value}</h3>
             </div>
         </th>
     );

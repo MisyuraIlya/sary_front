@@ -2,7 +2,7 @@ import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface'
 import React, {FC, useEffect, useState} from 'react';
 import BoldChanger from '../components/BoldChanger';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-type TextModuleProps = {
+type SongModuleProps = {
     value: string
 
     col: any;
@@ -12,13 +12,12 @@ type TextModuleProps = {
     dataObjectId: number
     checkIsThereImage: boolean
     isTable : boolean
-    firstIdTextModule: string
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
 
 }
-const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const SongModule:FC<SongModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -30,7 +29,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
 
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'text');
+        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'song');
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
@@ -44,7 +43,6 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         text-[23px]
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
         `}
         
         style={{
@@ -58,17 +56,20 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-2 py-4 fontSizeExercise'
-            style={choosedModule ? {paddingLeft:'70px'}: {}}
-            >
-                <div
-                    // onInput={handleInputChange}
-                    dangerouslySetInnerHTML={{ __html: htmlTag }}
-                    className=""
-                />
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <div className='w-[60%]'>
+                    <div className='text-right py-4 fontSizeExercise bg-white shadow-xl shadow-black/10 rounded-sm px-9'>
+                        <div
+                            // onInput={handleInputChange}
+                            dangerouslySetInnerHTML={{ __html: htmlTag }}
+                            className=""
+                        />
+                    </div>
+                </div>
             </div>
+
         </th>
     );
 };
 
-export default TextModule;
+export default SongModule;

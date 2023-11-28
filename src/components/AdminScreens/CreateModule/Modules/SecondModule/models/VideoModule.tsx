@@ -8,6 +8,7 @@ import { getVideoValue, getVideoId} from '../helpers/VideoModuleHelper';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 type ImageModuleProps = {
     data: ISecondModuleSubExercises[]
 }
@@ -35,7 +36,6 @@ const VideoModule:FC<ImageModuleProps> = ({data}) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm<VideoType>();
-
     const onSubmit: SubmitHandler<VideoType> = (dataInput) => {
         const id = getVideoId(data)
         if(id) {
