@@ -45,6 +45,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
+        ${choosedModule && 'text-justify'}
         `}
         
         style={{
