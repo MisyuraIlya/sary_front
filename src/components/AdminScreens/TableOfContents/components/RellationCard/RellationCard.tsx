@@ -77,6 +77,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
         if(file){
             CourseMethods.uploadFile(file, item.id)
         }
+        location.reload()
     };
 
 
@@ -93,8 +94,8 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
                 <div className='flex gap-2 '>
                     {isHavePdf &&
                         <div className={`border border-black rounded-full flex justify-center w-12 h-12 cursor-pointer text-center items-center ${item.pdf ? 'bg-primary text-white' : ''}`}>
-                            <label   className='cursor-pointer' htmlFor="fileInput">PDF</label>
-                            <input type="file" id="fileInput" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+                            <label className='cursor-pointer' htmlFor={`fileInput-${item.id}`}>PDF</label>
+                            <input type="file" id={`fileInput-${item.id}`} ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
                         </div>
                     }
                     {
