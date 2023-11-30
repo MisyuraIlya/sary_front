@@ -73,11 +73,11 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
     }
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if(file){
-            CourseMethods.uploadFile(file, item.id)
-        }
-        location.reload()
+        console.log('item',item.id)
+        // const file = event.target.files?.[0];
+        // if(file){
+        //     CourseMethods.uploadFile(file, item.id)
+        // }
     };
 
 
