@@ -15,8 +15,8 @@ const ExplanationModule: FC<ExplanationProps> = ({ htmlTag }) => {
   }, [htmlTag,replacedText]);
 
   return (
-    <div className="relative pt-10 pb-10  " >
-      <div className="absolute bg-white h-28 top-[-15px]  flex items-center">
+    <div className="relative" >
+      <div className="bg-white flex items-center pt-10 pb-10">
         <div className='w-[90vw]'>
           <div className="flex mr-[150px] ml-10" style={{border: `1px solid #D0D0D0`, borderRadius: '5px' }}>
             <div className="text-center flex pt-1 pr-5">
