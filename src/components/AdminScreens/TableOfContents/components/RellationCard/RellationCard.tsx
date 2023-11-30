@@ -23,7 +23,7 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
     const {CourseMethods, choosedLvl1, choosedLvl2 , choosedLvl3 ,choosedLvl4} = useCourse()
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const fileInputRef = useRef<HTMLInputElement>(null);
-
+    
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         CourseMethods.updateFunction(item.id,data.name,item.grade,item.level,item.published,item.orden)
         setEditMode(false)
@@ -38,7 +38,6 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
     const {query} = router
 
     const handleChoose = (id: number) => {
-        console.log('1')
         if(query.first && level === 2){
             router.push(`/admin/tableOfContents/${query.first}/${id}`, undefined, {scroll:false})
         } else if ((query.first && query.second) && level === 3) {
@@ -73,11 +72,11 @@ const RellationCard: FC<RellationCardProps> = ({item,isExercise,isHavePdf,level,
     }
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('item',item.id)
-        // const file = event.target.files?.[0];
-        // if(file){
-        //     CourseMethods.uploadFile(file, item.id)
-        // }
+        const file = event.target.files?.[0];
+        if(file){
+            CourseMethods.uploadFile(file, item.id)
+        }
+        location.reload()
     };
 
 
