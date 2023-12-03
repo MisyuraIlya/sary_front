@@ -34,11 +34,12 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereProperties= item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'properties')))
                 const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
                 const isClearTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'tableClear')))
+                const isIcon = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon1' || row?.module_type === 'icon2')))
                 const checkIsThereImageRightData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageRight')))
                 const checkIsThereImageLeftData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageLeft')))
                 const checkIsThereImageVideo = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'video')))
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
-                const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged')))
+                const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged'|| row?.module_type === 'storyHeadline' || row?.module_type === 'imageLeft' || row?.module_type === 'imageRight')))
                 const isBackgroundWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'instructionWhite')))
                 const checkIsThereBorder = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'border')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
@@ -106,6 +107,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
 
                             <ChartModule data={checkIsThereImageChart} />
                         }
+                        
 
                         <div  style={(checkIsThereImageRight || checkIsThereImageLeft) ?{gridColumn:`span ${calulcatedImageColSpan} / span ${calulcatedImageColSpan}`} : {gridColumn:'span 12 / span 12'}}>
                             {item[propertyName].data.map((exercise,dataObjectId) =>   {
@@ -115,6 +117,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                                     key={dataObjectId}
                                     className={`
                                     ${isTable ? 'inOnlyTable' : ''} 
+                                    
                                     ${(isStory && (getStoryNumber !== choosedTab) && 'hidden')}
                                     `}
                                     >

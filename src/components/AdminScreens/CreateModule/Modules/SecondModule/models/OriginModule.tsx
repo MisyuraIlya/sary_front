@@ -23,9 +23,7 @@ const OriginModule:FC<OriginModuleProps> = ({CustomTableWidth, setValue, exercis
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <div className='px-4 pb-7'>
-            <p style={{color:'#00000080'}}>{value}</p>
-        </div>
+        <div className='px-4 pt-5 pb-7' style={{color:'#00000080'}} dangerouslySetInnerHTML={{ __html: value }}/>
     );
 };
 

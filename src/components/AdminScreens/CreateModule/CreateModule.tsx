@@ -37,6 +37,7 @@ const CreateModule = () => {
   const { register, handleSubmit: handleSubmitForm, reset ,watch, formState: { errors } , setValue,control} = useForm<any>();
   
   const onSubmit = (data: any) => {
+    console.log('data',data)
     ExerciseMethods.createMoudle(data)
     reset()
   };
@@ -68,7 +69,7 @@ const CreateModule = () => {
         <Meta title='יצירת מודול'>
             <AdminLayout>
               <HeadManager control={control} handleSubmitForm={handleSubmitForm} onSubmit={onSubmit} handleSidebarToggle={handleSidebarToggle}/>  
-              <div style={{boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.25)', marginLeft:'15px'}}>
+              <div style={{boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.25)', marginLeft:'15px', paddingBottom:'100px'}}>
                 <TableManager handleSubmitForm={handleSubmitForm} onSubmit={onSubmit} register={register} setValue={setValue} control={control}/>
               </div>
 

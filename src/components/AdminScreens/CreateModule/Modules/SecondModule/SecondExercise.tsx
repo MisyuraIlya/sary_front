@@ -105,7 +105,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
 
     const handleSidebarToggle = () => {
         setIsSidebarOpen(!isSidebarOpen);
-      };
+    };
     
     const handleSidebarClose = () => {
         setIsSidebarOpen(false);
@@ -215,7 +215,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                             } 
 
                             { !checkIsThereMergedBackground &&
-                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full`}></div>                        
+                                <div className={`${isStory ? 'bg-[#EDF2F9]' : 'bg-white'}  h-1 absolute z-1 w-full bg-white`}></div>                        
                             }
                             </>
                         )}

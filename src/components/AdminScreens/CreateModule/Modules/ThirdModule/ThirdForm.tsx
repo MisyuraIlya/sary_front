@@ -35,7 +35,6 @@ const ThirdForm:FC<ThirdFormProps> = ({handleSubmitForm,onSubmit, register, setV
 
     const {resRight, resLeft, resRegular} = findSplitedScreens((exercises as any)?.exercises)
     const overflow = findOverFlowValue((exercises as any)?.exercises)
-    console.log('overflow',overflow)
     return (
         <div className='grid grid-cols-12 gap-4'>
             <div style={{gridColumn: 'span 6 / span 6', overflow: overflow !== 0 ? `auto` : 'none', height: overflow !== 0 ? overflow : ''}} >

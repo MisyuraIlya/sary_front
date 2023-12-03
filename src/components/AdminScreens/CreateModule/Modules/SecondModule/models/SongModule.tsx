@@ -58,7 +58,7 @@ const SongModule:FC<SongModuleProps> = ({CustomTableWidth, checkIsThereImage, va
 
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                 <div className='w-[60%]'>
-                    <div className='text-right py-4 fontSizeExercise bg-white shadow-xl shadow-black/10 rounded-sm px-9'>
+                    <div className=' py-4 fontSizeExercise bg-white shadow-xl shadow-black/10 rounded-sm px-9 text-justify '>
                         <div
                             // onInput={handleInputChange}
                             dangerouslySetInnerHTML={{ __html: htmlTag }}

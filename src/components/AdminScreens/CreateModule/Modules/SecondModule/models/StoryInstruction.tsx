@@ -24,9 +24,9 @@ const StoryInstruction:FC<StoryInstructionProps> = ({CustomTableWidth, setValue,
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
       
     return (
-        <th className='text-right text-white py-7'>
+        <th className='text-right text-white py-4'>
             <div className='flex items-center mr-5 justify-center '>
-                <h4 >{value}</h4>
+                <h4 style={{fontSize:'35px', fontWeight:'600', paddingTop:'10px'}}>{value}</h4>
             </div>
         </th>
     );

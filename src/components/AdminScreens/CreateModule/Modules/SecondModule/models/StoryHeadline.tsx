@@ -24,7 +24,7 @@ const StoryHeadline:FC<StoryHeadlineProps> = ({CustomTableWidth, setValue, exerc
 
     return (
         <div >
-            <h1 className='font-bold pt-6 px-4' style={{fontSize:'30px'}}>{value}</h1>
+            <div className='font-bold pt-6 px-4' style={{fontSize:'30px'}} dangerouslySetInnerHTML={{ __html: value }}/>
         </div>
     );
 };

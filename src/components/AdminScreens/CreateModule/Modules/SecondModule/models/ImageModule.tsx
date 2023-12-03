@@ -32,7 +32,7 @@ const ImageModule:FC<ImageModuleProps> = ({data, CustomImageCol, isStory, choose
     const imageLink = getImageValue(data)
     const isThereOnlyOneInLine = (data.length === 1  || data.length === 2)
     return (
-        <div className={`col-span-${CustomImageCol} ${isStory && !choosedTab && 'hidden'} `} >
+        <div className={`col-span-${CustomImageCol} ${isStory && !choosedTab && 'hidden'}`} >
             <div className={` py-4 h-full ${isThereOnlyOneInLine ? 'mr-16' : 'mr-4'}`}>
                 {selectedFile ? (
                     <div className=' h-full flex justify-center items-center bg-white relative'>

@@ -59,7 +59,7 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-2 py-4 fontSizeExercise'
+            <div className=' px-2 py-4 fontSizeExercise text-justify'
             style={choosedModule ? {paddingLeft:'70px'}: {}}
             >
                 <div
