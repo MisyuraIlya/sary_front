@@ -27,10 +27,11 @@ type SecondExerciseProps = {
     CustomInputWidth: number
     CustomSelectBoxWidth: number
     isStory: boolean
+    songPropetries: number
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {choosedModule} = useExercise()
@@ -192,6 +193,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({isStory, CustomSelectBoxWidth, 
                                         checkIsIcon={checkIsIcon}
                                         isIcon1={isIcon1}
                                         isIcon2={isIcon2}
+                                        songPropetries={songPropetries}
                                     />  
                                     </>
                                 )}

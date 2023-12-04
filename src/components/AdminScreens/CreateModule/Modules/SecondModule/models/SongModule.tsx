@@ -15,9 +15,10 @@ type SongModuleProps = {
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
+    songPropetries: number
 
 }
-const SongModule:FC<SongModuleProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const SongModule:FC<SongModuleProps> = ({songPropetries, CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -56,8 +57,8 @@ const SongModule:FC<SongModuleProps> = ({CustomTableWidth, checkIsThereImage, va
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                <div className='w-[60%]'>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}} className='pt-5 pb-5'>
+                <div style={{width:`${songPropetries}%`}}>
                     <div className=' py-4 fontSizeExercise bg-white shadow-xl shadow-black/10 rounded-sm px-9 text-justify '>
                         <div
                             // onInput={handleInputChange}

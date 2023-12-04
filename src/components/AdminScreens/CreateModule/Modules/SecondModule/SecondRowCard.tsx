@@ -60,6 +60,10 @@ import IconSecondModule from './models/IconSecondModule';
 import SongModule from './models/SongModule';
 import InstructionWhite from './models/InstructionWhite';
 import ToggleModule from './models/ToggleModule';
+import SecondHeadWhiteModule from './models/SecondHeadWhite';
+import IconDescriptionOne from './models/IconDescriptionOne';
+import IconDescriptionTwo from './models/IconDescriptionTwo';
+import CircleModule from './models/Circle';
 type SecondRowCard = {
     row: collectionRow 
     orden: number
@@ -85,8 +89,9 @@ type SecondRowCard = {
     checkIsIcon: boolean
     isIcon1: boolean
     isIcon2: boolean
+    songPropetries: number
 }
-    const SecondRowCard:FC<SecondRowCard> = ({checkIsIcon, isStoryInstruction, isExplanationRowSplited, CustomSelectBoxWidth, CustomTableWidth, firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues, collectionsCols, CustomInputWidth, isIcon1, isIcon2 }) => {
+    const SecondRowCard:FC<SecondRowCard> = ({songPropetries, checkIsIcon, isStoryInstruction, isExplanationRowSplited, CustomSelectBoxWidth, CustomTableWidth, firstIdTextModule, mergedData, row,orden,register, setValue, control, index, exerciseId, dataObjectId, isExistWord, checkIsThereImage, isTable, isClearTable, draftBankCollectionValues, collectionsCols, CustomInputWidth, isIcon1, isIcon2 }) => {
     return (
         <>
             {row?.module_type === 'input' && <InputModule CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth}isMerged={row?.isMerged} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} key={index} id={row.id} answer={row.collectionAnswers} placeholder={row.placeholder || ''}  register={register} col={orden} row={row.orden} setValue={setValue} isFullText={row.isFullText} />}
@@ -152,13 +157,19 @@ type SecondRowCard = {
             {row?.module_type === 'secondHead' && <SecondHead checkIsIcon={checkIsIcon}CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} setValue={setValue} value={row.collectionValues[0].value} col={orden} row={row.orden} register={register} />}
             {row?.module_type === 'instructionWhite' && <InstructionWhite CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols}  isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
             {row?.module_type === 'wordRegular' && <WordRegular index={index} isStoryInstruction={isStoryInstruction} isExplanationRowSplited={isExplanationRowSplited} CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row?.collectionValues[0]?.value}/>}
+            
+            {row?.module_type === 'secondHeadWhite' && <SecondHeadWhiteModule checkIsIcon={checkIsIcon}CustomTableWidth={CustomTableWidth} isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} setValue={setValue} value={row.collectionValues[0].value} col={orden} row={row.orden} register={register} />}
+            {row?.module_type === 'iconDescriptionOne' && <IconDescriptionOne CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0]?.value} />}
+            {row?.module_type === 'iconDescriptionTwo' && <IconDescriptionTwo CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0]?.value} />}
+            {row?.module_type === 'circle' && <CircleModule collectionsCols={collectionsCols} isClearTable={isClearTable} CustomTableWidth={CustomTableWidth} firstIdTextModule={firstIdTextModule} isTable={isTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+            
             {/* SPLITED SCREEN FORMS */}
             {row?.module_type === 'overflow' && <ToggleModule CustomTableWidth={CustomTableWidth}  isTable={isTable} isClearTable={isClearTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0]?.value}/>}
             {row?.module_type === 'splitedScreenRight' && <SplitedScreenRight CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
             {row?.module_type === 'doneSplitedScreenRight' && <DoneSplitedScreenRight CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
             {row?.module_type === 'splitedScreenLeft' && <SplitedScreenLeft CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
             {row?.module_type === 'doneSplitedScreenLeft' && <DoneSplitedScreenLeft CustomTableWidth={CustomTableWidth} isTable={isTable} checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionAnswers[0]?.value}/> }
-            {row?.module_type === 'song' && <SongModule CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols}  isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
+            {row?.module_type === 'song' && <SongModule songPropetries={songPropetries} CustomTableWidth={CustomTableWidth} collectionsCols={collectionsCols}  isTable={isTable} isClearTable={isClearTable}  checkIsThereImage={checkIsThereImage} dataObjectId={dataObjectId} exerciseId={exerciseId} col={orden} row={row.orden} setValue={setValue} value={row.collectionValues[0].value}/>}
 
         
         </>

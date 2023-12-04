@@ -41,15 +41,29 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged'|| row?.module_type === 'storyHeadline' || row?.module_type === 'imageLeft' || row?.module_type === 'imageRight')))
                 const isBackgroundWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'instructionWhite')))
+                const isHeadDescriptionOne = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'iconDescriptionOne')))
+                const isHeadDescriptionTwo = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'iconDescriptionTwo')))
+                const isSecondHeadWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'secondHeadWhite')))
                 const checkIsThereBorder = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'border')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
                 const tes = tabCounter(exercises);
                 const TabCounter = tes;
 
+                const isIcon1 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon1')))
+                const isIcon2 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon2')))
+                
+                let iconBg = ''
+                if(isIcon1) {
+                    iconBg = '#005CBB'
+                }
+                if(isIcon2) {
+                    iconBg = '#3995F5'
+                }
                 let CustomTableWidth = 200;
                 let CustomImageCol = 4 ;
                 let CustomInputWidth = 200;
                 let CustomSelectBoxWidth = 300;
+                let songPropetries = 60;
                 let defaultBackground = 'bg-exerciseCardBgg'
                 if(isTable) {
                     CustomTableWidth = +getTableCustomValue(item, 'table')
@@ -73,7 +87,9 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                     CustomInputWidth = getPropertiesValue(item, 'properties','שדה הקלדה')
                     CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
                 }
-
+                if(checkIsThereProperties) {
+                    songPropetries = getPropertiesValue(item, 'properties','רוחב שיר')
+                }
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = isStoryFunc(exercises)
                 const getStoryNumber = getStroryNumber(item)
@@ -82,11 +98,13 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 <div 
                 className={` 
                 ${isBackgroundWhite && 'bg-white border-sky-500 rounded-md'}
+                ${isSecondHeadWhite && 'bg-white border-sky-500 rounded-md'} 
                 ${checkIsThereBorder && 'border '}
                 ${isStory ? 'bg-[#EDF2F9]' : 'bg-[#EDF2F9]'} 
                 ${isDragModule && 'pr-[65px]'}
                 `}  
                 key={indexx}
+                style={{background:(isHeadDescriptionOne || isHeadDescriptionTwo) ? iconBg: ''}}
                 >
                         {
                             isDragModule && 
@@ -121,7 +139,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                                     ${(isStory && (getStoryNumber !== choosedTab) && 'hidden')}
                                     `}
                                     >
-                                        <SecondExercise isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                        <SecondExercise songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                     </div>    
                                 )
                             }
