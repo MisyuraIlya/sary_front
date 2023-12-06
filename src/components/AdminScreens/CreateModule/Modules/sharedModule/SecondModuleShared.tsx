@@ -101,14 +101,13 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 ${isSecondHeadWhite && 'bg-white border-sky-500 rounded-md'} 
                 ${checkIsThereBorder && 'border '}
                 ${isStory ? 'bg-[#EDF2F9]' : 'bg-[#EDF2F9]'} 
-                ${isDragModule && 'pr-[65px]'}
                 `}  
                 key={indexx}
                 style={{background:(isHeadDescriptionOne || isHeadDescriptionTwo) ? iconBg: ''}}
                 >
                         {
                             isDragModule && 
-                            <DragAndDropModule item={item} />
+                            <DragAndDropModule item={item} isDragModule={isDragModule} />
                         }
                     <div className={` grid grid-cols-12 ${checkIsThereMergedBackground && `${defaultBackground}`}`}>
                         {

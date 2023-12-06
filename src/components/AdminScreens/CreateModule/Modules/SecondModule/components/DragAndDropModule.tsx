@@ -7,8 +7,9 @@ import { getColumnAnswers } from '../helpers/getColumnAnswers';
 
 type DragAndDropModuleProps = {
     item : ISecondModuleExercises;
+    isDragModule: boolean;
 }
-const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
+const DragAndDropModule:FC<DragAndDropModuleProps> = ({item,isDragModule}) => {
 
     const data = getDragModuleData(item)
     const onDragEnd = (result: DropResult) => {
@@ -27,12 +28,12 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
 
 
     return (
-        <div className='w-full  h-auto px-2'>
+        <div className='w-full  h-auto px-2' style={{paddingRight:'66px'}}>
             <DragDropContext onDragEnd={onDragEnd}>
-                <div className='flex gap-5'>
+                <div className='flex gap-5' style={{borderRight:'6px solid white'}}>
                     {data?.map((column,indexx) => 
-                        <div className={`${column.title === 'מחסן מילים' ? 'bg-[#E5F0FE] w-[400px]' : 'border-[3px] border-1 border-[#E5F0FE] w-[200px] min-h-[300px]'} relative`} key={indexx}>
-                            <h2 className='bg-[#BACEE9] text-black font-bold py-2 px-4 text-center'>{column.title}</h2>
+                        <div className={`${column.title === 'מחסן מילים' ? ' w-[400px]' : 'border-[6px] border-1 border-[#BACEE9] min-w-[200px] min-h-[300px]'} relative`} key={indexx}>
+                            <h2 className='bg-[#BACEE9] fontSizeExercise py-2 px-4 text-center'>{column.title}</h2>
                             {column.title !== 'מחסן מילים' &&
                             <div className='absolute top-1 right-2'>
                                 <Tooltip
@@ -77,7 +78,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
                                     ref={provided.innerRef}
                                     className={`h-full text-center `}
                                     >
-                                        <div className={`${column.title === 'מחסן מילים' ? 'grid grid-cols-12' : 'grid grid-cols-12'} `}>
+                                        <div className={`${column.title === 'מחסן מילים' ? 'grid grid-cols-12' : 'grid grid-cols-12'}  flex items-center justify-center`}>
                                             {column.questionIds.map((questionId, index) => {
                                                 return (
                                                 <Draggable key={questionId.value} draggableId={questionId.value} index={index}>
@@ -86,7 +87,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item}) => {
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
-                                                        className={`${column.title === 'מחסן מילים' ? 'col-span-4' : 'col-span-6'}`}
+                                                        className={`${column.title === 'מחסן מילים' ? 'col-span-6' : 'col-span-6'}`}
                                                     >
                                                         {column.title === 'מחסן מילים' ?
                                                         <div className='bg-white m-2 text-center px-1 rounded-md w-auto fontSizeExercise'>

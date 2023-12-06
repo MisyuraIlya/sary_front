@@ -20,9 +20,8 @@ type TextModuleProps = {
 const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collectionsCols,  firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable}) => {
     const {choosedModule} = useExercise()
     const {isOnlineXml} = useExercise()
-    // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
-    let formattedValue = value?.replaceAll('@', "<br/>");
-    const [htmlTag, setHtmlTal] = useState<string>(formattedValue)
+    let formattedValue = value?.replaceAll('$$$$', "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll('@', "<br/>");
+    const [htmlTag, setHtmlTal] = useState<string>(formattedValue);
 
     const handleUpdateHtml = (updatedHtml: string) => {
         setHtmlTal(updatedHtml)
@@ -47,11 +46,11 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
         relative
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
+    
         ${choosedModule === 3 && 'w-full'}
         leading-[60px]
         `}
-        
+        // ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}
         style={{
             verticalAlign: 'top', 
             textAlign: 'right',   

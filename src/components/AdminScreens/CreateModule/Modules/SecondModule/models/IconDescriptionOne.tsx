@@ -23,7 +23,7 @@ const IconDescriptionOne:FC<IconDescriptionOneProps> = ({CustomTableWidth, setVa
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <div className='px-4 pt-5 pb-7 bg-[#005CBB] text-white font-medium'  dangerouslySetInnerHTML={{ __html: value }}/>
+        <div className='px-4 pt-5 pb-7  text-white font-medium text-xl'  dangerouslySetInnerHTML={{ __html: value }}/>
     );
 };
 

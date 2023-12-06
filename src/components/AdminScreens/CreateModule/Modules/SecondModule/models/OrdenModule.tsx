@@ -31,12 +31,10 @@ const OrdenModule:FC<OrdenModuleProps> = ({index, isExplanationRowSplited, Custo
                 maxWidth:'70px',
                 verticalAlign: 'top', // Align text to the top
                 textAlign: 'right', 
-            paddingTop:'25px',
-
-                
+                paddingTop:'25px',
             }} 
             className={`
-                specific-th
+                specific-th 
                 ${(isTable || isClearTable) ? '' : ''} 
                 pt-4
                 ${isExplanationRowSplited && 'bg-white'}

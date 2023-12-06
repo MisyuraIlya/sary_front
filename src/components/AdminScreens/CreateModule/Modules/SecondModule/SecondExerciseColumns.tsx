@@ -31,7 +31,7 @@ const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({CustomTableWidth,
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: data.title }}
-                    className="fontSizeExercise"
+                    className="fontSizeExercise "
                 />
 
                 }
