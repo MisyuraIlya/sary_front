@@ -33,7 +33,7 @@ const DragAndDropModule:FC<DragAndDropModuleProps> = ({item,isDragModule}) => {
                 <div className='flex gap-5' style={{borderRight:'6px solid white'}}>
                     {data?.map((column,indexx) => 
                         <div className={`${column.title === 'מחסן מילים' ? ' w-[400px]' : 'border-[6px] border-1 border-[#BACEE9] min-w-[200px] min-h-[300px]'} relative`} key={indexx}>
-                            <h2 className='bg-[#BACEE9] fontSizeExercise py-2 px-4 text-center'>{column.title}</h2>
+                            <h2 className='bg-[#BACEE9] fontSizeExercise py-2 px-4 text-center' dangerouslySetInnerHTML={{ __html: column.title ?? '' }} />
                             {column.title !== 'מחסן מילים' &&
                             <div className='absolute top-1 right-2'>
                                 <Tooltip
