@@ -13,6 +13,7 @@ import TabsModule from '../SecondModule/components/TabsModule';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { tabCounter } from '../SecondModule/helpers/tabCounter';
 import { isStoryFunc } from '../SecondModule/helpers/isStoryModule';
+import { getPropertiesValueString } from '../SecondModule/helpers/getPropertiesValueString';
 type SecondModuleSharedProps = {
     exercises: ISecondModuleExercises[]
     findDraftsArray: any
@@ -64,6 +65,9 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 let CustomInputWidth = 200;
                 let CustomSelectBoxWidth = 300;
                 let songPropetries = 60;
+                let widthText = 100;
+                let textMargin = 0;
+                let textBgColor = '';
                 let defaultBackground = 'bg-exerciseCardBgg'
                 if(isTable) {
                     CustomTableWidth = +getTableCustomValue(item, 'table')
@@ -89,6 +93,13 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 }
                 if(checkIsThereProperties) {
                     songPropetries = getPropertiesValue(item, 'properties','רוחב שיר')
+                }
+                if(checkIsThereProperties) {
+                    widthText = getPropertiesValue(item, 'properties','רוחב טקסט')
+                }
+                if(checkIsThereProperties) {
+                    textMargin = getPropertiesValue(item, 'properties','טקסט צדדים')
+                    textBgColor = getPropertiesValueString(item, 'properties','צבע טקסט')
                 }
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = isStoryFunc(exercises)
@@ -138,7 +149,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                                     ${(isStory && (getStoryNumber !== choosedTab) && 'hidden')}
                                     `}
                                     >
-                                        <SecondExercise songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                        <SecondExercise textBgColor={textBgColor} textMargin={textMargin} widthText={widthText} songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                     </div>    
                                 )
                             }

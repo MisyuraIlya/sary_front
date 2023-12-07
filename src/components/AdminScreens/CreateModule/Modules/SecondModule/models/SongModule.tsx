@@ -44,6 +44,7 @@ const SongModule:FC<SongModuleProps> = ({songPropetries, CustomTableWidth, check
         text-[23px]
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
+        w-full
         `}
         
         style={{

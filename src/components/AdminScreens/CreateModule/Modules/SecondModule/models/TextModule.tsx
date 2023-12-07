@@ -16,9 +16,12 @@ type TextModuleProps = {
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
+    widthText: number
+    textMargin: number
+    textBgColor: string
 
 }
-const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const TextModule:FC<TextModuleProps> = ({textBgColor,textMargin, widthText,CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -36,7 +39,6 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
 
-    
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
         <th className={`
@@ -46,9 +48,11 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
         ${checkIsThereImage ? '' : ''}
         ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
         ${choosedModule === 3 && 'text-justify'}
+        
         `}
         
         style={{
+            width:`${widthText}%`,
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right',   // Align text to the right
             minWidth: isTable ? `${CustomTableWidth}px` : '',
@@ -59,8 +63,8 @@ const TextModule:FC<TextModuleProps> = ({CustomTableWidth,firstIdTextModule, che
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className=' px-2 py-4 fontSizeExercise text-justify'
-            style={choosedModule ? {paddingLeft:'70px'}: {}}
+            <div className={`px-2 py-4 fontSizeExercise text-justify ${textBgColor == 'לבן' && 'bg-white mt-10 mb-10 rounded-md shadow-xl px-8 shadow-black/10'}`}
+            style={choosedModule ? {width:widthText ? `${widthText}%` : '100%', marginRight:textMargin ? `${textMargin}%` : ''}: {width:widthText ? `${widthText}%` : '100%',marginRight: textMargin ? `${textMargin}%` : ''}}
             >
                 <div
                     // onInput={handleInputChange}
