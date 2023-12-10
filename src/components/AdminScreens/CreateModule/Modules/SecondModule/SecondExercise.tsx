@@ -31,10 +31,12 @@ type SecondExerciseProps = {
     widthText: number
     textMargin: number
     textBgColor: string
+    paddingRight: number
+    paddingLeft: number
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({paddingRight, paddingLeft, textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {choosedModule} = useExercise()
@@ -200,6 +202,8 @@ const SecondExercise:FC<SecondExerciseProps> = ({textBgColor, textMargin, widthT
                                         widthText={widthText}
                                         textMargin={textMargin}
                                         textBgColor={textBgColor}
+                                        paddingLeft={paddingLeft}
+                                        paddingRight={paddingRight}
                                     />  
                                     </>
                                 )}

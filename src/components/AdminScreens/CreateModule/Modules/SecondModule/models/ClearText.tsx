@@ -47,7 +47,6 @@ const ClearText:FC<TextModuleProps> = ({CustomTableWidth,isClearTable,collection
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
     
-        ${choosedModule === 3 && 'w-full'}
         leading-[60px]
         `}
         // ${(firstIdTextModule === value && !isClearTable)  ? 'specific-th ' : ''}

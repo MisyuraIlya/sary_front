@@ -6,7 +6,7 @@ export const getBankArr = (item: ISecondModuleExercises) => {
     item[propertyName].data.map((data1) => {
         data1.collectionsRows.map((data2) => {
             data2.collectionRow.map((data3) => {
-                if(data3.module_type === 'bank') {
+                if(data3?.module_type === 'bank') {
                     data3.collectionValues.map((data4) => {
                         bankValues.push(data4)
                     })
