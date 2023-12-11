@@ -92,14 +92,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 if(checkIsThereProperties) {
                     CustomInputWidth = getPropertiesValue(item, 'properties','שדה הקלדה')
                     CustomSelectBoxWidth = getPropertiesValue(item, 'properties','שדה בחירה')
-                }
-                if(checkIsThereProperties) {
                     songPropetries = getPropertiesValue(item, 'properties','רוחב שיר')
-                }
-                if(checkIsThereProperties) {
-                    widthText = getPropertiesValue(item, 'properties','רוחב טקסט')
-                }
-                if(checkIsThereProperties) {
                     textMargin = getPropertiesValue(item, 'properties','טקסט צדדים')
                     textBgColor = getPropertiesValueString(item, 'properties','צבע טקסט')
                     paddingLeft = getPropertiesValue(item, 'properties','ריפוד שמאל')
