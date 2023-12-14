@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, { FC, useEffect, useState } from 'react';
 
 type SecondHeadProps = {
@@ -13,9 +14,15 @@ type SecondHeadProps = {
     isClearTable: boolean
     CustomTableWidth: number
     checkIsIcon: boolean
+    widthText: number
+    textMargin: number
+    textBgColor: string
+    paddingLeft:number
+    paddingRight: number
 };
 
-const SecondHead: FC<SecondHeadProps> = ({ checkIsIcon, CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
+const SecondHead: FC<SecondHeadProps> = ({ widthText, textMargin, textBgColor, paddingLeft, paddingRight, checkIsIcon, CustomTableWidth, checkIsThereImage, value, register, col, row, setValue , exerciseId, dataObjectId, isTable, isClearTable}) => {
+    const {isOnlineXml, choosedModule} = useExercise()
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'secondHead');
@@ -29,9 +36,14 @@ const SecondHead: FC<SecondHeadProps> = ({ checkIsIcon, CustomTableWidth, checkI
             className={`${checkIsThereImage ? '' : ''} ${(isTable || isClearTable) ? 'tableModule' : ''} ${checkIsIcon && 'bg-[#005CBB] text-white'} text-[23px] leading-10`} 
             style={{
                 minWidth: isTable ? `${CustomTableWidth}px` : '',
+                paddingRight:paddingRight ? `${paddingRight}px` : '', paddingLeft:paddingLeft ? `${paddingLeft}px` : ''
             }}
             >
-            <div  className='text-right px-4'>
+            <div  className={`text-right px-4 py-6 ${textBgColor == 'לבן' && 'bg-white mt-10 mb-10 rounded-md shadow-xl px-8 shadow-black/10'}`}
+                style={choosedModule ? 
+                {width:widthText ? `${widthText}%` : '100%', marginRight:textMargin ? `${textMargin}%` : ''}:
+                {width:widthText ? `${widthText}%` : '100%',marginRight: textMargin ? `${textMargin}%` : ''}}
+            >
                 <h3 className='text-[26px] font-semibold'>{value}</h3>
             </div>
         </th>

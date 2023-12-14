@@ -1,3 +1,4 @@
+import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect} from 'react';
 
 type OriginModuleProps = {
@@ -10,10 +11,16 @@ type OriginModuleProps = {
     isTable: boolean
     CustomTableWidth: number
     value: string
+    widthText: number
+    textMargin: number
+    textBgColor: string
+    paddingLeft:number
+    paddingRight: number
 }
 
-const OriginModule:FC<OriginModuleProps> = ({CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, value}) => {
+const OriginModule:FC<OriginModuleProps> = ({paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth, setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable, value}) => {
 
+    const {isOnlineXml, choosedModule} = useExercise()
     useEffect(() => {
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'origin');
@@ -23,7 +30,19 @@ const OriginModule:FC<OriginModuleProps> = ({CustomTableWidth, setValue, exercis
       }, [col, row, setValue, exerciseId, dataObjectId,value]);
 
     return (
-        <div className='px-4 pt-5 pb-7' style={{color:'#00000080'}} dangerouslySetInnerHTML={{ __html: value }}/>
+        <th
+        style={{
+            verticalAlign: 'top', // Align text to the top
+            textAlign: 'right',   // Align text to the right
+            width:`${widthText}%`,
+            paddingRight:paddingRight ? `${paddingRight}px` : '', paddingLeft:paddingLeft ? `${paddingLeft}px` : ''
+        }}
+        >   
+            <div className={` ${textBgColor == 'לבן' && 'bg-white mt-10 mb-10 rounded-md shadow-xl px-8 shadow-black/10'}`}>
+
+            </div>
+            <div className='px-4 pt-5 pb-7' style={{color:'#00000080', width: widthText ? `${widthText}%` : '100%', marginRight:textMargin ? `${textMargin}%` : ''}} dangerouslySetInnerHTML={{ __html: value }}/>
+        </th>
     );
 };
 

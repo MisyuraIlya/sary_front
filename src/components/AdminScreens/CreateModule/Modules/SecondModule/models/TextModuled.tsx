@@ -21,9 +21,11 @@ type TextModuledProps = {
     textBgColor: string
     paddingLeft:number
     paddingRight: number
+    whiteSpace: string
+    textAlign: string
 
 }
-const TextModuled:FC<TextModuledProps> = ({paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const TextModuled:FC<TextModuledProps> = ({whiteSpace, textAlign, paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -40,7 +42,7 @@ const TextModuled:FC<TextModuledProps> = ({paddingLeft, paddingRight,textBgColor
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
         setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
       }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
-
+      console.log('whiteSpace',whiteSpace)
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
         <th className={`
@@ -77,6 +79,7 @@ const TextModuled:FC<TextModuledProps> = ({paddingLeft, paddingRight,textBgColor
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
                     className=""
+                    style={{textAlign:textAlign == 'אמצע' ? 'center' : 'right', whiteSpace: whiteSpace == 'לא' ? 'nowrap' : 'normal' }}
                 />
             </div>
         </th>

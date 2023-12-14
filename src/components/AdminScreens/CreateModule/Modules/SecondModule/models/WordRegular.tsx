@@ -43,7 +43,7 @@ const WordRegular:FC<WordRegularProps> = ({index, isStoryInstruction, isExplanat
             maxWidth:'70px',
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right', 
-            paddingTop:'40px', 
+            paddingTop:'32px', 
         }}
 
         >
