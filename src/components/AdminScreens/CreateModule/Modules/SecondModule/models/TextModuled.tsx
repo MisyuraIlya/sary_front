@@ -79,7 +79,7 @@ const TextModuled:FC<TextModuledProps> = ({whiteSpace, textAlign, paddingLeft, p
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
                     className=""
-                    style={{textAlign:textAlign == 'אמצע' ? 'center' : 'right', whiteSpace: whiteSpace == 'לא' ? 'nowrap' : 'normal' }}
+                    style={{ textAlign: textAlign === 'אמצע' ? 'center' : undefined, whiteSpace: whiteSpace === 'לא' ? 'nowrap' : undefined}}
                 />
             </div>
         </th>
