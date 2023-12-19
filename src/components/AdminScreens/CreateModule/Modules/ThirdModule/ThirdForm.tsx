@@ -31,7 +31,6 @@ const ThirdForm:FC<ThirdFormProps> = ({handleSubmitForm,onSubmit, register, setV
     })
     .filter((array: any) => array.length > 0)?.[0]?.[0]; 
     const {screenLeft, screenRight} = findScreenWidth((exercises as ISecondModule))
-    console.log('screenLeft',screenLeft,screenRight)
     const {resRight, resLeft, resRegular} = findSplitedScreens((exercises as any)?.exercises)
     const overflow = findOverFlowValue((exercises as any)?.exercises)
     return (

@@ -17,7 +17,6 @@ type VideoType = {
     videoLink: string,
 };
 
-
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -49,7 +48,6 @@ const VideoModule:FC<ImageModuleProps> = ({data}) => {
         } else {
             onErrorAlert('ניתן קודם לשמור את הקובץ','')
         }
-
     }
 
     const videoLink = getVideoValue(data)

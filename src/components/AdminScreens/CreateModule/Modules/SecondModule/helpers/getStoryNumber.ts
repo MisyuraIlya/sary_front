@@ -9,10 +9,7 @@ export const getStroryNumber = (item :ISecondModuleExercises) => {
         const allValues = filteredRows.flatMap((item3) => item3.collectionValues);
         return allValues.flatMap((item4) => item4.value);
       });
-      if(values[0]) {
-        return  +values[0];
-      } else {
-        return 1
-      }
+      return  values[0];
+     
 }
 

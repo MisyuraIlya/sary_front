@@ -14,6 +14,8 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import { tabCounter } from '../SecondModule/helpers/tabCounter';
 import { isStoryFunc } from '../SecondModule/helpers/isStoryModule';
 import { getPropertiesValueString } from '../SecondModule/helpers/getPropertiesValueString';
+import { getArrayTabs, getFirstTab } from '../ThirdModule/helpers/getFirstTab';
+import PdfIframe from '../SecondModule/models/PdfIframe';
 type SecondModuleSharedProps = {
     exercises: ISecondModuleExercises[]
     findDraftsArray: any
@@ -23,7 +25,7 @@ type SecondModuleSharedProps = {
 }
 
 const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsArray, register, setValue, control}) => {
-    const {choosedTab} = useExercise()
+    const {choosedTab,ExerciseMethods } = useExercise()
     return (
         <>
         {exercises.map((item: ISecondModuleExercises, indexx:number) => {
@@ -31,6 +33,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereImageRight = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageRight')))
                 const checkIsThereImageLeft = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'imageLeft')))
                 const checkIsThereVideo = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'video')))
+                const checkIsTherePdf = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'pdf')))
                 const checkIsThereChart = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'chart')))
                 const checkIsThereProperties= item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'properties')))
                 const isTable = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'table')))
@@ -40,6 +43,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const checkIsThereImageLeftData = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'imageLeft')))
                 const checkIsThereImageVideo = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'video')))
                 const checkIsThereImageChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'chart')))
+                const checkIsTherePdfChart = item[propertyName]?.data.filter((subItem) => subItem.collectionsRows.filter((rows) => rows.collectionRow.filter((row) => row?.module_type === 'pdf')))
                 const checkIsThereMergedBackground = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'merged'|| row?.module_type === 'storyHeadline' || row?.module_type === 'imageLeft' || row?.module_type === 'imageRight')))
                 const isBackgroundWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'instructionWhite')))
                 const isHeadDescriptionOne = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'iconDescriptionOne')))
@@ -47,9 +51,9 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const isSecondHeadWhite = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'secondHeadWhite')))
                 const checkIsThereBorder = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'border')))
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
-                const tes = tabCounter(exercises);
-                const TabCounter = tes;
-
+                const TabCounter = tabCounter(exercises);
+                const firstTab = getFirstTab(exercises)
+                const arrayTabs = getArrayTabs(exercises)
                 const isIcon1 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon1')))
                 const isIcon2 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon2')))
                 
@@ -131,6 +135,10 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                             checkIsThereVideo &&
                             <VideoModule data={checkIsThereImageVideo} />
                         }
+                        {
+                            checkIsTherePdf &&
+                            <PdfIframe data={checkIsTherePdfChart} />
+                        }
 
                         {
                             checkIsThereChart &&
@@ -148,7 +156,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                                     className={`
                                     ${isTable ? 'inOnlyTable' : ''} 
                                     
-                                    ${(isStory && (getStoryNumber !== choosedTab) && 'hidden')}
+                                    ${(isStory && (getStoryNumber !== (choosedTab ? choosedTab : firstTab)) && 'hidden')}
                                     `}
                                     >
                                         <SecondExercise textAlign={textAlign} whiteSpace={whiteSpace} paddingRight={paddingRight} paddingLeft={paddingLeft} textBgColor={textBgColor} textMargin={textMargin} widthText={widthText} songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
@@ -158,11 +166,10 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
 
                             )}
                         </div>  
-
                         {isHaveStoryInstruction && 
-                        ( isStory && getStoryNumber === choosedTab ) &&
+                        ( isStory && getStoryNumber === (choosedTab ? choosedTab : firstTab) ) &&
                             <div style={{gridColumn: 'span 12 / span 12'}} className=''>
-                                <TabsModule tabsCounter={TabCounter}/>
+                                <TabsModule arrayTabs={arrayTabs} firstTab={firstTab}/>
                             </div>    
                         }
 

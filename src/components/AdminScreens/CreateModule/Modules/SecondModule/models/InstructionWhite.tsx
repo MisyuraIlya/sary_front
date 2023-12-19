@@ -4,7 +4,6 @@ import BoldChanger from '../components/BoldChanger';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 type instructionWhiteProps = {
     value: string
-
     col: any;
     row: any;
     setValue: any
@@ -15,9 +14,16 @@ type instructionWhiteProps = {
     isClearTable: boolean
     collectionsCols: collectionsCols[]
     CustomTableWidth: number
+    widthText: number
+    textMargin: number
+    textBgColor: string
+    paddingLeft:number
+    paddingRight: number
+    whiteSpace: string
+    textAlign: string
 
 }
-const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const InstructionWhite:FC<instructionWhiteProps> = ({whiteSpace, textAlign, paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -51,6 +57,7 @@ const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth, checkIsTh
             verticalAlign: 'top', // Align text to the top
             textAlign: 'right',   // Align text to the right
             minWidth: isTable ? `${CustomTableWidth}px` : '',
+            paddingRight:paddingRight ? `${paddingRight}px` : '', paddingLeft:paddingLeft ? `${paddingLeft}px` : ''
         }}
         
         >
@@ -58,10 +65,15 @@ const InstructionWhite:FC<instructionWhiteProps> = ({CustomTableWidth, checkIsTh
                 <BoldChanger html={htmlTag} handleUpdateHtml={handleUpdateHtml}/>
             }
 
-            <div className='text-right  px-4 py-4 fontSizeExercise ' >
+            <div className='text-right  px-4 py-4 fontSizeExercise ' 
+                        style={choosedModule ? 
+                            {width:widthText ? `${widthText}%` : '100%', marginRight:textMargin ? `${textMargin}%` : ''}:
+                            {width:widthText ? `${widthText}%` : '100%',marginRight: textMargin ? `${textMargin}%` : ''}}
+            >
                 <div
                     // onInput={handleInputChange}
                     dangerouslySetInnerHTML={{ __html: htmlTag }}
+                    style={{ textAlign: textAlign === 'אמצע' ? 'center' : undefined, whiteSpace: whiteSpace === 'לא' ? 'nowrap' : undefined}}
                     className=""
                 />
             </div>

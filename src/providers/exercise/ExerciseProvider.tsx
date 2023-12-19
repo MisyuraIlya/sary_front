@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { onAsk, onSuccessAlert, onErrorAlert } from '@/utils/sweetAlert';
 import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import { ExerciseDeletionStoredData } from '@/utils/local-storage-exercise-deletion-store';
+import { getFirstTab } from '@/components/AdminScreens/CreateModule/Modules/ThirdModule/helpers/getFirstTab';
 interface ExerciseContextType {
   ExerciseMethods: {
     setId: (id: number) => void
@@ -19,7 +20,7 @@ interface ExerciseContextType {
     handleEditCheckBox: (id: number, cheked: boolean) => void
     handleSaveUpload: () => void
     chooseModule: (number: number) => void
-    setChoosedTab: (number: number) => void
+    setChoosedTab: (number: string) => void
     resroteDeletionData: () => void
     fetchOnline: (id: string | string[] | undefined, bool: boolean) => void
   };
@@ -30,7 +31,7 @@ interface ExerciseContextType {
   isChanged: boolean,
   handleEditedCheckbox: { id: number, checked: boolean }[],
   choosedModule: number | null,
-  choosedTab: number,
+  choosedTab: string,
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -61,7 +62,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const [choosedModule, setChoosedModule] = useState<number | null>(null)
     const router = useRouter();
     const moduleId = router.query.moduleId;
-    const [choosedTab, setChoosedTab] = useState(1)
+    const [choosedTab, setChoosedTab] = useState('')
     // Helpers
 
     const fetchOnline = async (id: any, useLoading = true) => {
@@ -92,6 +93,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           // console.log(response)
           setExercises(response)
           setIsOnlineXml(false)
+          // const handleFirstTab = getFirstTab(response as ISecondModule[])
+          // console.log('handleFirstTab',handleFirstTab)
         } catch(e) {
           console.log('error',e)
           onErrorAlert('שגיאה בלפרסס את המודול','XL אינו תקין')
@@ -275,7 +278,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
         },1000)
       }
     }
-  
+
+ 
 
 
     useEffect(() => {
