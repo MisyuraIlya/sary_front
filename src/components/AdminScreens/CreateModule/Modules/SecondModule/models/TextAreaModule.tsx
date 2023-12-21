@@ -52,7 +52,7 @@ const TextAreaModule2: FC<TextAreaModule2Props> = ({
 
   return (
     <th style={{ height: '100%' }}>
-      <label className="input-sizer stacked">
+      <label className="input-sizer stacked bg-white">
         <textarea
           ref={textareaRef}
           onInput={(e) => {

@@ -248,8 +248,9 @@ mark > span {
   vertical-align: top;
   align-items: center;
   position: relative;
-  border: solid 1px;
+  border: solid 1px #D0D0D0;
   padding: 0.25em 0.5em;
+  border-radius: 5px;
   margin: 5px;
   box-sizing: border-box; /* Adjust the box-sizing property */
 

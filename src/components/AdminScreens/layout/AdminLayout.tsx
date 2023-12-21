@@ -9,7 +9,7 @@ const AdminLayout:FC <PropsWithChildren> = ({children}) => {
                 <div className="col-span-1" style={{height:'100%'}}>
                     <Sidebar/>
                 </div>
-                <div className="col-span-11 mb-[900px]" style={{minHeight:'calc(100vh - 70px)'}}>
+                <div className="col-span-11 " style={{minHeight:'calc(100vh - 70px)'}}>
                     {children}
                 </div>
             </div>
