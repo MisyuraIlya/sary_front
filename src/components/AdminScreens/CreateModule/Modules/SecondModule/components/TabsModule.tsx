@@ -8,7 +8,6 @@ type TabsModuleProps = {
 
 const TabsModule:FC<TabsModuleProps> = ({arrayTabs,firstTab}) => {
     const {ExerciseMethods,choosedTab} = useExercise()
-    console.log('arrayTabs',arrayTabs)
     return (
         <div className='flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
 

@@ -26,7 +26,6 @@ const CheckBoxModule:FC<CheckBoxModuleProps> = ({CustomTableWidth, checkIsThereI
     const answers = answer[0]?.value?.split(';').map(item => item.trim());
     // const answers = answer.map((item) => { return item.value})
     // console.log('answers',answers)
-    console.log('values',values)
     return (
         <th 
         style={{width:'100%',minWidth: isTable ? `${CustomTableWidth}px` : '',}}

@@ -53,7 +53,6 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 const isDragModule = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'bank')))
                 const TabCounter = tabCounter(exercises);
                 const firstTab = getFirstTab(exercises)
-                const arrayTabs = getArrayTabs(exercises)
                 const isIcon1 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon1')))
                 const isIcon2 = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'icon2')))
                 
@@ -110,7 +109,6 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = isStoryFunc(exercises)
                 const getStoryNumber = getStroryNumber(item)
-                const isHaveStoryInstruction = item[propertyName]?.data.some((subItem) => subItem.collectionsRows.some((rows) => rows.collectionRow.some((row) => row?.module_type === 'storyInstruction')))
                 return (
                 <div 
                 className={` 
@@ -166,14 +164,6 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
 
                             )}
                         </div>  
-                        {isHaveStoryInstruction && 
-                        ( isStory && getStoryNumber === (choosedTab ? choosedTab : firstTab) ) &&
-                            <div style={{gridColumn: 'span 12 / span 12'}} className=''>
-                                <TabsModule arrayTabs={arrayTabs} firstTab={firstTab}/>
-                            </div>    
-                        }
-
-
                         {
                             checkIsThereImageLeft && 
                             <ImageModule data={checkIsThereImageLeftData} CustomImageCol={CustomImageCol} isStory={isStory} choosedTab={ getStoryNumber === choosedTab }/>
