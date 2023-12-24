@@ -35,10 +35,11 @@ type SecondExerciseProps = {
     paddingLeft: number
     textAlign: string
     whiteSpace: string
+    textAreaWidth: number
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({textAlign, whiteSpace, paddingRight, paddingLeft, textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({textAreaWidth,textAlign, whiteSpace, paddingRight, paddingLeft, textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {choosedModule} = useExercise()
@@ -153,7 +154,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAlign, whiteSpace, paddingR
                         const isExistSubInstruction = rows?.collectionRow.some((item) => item?.module_type === 'subInstruction' && item?.collectionValues[0]?.value !== null);
                         const isExistImage = rows?.collectionRow.some((item) => item?.module_type === 'imageRight' && item?.collectionValues[0]?.value !== null);
                         // const isExistCheckBox = rows?.collectionRow.some((item) => item?.module_type === 'checkBox' && item?.collectionValues[0]?.value !== null);
-                        const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues[0]?.value !== null);
+                        const isBank = rows?.collectionRow.some((item) => item?.module_type === 'bank' && item?.collectionValues?.[0]?.value !== null);
                         const mergedExercise = rows?.collectionRow.some((item) => item?.module_type === 'mergedExercise' && item?.collectionValues[0]?.value !== null);
                         const isExplanationRow =  rows?.collectionRow.some((item) => item?.module_type === 'explanation' && item?.collectionValues[0]?.value !== null);
                         const isExplanationRowSplited =  rows?.collectionRow.some((item) => item?.module_type === 'explanationSplited' && item?.collectionValues[0]?.value !== null);
@@ -168,7 +169,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAlign, whiteSpace, paddingR
                             // <tr style={(isExistInstruction || isExistSubInstruction ) ? {minWidth:'100px',background:'#E5F0FE'} : {minWidth:'100px',background:'#EDF2F9'} }>
                             <>
                             { !checkIsThereMergedBackground &&
-                                <div className={`h-1 absolute z-1 w-full`}></div>                        
+                                <div className={`h-1 absolute z-1 w-full bg-white`}></div>                        
                             }
                             <tr className={`w-full `} key={keys} >
                                 
@@ -208,6 +209,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAlign, whiteSpace, paddingR
                                         paddingRight={paddingRight}
                                         textAlign={textAlign}
                                         whiteSpace={whiteSpace}
+                                        textAreaWidth={textAreaWidth}
                                     />  
                                     </>
                                 )}

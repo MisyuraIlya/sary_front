@@ -76,6 +76,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                 let paddingRight = 0
                 let whiteSpace = ''
                 let textAlign = ''
+                let textAreaWidth = 0
                 if(isTable) {
                     CustomTableWidth = +getTableCustomValue(item, 'table')
                 }
@@ -105,6 +106,8 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                     textAlign = getPropertiesValueString(item, 'properties','מיקום טקסט')
                     whiteSpace = getPropertiesValueString(item, 'properties','שבירת טקסט')
                     widthText = getPropertiesValue(item, 'properties','רוחב טקסט')
+                    textAreaWidth = getPropertiesValue(item, 'properties','רוחב תא מותאם')
+                    console.log('textAreaWidthh',textAreaWidth)
                 }
                 let calulcatedImageColSpan = 12 - CustomImageCol
                 const isStory = isStoryFunc(exercises)
@@ -157,7 +160,7 @@ const SecondModuleShared: FC<SecondModuleSharedProps> = ({exercises, findDraftsA
                                     ${(isStory && (getStoryNumber !== (choosedTab ? choosedTab : firstTab)) && 'hidden')}
                                     `}
                                     >
-                                        <SecondExercise textAlign={textAlign} whiteSpace={whiteSpace} paddingRight={paddingRight} paddingLeft={paddingLeft} textBgColor={textBgColor} textMargin={textMargin} widthText={widthText} songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
+                                        <SecondExercise textAreaWidth={textAreaWidth} textAlign={textAlign} whiteSpace={whiteSpace} paddingRight={paddingRight} paddingLeft={paddingLeft} textBgColor={textBgColor} textMargin={textMargin} widthText={widthText} songPropetries={songPropetries} isStory={isStory} CustomSelectBoxWidth={CustomSelectBoxWidth} CustomInputWidth={CustomInputWidth} CustomTableWidth={CustomTableWidth} draftBankCollectionValues={findDraftsArray} isClearTable={isClearTable} isTable={isTable} checkIsThereImage={(checkIsThereImageRight || checkIsThereImageLeft)} isDragModule={isDragModule} exerciseId={+item.exercise} checkIsThereMergedBackground={checkIsThereMergedBackground} dataObjectId={dataObjectId} data={exercise} register={register} setValue={setValue} control={control} />
                                     </div>    
                                 )
                             }

@@ -14,6 +14,7 @@ type TextAreaModule2Props = {
     placeholder: string
     isClearTable: boolean
     CustomTableWidth: number
+    textAreaWidth: number
 }
 
 const TextAreaModule2: FC<TextAreaModule2Props> = ({
@@ -28,6 +29,7 @@ const TextAreaModule2: FC<TextAreaModule2Props> = ({
   answer,
   placeholder,
   isClearTable,
+  textAreaWidth
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -49,10 +51,10 @@ const TextAreaModule2: FC<TextAreaModule2Props> = ({
         tableRow.style.height = newHeight;
       }
   }, [col, row, setValue, exerciseId, dataObjectId, placeholder, answer]);
-
+  console.log('textAreaWidthh',textAreaWidth)
   return (
     <th style={{ height: '100%' }}>
-      <label className="input-sizer stacked bg-white">
+      <label className="input-sizer stacked bg-white" style={{width:textAreaWidth ? `${textAreaWidth}px` :  '350px'}}>
         <textarea
           ref={textareaRef}
           onInput={(e) => {
