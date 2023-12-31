@@ -68,6 +68,7 @@ const CreateModule = () => {
         setValue(`[${index}].description2`, item.description2);
         setValue(`[${index}].module`, item.module);
         setValue(`[${index}].tab`, item.tab);
+        setValue(`[${index}].tabOrden`, item.tabOrden);
         setValue(`[${index}].youtube_link`, item.youtube_link);
         setValue(`[${index}].courseId`, moduleId); 
         setValue(`[${index}].pdf`, item.pdf);
@@ -80,6 +81,7 @@ const CreateModule = () => {
         setValue(`description2`, (exercises as ISecondModule).description2);
         setValue(`module`, (exercises as ISecondModule).module);
         setValue(`tab`, null);
+        setValue(`tabOrden`, null);
         setValue(`youtube_link`, (exercises as ISecondModule).youtube_link);
         setValue('courseId', moduleId); 
         setValue(`pdf`, (exercises as ISecondModule).pdf);

@@ -6,6 +6,7 @@ export interface ISecondModule {
     title?: string;
     module: number;
     tab: string;
+    tabOrden: number;
     pdf?: string;
     youtube_link?: string;
     description?: string;

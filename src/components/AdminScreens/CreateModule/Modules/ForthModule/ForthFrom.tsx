@@ -16,13 +16,14 @@ const ForthFrom:FC<ForthFromProps> = ({register, setValue, control}) => {
 
     const {exercises, choosedTab,ExerciseMethods} = useExercise()
 
-
+    const sortedTabs =  (exercises as ForthModule)?.sort((a, b) => a.tabOrden - b.tabOrden);
+    console.log('sortedTabs',sortedTabs)
     return (
         <>
         <div className='mr-10 flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
 
         {
-            (exercises as ForthModule)?.map((item,index) => 
+            (sortedTabs as ForthModule)?.map((item,index) => 
             <>
                 <div 
                 className={`${choosedTab  == item.tab ? 'bg-[#3995F5] text-white' : 'bg-white color-[#000000B2]'} pt-2 pb-2 pr-4 pl-4 rounded-md cursor-pointer`} 
