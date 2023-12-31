@@ -88,7 +88,7 @@ const CreateModule = () => {
 
     }
   }, [exercises, choosedModule, setValue]);
-
+    console.log('choosedModule',choosedModule)
     return (
         <Meta title='יצירת מודול'>
             <AdminLayout>
@@ -100,6 +100,10 @@ const CreateModule = () => {
               {/* {choosedModule === 1 &&
                 <SideBar isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose} register={register} setValue={setValue}/>            
               } */}
+
+              {choosedModule.value === 21 && 
+                <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>
+              }
 
               {choosedModule.value === 2 && 
                 <SideBarModuleTwo isSidebarOpen={isSidebarOpen} handleSidebarClose={handleSidebarClose}/>

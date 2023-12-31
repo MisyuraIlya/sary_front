@@ -132,7 +132,7 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
 
                     <div className='relative flex items-center gap-1'>
                         <div className=''>
-                            {  (exercises as ISecondModule)?.pdf  ?  (exercises as ISecondModule)?.pdf :  (exercises as ISecondModule)?.pdf && 
+                            {  (exercises as ISecondModule)?.pdf && 
                                 <div>
                                     <div className='flex items-center justify-center'>
                                         <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
@@ -142,7 +142,7 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
                             }
                         </div>
                         <div className=''>
-                            {(exercises as ISecondModule).youtube_link  ? (exercises as ISecondModule).youtube_link :  (exercises as ISecondModule)?.youtube_link && 
+                            {(exercises as ISecondModule)?.youtube_link   && 
                             <div>
                                 <div className='flex items-center justify-center'>
                                     <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
