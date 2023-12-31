@@ -20,21 +20,22 @@ const ForthFrom:FC<ForthFromProps> = ({register, setValue, control}) => {
     console.log('sortedTabs',sortedTabs)
     return (
         <>
-        <div className='mr-10 flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
-
-        {
-            (sortedTabs as ForthModule)?.map((item,index) => 
-            <>
-                <div 
-                className={`${choosedTab  == item.tab ? 'bg-[#3995F5] text-white' : 'bg-white color-[#000000B2]'} pt-2 pb-2 pr-4 pl-4 rounded-md cursor-pointer`} 
-                key={index} 
-                onClick={() => ExerciseMethods.setChoosedTab(item.tab)}
-                >
-                {item.tab}
-                </div>
-            </>
-            )
-        }
+        <div className=' flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
+            <div className='mr-[80px] flex  gap-5'>
+                {
+                    (sortedTabs as ForthModule)?.map((item,index) => 
+                    <>
+                        <div 
+                        className={`${choosedTab  == item.tab ? 'bg-[#3995F5] text-white' : 'bg-[#F0FBFF] color-[#F0FBFF]'}  pt-2 pb-2 pr-4 pl-4 rounded-md cursor-pointer`} 
+                        key={index} 
+                        onClick={() => ExerciseMethods.setChoosedTab(item.tab)}
+                        >
+                        {item.tab}
+                        </div>
+                    </>
+                    )
+                }
+            </div>
         </div>
         {(exercises as ForthModule)?.map((item,index) => {
         const findDraftsArray = (item as any)?.exercises?.map((item: ISecondModuleExercises, indexx:number) => {

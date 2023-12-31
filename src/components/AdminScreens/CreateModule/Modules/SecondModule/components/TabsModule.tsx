@@ -17,7 +17,7 @@ const TabsModule: FC<TabsModuleProps> = ({ arrayTabs, firstTab }) => {
           <>
             <div className='mr-2'></div>
             <div
-              className={`${(choosedTab ? choosedTab : firstTab) === item.name ? 'bg-[#3995F5] text-white' : 'bg-white color-[#000000B2]'} pt-2 pb-2 pr-4 pl-4 rounded-md cursor-pointer`}
+              className={`${(choosedTab ? choosedTab : firstTab) === item.name ? 'bg-[#3995F5] text-white' : 'bg-[#F0FBFF] color-[#000000B2]'} pt-2 pb-2 pr-4 pl-4 rounded-md cursor-pointer`}
               key={index}
               onClick={() => ExerciseMethods.setChoosedTab(item.name)}
             >
