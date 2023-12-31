@@ -19,7 +19,7 @@ const ForthFrom:FC<ForthFromProps> = ({register, setValue, control}) => {
 
     return (
         <>
-        <div className='flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
+        <div className='mr-10 flex gap-2 w-full pt-5 pb-5 ' style={{borderBottom:'1px solid #00000033'}}>
 
         {
             (exercises as ForthModule)?.map((item,index) => 
