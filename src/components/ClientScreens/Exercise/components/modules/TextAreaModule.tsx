@@ -1,6 +1,5 @@
 import React from 'react';
-import { collectionRow } from '@/types/ModulesTypes.ts/FirstModule.interface';
-
+import { collectionRow } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type SelectBoxProps = {
     collection: collectionRow
 }

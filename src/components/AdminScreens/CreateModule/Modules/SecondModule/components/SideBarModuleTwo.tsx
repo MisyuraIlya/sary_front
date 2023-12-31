@@ -4,6 +4,8 @@ import SideBars from '@/components/SideBars/SideBars';
 import Heading from '@/ui/heading/Heading';
 import SideLinks from './SideLinks';
 import SideLinkMain from './SideLinkMain';
+import IconSecondModule from '../models/IconSecondModule';
+import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type SideBarProps = {
     isSidebarOpen: any
     handleSidebarClose: any
@@ -11,20 +13,21 @@ type SideBarProps = {
 
 const SideBarModuleTwo:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose}) => {
 
-    const {exercises} = useExercise()
+    const {exercises } = useExercise()
+    console.log('exercisess',exercises)
     return (
         <SideBars anchor="left" isOpen={isSidebarOpen} onClose={handleSidebarClose}>
             <div style={{width:'700px'}} className='myCenter'>
             <div className='m-10 w-full'>
                 <div className='text-center'>
-                <Heading>{exercises?.title}</Heading>
+                <Heading>{(exercises as ISecondModule)?.title}</Heading>
                 </div>
                 <h3 className='font-bold text-primary text-right underline'>הוראות תרגיל</h3>
                 <div>
                 <div 
                 
                 // onInput={handleInputChange} 
-                dangerouslySetInnerHTML={{ __html: exercises?.description ?? '' }}
+                dangerouslySetInnerHTML={{ __html: (exercises as ISecondModule)?.description ?? '' }}
                 className='text-right pr-2'
                 />
                 {/* <SubHeading>{exercises?.description}</SubHeading> */}
@@ -35,7 +38,7 @@ const SideBarModuleTwo:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose}) =
                 <div 
                 
                 // onInput={handleInputChange} 
-                dangerouslySetInnerHTML={{ __html: exercises?.description2 ?? '' }}
+                dangerouslySetInnerHTML={{ __html: (exercises as ISecondModule)?.description2 ?? '' }}
                 className='text-right pr-2'
                 />
                 </div>

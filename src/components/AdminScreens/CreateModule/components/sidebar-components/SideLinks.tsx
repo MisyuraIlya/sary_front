@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useState, useRef, use} from 'react';
 
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-import { IFirstModule, collectionRow, collectionsRows } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import Image from 'next/image';
 import { useAuth } from '@/hooks/useAuth';

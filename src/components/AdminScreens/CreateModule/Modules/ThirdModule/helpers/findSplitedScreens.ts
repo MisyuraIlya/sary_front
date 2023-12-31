@@ -1,4 +1,3 @@
-import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
 import { ISecondModuleExercises, ISecondModuleSubExercises } from "@/types/ModulesTypes.ts/SecondModule.interface";
 
 export const findSplitedScreens = (exercises : ISecondModuleExercises[]) => {

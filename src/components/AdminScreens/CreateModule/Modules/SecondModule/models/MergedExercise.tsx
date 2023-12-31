@@ -14,9 +14,10 @@ type MergedExerciseProps = {
     isTable: boolean
     control: any
     CustomTableWidth: number
+    tab: number | null
 }
 
-const MergedExercise:FC<MergedExerciseProps> = ({CustomTableWidth, mergedData,setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,control}) => {
+const MergedExercise:FC<MergedExerciseProps> = ({tab, CustomTableWidth, mergedData,setValue, exerciseId, dataObjectId, col , row, checkIsThereImage, isTable,control}) => {
     let optionsNew: any = []
     if(mergedData?.previous?.module_type === 'selectbox' || mergedData?.next?.module_type === 'selectbox') {
         optionsNew = Array.isArray((mergedData?.previous?.collectionValues || mergedData?.next?.collectionValues))
@@ -28,12 +29,12 @@ const MergedExercise:FC<MergedExerciseProps> = ({CustomTableWidth, mergedData,se
     const getValueNext = (value:any) => value ? optionsNew.find((option:any) => option.value.trim() == value) : {value:mergedData?.previous?.collectionAnswers[0].value, label:mergedData?.previous?.collectionAnswers[0].value}
 
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'mergedExercise');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue, exerciseId, dataObjectId]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'mergedExercise');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
+      }, [col, row, setValue, exerciseId, dataObjectId,tab]);
 
     return (
         <th

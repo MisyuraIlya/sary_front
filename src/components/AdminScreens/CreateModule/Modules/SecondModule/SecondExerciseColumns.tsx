@@ -13,14 +13,15 @@ type SecondExerciseColumnsProps = {
     isClearTable: boolean
     isDragModule: boolean
     CustomTableWidth: number
+    tab: number | null
 }
 
-const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({CustomTableWidth, checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable, isClearTable, isDragModule}) => {
+const SecondExerciseColumns:FC<SecondExerciseColumnsProps> = ({tab, CustomTableWidth, checkIsAllCategoryColsEmpty, data,exerciseId,dataObjectId, setValue, index, col, isTable, isClearTable, isDragModule}) => {
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].orden`, data.orden ? data.orden : '');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].title`, data.title ? data.title : '');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].type`, data.type ? data.type : '');
-      }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId,data.type]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].orden`, data.orden ? data.orden : '');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].title`, data.title ? data.title : '');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsCols[${col}].type`, data.type ? data.type : '');
+      }, [col,setValue, data.orden, data.title, exerciseId, dataObjectId,data.type,tab]);
     if (isDragModule) return null
     return (
         <>

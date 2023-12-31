@@ -1,8 +1,8 @@
+import { ISecondModule } from "@/types/ModulesTypes.ts/SecondModule.interface"
 import { ICourse } from "@/types/course.interface"
-import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface"
 
 export interface IInitialState {
-    exercise: null | IFirstModule
+    exercise: null | ISecondModule
     isLoading: boolean
 
 }

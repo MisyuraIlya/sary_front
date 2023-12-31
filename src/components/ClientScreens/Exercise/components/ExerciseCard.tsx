@@ -1,8 +1,7 @@
-import { collectionRow } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import Image from 'next/image';
 import React from 'react';
 import HandleExercise from './HandleExercise';
-
+import { collectionRow } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type ExerciseCardProps = {
     item: collectionRow
 }

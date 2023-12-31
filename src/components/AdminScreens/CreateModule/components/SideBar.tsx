@@ -3,6 +3,7 @@ import SideBars from '@/components/SideBars/SideBars';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import Heading from '@/ui/heading/Heading';
 import SideLinks from './sidebar-components/SideLinks';
+import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 
 type SideBarProps = {
     isSidebarOpen: any
@@ -18,14 +19,14 @@ const SideBar:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose, register, s
             <div style={{width:'700px'}} className='myCenter'>
             <div className='m-10 w-full'>
                 <div className='text-center'>
-                <Heading>{exercises?.title}</Heading>
+                <Heading>{(exercises as ISecondModule)?.title}</Heading>
                 </div>
                 <h3 className='font-bold text-primary text-right underline'>הוראות תרגיל</h3>
                 <div>
                 <div 
                 
                 // onInput={handleInputChange} 
-                dangerouslySetInnerHTML={{ __html: exercises?.description ?? '' }}
+                dangerouslySetInnerHTML={{ __html: (exercises as ISecondModule)?.description ?? '' }}
                 className='text-right pr-2'
                 />
                 {/* <SubHeading>{exercises?.description}</SubHeading> */}
@@ -36,7 +37,7 @@ const SideBar:FC<SideBarProps> = ({isSidebarOpen,handleSidebarClose, register, s
                 <div 
                 
                 // onInput={handleInputChange} 
-                dangerouslySetInnerHTML={{ __html: exercises?.description2 ?? '' }}
+                dangerouslySetInnerHTML={{ __html: (exercises as ISecondModule)?.description2 ?? '' }}
                 className='text-right pr-2'
                 />
                 </div>

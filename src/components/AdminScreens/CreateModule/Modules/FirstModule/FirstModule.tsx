@@ -3,7 +3,7 @@ import Exercise from '@/components/ClientScreens/Exercise/Exercise';
 import FieldModule from '../../components/models/FieldModule';
 import InputModule from '../../components/models/InputModule';
 import SelectModule from '../../components/models/SelectModule';
-import { collectionRow, collectionsRows } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionsRows } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import TextAreaModule from '../../components/models/TextAreaModule';
 import SideBars from '@/components/SideBars/SideBars';
 import Image from 'next/image';
@@ -50,7 +50,7 @@ const FirstModule:FC <FirstModule> = ({exercises, register, orden,setValue , con
                     if(item.module_type == 'text') return <FieldModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue} />
                     if(item.module_type == 'input') return <InputModule key={index} id={item.id} answer={item.collectionAnswers.length > 0 ? item.collectionAnswers[0].value : ""  } placeholder={item.placeholder || ''}  register={register} col={orden} row={item.orden} setValue={setValue} isFullText={item.isFullText} />
                     if(item.module_type == 'selectbox') return <SelectModule key={index} placeholder={item.placeholder || ''} options={item.collectionValues} answer={item.collectionAnswers.length > 0 ? item.collectionAnswers[0].value : ""} register={register}   col={orden} row={item.orden} setValue={setValue} control={control} />
-                    if(item.module_type == 'textarea') return <TextAreaModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue}/>
+                    if(item.module_type == 'textArea') return <TextAreaModule key={index} value={item.collectionValues[0].value}  register={register} col={orden} row={item.orden} setValue={setValue}/>
                 })
             }
             <th className='bg-white relative pl-4'>

@@ -10,6 +10,7 @@ import Button from '@/ui/button/Button';
 import { substring10 } from '@/helpers/Substring10';
 import Image from 'next/image';
 import { ExerciseDeletionStoredData } from '@/utils/local-storage-exercise-deletion-store';
+import { ForthModule, ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 
 type HeadManager = {
     control: any
@@ -17,38 +18,17 @@ type HeadManager = {
     onSubmit: any
     handleSidebarToggle: any
 }
-
-const options = [
-    { value: 1, label: 'מודול ראשון' },
-    { value: 21, label: 'מודול שני - בנתיבי הצורות' },
-    { value: 2, label: 'מודול שני' },
-    { value: 3, label: 'מודול שלישי' },
-  ]
-
-  
-
 const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handleSidebarToggle}) => {
-
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
     const {user} = useAuth()
-
-    const [isEmptySelect, setIsEmptySelect] = useState<number>()
-
-    const {ExerciseMethods, exercises, isOnlineXml, handleEditedCheckbox, choosedModule} = useExercise()
-    
+    const {ExerciseMethods, exercises, isOnlineXml, handleEditedCheckbox, choosedModule, choosedTab,options } = useExercise()
     const router = useRouter();
-
     const moduleId = router.query.moduleId
-    
     const {pdf, link} = ExerciseDeletionStoredData.isExistData()
-
-    const getValue = (value:any) => value ? options.find((option) => option.value === value) : {value:exercises?.module, label:exercises?.module}
-
-
+    
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if(!isEmptySelect) {
+        if(!choosedModule.value) {
         onInfoAlert('אנא בחרו מודל רצוי','')
         } else {
         if (selectedFile) {
@@ -75,49 +55,46 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
 
     return (
         <div className='mr-12'>
-            
-            <Heading>{exercises?.title}</Heading>
-            {exercises?.title &&
-            <div className="border-b border-solid border-2 border-gray-400"></div>
+            {choosedModule.value === 4 ?
+                <>
+                    <Heading>{(exercises as ForthModule)?.[0].title}</Heading>
+                    <div className="border-b border-solid border-2 border-gray-400"></div>
+                </>
+            :
+                <>
+                    <Heading>{(exercises as ISecondModule)?.title}</Heading>
+                    <div className="border-b border-solid border-2 border-gray-400"></div>
+                </>
             }
 
             <div className='grid grid-cols-2 py-10 px-2 relative'>
                 <Controller control={control} name={`module`} rules={{required:'צריך לבחור מודול'}} render={
                     ({field:{onChange,value},fieldState:{error}}) => { 
-                        
-                        setIsEmptySelect(value) 
-                        
                         return(
                         <>
-                        <ReactSelect
-                        placeholder={'בחירת מודול'}
-                        options={options}
-                        value={getValue(value)}
-                        onChange={(newValue) => {onChange((newValue?.value)); ExerciseMethods.chooseModule(newValue?.value!)}}
-                        className='w-96'
-                        />
-                        {error && (
-                            <div style={{color:'red',position:'absolute', bottom:'10px', paddingRight:'15px'}}>
-                                {error.message}
-                            </div>
-                        )}
+                            <ReactSelect
+                            placeholder={'בחירת מודול'}
+                            options={options}
+                            value={choosedModule}
+                            onChange={(newValue) => {onChange((newValue?.value)); ExerciseMethods.chooseModule({value: newValue?.value!, label:newValue?.label!})}}
+                            className='w-96'
+                            />
+                            {error && (
+                                <div style={{color:'red',position:'absolute', bottom:'10px', paddingRight:'15px'}}>
+                                    {error.message}
+                                </div>
+                            )}
                         </>
                         )}
                     }
                 />
                 <form onSubmit={handleSubmit} encType="multipart/form-data" className='justify-end items-end flex gap-12'>
-                    {exercises?.title && moduleId && isOnlineXml && 
+                    {moduleId && isOnlineXml && 
                     <>
                         <div className='rounded-x1 font-medium px-10 py-2 shadow bg-red text-white rounded-md cursor-pointer' onClick={() => ExerciseMethods.deleteModule(moduleId)}>מחיקה</div>       
-
                         {(pdf || link) &&                    
                             <div className='rounded-x1 font-medium px-10 py-2 shadow border-2 hover:bg-[#1D99FF] hover:text-white border-[#1D99FF]  text-[#1D99FF] rounded-md cursor-pointer' onClick={() => ExerciseMethods.resroteDeletionData()}>שחזור נתונים קודמים</div>
                         }             
-                        {/* <div className='justify-center items-center h-full flex'> */}
-                        {/* here my logs */}
-                        {/* <Image src={'/images/xl.svg'} width={45} height={45} alt='xl' className='cursor-pointer flex ' onClick={() =>  window.open(`http://3.74.228.194:4000/${exercises?.xl}`, '_blank')} /> */}
-                        {/* </div> */}
-                    
                     </>
                     }
 
@@ -131,14 +108,12 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
                         <div className='relative'>
                         {user?.isAdmin &&
                         <>
-                        <Button className='bg-primary text-white rounded-md '>העלה</Button>                              
-                        <div className='absolute '>
-                            {substring10(selectedFile.name)}
-                        </div>
+                            <Button className='bg-primary text-white rounded-md '>העלה</Button>                              
+                            <div className='absolute '>
+                                {substring10(selectedFile.name)}
+                            </div>
                         </>
-
                         }
-
                         </div>   
                     }
                     {selectedFile &&                     
@@ -157,7 +132,7 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
 
                     <div className='relative flex items-center gap-1'>
                         <div className=''>
-                            { exercises?.pdf && 
+                            {  (exercises as ISecondModule)?.pdf  ?  (exercises as ISecondModule)?.pdf :  (exercises as ISecondModule)?.pdf && 
                                 <div>
                                     <div className='flex items-center justify-center'>
                                         <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
@@ -167,7 +142,7 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
                             }
                         </div>
                         <div className=''>
-                            {exercises?.youtube_link && 
+                            {(exercises as ISecondModule).youtube_link  ? (exercises as ISecondModule).youtube_link :  (exercises as ISecondModule)?.youtube_link && 
                             <div>
                                 <div className='flex items-center justify-center'>
                                     <Image src={`/images/v.svg`} width={15} height={15} alt='v' />
@@ -176,12 +151,9 @@ const HeadManager:FC<HeadManager> = ({control, handleSubmitForm, onSubmit, handl
                             </div>   
                             }
                         </div>
-                        {/* { choosedModule === 1 && */}
-                            <div className={`p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} > 
-                                <Image src={`${exercises?.pdf && exercises?.youtube_link ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>
-                            </div> 
-                        {/* } */}
-
+                        <div className={`p-2 rounded-lg cursor-pointer`} onClick={() => handleSidebarToggle()} > 
+                            <Image src={`${(exercises as ISecondModule)?.pdf && (exercises as ISecondModule)?.youtube_link ? '/images/settings_primary.svg' : '/images/settings_clear.svg'}`} alt='settings' width={25} height={25}/>
+                        </div> 
                     </div>
                 </form>
             </div>

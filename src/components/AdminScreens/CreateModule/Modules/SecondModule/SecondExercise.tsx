@@ -36,10 +36,11 @@ type SecondExerciseProps = {
     textAlign: string
     whiteSpace: string
     textAreaWidth: number
+    tab: number | null
 }
 
 
-const SecondExercise:FC<SecondExerciseProps> = ({textAreaWidth,textAlign, whiteSpace, paddingRight, paddingLeft, textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
+const SecondExercise:FC<SecondExerciseProps> = ({tab, textAreaWidth,textAlign, whiteSpace, paddingRight, paddingLeft, textBgColor, textMargin, widthText, songPropetries,isStory, CustomSelectBoxWidth, CustomTableWidth, checkIsThereImage, data,register,setValue,control, exerciseId,checkIsThereMergedBackground,  dataObjectId,isTable,isClearTable, isDragModule, draftBankCollectionValues, CustomInputWidth }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {choosedModule} = useExercise()
@@ -107,10 +108,10 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAreaWidth,textAlign, whiteS
 
     const checkIsIcon = checkIsIconModule(data)
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.exercise`, exerciseId);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].orden`, data.orden);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.exercise`, exerciseId);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].orden`, data.orden);
 
-    },[exerciseId,dataObjectId, data.orden, setValue ])
+    },[exerciseId,dataObjectId, data.orden, setValue,tab])
 
     const handleSidebarToggle = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -140,15 +141,16 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAreaWidth,textAlign, whiteS
                                 isClearTable={isClearTable}
                                 isDragModule={isDragModule}
                                 CustomTableWidth={CustomTableWidth}
+                                tab={tab}
                                 
                             />
                             );
                         })}
                     </tr>
                     {data?.collectionsRows?.map((rows,keys) => {
-                        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].orden`, rows.orden);
-                        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].youtube_link`, null);
-                        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].pdf`, null);
+                        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].orden`, rows.orden);
+                        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].youtube_link`, null);
+                        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${rows.orden}].pdf`, null);
                         const isExistWord = rows?.collectionRow.some((item) => item?.module_type === 'word' && item?.collectionValues[0]?.value !== null);
                         const isExistInstruction = rows?.collectionRow.some((item) => item?.module_type === 'instruction' && item?.collectionValues[0]?.value !== null);
                         const isExistSubInstruction = rows?.collectionRow.some((item) => item?.module_type === 'subInstruction' && item?.collectionValues[0]?.value !== null);
@@ -210,6 +212,7 @@ const SecondExercise:FC<SecondExerciseProps> = ({textAreaWidth,textAlign, whiteS
                                         textAlign={textAlign}
                                         whiteSpace={whiteSpace}
                                         textAreaWidth={textAreaWidth}
+                                        tab={tab}
                                     />  
                                     </>
                                 )}

@@ -7,7 +7,7 @@ export const isStoryFunc = (item: ISecondModuleExercises[]): boolean => {
         item[propertyName].data.map((item2) => {
             item2.collectionsRows.map((item3) => {
                 item3.collectionRow.map((item4) => {
-                    if(item4?.module_type === 'story' || item4?.module_type === 'storyHeadline'){
+                    if(item4?.module_type === 'storyHeadline'){
                         isStory = true
                     }
                 })

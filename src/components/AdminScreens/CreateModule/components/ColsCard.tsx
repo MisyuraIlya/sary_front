@@ -1,7 +1,6 @@
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-import { collectionsCols } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import React, {FC, useEffect} from 'react';
-
+import { collectionsCols } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type ColsCardProps = {
     item:collectionsCols
     register: any

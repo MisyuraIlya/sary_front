@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CourseService } from "@/services/courses/courses";
 import { IUser } from "@/types/user.interface";
-import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
 import { ICourse } from "@/types/course.interface";
 import { ExercisesService } from "@/services/exercises/Exercises";
+import { ISecondModule } from "@/types/ModulesTypes.ts/SecondModule.interface";
 
 type data = {
   idExercise: number,
@@ -11,7 +11,7 @@ type data = {
 
 }
 export const getExercise = createAsyncThunk<
-    IFirstModule,
+    ISecondModule,
     data
 
 >("exercises/:id", async (data, thunkApi) => {

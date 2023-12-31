@@ -2,10 +2,10 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect,useState} from 'react';
 import { Controller } from 'react-hook-form';
 import { Tooltip, Typography } from "@material-tailwind/react";
-import { Collection } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionAnswers } from '@/types/ModulesTypes.ts/SecondModule.interface';
 interface TypedInputModuleProps {
     id: number
-    answer: Collection[]
+    answer: collectionAnswers[]
     placeholder: string
     register: any
     col: number
@@ -19,21 +19,22 @@ interface TypedInputModuleProps {
     isMerged: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    tab: number | null
 }
 
-const TypedInput: FC<TypedInputModuleProps> = ({CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
+const TypedInput: FC<TypedInputModuleProps> = ({tab, CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId,isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
 
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'typedInput');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, isFullText);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].placeholder`, placeholder);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'typedInput');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, isFullText);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].placeholder`, placeholder);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
         
-      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer,placeholder]);
+      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer,placeholder,tab]);
 
     const handleCheckBox = () => {
         setIsChecked(!isChecked)

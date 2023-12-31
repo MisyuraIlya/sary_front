@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import FirstModule from './FirstModule';
 import ColsCard from '../../components/ColsCard';
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
-import { collectionsCols, collectionsRows } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionsCols, collectionsRows } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type FirstFormProps = {
     handleSubmitForm: any
     onSubmit: any

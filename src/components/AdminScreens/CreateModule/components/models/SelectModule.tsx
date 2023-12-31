@@ -1,10 +1,10 @@
 import React, {FC,useEffect} from 'react';
 import ReactSelect from 'react-select'
 import { Controller } from 'react-hook-form'
-import { Collection } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionAnswers } from '@/types/ModulesTypes.ts/SecondModule.interface';
 interface SelectModuleProps {
     answer: string
-    options: Collection[]
+    options: collectionAnswers[]
     placeholder: string
     col: number
     row:number

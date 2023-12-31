@@ -1,7 +1,6 @@
 import { instance } from "@/api/api.interceptor"
 import { ICourse, CoursesPerUserResponse } from "@/types/course.interface"
 import axios, { AxiosResponse } from 'axios';
-import { IFirstModule } from "@/types/ModulesTypes.ts/FirstModule.interface";
 import { onErrorAlert } from "@/utils/sweetAlert";
 interface courseDtoRequest {
     name: string

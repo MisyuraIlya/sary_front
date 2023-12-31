@@ -1,12 +1,12 @@
 import React, {FC,useEffect} from 'react';
 import ReactSelect from 'react-select'
 import { Controller } from 'react-hook-form'
-import { Collection } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionAnswers } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import ToolTip from '../ToolTip';
 
 interface SelectModuleProps {
-    answer: Collection[]
-    options: Collection[]
+    answer: collectionAnswers[]
+    options: collectionAnswers[]
     placeholder: string
     col: number
     row:number
@@ -21,21 +21,22 @@ interface SelectModuleProps {
     isClearTable: boolean
     CustomTableWidth: number
     CustomSelectBoxWidth: number
+    tab: number | null
 }
-const SelectModule:FC<SelectModuleProps> = ({CustomSelectBoxWidth, CustomTableWidth, isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
+const SelectModule:FC<SelectModuleProps> = ({tab, CustomSelectBoxWidth, CustomTableWidth, isMerged,checkIsThereImage, placeholder, options, answer,col, row, register, setValue, control, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const optionsNew = Array.isArray(options)
     ? options.map((item) => ({ value: item.value, label: item.value }))
     : [];
 
     const getValue = (value:any) => value ? optionsNew.find((option) => option.value.trim() == value) : {value:answer[0]?.value, label:answer[0]?.value}
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, options);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'selectbox');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].placeholder`, placeholder);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-      }, [answer, col, options, row, setValue, exerciseId, dataObjectId,placeholder]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, options);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'selectbox');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].placeholder`, placeholder);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
+      }, [answer, col, options, row, setValue, exerciseId, dataObjectId,placeholder,tab]);
     return (
         <>
         {!isMerged &&

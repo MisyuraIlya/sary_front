@@ -23,9 +23,10 @@ type TextModuledProps = {
     paddingRight: number
     whiteSpace: string
     textAlign: string
+    tab: number | null
 
 }
-const TextModuled:FC<TextModuledProps> = ({whiteSpace, textAlign, paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
+const TextModuled:FC<TextModuledProps> = ({tab, whiteSpace, textAlign, paddingLeft, paddingRight,textBgColor,textMargin, widthText,CustomTableWidth,firstIdTextModule, checkIsThereImage, value, setValue, exerciseId, dataObjectId, col , row, isTable, isClearTable, collectionsCols}) => {
 
     const {isOnlineXml, choosedModule} = useExercise()
     // let formattedValue = value?.replaceAll('#', "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -36,12 +37,12 @@ const TextModuled:FC<TextModuledProps> = ({whiteSpace, textAlign, paddingLeft, p
     }
 
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'textModuled');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
-      }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'textModuled');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, false);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, [{value: htmlTag}]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, []);
+      }, [col, row, setValue,exerciseId, dataObjectId, value, htmlTag,tab]);
       const isDisabledTh = collectionsCols.some((item) => item.orden === col + 1 && item.title == 'h')
     return (
         <th className={`
@@ -50,8 +51,8 @@ const TextModuled:FC<TextModuledProps> = ({whiteSpace, textAlign, paddingLeft, p
         
         ${isDisabledTh && 'disbleTh'}
         ${checkIsThereImage ? '' : ''}
-        ${(firstIdTextModule === value && !isClearTable && choosedModule !== 3)  ? 'specific-th ' : ''}
-        ${choosedModule === 3 && 'text-justify'}
+        ${(firstIdTextModule === value && !isClearTable && choosedModule.value !== 3)  ? 'specific-th ' : ''}
+        ${choosedModule.value === 3 && 'text-justify'}
         pt-2
         pb-2
         `}

@@ -49,7 +49,7 @@ const PdfModule: FC<PdfModuleProps> = ({ data }) => {
                 <iframe title='uploaded-pdf' src={URL.createObjectURL(selectedFile)} width='900px' height='500px' />
               ) : (
                 // Display PDF link using iframe
-                <iframe title='pdf-link' src={`http://localhost:4000/${pdfLink}`} width='900px' height='500px' />
+                <iframe title='pdf-link' src={`http://3.74.228.194:4000/${pdfLink}`} width='900px' height='500px' />
               )}
               <input id='pdfInput' ref={fileInputRef} type='file' onChange={uploadPdf} className='hidden' />
             </div>

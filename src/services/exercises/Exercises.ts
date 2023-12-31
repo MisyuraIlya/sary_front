@@ -1,7 +1,6 @@
 import { instance } from "@/api/api.interceptor"
 import axios, { AxiosResponse } from 'axios';
-import { IFirstModule, ResponseUploadedPdf} from "@/types/ModulesTypes.ts/FirstModule.interface";
-import { ISecondModule } from "@/types/ModulesTypes.ts/SecondModule.interface";
+import { ISecondModule, ResponseUploadedPdf } from "@/types/ModulesTypes.ts/SecondModule.interface";
 import { onErrorAlert } from "@/utils/sweetAlert";
 interface courseDtoRequest {
     title: string
@@ -32,7 +31,7 @@ interface updateIsInTheBook {
     isInTheBook: boolean;
 }
 
-type ModuleIdToExercise<ModuleId extends number> = ModuleId extends 1 ? IFirstModule : ISecondModule
+type ModuleIdToExercise<ModuleId extends number> = ISecondModule
 
 
 export const ExercisesService = {
@@ -74,14 +73,14 @@ export const ExercisesService = {
     },
 
     async ReadStudentExerciseWithAnswersPerStudent(idExercise: number, idStudent: number) {
-        const response = await instance<IFirstModule>({
+        const response = await instance<ISecondModule>({
             url: `/exercises/${idExercise}/${idStudent}`,
             method:'GET',
         })
         return response.data
     },
     async getOne (id: number | string) {
-        const response = await instance<IFirstModule>({
+        const response = await instance<ISecondModule>({
             url: `/exercises/${id}`,
             method:'GET',
         })

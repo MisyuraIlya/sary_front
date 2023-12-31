@@ -1,20 +1,17 @@
 import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC} from 'react';
 import { Oval } from 'react-loader-spinner';
-import ColsCard from './ColsCard';
-import FirstModule from '../Modules/FirstModule/FirstModule';
-import FirstForm from '../Modules/FirstModule/FirstForm';
 import SecondForm from '../Modules/SecondModule/SecondForm';
 import ThirdForm from '../Modules/ThirdModule/ThirdForm';
+import ForthFrom from '../Modules/ForthModule/ForthFrom';
+
 type TableManagerProps = {
-    handleSubmitForm: any
-    onSubmit: any
     register: any
     setValue: any
     control: any
 }
 
-const TableManager:FC<TableManagerProps> = ({handleSubmitForm, onSubmit, register, setValue, control}) => {
+const TableManager:FC<TableManagerProps> = ({register, setValue, control}) => {
     const {loading, choosedModule, exercises} = useExercise()
     return (
         <>
@@ -35,10 +32,11 @@ const TableManager:FC<TableManagerProps> = ({handleSubmitForm, onSubmit, registe
               </div>
               :
               <>
-              {choosedModule === 1 && exercises && <FirstForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
-              {choosedModule === 21 && exercises && <SecondForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
-              {choosedModule === 2 && exercises && <SecondForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
-              {choosedModule === 3 && exercises && <ThirdForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>}
+              {/* {choosedModule === 1 && exercises && <FirstForm handleSubmitForm={handleSubmitForm} register={register} setValue={setValue} control={control} onSubmit={onSubmit}/>} */}
+              {choosedModule.value === 21 && exercises && <SecondForm  register={register} setValue={setValue} control={control}/>}
+              {choosedModule.value === 2 && exercises && <SecondForm register={register} setValue={setValue} control={control}/>}
+              {choosedModule.value === 3 && exercises && <ThirdForm  register={register} setValue={setValue} control={control}/>}
+              {choosedModule.value === 4 && exercises && <ForthFrom  register={register} setValue={setValue} control={control}/>}
               </>
             }
         </>

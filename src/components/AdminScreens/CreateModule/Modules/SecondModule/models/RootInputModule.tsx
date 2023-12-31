@@ -2,10 +2,10 @@ import { useExercise } from '@/providers/exercise/ExerciseProvider';
 import React, {FC, useEffect,useState} from 'react';
 import { Controller } from 'react-hook-form';
 import ToolTip from '../ToolTip';
-import { Collection } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionAnswers } from '@/types/ModulesTypes.ts/SecondModule.interface';
 interface RootInputModuleProps {
     id: number
-    answer: Collection[]
+    answer: collectionAnswers[]
     placeholder: string
     register: any
     col: number
@@ -19,18 +19,19 @@ interface RootInputModuleProps {
     isMerged: boolean
     isClearTable: boolean
     CustomTableWidth: number
+    tab: number | null
 }
 
-const RootInputModule: FC<RootInputModuleProps> = ({CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable, isClearTable}) => {
+const RootInputModule: FC<RootInputModuleProps> = ({tab, CustomTableWidth, isMerged, checkIsThereImage, id, answer,placeholder, register, col, row, setValue,isFullText, exerciseId, dataObjectId, isTable, isClearTable}) => {
     const {ExerciseMethods} = useExercise()
     const [isChecked, setIsChecked] = useState(isFullText)
     useEffect(() => {
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'rootInput');
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, isFullText);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
-        setValue(`exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
-      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer]);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].orden`, row);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].module_type`, 'rootInput');
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].isFullText`, isFullText);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionValues`, []);
+        setValue(`${tab !== null ? `[${tab}].` : ''}exercises.${exerciseId}.data[${dataObjectId}].collectionsRows[${col}].collectionRow[${row}].collectionAnswers`, answer);
+      }, [col, row, setValue, isFullText, exerciseId, dataObjectId,answer,tab]);
 
       const handleCheckBox = () => {
         setIsChecked(!isChecked)

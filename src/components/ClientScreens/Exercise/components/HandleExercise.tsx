@@ -1,10 +1,9 @@
-import { collectionRow } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import React from 'react';
 import InputModule from './modules/InputModule';
 import TextModule from './modules/TextModule';
 import SelectBoxModule from './modules/SelectBoxModule';
 import TextAreaModule from './modules/TextAreaModule';
-
+import { collectionRow } from '@/types/ModulesTypes.ts/SecondModule.interface';
 type HandleExerciseProps = {
     item: collectionRow[]
 }
@@ -24,7 +23,7 @@ const HandleExercise = ({ item }: HandleExerciseProps) => {
                 } else if (type.module_type === 'input') {
                     return (
                         <th key={uniqueKey} className='w-52'>
-                            <InputModule collection={type} />
+                            {/* <InputModule collection={type} /> */}
                         </th>
                     );
                 } else if (type.module_type === 'selectbox') {
@@ -33,7 +32,7 @@ const HandleExercise = ({ item }: HandleExerciseProps) => {
                             <SelectBoxModule collection={type} />
                         </th>
                     );
-                } else if (type.module_type === 'textarea') {
+                } else if (type.module_type === 'textArea') {
                     return (
                         <th key={uniqueKey} className='w-52'>
                             <TextAreaModule collection={type} />

@@ -2,12 +2,15 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { ExercisesService } from '@/services/exercises/Exercises';
 import { useQuery } from '@tanstack/react-query';
-import { IFirstModule } from '@/types/ModulesTypes.ts/FirstModule.interface';
 import { useRouter } from 'next/router';
 import { onAsk, onSuccessAlert, onErrorAlert } from '@/utils/sweetAlert';
-import { ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
+import { ForthModule, ISecondModule } from '@/types/ModulesTypes.ts/SecondModule.interface';
 import { ExerciseDeletionStoredData } from '@/utils/local-storage-exercise-deletion-store';
-import { getFirstTab } from '@/components/AdminScreens/CreateModule/Modules/ThirdModule/helpers/getFirstTab';
+interface IOptionsModule {
+  value: number
+  label: string
+}
+
 interface ExerciseContextType {
   ExerciseMethods: {
     setId: (id: number) => void
@@ -19,19 +22,20 @@ interface ExerciseContextType {
     setIsChanged: (change: boolean) =>void
     handleEditCheckBox: (id: number, cheked: boolean) => void
     handleSaveUpload: () => void
-    chooseModule: (number: number) => void
+    chooseModule: (object: {value:number, label:string}) => void
     setChoosedTab: (number: string) => void
     resroteDeletionData: () => void
     fetchOnline: (id: string | string[] | undefined, bool: boolean) => void
   };
-  exercises: IFirstModule | ISecondModule |undefined;
+  exercises: ISecondModule | ForthModule | undefined;
   loading: boolean,
   isOnlineXml: boolean,
   settingsEdit: number[] | undefined
   isChanged: boolean,
   handleEditedCheckbox: { id: number, checked: boolean }[],
-  choosedModule: number | null,
+  choosedModule: {value: number | null , label: string | null},
   choosedTab: string,
+  options: IOptionsModule[]
 }
 
 const ExerciseContext = createContext<ExerciseContextType | null>(null);
@@ -54,17 +58,24 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     // state
     const [id, setId] = useState<number | null>();
     const [loading, setLoading] = useState(false)
-    const [exercises, setExercises] = useState<IFirstModule | ISecondModule | undefined>()
+    const [exercises, setExercises] = useState<ISecondModule | undefined>()
     const [isOnlineXml, setIsOnlineXml] = useState(false)
     const [settingsEdit, setSettingsEdit] = useState<number[]>()
     const [isChanged, setIsChanged] = useState(false)
     const [handleEditedCheckbox, setHandleEditedCheckbox] = useState<{ id: number, checked: boolean }[]>([]);
-    const [choosedModule, setChoosedModule] = useState<number | null>(null)
+    const [choosedModule, setChoosedModule] = useState<IOptionsModule>({value: 0, label:''})
     const router = useRouter();
     const moduleId = router.query.moduleId;
-    const [choosedTab, setChoosedTab] = useState('')
-    // Helpers
+    const [choosedTab, setChoosedTab] = useState<string>('')
+    const options = [
+      { value: 1, label: 'מודול ראשון' },
+      { value: 2, label: 'מודול שני - בנתיבי הצורות' },
+      { value: 2, label: 'מודול שני' },
+      { value: 3, label: 'מודול שלישי' },
+      { value: 4, label: 'מודול שלישי - טאבים' },
+  ]
 
+    // Helpers
     const fetchOnline = async (id: any, useLoading = true) => {
       if(useLoading){
         setLoading(true)
@@ -74,7 +85,16 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
         if(response){
           setExercises(response)
           setIsOnlineXml(true)
-          setChoosedModule(response.module)
+          if (Array.isArray(response)) {
+            setChoosedModule({value:4, label: 'מודול שלישי - טאבים'})
+            setChoosedTab(response[0].tab)
+          } else {
+            setChoosedModule({value:response.module, label: 'מודול שלישי - טאבים'})
+            const find = options?.find((item) => item.value === response.module)
+            if(find){
+              setChoosedModule(find)
+            }
+          }
         } 
       } catch(e) {
         console.log('error',e)
@@ -89,12 +109,14 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       if(choosedModule) {
         setLoading(true)
         try {
-          const response = await ExercisesService.parseXlFile(file,choosedModule)
-          // console.log(response)
-          setExercises(response)
-          setIsOnlineXml(false)
-          // const handleFirstTab = getFirstTab(response as ISecondModule[])
-          // console.log('handleFirstTab',handleFirstTab)
+          if(choosedModule.value){
+            const response = await ExercisesService.parseXlFile(file,choosedModule.value)
+            // console.log(response)
+            setExercises(response)
+            setIsOnlineXml(false)
+            // const handleFirstTab = getFirstTab(response as ISecondModule[])
+            // console.log('handleFirstTab',handleFirstTab)
+          }
         } catch(e) {
           console.log('error',e)
           onErrorAlert('שגיאה בלפרסס את המודול','XL אינו תקין')
@@ -107,24 +129,22 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     const createMoudle = async (data: any) => {
       setLoading(true)
       try {
-        if(choosedModule === 1) {
-          const response = await ExercisesService.createFirstModule(data)
-
-        }
-
-        if(choosedModule === 2) {
+        if(choosedModule.value === 2) {
           const response = await ExercisesService.createSecondModule(data, 2)
 
         }
 
-        if(choosedModule === 21) {
+        if(choosedModule.value === 21) {
           const response = await ExercisesService.createSecondModule(data, 21)
 
         }
 
-        if(choosedModule === 3) {
+        if(choosedModule.value === 3) {
           const response = await ExercisesService.createSecondModule(data, 3)
+        }
 
+        if(choosedModule.value === 4) {
+          const response = await ExercisesService.createSecondModule(data, 4)
         }
         setTimeout(() => {
           fetchOnline(moduleId)
@@ -187,13 +207,13 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           if(field === 'youtube_link') {
             setExercises((e) => {
               if (e) {
-                const updatedCollectionsRows = (e as IFirstModule).collectionsRows?.map((i) => {
+                const updatedCollectionsRows = (e as any).collectionsRows?.map((i: any) => {
                   if (i.orden === orden) {
                     return { ...i, youtube_link: data };
                   }
                   return i;
                 });
-                return { ...(e as IFirstModule), collectionsRows: updatedCollectionsRows };
+                return { ...(e as ISecondModule), collectionsRows: updatedCollectionsRows };
               }
               return e;
             });
@@ -202,7 +222,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
           if(field === 'pdf'){
             setExercises((e) => {
               if (e) {
-                const updatedCollectionsRows = (e as IFirstModule).collectionsRows?.map((i) => {
+                const updatedCollectionsRows = (e as any).collectionsRows?.map((i: any) => {
                   if (i.orden === orden) {
                     return { ...i, pdf: data };
                   }
@@ -248,8 +268,8 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
       }
     }
 
-    const chooseModule = (number: number) => {
-      setChoosedModule(number)
+    const chooseModule = (object: {value:number, label:string}) => {
+      setChoosedModule(object)
     }
 
     const resroteDeletionData = async () => {
@@ -312,6 +332,7 @@ const ExerciseProvider: React.FC<ExerciseProviderProps> = (props) => {
     handleEditedCheckbox,
     choosedModule,
     choosedTab,
+    options
   };
 
   return <ExerciseContext.Provider value={value} {...props} />;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Tooltip, Typography } from "@material-tailwind/react";
-import { Collection } from '@/types/ModulesTypes.ts/FirstModule.interface';
+import { collectionAnswers } from '@/types/ModulesTypes.ts/SecondModule.interface';
 
 
 type Props = {
     placeholder: string
-    answers: Collection[]
+    answers: collectionAnswers[]
 }
 
 const ToolTip = ({placeholder, answers}: Props) => {

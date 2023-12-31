@@ -7,7 +7,7 @@ const ExerciseList = () => {
     return (
         <table className='ml-12 mr-12'>
             <tbody className='bg-white'>
-            <tr>
+            {/* <tr>
                
                 {exercise?.collectionsCols?.map((item, index) => (
                 <th key={index}>
@@ -16,15 +16,15 @@ const ExerciseList = () => {
                     </div>
                 </th>
                 ))}
-            </tr>
+            </tr> */}
     
-            {exercise?.collectionsRows?.map((item, index) => (
+            {/* {exercise?.collectionsRows?.map((item, index) => (
                 <tr key={index}>
                     <td colSpan={exercise?.collectionsCols.length}>
-                        {/* <ExerciseCard item={item} /> */}
+                        <ExerciseCard item={item} />
                     </td>
                 </tr>
-            ))}
+            ))} */}
             </tbody>
         </table>
     );
